@@ -1,0 +1,141 @@
+{
+  "generated_at": "2026-05-09",
+  "controller_base_url": "http://192.168.1.203:4000",
+  "source_manifest": "llmcommune-entropy-targets.json",
+  "policy": {
+    "loader_rule": "Preserve the LLMCommune source runtime_family and launch_command; do not change GGUF/TRT/Ray/vLLM loader type without operator review.",
+    "lane_rule": "Entropy targets are solo large-lane runs; mini remains dark.",
+    "selection_rule": "Use the highest smoke-passed Entropy context target per PRD queue id."
+  },
+  "top_contexts": [
+    {
+      "prd_queue_id": "qwen25-coder-05b",
+      "set_id": "entropy-qwen25-coder-05b-large",
+      "profile_id": "entropy_gguf_qwen25_coder_05b_large",
+      "runtime_family": "llama.cpp",
+      "context_tokens": 262144,
+      "observed_context_tokens": 262144,
+      "proof_result": "entropy-smoke-results-20260509-124418.jsonl"
+    },
+    {
+      "prd_queue_id": "gemma4-e2b",
+      "set_id": "entropy-gemma4-e2b",
+      "profile_id": "entropy_gguf_gemma4_e2b_large",
+      "runtime_family": "llama.cpp",
+      "context_tokens": 262144,
+      "observed_context_tokens": 262144,
+      "proof_result": "entropy-smoke-results-20260509-124418.jsonl"
+    },
+    {
+      "prd_queue_id": "smollm3-3b",
+      "set_id": "entropy-smollm3-3b",
+      "profile_id": "entropy_gguf_smollm3_3b_large",
+      "runtime_family": "llama.cpp",
+      "context_tokens": 262144,
+      "observed_context_tokens": 262144,
+      "proof_result": "entropy-smoke-results-20260509-124418.jsonl"
+    },
+    {
+      "prd_queue_id": "granite-code-3b",
+      "set_id": "entropy-granite-code-3b",
+      "profile_id": "entropy_gguf_granite_code_3b_large",
+      "runtime_family": "llama.cpp",
+      "context_tokens": 262144,
+      "observed_context_tokens": 262144,
+      "proof_result": "entropy-smoke-results-20260509-124418.jsonl"
+    },
+    {
+      "prd_queue_id": "gemma4-e4b",
+      "set_id": "entropy-gemma4-e4b",
+      "profile_id": "entropy_gguf_gemma4_e4b_large",
+      "runtime_family": "llama.cpp",
+      "context_tokens": 262144,
+      "observed_context_tokens": 262144,
+      "proof_result": "entropy-smoke-results-20260509-124418.jsonl"
+    },
+    {
+      "prd_queue_id": "qwen35-4b",
+      "set_id": "entropy-qwen35-4b",
+      "profile_id": "entropy_gguf_qwen35_4b_large",
+      "runtime_family": "llama.cpp",
+      "context_tokens": 262144,
+      "observed_context_tokens": 262144,
+      "proof_result": "entropy-smoke-results-20260509-124418.jsonl"
+    },
+    {
+      "prd_queue_id": "nemotron-cascade-30b",
+      "set_id": "entropy-nemotron-cascade-30b",
+      "profile_id": "entropy_gguf_nemotron_cascade_30b_a3b_large",
+      "runtime_family": "llama.cpp",
+      "context_tokens": 131072,
+      "observed_context_tokens": 131072,
+      "proof_result": "entropy-smoke-results-20260509-124418.jsonl"
+    },
+    {
+      "prd_queue_id": "qwen80nextcoder",
+      "set_id": "entropy-qwen80nextcoder-256k",
+      "profile_id": "entropy_gguf_coder_next_256k_large",
+      "canonical_lower_rung_set_id": "entropy-qwen80nextcoder",
+      "runtime_family": "llama.cpp",
+      "context_tokens": 262144,
+      "observed_context_tokens": 262144,
+      "proof_result": "entropy-smoke-results-qwen80nextcoder-256k-20260509-135555.jsonl"
+    },
+    {
+      "prd_queue_id": "gptoss120",
+      "set_id": "entropy-gptoss120",
+      "profile_id": "entropy_gguf_gptoss120b_large",
+      "runtime_family": "llama.cpp",
+      "context_tokens": 65536,
+      "observed_context_tokens": 65536,
+      "proof_result": "entropy-smoke-results-20260509-124418.jsonl",
+      "note": "Covered even though PRD labels it as an out-of-order rerun."
+    },
+    {
+      "prd_queue_id": "nemotron120",
+      "set_id": "entropy-nemotron3-super-120b",
+      "profile_id": "gguf_nemotron3_super_120b_large",
+      "canonical_entropy_set_id": "entropy-nemotron120",
+      "canonical_entropy_profile_id": "entropy_gguf_nemotron_super_120b_a12b_large",
+      "entropy_model_map_key": "gguf_nemotron3_super_120b_large",
+      "runtime_family": "llama.cpp",
+      "context_tokens": 65536,
+      "observed_context_tokens": 65536,
+      "proof_result": "entropy-smoke-results-nemotron3-alias-20260509-135101.jsonl",
+      "note": "MODEL_MAP-compatible activation set points at the alias key Entropy expects."
+    },
+    {
+      "prd_queue_id": "qwen235",
+      "set_id": "entropy-qwen235-2507-64k-eager",
+      "profile_id": "entropy_vllm_ray_qwen235_2507_64k_eager_large",
+      "runtime_family": "vllm",
+      "requires_gx10": true,
+      "context_tokens": 65536,
+      "observed_context_tokens": 65536,
+      "proof_result": "entropy-smoke-results-qwen235-2507-64k-eager-20260511-200059.jsonl",
+      "note": "Top qwen235 handoff as of 2026-05-11. This is now also the canonical LLMCommune qwen235 set; the old TRT nvidia/Qwen3-235B-A22B-NVFP4 target was removed.",
+      "llmcommune_canonical_set_id": "qwen235"
+    }
+  ],
+  "not_top_context": [
+    {
+      "prd_queue_id": "qwen235",
+      "set_id": "entropy-qwen235-2507-128k",
+      "context_tokens": 131072,
+      "runtime_family": "vllm",
+      "requires_gx10": true,
+      "proof_result": "entropy-smoke-results-qwen235-2507-128k-socket90-jobs2-20260510-122915.jsonl",
+      "status": "timeout",
+      "note": "Newer 2507 NVFP4 Ray/vLLM replacement candidate is configured but not top-context proven. NCCL Socket and compile-limited launcher got through NCCL, memory preflight, and weight loading, but timed out during first-time FlashInfer/CUTLASS compilation before API ready."
+    },
+    {
+      "prd_queue_id": "qwen235",
+      "set_id": "entropy-qwen235-2507-64k",
+      "context_tokens": 65536,
+      "runtime_family": "vllm",
+      "requires_gx10": true,
+      "status": "failed",
+      "note": "Normal 64K Ray/vLLM rung reached API-ready, then first chat completion killed EngineCore with CUBLAS_STATUS_INTERNAL_ERROR inside the torch/inductor compiled CUDA graph path. Superseded by entropy-qwen235-2507-64k-eager."
+    }
+  ]
+}

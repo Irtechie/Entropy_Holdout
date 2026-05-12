@@ -1,0 +1,8 @@
+Writing results to E:\Dev\AI\remote\Entropy\entropy-smoke-results-qwen235-2507-128k-nccltcp-20260510-120223.jsonl
+Targets: 1. IncludeDualBox=True. OnlySet=entropy-qwen235-2507-128k
+=== activating entropy-qwen235-2507-128k (235B, ctx 131072) ===
+activation returned for entropy-qwen235-2507-128k
+current state read for entropy-qwen235-2507-128k
+FAILED entropy-qwen235-2507-128k: No connection could be made because the target machine actively refused it. (192.168.1.203:8000)
+done entropy-qwen235-2507-128k status=failed ctx= elapsed=117.9s
+Complete: E:\Dev\AI\remote\Entropy\entropy-smoke-results-qwen235-2507-128k-nccltcp-20260510-120223.jsonl

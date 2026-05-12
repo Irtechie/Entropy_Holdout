@@ -1,0 +1,8 @@
+{
+  "pid": 44396,
+  "shell": "pwsh",
+  "result": "E:/Dev/AI/remote/Entropy/entropy-smoke-results-20260509-124418.jsonl",
+  "stdout": "E:/Dev/AI/remote/Entropy/entropy-smoke-run-20260509-124418.out.log",
+  "stderr": "E:/Dev/AI/remote/Entropy/entropy-smoke-run-20260509-124418.err.log",
+  "started": "2026-05-09T12:44:18.6461376-04:00"
+}

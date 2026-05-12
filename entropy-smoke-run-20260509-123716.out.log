@@ -1,0 +1,9 @@
+Writing results to E:/Dev/AI/remote/Entropy/entropy-smoke-results-20260509-123716.jsonl
+Targets: 16. IncludeDualBox=False. OnlySet=
+=== activating entropy-qwen25-coder-05b-large (0.5B, ctx 262144) ===
+activation returned for entropy-qwen25-coder-05b-large
+current state read for entropy-qwen25-coder-05b-large
+health ok for entropy-qwen25-coder-05b-large
+served model qwen2.5-coder-0.5b-instruct-q4_k_m.gguf
+observed context 262144
+completion probe for entropy-qwen25-coder-05b-large

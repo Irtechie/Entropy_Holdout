@@ -1,0 +1,36 @@
+Writing results to E:/Dev/AI/remote/Entropy/entropy-smoke-results-20260509-123237.jsonl
+Targets: 16. IncludeDualBox=False
+=== activating entropy-qwen25-coder-05b-large (0.5B, ctx 262144) ===
+FAILED entropy-qwen25-coder-05b-large: The remote server returned an error: (400) Bad Request. body={
+  "ok": true,
+  "accepted": false,
+  "status": "skipped",
+  "set_id": "entropy-qwen25-coder-05b-large",
+  "detail": "set 'entropy-qwen25-coder-05b-large' is already active and healthy",
+  "skipped": true,
+  "readiness_lease": {
+    "schema_version": 1,
+    "lease_id": "swap-epoch-39ee25cd-530f-42a7-9207-8dd709da54cc:485:2416622:entropy-qwen25-coder-05b-large:89a88802-7e10-4ddb-ab18-96ef0a073ef1",
+    "activation_set_id": "entropy-qwen25-coder-05b-large",
+    "current_job_id": "89a88802-7e10-4ddb-ab18-96ef0a073ef1",
+    "swap_id": "89a88802-7e10-4ddb-ab18-96ef0a073ef1",
+    "controller_epoch": "swap-epoch-39ee25cd-530f-42a7-9207-8dd709da54cc",
+    "controller_revision": 485,
+    "runtime_incarnation_id": "2416622",
+    "desired_state": "ready",
+    "desired_status_detail": "entropy_gguf_qwen25_coder_05b_large ready on large",
+    "swap_state": "ready",
+    "swap_terminal_state": "ready",
+    "reconcile_needed": false,
+    "known_idle": false,
+    "stage_scope": [
+      "design_loop",
+      "implementation"
+    ],
+    "fencing_token": "swap-epoch-39ee25cd-530f-42a7-9207-8dd709da54cc:485:2416622:89a88802-7e10-4ddb-ab18-96ef0a073ef1",
+    "issued_at": "2026-05-09T16:29:19.617Z"
+  }
+}
+
+done entropy-qwen25-coder-05b-large status= ctx= elapsed=0.1s
+=== activating entropy-gemma4-e2b (2B, ctx 262144) ===

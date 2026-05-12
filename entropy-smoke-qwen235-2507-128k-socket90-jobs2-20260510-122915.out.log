@@ -1,0 +1,6 @@
+Writing results to E:\Dev\AI\remote\Entropy\entropy-smoke-results-qwen235-2507-128k-socket90-jobs2-20260510-122915.jsonl
+Targets: 1. IncludeDualBox=True. OnlySet=entropy-qwen235-2507-128k
+=== activating entropy-qwen235-2507-128k (235B, ctx 131072) ===
+FAILED entropy-qwen235-2507-128k: The request was canceled due to the configured HttpClient.Timeout of 1800 seconds elapsing.
+done entropy-qwen235-2507-128k status= ctx= elapsed=1800.1s
+Complete: E:\Dev\AI\remote\Entropy\entropy-smoke-results-qwen235-2507-128k-socket90-jobs2-20260510-122915.jsonl

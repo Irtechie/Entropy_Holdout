@@ -1,0 +1,20 @@
+Writing results to E:/Dev/AI/remote/Entropy/entropy-smoke-results-20260509-123746.jsonl
+Targets: 16. IncludeDualBox=False. OnlySet=
+=== activating entropy-qwen25-coder-05b-large (0.5B, ctx 262144) ===
+activation returned for entropy-qwen25-coder-05b-large
+current state read for entropy-qwen25-coder-05b-large
+health ok for entropy-qwen25-coder-05b-large
+served model qwen2.5-coder-0.5b-instruct-q4_k_m.gguf
+observed context 262144
+completion probe for entropy-qwen25-coder-05b-large
+done entropy-qwen25-coder-05b-large status=skipped ctx=262144 elapsed=2.6s
+=== activating entropy-gemma4-e2b (2B, ctx 262144) ===
+activation returned for entropy-gemma4-e2b
+FAILED entropy-gemma4-e2b: controller desired_state failed detail=corrected from reality: entropy_gguf_qwen25_coder_05b_large on large
+done entropy-gemma4-e2b status=queued ctx= elapsed=4.3s
+=== activating entropy-granite-code-3b (3B, ctx 262144) ===
+activation returned for entropy-granite-code-3b
+FAILED entropy-granite-code-3b: controller desired_state failed detail=corrected from reality: entropy_gguf_qwen25_coder_05b_large on large
+done entropy-granite-code-3b status=queued ctx= elapsed=6.6s
+=== activating entropy-smollm3-3b (3B, ctx 262144) ===
+activation returned for entropy-smollm3-3b

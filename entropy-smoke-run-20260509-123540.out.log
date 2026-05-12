@@ -1,0 +1,3 @@
+Writing results to E:/Dev/AI/remote/Entropy/entropy-smoke-results-20260509-123540.jsonl
+Targets: 16. IncludeDualBox=False. OnlySet=
+=== activating entropy-qwen25-coder-05b-large (0.5B, ctx 262144) ===

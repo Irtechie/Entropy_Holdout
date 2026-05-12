@@ -1,0 +1,161 @@
+Writing results to E:/Dev/AI/remote/Entropy/entropy-smoke-results-20260509-123950.jsonl
+Targets: 16. IncludeDualBox=False. OnlySet=
+=== activating entropy-qwen25-coder-05b-large (0.5B, ctx 262144) ===
+FAILED entropy-qwen25-coder-05b-large: Response status code does not indicate success: 400 (Bad Request). body=
+{
+  "ok": false,
+  "accepted": false,
+  "code": "RATE_LIMITED",
+  "detail": "activation cooldown active \u2014 17s remaining",
+  "estimated_ready_at": "2026-05-09T16:40:07.419Z"
+}
+done entropy-qwen25-coder-05b-large status= ctx= elapsed=0.1s
+=== activating entropy-gemma4-e2b (2B, ctx 262144) ===
+FAILED entropy-gemma4-e2b: Response status code does not indicate success: 400 (Bad Request). body=
+{
+  "ok": false,
+  "accepted": false,
+  "code": "RATE_LIMITED",
+  "detail": "activation cooldown active \u2014 17s remaining",
+  "estimated_ready_at": "2026-05-09T16:40:07.419Z"
+}
+done entropy-gemma4-e2b status= ctx= elapsed=0s
+=== activating entropy-smollm3-3b (3B, ctx 262144) ===
+FAILED entropy-smollm3-3b: Response status code does not indicate success: 400 (Bad Request). body=
+{
+  "ok": false,
+  "accepted": false,
+  "code": "RATE_LIMITED",
+  "detail": "activation cooldown active \u2014 17s remaining",
+  "estimated_ready_at": "2026-05-09T16:40:07.419Z"
+}
+done entropy-smollm3-3b status= ctx= elapsed=0s
+=== activating entropy-granite-code-3b (3B, ctx 262144) ===
+activation returned for entropy-granite-code-3b
+current state read for entropy-granite-code-3b
+health ok for entropy-granite-code-3b
+served model granite-3b-code-instruct.Q8_0.gguf
+observed context 262144
+completion probe for entropy-granite-code-3b
+done entropy-granite-code-3b status=skipped ctx=262144 elapsed=1s
+=== activating entropy-gemma4-e4b (4B, ctx 262144) ===
+FAILED entropy-gemma4-e4b: Response status code does not indicate success: 400 (Bad Request). body=
+{
+  "ok": false,
+  "accepted": false,
+  "code": "RATE_LIMITED",
+  "detail": "activation cooldown active \u2014 16s remaining",
+  "estimated_ready_at": "2026-05-09T16:40:07.419Z"
+}
+done entropy-gemma4-e4b status= ctx= elapsed=0s
+=== activating entropy-qwen35-4b (4B, ctx 262144) ===
+FAILED entropy-qwen35-4b: Response status code does not indicate success: 400 (Bad Request). body=
+{
+  "ok": false,
+  "accepted": false,
+  "code": "RATE_LIMITED",
+  "detail": "activation cooldown active \u2014 16s remaining",
+  "estimated_ready_at": "2026-05-09T16:40:07.419Z"
+}
+done entropy-qwen35-4b status= ctx= elapsed=0s
+=== activating entropy-gptoss20 (20B, ctx 131072) ===
+FAILED entropy-gptoss20: Response status code does not indicate success: 400 (Bad Request). body=
+{
+  "ok": false,
+  "accepted": false,
+  "code": "RATE_LIMITED",
+  "detail": "activation cooldown active \u2014 16s remaining",
+  "estimated_ready_at": "2026-05-09T16:40:07.419Z"
+}
+done entropy-gptoss20 status= ctx= elapsed=0s
+=== activating entropy-devstral-small2 (24B, ctx 131072) ===
+FAILED entropy-devstral-small2: Response status code does not indicate success: 400 (Bad Request). body=
+{
+  "ok": false,
+  "accepted": false,
+  "code": "RATE_LIMITED",
+  "detail": "activation cooldown active \u2014 16s remaining",
+  "estimated_ready_at": "2026-05-09T16:40:07.419Z"
+}
+done entropy-devstral-small2 status= ctx= elapsed=0s
+=== activating entropy-nemotron-cascade-30b (30B, ctx 131072) ===
+FAILED entropy-nemotron-cascade-30b: Response status code does not indicate success: 400 (Bad Request). body=
+{
+  "ok": false,
+  "accepted": false,
+  "code": "RATE_LIMITED",
+  "detail": "activation cooldown active \u2014 16s remaining",
+  "estimated_ready_at": "2026-05-09T16:40:07.419Z"
+}
+done entropy-nemotron-cascade-30b status= ctx= elapsed=0.1s
+=== activating entropy-gemma431 (31B, ctx 262144) ===
+FAILED entropy-gemma431: Response status code does not indicate success: 400 (Bad Request). body=
+{
+  "ok": false,
+  "accepted": false,
+  "code": "RATE_LIMITED",
+  "detail": "activation cooldown active \u2014 16s remaining",
+  "estimated_ready_at": "2026-05-09T16:40:07.419Z"
+}
+done entropy-gemma431 status= ctx= elapsed=0s
+=== activating entropy-qwen36 (35B, ctx 262144) ===
+FAILED entropy-qwen36: Response status code does not indicate success: 400 (Bad Request). body=
+{
+  "ok": false,
+  "accepted": false,
+  "code": "RATE_LIMITED",
+  "detail": "activation cooldown active \u2014 16s remaining",
+  "estimated_ready_at": "2026-05-09T16:40:07.419Z"
+}
+done entropy-qwen36 status= ctx= elapsed=0s
+=== activating entropy-qwen80next (80B, ctx 131072) ===
+FAILED entropy-qwen80next: Response status code does not indicate success: 400 (Bad Request). body=
+{
+  "ok": false,
+  "accepted": false,
+  "code": "RATE_LIMITED",
+  "detail": "activation cooldown active \u2014 16s remaining",
+  "estimated_ready_at": "2026-05-09T16:40:07.419Z"
+}
+done entropy-qwen80next status= ctx= elapsed=0s
+=== activating entropy-gptoss120 (120B, ctx 65536) ===
+FAILED entropy-gptoss120: Response status code does not indicate success: 400 (Bad Request). body=
+{
+  "ok": false,
+  "accepted": false,
+  "code": "RATE_LIMITED",
+  "detail": "activation cooldown active \u2014 16s remaining",
+  "estimated_ready_at": "2026-05-09T16:40:07.419Z"
+}
+done entropy-gptoss120 status= ctx= elapsed=0s
+=== activating entropy-nemotron120 (120B, ctx 65536) ===
+FAILED entropy-nemotron120: Response status code does not indicate success: 400 (Bad Request). body=
+{
+  "ok": false,
+  "accepted": false,
+  "code": "RATE_LIMITED",
+  "detail": "activation cooldown active \u2014 16s remaining",
+  "estimated_ready_at": "2026-05-09T16:40:07.419Z"
+}
+done entropy-nemotron120 status= ctx= elapsed=0s
+=== activating entropy-qwen35-122b (122B, ctx 65536) ===
+FAILED entropy-qwen35-122b: Response status code does not indicate success: 400 (Bad Request). body=
+{
+  "ok": false,
+  "accepted": false,
+  "code": "RATE_LIMITED",
+  "detail": "activation cooldown active \u2014 16s remaining",
+  "estimated_ready_at": "2026-05-09T16:40:07.419Z"
+}
+done entropy-qwen35-122b status= ctx= elapsed=0s
+=== activating entropy-minimax-m27 (230B, ctx 16384) ===
+FAILED entropy-minimax-m27: Response status code does not indicate success: 400 (Bad Request). body=
+{
+  "ok": false,
+  "accepted": false,
+  "code": "RATE_LIMITED",
+  "detail": "activation cooldown active \u2014 16s remaining",
+  "estimated_ready_at": "2026-05-09T16:40:07.419Z"
+}
+done entropy-minimax-m27 status= ctx= elapsed=0s
+Complete: E:/Dev/AI/remote/Entropy/entropy-smoke-results-20260509-123950.jsonl
