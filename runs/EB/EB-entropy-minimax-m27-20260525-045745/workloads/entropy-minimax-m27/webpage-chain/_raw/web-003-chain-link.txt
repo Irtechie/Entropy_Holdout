@@ -1,0 +1,40 @@
+The user wants me to create webpage 3 (page-3.html) and link it back to page 2, while preserving the existing links between page 1 and page 2.
+
+Looking at the existing files:
+- site/index.html - has nav with links to Home and Page 2, plus a "Back to home" link in main
+- site/page-2.html - has nav with links to Home and Page 2, plus a "Back to home" link in main
+
+I need to:
+1. Create site/page-3.html with navigation links to Home, Page 2, and Page 3
+2. Update site/page-2.html to include a link to page-3.html in the nav
+3. Possibly update site/index.html to include a link to page-3.html in the nav
+
+The validators:
+- page-3-links-page-2: failure_class=link_integrity - page 3 must link to page 2
+- previous-links-preserved: failure_class=link_integrity - the existing links between page 1 and page 2 must still work
+
+So I need to:
+1. Create page-3.html with nav links to index.html, page-2.html, and page-3.html, and content about page 3
+2. Update page-2.html to add a link to page-3.html in the nav
+3. Update index.html to add a link to page-3.html in the nav
+
+Let me create the JSON response.
+</think>
+
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>My Website</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Home</a>\n        <a href=\"page-2.html\">Page 2</a>\n        <a href=\"page-3.html\">Page 3</a>\n    </nav>\n    <main>\n        <h1>Welcome</h1>\n        <p>This is the main content of the page.</p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-2.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 2</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Home</a>\n        <a href=\"page-2.html\">Page 2</a>\n        <a href=\"page-3.html\">Page 3</a>\n    </nav>\n    <main>\n        <h1>Page 2</h1>\n        <p>This is the second page of the website.</p>\n        <p><a href=\"index.html\">Back to home</a></p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-3.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 3</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Home</a>\n        <a href=\"page-2.html\">Page 2</a>\n        <a href=\"page-3.html\">Page 3</a>\n    </nav>\n    <main>\n        <h1>Page 3</h1>\n        <p>This is the third page of the website.</p>\n        <p><a href=\"page-2.html\">Back to page 2</a></p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created page-3.html linking to page 2, updated page-2.html and index.html nav to include Page 3 link."
+}

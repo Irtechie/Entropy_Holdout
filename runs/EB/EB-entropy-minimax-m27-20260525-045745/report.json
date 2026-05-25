@@ -1,0 +1,35 @@
+[
+  {
+    "target_set_id": "entropy-minimax-m27",
+    "model_id": "MiniMax-M2.7-UD-IQ4_XS-00001-of-00004.gguf",
+    "context_tokens": 16384,
+    "harness_mode": "plain",
+    "workload_id": "factory",
+    "stages_seen": 1,
+    "max_pass_stage": 0,
+    "first_fail_stage": "factory-001-layout",
+    "first_failure_class": "generation"
+  },
+  {
+    "target_set_id": "entropy-minimax-m27",
+    "model_id": "MiniMax-M2.7-UD-IQ4_XS-00001-of-00004.gguf",
+    "context_tokens": 16384,
+    "harness_mode": "plain",
+    "workload_id": "library-chain",
+    "stages_seen": 3,
+    "max_pass_stage": 2,
+    "first_fail_stage": "lib-003-chain",
+    "first_failure_class": "generation"
+  },
+  {
+    "target_set_id": "entropy-minimax-m27",
+    "model_id": "MiniMax-M2.7-UD-IQ4_XS-00001-of-00004.gguf",
+    "context_tokens": 16384,
+    "harness_mode": "plain",
+    "workload_id": "webpage-chain",
+    "stages_seen": 5,
+    "max_pass_stage": 4,
+    "first_fail_stage": "web-005-nested-shared-table",
+    "first_failure_class": "harness"
+  }
+]

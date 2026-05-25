@@ -1,0 +1,36 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The user wants me to create a second library called \"feature\" that depends on the first library \"core\" and calls its public function `get_greeting`.\n\nI need to create:\n1. `library-chain/feature/__init__.py` - the feature library that depends on core and calls get_greeting\n2. `library-chain/feature/pyproject.toml` - build configuration that specifies the dependency on core\n3. Maybe a sample caller or some other file\n\nThe validators are:\n- feature-references-core: failure_class=api_contract - checks that feature references core properly\n- feature-builds: failure_class=build - checks that feature builds successfully\n\nLet me create the feature library that:\n1. Has a pyproject.toml with a dependency on core\n2. Has an __init__.py that imports and uses get_greeting from core\n3. Maybe has a sample caller\n\nLet me structure this:\n\n```\nlibrary-chain/feature/\n├── __init__.py\n├── pyproject.toml\n└── sample_caller.py (optional)\n```\n\nThe key is that feature's __init__.py should call core's get_greeting function, demonstrating the dependency.\n\nLet me write the files:\n\n1. `library-chain/feature/pyproject.toml` - needs to depend on core\n2. `library-chain/feature/__init__.py` - needs to import and use get_greeting from core\n</think>\n\n{\n  \"files\": [\n    {\n      \"path\": \"library-chain/feature/pyproject.toml\",\n      \"content\": \"[build-system]\\nrequires = [\\\"setuptools>=61.0\\\"]\\nbuild-backend = \\\"setuptools.build_meta\\\"\\n\\n[project]\\nname = \\\"feature\\\"\\nversion = \\\"0.1.0\\\"\\ndescription = \\\"Feature library that depends on core\\\"\\nrequires-python = \\\">=3.8\\\"\\ndependencies = [\\n    \\\"core\\\"\\n]\\n\"\n    },\n    {\n      \"path\": \"library-chain/feature/__init__.py\",\n      \"content\": \"\\\"\\\"\\\"Feature library that depends on core and calls its public function.\\\"\\\"\\\"\\n\\nfrom core import get_greeting\\n\\ndef get_feature_greeting(name: str) -> str:\\n    \\\"\\\"\\\"Return a greeting message using the core library.\\n    \\n    Args:\\n        name: The name to greet.\\n        \\n    Returns:\\n        A greeting string from the feature library.\\n    \\\"\\\"\\\"\\n    core_greeting = get_greeting(name)\\n    return f\\\"[Feature] {core_greeting}\\\"\\n\"\n    },\n    {\n      \"path\": \"library-chain/feature/sample_caller.py\",\n      \"content\": \"\\\"\\\"\\\"Sample caller for the feature library.\\\"\\\"\\\"\\n\\nfrom feature import get_feature_greeting\\n\\nif __name__ == \\\"__main__\\\":\\n    result = get_feature_greeting(\\\"World\\\")\\n    print(result)\\n\"\n    }\n  ],\n  \"notes\": \"Created library-chain/feature that depends on core and calls its get_greeting function.\"\n}"
+      }
+    }
+  ],
+  "created": 1779699903,
+  "model": "MiniMax-M2.7-UD-IQ4_XS-00001-of-00004.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 642,
+    "prompt_tokens": 2405,
+    "total_tokens": 3047,
+    "prompt_tokens_details": {
+      "cached_tokens": 46
+    }
+  },
+  "id": "chatcmpl-6dIXGxLaUqHSvZsBZxEdG3tAZQiCrlha",
+  "timings": {
+    "cache_n": 46,
+    "prompt_n": 2359,
+    "prompt_ms": 4914.303,
+    "prompt_per_token_ms": 2.0832144976685036,
+    "prompt_per_second": 480.0273812990367,
+    "predicted_n": 642,
+    "predicted_ms": 28276.241,
+    "predicted_per_token_ms": 44.04398909657321,
+    "predicted_per_second": 22.704573779803333
+  }
+}
