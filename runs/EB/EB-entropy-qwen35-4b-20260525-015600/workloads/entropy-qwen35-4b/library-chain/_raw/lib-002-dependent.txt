@@ -1,0 +1,15 @@
+```json
+{
+  "files": [
+    {
+      "path": "library-chain/feature/index.js",
+      "content": "import { add } from '../core/index.js';\n\nexport function multiply(a, b) {\n  return add(a, b);\n}\n"
+    },
+    {
+      "path": "library-chain/feature/sample.js",
+      "content": "import { multiply } from './index.js';\nconsole.log(multiply(2, 3));\n"
+    }
+  ],
+  "notes": "Created feature library that depends on core library and calls its public function."
+}
+```

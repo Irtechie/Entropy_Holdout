@@ -51,5 +51,5 @@ pwsh .\tools\report_entropy_results.ps1 -ResultsPath "$run\results.jsonl" -Json
 
 ## Scope Boundary
 
-No generated-output repair behavior in Wave 2. LLMCommune/model-serving recovery is allowed.
+No generated-output repair behavior in Wave 1. LLMCommune/model-serving recovery is allowed.
 

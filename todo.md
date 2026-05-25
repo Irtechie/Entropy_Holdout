@@ -37,12 +37,12 @@ Mock/local EB harness is complete. Serial real-model experiment pattern is in pl
 Source: `todo.md`
 Manifest: `docs/plans/2026-05-25-000-kb-eb-remaining-singlebox-runs-manifest.md`
 
-Wave 2 baseline rule: run `plain` EB per target, one folder per target, commit/push after each. Repair LLMCommune/model-serving issues when safe; do not repair generated model output inside Wave 2.
+Wave 1 baseline rule: run `plain` EB per target, one folder per target, commit/push after each. Repair LLMCommune/model-serving issues when safe; do not repair generated model output inside Wave 1.
 
 | # | Slice | Blocked By | Verification | Status |
 |---|-------|------------|--------------|--------|
 | 1 | entropy-gemma4-e4b | - | functional-cli | ✅ done |
-| 2 | entropy-qwen35-4b | - | functional-cli | ⬜ pending |
+| 2 | entropy-qwen35-4b | - | functional-cli | ✅ done |
 | 3 | entropy-gptoss20 | - | functional-cli | ⬜ pending |
 | 4 | entropy-devstral-small2 | - | functional-cli | ⬜ pending |
 | 5 | entropy-nemotron-cascade-30b | - | functional-cli | ⬜ pending |

@@ -1,0 +1,13 @@
+{
+  "files": [
+    {
+      "path": "library-chain/pipeline/index.js",
+      "content": "import { multiply } from '../feature/index.js';\n\nexport function power(a, b) {\n  return multiply(a, b);\n}\n"
+    },
+    {
+      "path": "library-chain/pipeline/sample.js",
+      "content": "import { power } from './index.js';\nconsole.log(power(2, 3));\n"
+    }
+  ],
+  "notes": "Created pipeline library that depends on feature library and calls its public function."
+}

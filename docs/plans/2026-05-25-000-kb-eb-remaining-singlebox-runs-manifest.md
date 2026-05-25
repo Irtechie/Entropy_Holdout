@@ -29,14 +29,14 @@ slices:
     test_level: functional-cli
     functional_risk: narrow
     hitl: false
-    status: pending
+    status: done
     owner: agent
     blocked_reason: ""
     resume_when: ""
-    next_agent_action: "Run one-target EB, verify critique, commit and push the run folder."
+    next_agent_action: "Done. Continue with slice-003."
     human_action: ""
     can_continue_other_slices: true
-    notes: ""
+    notes: "run=runs/EB/EB-entropy-qwen35-4b-20260525-015600; report: webpage 5/5 then final-validation missing_artifact, library 4/4 then final-validation missing_artifact, factory 1/4 generation; proof=critique.md and report_entropy_results -Json"
   - id: slice-003
     title: "Run EB target entropy-gptoss20"
     path: docs/plans/2026-05-25-003-verification-eb-target-entropy-gptoss20-plan.md
@@ -276,7 +276,7 @@ If a target fails activation or the controller becomes unavailable, mark only th
 
 ## Failure Policy
 
-Wave 2 is a baseline collection wave. Do not repair generated output inside a `plain` run.
+Wave 1 is the plain baseline collection wave. Do not repair generated output inside a `plain` run.
 
 Repairing LLMCommune/model serving is different from repairing model output. If activation, model loading, route state, cooldown, or controller status fails, the slice may repair or retry the serving path before classifying the result. That is infrastructure recovery, not benchmark intervention.
 
@@ -296,7 +296,7 @@ Allowed mid-slice infrastructure recovery:
 - restart or reconcile the target only if the existing repo/controller scripts expose a safe non-destructive path,
 - rerun the same EB slice after the serving path is healthy and record the recovery in the plan notes.
 
-Not allowed in Wave 2:
+Not allowed in Wave 1:
 
 - editing generated workload files to make validation pass,
 - asking the model a repair prompt after a malformed answer,
@@ -310,14 +310,14 @@ Treat these as blockers:
 - target load wedges the serving lane or prevents later targets from activating,
 - run folder lacks `results.jsonl`, `critique.md`, or `critique.json`.
 
-Wave 3 should add a separate named harness mode, such as `repair-extract`, that can repair JSON/extraction failures mid-stage. Its results must be stored in separate EB folders and compared against Wave 2 rather than overwriting the `plain` baseline.
+Wave 2 should add a separate named harness mode, such as `repair-extract`, that can repair JSON/extraction failures mid-stage. Its results must be stored in separate EB folders and compared against Wave 1 rather than overwriting the `plain` baseline.
 
 ## Slice Overview
 
 | # | Slice | Blocked By | Verification | HITL | Status |
 |---|-------|------------|--------------|------|--------|
 | 1 | Run EB target entropy-gemma4-e4b | - | functional-cli | no | done |
-| 2 | Run EB target entropy-qwen35-4b | - | functional-cli | no | pending |
+| 2 | Run EB target entropy-qwen35-4b | - | functional-cli | no | done |
 | 3 | Run EB target entropy-gptoss20 | - | functional-cli | no | pending |
 | 4 | Run EB target entropy-devstral-small2 | - | functional-cli | no | pending |
 | 5 | Run EB target entropy-nemotron-cascade-30b | - | functional-cli | no | pending |

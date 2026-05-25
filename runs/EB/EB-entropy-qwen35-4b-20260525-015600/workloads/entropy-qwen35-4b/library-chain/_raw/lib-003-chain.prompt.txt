@@ -1,0 +1,380 @@
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-003-chain
+Order: 3
+
+Stage goal:
+Create a third library that depends on the second library, preserving the full call chain.
+
+Expected artifacts:
+- library-chain/pipeline (project)
+
+Validators that will run:
+- pipeline-references-feature: failure_class=api_contract
+- chain-sample-runs: failure_class=runtime_behavior
+
+Existing generated files:
+FILE: library-chain/core/index.js
+---BEGIN FILE---
+export function add(a, b) {
+  return a + b;
+}
+
+
+---END FILE---
+
+FILE: library-chain/core/sample.js
+---BEGIN FILE---
+import { add } from './index.js';
+console.log(add(1, 2));
+
+
+---END FILE---
+
+FILE: library-chain/feature/index.js
+---BEGIN FILE---
+import { add } from '../core/index.js';
+
+export function multiply(a, b) {
+  return add(a, b);
+}
+
+
+---END FILE---
+
+FILE: library-chain/feature/sample.js
+---BEGIN FILE---
+import { multiply } from './index.js';
+console.log(multiply(2, 3));
+
+
+---END FILE---
+
+FILE: _raw/lib-001-core.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-001-core
+Order: 1
+
+Stage goal:
+Create the first library with one public function and a tiny sample caller.
+
+Expected artifacts:
+- library-chain/core (project)
+
+Validators that will run:
+- core-builds: failure_class=build
+- core-sample-runs: failure_class=runtime_behavior
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/lib-001-core.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/core/index.js\",\n      \"content\": \"export function add(a, b) {\\n  return a + b;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/sample.js\",\n      \"content\": \"import { add } from './index.js';\\nconsole.log(add(1, 2));\\n\"\n    }\n  ],\n  \"notes\": \"Created core library with add function and sample caller.\"\n}",
+        "reasoning_content": "Okay, I need to create the first library for the Entropy staged code-generation benchmark. The stage is lib-001-core, and the goal is to have one public function and a tiny sample caller. The expected artifact is a project called library-chain/core.\n\nFirst, I should figure out the structure. Since it's a library, maybe it's a directory with a main module. Let's say the project directory is library-chain/core. Inside that, there should be a source file with the function and a test or sample file that uses it.\n\nWait, the validators are core-builds and core-sample-runs. So the build needs to succeed, and the sample code must run without errors. So I need to make sure the function is properly defined and the sample caller is correct.\n\nLet me think about the files. The main library file would be something like core.js or core.ts. Since the problem doesn't specify the language, but given that it's a benchmark, maybe JavaScript is common. Let's go with JavaScript.\n\nSo the structure would be:\n\nlibrary-chain/core/\n  index.js (or main.js)\n  sample.js (the caller)\n\nWait, but the project name is library-chain/core, so the directory is library-chain/core. Inside that, the files should be relative from the run root. So the path would be library-chain/core/index.js and library-chain/core/sample.js.\n\nWait, but the existing generated files section shows FILE: ---BEGIN FILE--- ---END FILE---. But the user hasn't provided any existing files. So I need to create all necessary files from scratch.\n\nSo the first step is to create the directory structure. But in JSON, I need to list the files with their paths. So the paths should be relative from the run root. So the project directory is library-chain/core, so the files inside would be library-chain/core/index.js and library-chain/core/sample.js.\n\nWait, but maybe the project directory is library-chain/core, so the files are within that directory. So the paths would be library-chain/core/index.js and library-chain/core/sample.js.\n\nNow, the core library should have one public function. Let's say a function that does something simple, like adding two numbers. Then the sample caller would import that function and call it.\n\nSo index.js would export the function, and sample.js would import and use it.\n\nWait, but in JavaScript, if it's a module, you need to use ES modules. So the index.js would export the function, and sample.js would import it.\n\nSo the content for index.js:\n\nexport function add(a, b) {\n  return a + b;\n}\n\nThen sample.js:\n\nimport { add } from './index.js';\nconsole.log(add(2, 3));\n\nBut wait, the sample needs to run. So the sample.js should be executable. But in a Node.js environment, you can run it with node sample.js. So the sample.js would be the caller.\n\nBut the project structure would be:\n\nlibrary-chain/core/\n  index.js\n  sample.js\n\nBut the path in the JSON should be relative from the run root. So the paths would be library-chain/core/index.js and library-chain/core/sample.js.\n\nWait, but the project directory is library-chain/core, so the files inside are library-chain/core/index.js and library-chain/core/sample.js. So the paths in the JSON should be \"library-chain/core/index.js\" and \"library-chain/core/sample.js\".\n\nBut wait, the stage goal says \"Create the first library with one public function and a tiny sample caller.\" So the library is the core directory, and the sample caller is part of the same project. So the sample.js is inside the library directory.\n\nSo the files would be:\n\n- library-chain/core/index.js (the library with the function)\n- library-chain/core/sample.js (the caller)\n\nNow, the content for index.js:\n\nexport function add(a, b) {\n  return a + b;\n}\n\nAnd sample.js:\n\nimport { add } from './index.js';\nconsole.log(add(1, 2));\n\nBut wait, in Node.js, the import needs to be from the same directory. So if sample.js is in the same directory as index.js, the import path is './index.js'.\n\nBut the sample.js should be executable. So when you run node sample.js, it should output the result.\n\nBut the validator core-sample-runs checks runtime behavior. So the sample.js must run without errors and produce the expected output.\n\nSo the content for sample.js should be correct.\n\nNow, the JSON should list these two files with their paths and content.\n\nAlso, the notes should be a short note. Maybe something like \"Created core library with add function and sample caller.\"\n\nWait, but the user says \"Return ONLY a JSON object in this exact shape\". So no markdown, just the JSON.\n\nSo the final JSON would be:\n\n{\n  \"files\": [\n    {\n      \"path\": \"library-chain/core/index.js\",\n      \"content\": \"export function add(a, b) {\\n  return a + b;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/sample.js\",\n      \"content\": \"import { add } from './index.js';\\nconsole.log(add(1, 2));\\n\"\n    }\n  ],\n  \"notes\": \"Created core library with add function and sample caller.\"\n}\n\nWait, but in JavaScript, the export and import need to be in ES modules. So the index.js should have the export, and sample.js imports it. But in Node.js, you need to use .js extension for ES modules. So the import path is correct.\n\nBut the content of index.js should be:\n\nexport function add(a, b) {\n  return a + b;\n}\n\nAnd sample.js:\n\nimport { add } from './index.js';\nconsole.log(add(1, 2));\n\nBut in the JSON, the content should be a string with newlines. So using \\n for line breaks.\n\nWait, but in the JSON, the content is a string, so newlines should be escaped as \\n.\n\nSo the content for index.js would be:\n\n\"export function add(a, b) {\\n  return a + b;\\n}\\n\"\n\nSimilarly for sample.js.\n\nBut wait, the sample.js should have the import and the console.log. So the content would be:\n\n\"import { add } from './index.js';\\nconsole.log(add(1, 2));\\n\"\n\nBut in the JSON, the content is a string, so the newlines are represented as \\n.\n\nYes, that's correct.\n\nNow, check if there are any other files needed. For example, a package.json? But the validators are core-builds and core-sample-runs. If the build is done with a specific tool, maybe package.json is needed. But the problem says \"library-chain/core (project)\", so maybe the project is a directory with the source files. If the build system is assumed to handle it, perhaps package.json is not required. But in Node.js projects, package.json is usually needed. However, the problem doesn't specify. Since the existing generated files section is empty, maybe we don't need to include package.json. The validators might handle the build without it, or perhaps the project is structured without it.\n\nAlternatively, maybe the project is a directory with the source files, and the build is done via a script. But since the problem doesn't specify, I'll proceed with just the two files.\n\nSo the final JSON should have the two files as above.\n"
+      }
+    }
+  ],
+  "created": 1779688699,
+  "model": "Qwen3.5-4B-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 1746,
+    "prompt_tokens": 241,
+    "total_tokens": 1987,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-IjEovHQXa6uUkS2SmMffKfL5MhLdt8A9",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 241,
+    "prompt_ms": 135.021,
+    "prompt_per_token_ms": 0.5602531120331949,
+    "prompt_per_second": 1784.9075329022896,
+    "predicted_n": 1746,
+    "predicted_ms": 30110.135,
+    "predicted_per_token_ms": 17.24520904925544,
+    "predicted_per_second": 57.98711961935741
+  }
+}
+
+---END FILE---
+
+FILE: _raw/lib-001-core.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "library-chain/core/index.js",
+      "content": "export function add(a, b) {\n  return a + b;\n}\n"
+    },
+    {
+      "path": "library-chain/core/sample.js",
+      "content": "import { add } from './index.js';\nconsole.log(add(1, 2));\n"
+    }
+  ],
+  "notes": "Created core library with add function and sample caller."
+}
+
+---END FILE---
+
+FILE: _raw/lib-002-dependent.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-002-dependent
+Order: 2
+
+Stage goal:
+Create a second library that depends on the first library and calls its public function.
+
+Expected artifacts:
+- library-chain/feature (project)
+
+Validators that will run:
+- feature-references-core: failure_class=api_contract
+- feature-builds: failure_class=build
+
+Existing generated files:
+FILE: library-chain/core/index.js
+---BEGIN FILE---
+export function add(a, b) {
+  return a + b;
+}
+
+
+---END FILE---
+
+FILE: library-chain/core/sample.js
+---BEGIN FILE---
+import { add } from './index.js';
+console.log(add(1, 2));
+
+
+---END FILE---
+
+FILE: _raw/lib-001-core.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-001-core
+Order: 1
+
+Stage goal:
+Create the first library with one public function and a tiny sample caller.
+
+Expected artifacts:
+- library-chain/core (project)
+
+Validators that will run:
+- core-builds: failure_class=build
+- core-sample-runs: failure_class=runtime_behavior
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/lib-001-core.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/core/index.js\",\n      \"content\": \"export function add(a, b) {\\n  return a + b;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/sample.js\",\n      \"content\": \"import { add } from './index.js';\\nconsole.log(add(1, 2));\\n\"\n    }\n  ],\n  \"notes\": \"Created core library with add function and sample caller.\"\n}",
+        "reasoning_content": "Okay, I need to create the first library for the Entropy staged code-generation benchmark. The stage is lib-001-core, and the goal is to have one public function and a tiny sample caller. The expected artifact is a project called library-chain/core.\n\nFirst, I should figure out the structure. Since it's a library, maybe it's a directory with a main module. Let's say the project directory is library-chain/core. Inside that, there should be a source file with the function and a test or sample file that uses it.\n\nWait, the validators are core-builds and core-sample-runs. So the build needs to succeed, and the sample code must run without errors. So I need to make sure the function is properly defined and the sample caller is correct.\n\nLet me think about the files. The main library file would be something like core.js or core.ts. Since the problem doesn't specify the language, but given that it's a benchmark, maybe JavaScript is common. Let's go with JavaScript.\n\nSo the structure would be:\n\nlibrary-chain/core/\n  index.js (or main.js)\n  sample.js (the caller)\n\nWait, but the project name is library-chain/core, so the directory is library-chain/core. Inside that, the files should be relative from the run root. So the path would be library-chain/core/index.js and library-chain/core/sample.js.\n\nWait, but the existing generated files section shows FILE: ---BEGIN FILE--- ---END FILE---. But the user hasn't provided any existing files. So I need to create all necessary files from scratch.\n\nSo the first step is to create the directory structure. But in JSON, I need to list the files with their paths. So the paths should be relative from the run root. So the project directory is library-chain/core, so the files inside would be library-chain/core/index.js and library-chain/core/sample.js.\n\nWait, but maybe the project directory is library-chain/core, so the files are within that directory. So the paths would be library-chain/core/index.js and library-chain/core/sample.js.\n\nNow, the core library should have one public function. Let's say a function that does something simple, like adding two numbers. Then the sample caller would import that function and call it.\n\nSo index.js would export the function, and sample.js would import and use it.\n\nWait, but in JavaScript, if it's a module, you need to use ES modules. So the index.js would export the function, and sample.js would import it.\n\nSo the content for index.js:\n\nexport function add(a, b) {\n  return a + b;\n}\n\nThen sample.js:\n\nimport { add } from './index.js';\nconsole.log(add(2, 3));\n\nBut wait, the sample needs to run. So the sample.js should be executable. But in a Node.js environment, you can run it with node sample.js. So the sample.js would be the caller.\n\nBut the project structure would be:\n\nlibrary-chain/core/\n  index.js\n  sample.js\n\nBut the path in the JSON should be relative from the run root. So the paths would be library-chain/core/index.js and library-chain/core/sample.js.\n\nWait, but the project directory is library-chain/core, so the files inside are library-chain/core/index.js and library-chain/core/sample.js. So the paths in the JSON should be \"library-chain/core/index.js\" and \"library-chain/core/sample.js\".\n\nBut wait, the stage goal says \"Create the first library with one public function and a tiny sample caller.\" So the library is the core directory, and the sample caller is part of the same project. So the sample.js is inside the library directory.\n\nSo the files would be:\n\n- library-chain/core/index.js (the library with the function)\n- library-chain/core/sample.js (the caller)\n\nNow, the content for index.js:\n\nexport function add(a, b) {\n  return a + b;\n}\n\nAnd sample.js:\n\nimport { add } from './index.js';\nconsole.log(add(1, 2));\n\nBut wait, in Node.js, the import needs to be from the same directory. So if sample.js is in the same directory as index.js, the import path is './index.js'.\n\nBut the sample.js should be executable. So when you run node sample.js, it should output the result.\n\nBut the validator core-sample-runs checks runtime behavior. So the sample.js must run without errors and produce the expected output.\n\nSo the content for sample.js should be correct.\n\nNow, the JSON should list these two files with their paths and content.\n\nAlso, the notes should be a short note. Maybe something like \"Created core library with add function and sample caller.\"\n\nWait, but the user says \"Return ONLY a JSON object in this exact shape\". So no markdown, just the JSON.\n\nSo the final JSON would be:\n\n{\n  \"files\": [\n    {\n      \"path\": \"library-chain/core/index.js\",\n      \"content\": \"export function add(a, b) {\\n  return a + b;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/sample.js\",\n      \"content\": \"import { add } from './index.js';\\nconsole.log(add(1, 2));\\n\"\n    }\n  ],\n  \"notes\": \"Created core library with add function and sample caller.\"\n}\n\nWait, but in JavaScript, the export and import need to be in ES modules. So the index.js should have the export, and sample.js imports it. But in Node.js, you need to use .js extension for ES modules. So the import path is correct.\n\nBut the content of index.js should be:\n\nexport function add(a, b) {\n  return a + b;\n}\n\nAnd sample.js:\n\nimport { add } from './index.js';\nconsole.log(add(1, 2));\n\nBut in the JSON, the content should be a string with newlines. So using \\n for line breaks.\n\nWait, but in the JSON, the content is a string, so newlines should be escaped as \\n.\n\nSo the content for index.js would be:\n\n\"export function add(a, b) {\\n  return a + b;\\n}\\n\"\n\nSimilarly for sample.js.\n\nBut wait, the sample.js should have the import and the console.log. So the content would be:\n\n\"import { add } from './index.js';\\nconsole.log(add(1, 2));\\n\"\n\nBut in the JSON, the content is a string, so the newlines are represented as \\n.\n\nYes, that's correct.\n\nNow, check if there are any other files needed. For example, a package.json? But the validators are core-builds and core-sample-runs. If the build is done with a specific tool, maybe package.json is needed. But the problem says \"library-chain/core (project)\", so maybe the project is a directory with the source files. If the build system is assumed to handle it, perhaps package.json is not required. But in Node.js projects, package.json is usually needed. However, the problem doesn't specify. Since the existing generated files section is empty, maybe we don't need to include package.json. The validators might handle the build without it, or perhaps the project is structured without it.\n\nAlternatively, maybe the project is a directory with the source files, and the build is done via a script. But since the problem doesn't specify, I'll proceed with just the two files.\n\nSo the final JSON should have the two files as above.\n"
+      }
+    }
+  ],
+  "created": 1779688699,
+  "model": "Qwen3.5-4B-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 1746,
+    "prompt_tokens": 241,
+    "total_tokens": 1987,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-IjEovHQXa6uUkS2SmMffKfL5MhLdt8A9",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 241,
+    "prompt_ms": 135.021,
+    "prompt_per_token_ms": 0.5602531120331949,
+    "prompt_per_second": 1784.9075329022896,
+    "predicted_n": 1746,
+    "predicted_ms": 30110.135,
+    "predicted_per_token_ms": 17.24520904925544,
+    "predicted_per_second": 57.98711961935741
+  }
+}
+
+---END FILE---
+
+FILE: _raw/lib-001-core.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "library-chain/core/index.js",
+      "content": "export function add(a, b) {\n  return a + b;\n}\n"
+    },
+    {
+      "path": "library-chain/core/sample.js",
+      "content": "import { add } from './index.js';\nconsole.log(add(1, 2));\n"
+    }
+  ],
+  "notes": "Created core library with add function and sample caller."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/lib-002-dependent.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"library-chain/feature/index.js\",\n      \"content\": \"import { add } from '../core/index.js';\\n\\nexport function multiply(a, b) {\\n  return add(a, b);\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/feature/sample.js\",\n      \"content\": \"import { multiply } from './index.js';\\nconsole.log(multiply(2, 3));\\n\"\n    }\n  ],\n  \"notes\": \"Created feature library that depends on core library and calls its public function.\"\n}\n```",
+        "reasoning_content": "The user is asking me to generate a JSON object for a code-generation benchmark stage. This is Stage 2 (lib-002-dependent) of a library-chain workload.\n\nThe stage goal is to create a second library that depends on the first library and calls its public function.\n\nLooking at the existing files:\n- library-chain/core/index.js - exports an add function\n- library-chain/core/sample.js - imports and uses the add function\n\nFor Stage 2 (lib-002-dependent), I need to create a second library that depends on the first library. This would typically be:\n- A new directory for the dependent library (e.g., library-chain/dependent or similar)\n- A file that imports from the core library and uses its public function\n\nThe expected artifacts should be:\n- library-chain/feature (project)\n\nWait, looking at the stage goal again: \"Create a second library that depends on the first library and calls its public function.\"\n\nAnd the expected artifacts say: \"- library-chain/feature (project)\"\n\nSo I need to create a feature library that depends on the core library. This would be a new project directory that imports from the core library.\n\nLet me create:\n1. library-chain/feature/index.js - the main library file\n2. library-chain/feature/sample.js - a sample caller that uses the core library\n\nThe feature library should import from the core library and call its public function (add).\n\nLet me structure this properly:\n\nFiles needed:\n- library-chain/feature/index.js - exports a function that uses the core library\n- library-chain/feature/sample.js - imports and uses the feature library\n\nWait, let me reconsider. The stage goal says \"Create a second library that depends on the first library and calls its public function.\"\n\nSo the feature library should:\n1. Import from the core library\n2. Call the public function from core\n\nThe structure would be:\n- library-chain/feature/index.js - exports a function that uses the core library's add function\n\n\n- library-chain/feature/sample.js - imports and uses the feature library\n\nI'll create the JSON with these two files.\n"
+      }
+    }
+  ],
+  "created": 1779688711,
+  "model": "Qwen3.5-4B-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 596,
+    "prompt_tokens": 2939,
+    "total_tokens": 3535,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-lcHisv0Z041huIN5Hi0u8X0wHlMqhZ72",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 2939,
+    "prompt_ms": 734.279,
+    "prompt_per_token_ms": 0.2498397414086424,
+    "prompt_per_second": 4002.5657822162966,
+    "predicted_n": 596,
+    "predicted_ms": 10472.788,
+    "predicted_per_token_ms": 17.571791946308725,
+    "predicted_per_second": 56.90939222678813
+  }
+}
+
+---END FILE---
+
+FILE: _raw/lib-002-dependent.txt
+---BEGIN FILE---
+```json
+{
+  "files": [
+    {
+      "path": "library-chain/feature/index.js",
+      "content": "import { add } from '../core/index.js';\n\nexport function multiply(a, b) {\n  return add(a, b);\n}\n"
+    },
+    {
+      "path": "library-chain/feature/sample.js",
+      "content": "import { multiply } from './index.js';\nconsole.log(multiply(2, 3));\n"
+    }
+  ],
+  "notes": "Created feature library that depends on core library and calls its public function."
+}
+```
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.

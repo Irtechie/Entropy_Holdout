@@ -1,0 +1,33 @@
+{
+  "files": [
+    {
+      "path": "library-chain/contracts/index.js",
+      "content": "export interface MathOperations {\n  add(a: number, b: number): number;\n  multiply(a: number, b: number): number;\n  power(a: number, b: number): number;\n}\n\nexport const MathOperations: MathOperations = {\n  add: (a, b) => a + b,\n  multiply: (a, b) => a * b,\n  power: (a, b) => Math.pow(a, b)\n};\n"
+    },
+    {
+      "path": "library-chain/core/index.js",
+      "content": "import { MathOperations } from '../contracts/index.js';\n\nexport function add(a, b) {\n  return MathOperations.add(a, b);\n}\n"
+    },
+    {
+      "path": "library-chain/core/sample.js",
+      "content": "import { add } from './index.js';\nconsole.log(add(1, 2));\n"
+    },
+    {
+      "path": "library-chain/feature/index.js",
+      "content": "import { MathOperations } from '../contracts/index.js';\n\nexport function multiply(a, b) {\n  return MathOperations.multiply(a, b);\n}\n"
+    },
+    {
+      "path": "library-chain/feature/sample.js",
+      "content": "import { multiply } from './index.js';\nconsole.log(multiply(2, 3));\n"
+    },
+    {
+      "path": "library-chain/pipeline/index.js",
+      "content": "import { MathOperations } from '../contracts/index.js';\n\nexport function power(a, b) {\n  return MathOperations.power(a, b);\n}\n"
+    },
+    {
+      "path": "library-chain/pipeline/sample.js",
+      "content": "import { power } from './index.js';\nconsole.log(power(2, 3));\n"
+    }
+  ],
+  "notes": "Created shared interface contract that all three libraries must use, ensuring consistent API across the chain."
+}

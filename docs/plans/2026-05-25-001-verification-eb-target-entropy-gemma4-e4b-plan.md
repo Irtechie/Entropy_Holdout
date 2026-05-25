@@ -55,7 +55,7 @@ pwsh .\tools\report_entropy_results.ps1 -ResultsPath "$run\results.jsonl" -Json
 
 ## Scope Boundary
 
-Do not repair generated model output in this slice. LLMCommune/model-serving recovery is allowed when the target has not wedged the lane. Output repair belongs to Wave 3.
+Do not repair generated model output in this slice. LLMCommune/model-serving recovery is allowed when the target has not wedged the lane. Output repair belongs to Wave 2.
 
 ## Result
 
@@ -67,5 +67,4 @@ Summary:
 - `library-chain`: reached 1/4, failed at `lib-002-dependent` due missing expected artifact path `library-chain/feature`.
 - `factory`: failed at 0/4 due malformed JSON content.
 
-This is a valid Wave 2 data point, not an LLMCommune wedge.
-
+This is a valid Wave 1 data point, not an LLMCommune wedge.
