@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!doctype html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <title>Entropy Page 1</title>\\n    <meta name=\\\"shared-data\\\" content=\\\"data-entropy-shared-table=\\\"factory-links\\\"\\\">\\n</head>\\n<body>\\n    <h1>Entropy Page 1</h1>\\n    <main>\\n        <!-- Main content area -->\\n    </main>\\n    <nav>\\n        <!-- Empty navigation area -->\\n    </nav>\\n</body>\\n</html>\"\n    },\n    {\n      \"path\": \"site/page-5.html\",\n      \"content\": \"<!doctype html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <title>Entropy Page 5</title>\\n    <meta name=\\\"shared-data\\\" content=\\\"data-entropy-shared-table=\\\"factory-links\\\"\\\">\\n</head>\\n<body>\\n    <h1>Entropy Page 5</h1>\\n    <p>This is webpage 5, linking back to page 4.</p>\\n    <nav>\\n        <a href=\\\"page-4.html\\\">Back to Entropy Page 4</a>\\n    </nav>\\n    <section id=\\\"shared-data\\\">\\n        <h2>Shared Data Section</h2>\\n        <p>This page utilizes the shared data structure.</p>\\n        <table data-entropy-shared-table=\\\"factory-links\\\">\\n            <thead>\\n                <tr><th>Key</th><th>Value</th></tr>\\n            </thead>\\n            <tbody>\\n                <tr><td>Shared Item A</td><td>Value A</td></tr>\\n            </tbody>\\n        </table>\\n    </section>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created site/page-5.html and updated site/index.html to include the required shared data attribute.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 1920,
+      "prompt_tokens": 22596,
+      "total_tokens": 24516,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "gemma-4-E2B-it-Q8_0.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-Jxaj79DrOHyUe3RMbFXQIlAIuh3Z40Mn",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 22596,
+    "output_tokens": 1920,
+    "total_tokens": 24516,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "c494bc3df325c6ebcf38cd215d7e4602",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-gemma4-e2b",
+      "webpage-chain"
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/page-4.html\",\n      \"content\": \"<!doctype html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <title>Entropy Page 4</title>\\n</head>\\n<body>\\n    <h1>Entropy Page 4</h1>\\n    <nav>\\n        <a href=\\\"index.html\\\">Index</a> | \\n        <a href=\\\"page-2.html\\\">Page 2</a> | \\n        <a href=\\\"page-3.html\\\">Page 3</a> | \\n        <a href=\\\"page-4.html\\\">Page 4</a>\\n    </nav>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created site/page-4.html with the required title, backlink, and shared navigation links.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 1033,
+      "prompt_tokens": 10733,
+      "total_tokens": 11766,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "gemma-4-E2B-it-Q8_0.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-ohTGYmDmHqGripTHgLLrAQjH3SKCBDRQ",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 10733,
+    "output_tokens": 1033,
+    "total_tokens": 11766,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "61ea2c2b5013dbe6a97a5c356e7eefd8",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-gemma4-e2b",
+      "webpage-chain"
+    ]
+  }
+}

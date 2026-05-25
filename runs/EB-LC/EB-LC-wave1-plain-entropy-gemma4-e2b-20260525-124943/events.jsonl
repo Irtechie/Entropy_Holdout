@@ -1,0 +1,8 @@
+{"ts":"2026-05-25T12:49:44.0360502-04:00","event":"experiment_start","experiment_id":"EB-LC-wave1-plain-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
+{"ts":"2026-05-25T12:49:44.0415034-04:00","event":"target_start","set_id":"entropy-gemma4-e2b","context_tokens":262144}
+{"ts":"2026-05-25T12:50:05.3612056-04:00","event":"target_ready","set_id":"entropy-gemma4-e2b","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"gemma-4-E2B-it-Q8_0.gguf"}
+{"ts":"2026-05-25T12:52:23.6839998-04:00","event":"workload_done","set_id":"entropy-gemma4-e2b","workload":"webpage-chain"}
+{"ts":"2026-05-25T12:52:58.4459342-04:00","event":"workload_failed","set_id":"entropy-gemma4-e2b","workload":"library-chain","error":"model did not generate expected artifact path: library-chain/core"}
+{"ts":"2026-05-25T12:53:54.0266361-04:00","event":"workload_failed","set_id":"entropy-gemma4-e2b","workload":"factory","error":"model did not generate expected artifact path: factory-system/stations"}
+{"ts":"2026-05-25T12:53:54.0282223-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-gemma4-e2b-20260525-124943\\results.jsonl"}
+{"ts":"2026-05-25T12:53:54.0577825-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-gemma4-e2b-20260525-124943\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-gemma4-e2b-20260525-124943\\critique.json"}

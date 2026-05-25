@@ -1,0 +1,13 @@
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Entropy Page 1</title>\n    <meta name=\"shared-data\" content=\"data-entropy-shared-table=\"factory-links\"\">\n</head>\n<body>\n    <h1>Entropy Page 1</h1>\n    <main>\n        <!-- Main content area -->\n    </main>\n    <nav>\n        <!-- Empty navigation area -->\n    </nav>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-5.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Entropy Page 5</title>\n    <meta name=\"shared-data\" content=\"data-entropy-shared-table=\"factory-links\"\">\n</head>\n<body>\n    <h1>Entropy Page 5</h1>\n    <p>This is webpage 5, linking back to page 4.</p>\n    <nav>\n        <a href=\"page-4.html\">Back to Entropy Page 4</a>\n    </nav>\n    <section id=\"shared-data\">\n        <h2>Shared Data Section</h2>\n        <p>This page utilizes the shared data structure.</p>\n        <table data-entropy-shared-table=\"factory-links\">\n            <thead>\n                <tr><th>Key</th><th>Value</th></tr>\n            </thead>\n            <tbody>\n                <tr><td>Shared Item A</td><td>Value A</td></tr>\n            </tbody>\n        </table>\n    </section>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created site/page-5.html and updated site/index.html to include the required shared data attribute."
+}

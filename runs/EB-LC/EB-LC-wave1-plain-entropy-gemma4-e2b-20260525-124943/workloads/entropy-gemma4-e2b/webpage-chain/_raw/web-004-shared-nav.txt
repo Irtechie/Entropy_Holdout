@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "site/page-4.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Entropy Page 4</title>\n</head>\n<body>\n    <h1>Entropy Page 4</h1>\n    <nav>\n        <a href=\"index.html\">Index</a> | \n        <a href=\"page-2.html\">Page 2</a> | \n        <a href=\"page-3.html\">Page 3</a> | \n        <a href=\"page-4.html\">Page 4</a>\n    </nav>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created site/page-4.html with the required title, backlink, and shared navigation links."
+}
