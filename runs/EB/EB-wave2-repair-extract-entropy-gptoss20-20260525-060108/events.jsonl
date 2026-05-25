@@ -1,0 +1,8 @@
+{"ts":"2026-05-25T06:01:08.3244350-04:00","event":"experiment_start","experiment_id":"EB-wave2-repair-extract-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
+{"ts":"2026-05-25T06:01:08.3286644-04:00","event":"target_start","set_id":"entropy-gptoss20","context_tokens":131072}
+{"ts":"2026-05-25T06:01:37.3778004-04:00","event":"target_ready","set_id":"entropy-gptoss20","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"gpt-oss-20b-Q4_K_M.gguf"}
+{"ts":"2026-05-25T06:02:35.5112935-04:00","event":"workload_failed","set_id":"entropy-gptoss20","workload":"webpage-chain","error":"model response did not include choices text"}
+{"ts":"2026-05-25T06:04:57.8858367-04:00","event":"workload_failed","set_id":"entropy-gptoss20","workload":"library-chain","error":"model response did not include choices text"}
+{"ts":"2026-05-25T06:05:49.9071473-04:00","event":"workload_failed","set_id":"entropy-gptoss20","workload":"factory","error":"model did not generate expected artifact path: factory-system/stations"}
+{"ts":"2026-05-25T06:05:49.9097246-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gptoss20-20260525-060108\\results.jsonl"}
+{"ts":"2026-05-25T06:05:49.9426591-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gptoss20-20260525-060108\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gptoss20-20260525-060108\\critique.json"}

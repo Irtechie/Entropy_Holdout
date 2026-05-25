@@ -1,0 +1,37 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<title>Home</title>\\n</head>\\n<body>\\n<header>\\n<h1>Welcome</h1>\\n</header>\\n<nav>\\n</nav>\\n<main>\\n<p>This is the main content.</p>\\n</main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created index.html with title, main content, and empty navigation.\"\n}",
+        "reasoning_content": "We need to produce JSON with files array containing site/index.html. The content should be a valid HTML page with title, main content, empty navigation area. Should be minimal but valid. Use <nav></nav> empty. Provide <main> with some placeholder. Title maybe \"Home\". Provide <header> maybe. But minimal.\n\nAlso ensure file exists. Provide content string. Use newline characters. Ensure no markdown fences. Provide JSON object only.\n\nLet's craft content:\n\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<title>Home</title>\n</head>\n<body>\n<header>\n<h1>Welcome</h1>\n</header>\n<nav>\n</nav>\n<main>\n<p>This is the main content.</p>\n</main>\n</body>\n</html>\n\nMake sure to escape newlines? In JSON string, we can include \\n. Provide content as string with newlines. Use double quotes. Ensure no trailing spaces.\n\nReturn JSON:\n\n{\n  \"files\": [\n    { \"path\": \"site/index.html\", \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<title>Home</title>\\n</head>\\n<body>\\n<header>\\n<h1>Welcome</h1>\\n</header>\\n<nav>\\n</nav>\\n<main>\\n<p>This is the main content.</p>\\n</main>\\n</body>\\n</html>\" }\n  ],\n  \"notes\": \"Created index.html with title, main content, and empty navigation.\"\n}\n\nCheck JSON formatting. Ensure proper escaping of quotes. Use double quotes inside string need to escape. Already used \\\" for lang attribute and charset. Good.\n\nReturn."
+      }
+    }
+  ],
+  "created": 1779703303,
+  "model": "gpt-oss-20b-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 496,
+    "prompt_tokens": 288,
+    "total_tokens": 784,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-atqa9QH7WVRNvkCqlqz0wMzUxF5y1ekK",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 288,
+    "prompt_ms": 500.553,
+    "prompt_per_token_ms": 1.73803125,
+    "prompt_per_second": 575.3636478055271,
+    "predicted_n": 496,
+    "predicted_ms": 5967.504,
+    "predicted_per_token_ms": 12.031258064516129,
+    "predicted_per_second": 83.11682740388612
+  }
+}

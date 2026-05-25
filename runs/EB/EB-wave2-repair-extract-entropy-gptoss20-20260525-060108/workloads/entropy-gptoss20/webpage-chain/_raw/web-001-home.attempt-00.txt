@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<title>Home</title>\n</head>\n<body>\n<header>\n<h1>Welcome</h1>\n</header>\n<nav>\n</nav>\n<main>\n<p>This is the main content.</p>\n</main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created index.html with title, main content, and empty navigation."
+}

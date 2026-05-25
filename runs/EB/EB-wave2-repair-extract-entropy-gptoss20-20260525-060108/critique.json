@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "benchmark": "EB",
+  "generated_at": "2026-05-25T06:05:49.9360156-04:00",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gptoss20-20260525-060108",
+  "results_path": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gptoss20-20260525-060108\\results.jsonl",
+  "rubric": {
+    "scale": "0-5",
+    "score_meaning": {
+      "0": "No valid stage output or strict output contract failure before code evaluation.",
+      "1": "Only first-stage or minimal artifact progress.",
+      "2": "Some local continuity, but breaks before deeper dependency pressure.",
+      "3": "Meaningful cross-stage progress, but breaks before completing workload invariants.",
+      "4": "All planned generation stages completed, but final validator failed.",
+      "5": "All planned generation stages and final validation passed."
+    },
+    "dimensions": [
+      "output_contract",
+      "artifact_continuity",
+      "dependency_retention",
+      "validator_readiness",
+      "entropy_pressure"
+    ]
+  },
+  "totals": {
+    "target_workload_count": 3,
+    "fully_validated_count": 0,
+    "prompt_tokens": 33453,
+    "completion_tokens": 10047,
+    "total_tokens": 43500
+  },
+  "critiques": [
+    {
+      "target_set_id": "entropy-gptoss20",
+      "model_id": "gpt-oss-20b-Q4_K_M.gguf",
+      "context_tokens": 131072,
+      "harness_mode": "repair-extract",
+      "workload_id": "factory",
+      "planned_stage_count": 4,
+      "stages_seen": 2,
+      "max_pass_stage": 1,
+      "entropy_right_shift": {
+        "passed_stages": 1,
+        "possible_stages": 4,
+        "normalized": 0.25,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "factory-002-stations",
+      "first_failure_class": "generation",
+      "first_error": "model did not generate expected artifact path: factory-system/stations",
+      "likely_entropy_cause": "The model produced files, but not at the paths required by the stage contract.",
+      "eb_score": 1,
+      "dimension_scores": {
+        "output_contract": 1,
+        "artifact_continuity": 1,
+        "dependency_retention": 1,
+        "validator_readiness": 1,
+        "entropy_pressure": 1
+      },
+      "token_usage": {
+        "prompt_tokens": 27547,
+        "completion_tokens": 3352,
+        "total_tokens": 30899
+      },
+      "breakpoint_metric": "highest ordered stage with valid component graph, configuration, and end-to-end factory behavior",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gptoss20-20260525-060108\\workloads\\entropy-gptoss20\\factory\\_raw\\factory-001-layout.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gptoss20-20260525-060108\\workloads\\entropy-gptoss20\\factory\\_raw\\factory-001-layout.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gptoss20-20260525-060108\\workloads\\entropy-gptoss20\\factory\\_raw\\factory-002-stations.attempt-02-repair.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gptoss20-20260525-060108\\workloads\\entropy-gptoss20\\factory\\_raw\\factory-002-stations.attempt-02-repair.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gptoss20-20260525-060108\\workloads\\entropy-gptoss20\\factory\\_raw\\factory-001-layout.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gptoss20-20260525-060108\\workloads\\entropy-gptoss20\\factory\\_raw\\factory-002-stations.attempt-02-repair.prompt.txt"
+      ],
+      "generated_file_count": 7,
+      "generated_files": [
+        "factory-system/package.json",
+        "factory-system/tsconfig.json",
+        "factory-system/src/component.ts",
+        "factory-system/src/station.ts",
+        "factory-system/src/product.ts",
+        "factory-system/src/routing.ts",
+        "factory-system/src/index.ts"
+      ]
+    },
+    {
+      "target_set_id": "entropy-gptoss20",
+      "model_id": "gpt-oss-20b-Q4_K_M.gguf",
+      "context_tokens": 131072,
+      "harness_mode": "repair-extract",
+      "workload_id": "library-chain",
+      "planned_stage_count": 4,
+      "stages_seen": 2,
+      "max_pass_stage": 1,
+      "entropy_right_shift": {
+        "passed_stages": 1,
+        "possible_stages": 4,
+        "normalized": 0.25,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "lib-002-dependent",
+      "first_failure_class": "harness",
+      "first_error": "model response did not include choices text",
+      "likely_entropy_cause": "The harness or validator surfaced an unexpected failure outside the workload contract.",
+      "eb_score": 1,
+      "dimension_scores": {
+        "output_contract": 1,
+        "artifact_continuity": 1,
+        "dependency_retention": 1,
+        "validator_readiness": 1,
+        "entropy_pressure": 1
+      },
+      "token_usage": {
+        "prompt_tokens": 5618,
+        "completion_tokens": 6199,
+        "total_tokens": 11817
+      },
+      "breakpoint_metric": "highest ordered stage with valid dependency references, build output, and sample call",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gptoss20-20260525-060108\\workloads\\entropy-gptoss20\\library-chain\\_raw\\lib-001-core.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gptoss20-20260525-060108\\workloads\\entropy-gptoss20\\library-chain\\_raw\\lib-001-core.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gptoss20-20260525-060108\\workloads\\entropy-gptoss20\\library-chain\\_raw\\lib-002-dependent.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gptoss20-20260525-060108\\workloads\\entropy-gptoss20\\library-chain\\_raw\\lib-002-dependent.attempt-00.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gptoss20-20260525-060108\\workloads\\entropy-gptoss20\\library-chain\\_raw\\lib-001-core.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gptoss20-20260525-060108\\workloads\\entropy-gptoss20\\library-chain\\_raw\\lib-002-dependent.attempt-00.prompt.txt"
+      ],
+      "generated_file_count": 4,
+      "generated_files": [
+        "library-chain/core/CoreLibrary.csproj",
+        "library-chain/core/Lib.cs",
+        "library-chain/core-sample/CoreSample.csproj",
+        "library-chain/core-sample/Program.cs"
+      ]
+    },
+    {
+      "target_set_id": "entropy-gptoss20",
+      "model_id": "gpt-oss-20b-Q4_K_M.gguf",
+      "context_tokens": 131072,
+      "harness_mode": "repair-extract",
+      "workload_id": "webpage-chain",
+      "planned_stage_count": 5,
+      "stages_seen": 2,
+      "max_pass_stage": 1,
+      "entropy_right_shift": {
+        "passed_stages": 1,
+        "possible_stages": 5,
+        "normalized": 0.2,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "web-002-backlink",
+      "first_failure_class": "harness",
+      "first_error": "model response did not include choices text",
+      "likely_entropy_cause": "The harness or validator surfaced an unexpected failure outside the workload contract.",
+      "eb_score": 1,
+      "dimension_scores": {
+        "output_contract": 1,
+        "artifact_continuity": 1,
+        "dependency_retention": 1,
+        "validator_readiness": 1,
+        "entropy_pressure": 1
+      },
+      "token_usage": {
+        "prompt_tokens": 288,
+        "completion_tokens": 496,
+        "total_tokens": 784
+      },
+      "breakpoint_metric": "highest ordered stage with valid pages, backlinks, and shared structure",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gptoss20-20260525-060108\\workloads\\entropy-gptoss20\\webpage-chain\\_raw\\web-001-home.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gptoss20-20260525-060108\\workloads\\entropy-gptoss20\\webpage-chain\\_raw\\web-001-home.attempt-00.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gptoss20-20260525-060108\\workloads\\entropy-gptoss20\\webpage-chain\\_raw\\web-001-home.attempt-00.prompt.txt"
+      ],
+      "generated_file_count": 1,
+      "generated_files": [
+        "site/index.html"
+      ]
+    }
+  ]
+}
