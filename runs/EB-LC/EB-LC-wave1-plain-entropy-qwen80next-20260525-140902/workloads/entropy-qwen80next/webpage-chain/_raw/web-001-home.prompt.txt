@@ -1,0 +1,47 @@
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-001-home
+Order: 1
+
+Stage goal:
+Create webpage 1 as index.html with a title, main content, and an empty navigation area that can grow later.
+
+Expected artifacts:
+- site/index.html (html)
+
+Validators that will run:
+- file-exists: failure_class=missing_artifact
+- html-parse: failure_class=syntax
+
+Exact validator contract:
+Generate files under site/ only.
+Every HTML page must include <!doctype html>.
+Required pages and literals:
+- index.html: title text must include 'Entropy Page 1'
+- page-2.html: title text must include 'Entropy Page 2'; backlink href must be 'index.html'
+- page-3.html: title text must include 'Entropy Page 3'; backlink href must be 'page-2.html'
+- page-4.html: title text must include 'Entropy Page 4'; backlink href must be 'page-3.html'
+- page-5.html: title text must include 'Entropy Page 5'; backlink href must be 'page-4.html'
+From page order 4, every page must link to index.html, page-2.html, page-3.html, and page-4.html.
+By stage 5, index.html and page-5.html must include data-entropy-shared-table="factory-links".
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.

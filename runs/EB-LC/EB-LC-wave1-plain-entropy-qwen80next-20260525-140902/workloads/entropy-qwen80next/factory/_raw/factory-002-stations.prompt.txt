@@ -1,0 +1,206 @@
+You are running an Entropy staged code-generation benchmark.
+
+Workload: factory
+Stage: factory-002-stations
+Order: 2
+
+Stage goal:
+Add multiple stations and a routing flow that moves a product between them.
+
+Expected artifacts:
+- factory-system/stations (source)
+
+Validators that will run:
+- station-graph-valid: failure_class=dependency_graph
+- product-route-runs: failure_class=runtime_behavior
+
+Exact validator contract:
+Generate a PowerShell-runnable factory under factory-system/.
+Required final files include factory-system/config/stations.json, factory-system/src/factory.ps1, and factory-system/dashboard/report.json.
+stations.json must contain exactly these stations:
+- id=intake, name=Intake, next=assembly
+- id=assembly, name=Assembly, next=quality
+- id=quality, name=Quality, next=shipping
+- id=shipping, name=Shipping, next=
+factory.ps1 must accept -ConfigPath and -ProductId, print route intake->assembly->quality->shipping, and write dashboard/report.json.
+dashboard/report.json must contain product_id entropy-widget-001 and route intake->assembly->quality->shipping.
+
+Existing generated files:
+FILE: factory-system/config/stations.json
+---BEGIN FILE---
+[
+  { "id": "intake", "name": "Intake", "next": "assembly" },
+  { "id": "assembly", "name": "Assembly", "next": "quality" },
+  { "id": "quality", "name": "Quality", "next": "shipping" },
+  { "id": "shipping", "name": "Shipping", "next": "" }
+]
+
+---END FILE---
+
+FILE: factory-system/dashboard/report.json
+---BEGIN FILE---
+{
+  "product_id": "entropy-widget-001",
+  "route": "intake->assembly->quality->shipping"
+}
+
+---END FILE---
+
+FILE: factory-system/src/factory.ps1
+---BEGIN FILE---
+param(
+    [string]$ConfigPath,
+    [string]$ProductId
+)
+
+# Read stations from config
+$stations = Get-Content -Path $ConfigPath | ConvertFrom-Json
+
+# Build route
+$route = @()
+foreach ($station in $stations) {
+    $route += $station.id
+}
+
+# Print route
+$route -join "->"
+
+# Write report
+$report = @{
+    product_id = $ProductId
+    route = $route -join "->"
+}
+
+$report | ConvertTo-Json -Depth 10 | Out-File -FilePath "factory-system/dashboard/report.json" -Encoding utf8
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: factory
+Stage: factory-001-layout
+Order: 1
+
+Stage goal:
+Create the factory project layout with component, station, product, and routing concepts.
+
+Expected artifacts:
+- factory-system (project)
+
+Validators that will run:
+- factory-layout-exists: failure_class=missing_artifact
+- factory-core-types-present: failure_class=api_contract
+
+Exact validator contract:
+Generate a PowerShell-runnable factory under factory-system/.
+Required final files include factory-system/config/stations.json, factory-system/src/factory.ps1, and factory-system/dashboard/report.json.
+stations.json must contain exactly these stations:
+- id=intake, name=Intake, next=assembly
+- id=assembly, name=Assembly, next=quality
+- id=quality, name=Quality, next=shipping
+- id=shipping, name=Shipping, next=
+factory.ps1 must accept -ConfigPath and -ProductId, print route intake->assembly->quality->shipping, and write dashboard/report.json.
+dashboard/report.json must contain product_id entropy-widget-001 and route intake->assembly->quality->shipping.
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.response.json
+---BEGIN FILE---
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"factory-system/config/stations.json\",\n      \"content\": \"[\\n  { \\\"id\\\": \\\"intake\\\", \\\"name\\\": \\\"Intake\\\", \\\"next\\\": \\\"assembly\\\" },\\n  { \\\"id\\\": \\\"assembly\\\", \\\"name\\\": \\\"Assembly\\\", \\\"next\\\": \\\"quality\\\" },\\n  { \\\"id\\\": \\\"quality\\\", \\\"name\\\": \\\"Quality\\\", \\\"next\\\": \\\"shipping\\\" },\\n  { \\\"id\\\": \\\"shipping\\\", \\\"name\\\": \\\"Shipping\\\", \\\"next\\\": \\\"\\\" }\\n]\"\n    },\n    {\n      \"path\": \"factory-system/src/factory.ps1\",\n      \"content\": \"param(\\n    [string]$ConfigPath,\\n    [string]$ProductId\\n)\\n\\n# Read stations from config\\n$stations = Get-Content -Path $ConfigPath | ConvertFrom-Json\\n\\n# Build route\\n$route = @()\\nforeach ($station in $stations) {\\n    $route += $station.id\\n}\\n\\n# Print route\\n$route -join \\\"->\\\"\\n\\n# Write report\\n$report = @{\\n    product_id = $ProductId\\n    route = $route -join \\\"->\\\"\\n}\\n\\n$report | ConvertTo-Json -Depth 10 | Out-File -FilePath \\\"factory-system/dashboard/report.json\\\" -Encoding utf8\"\n    },\n    {\n      \"path\": \"factory-system/dashboard/report.json\",\n      \"content\": \"{\\n  \\\"product_id\\\": \\\"entropy-widget-001\\\",\\n  \\\"route\\\": \\\"intake->assembly->quality->shipping\\\"\\n}\"\n    }\n  ],\n  \"notes\": \"Created factory project layout with required stations, script, and report files to satisfy stage goal.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 369,
+      "prompt_tokens": 372,
+      "total_tokens": 741,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    },
+    "model_name": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+    "system_fingerprint": "b1-983559d",
+    "id": "chatcmpl-6NYUuUBEQKm3KFLnCDtiNRpScpULZ1lJ",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 372,
+    "output_tokens": 369,
+    "total_tokens": 741,
+    "input_token_details": {},
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "9e477f55ca693f7471d1042e71ddd802",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-qwen80next",
+      "factory"
+    ]
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "factory-system/config/stations.json",
+      "content": "[\n  { \"id\": \"intake\", \"name\": \"Intake\", \"next\": \"assembly\" },\n  { \"id\": \"assembly\", \"name\": \"Assembly\", \"next\": \"quality\" },\n  { \"id\": \"quality\", \"name\": \"Quality\", \"next\": \"shipping\" },\n  { \"id\": \"shipping\", \"name\": \"Shipping\", \"next\": \"\" }\n]"
+    },
+    {
+      "path": "factory-system/src/factory.ps1",
+      "content": "param(\n    [string]$ConfigPath,\n    [string]$ProductId\n)\n\n# Read stations from config\n$stations = Get-Content -Path $ConfigPath | ConvertFrom-Json\n\n# Build route\n$route = @()\nforeach ($station in $stations) {\n    $route += $station.id\n}\n\n# Print route\n$route -join \"->\"\n\n# Write report\n$report = @{\n    product_id = $ProductId\n    route = $route -join \"->\"\n}\n\n$report | ConvertTo-Json -Depth 10 | Out-File -FilePath \"factory-system/dashboard/report.json\" -Encoding utf8"
+    },
+    {
+      "path": "factory-system/dashboard/report.json",
+      "content": "{\n  \"product_id\": \"entropy-widget-001\",\n  \"route\": \"intake->assembly->quality->shipping\"\n}"
+    }
+  ],
+  "notes": "Created factory project layout with required stations, script, and report files to satisfy stage goal."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.

@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!doctype html>\n<html>\n<head>\n  <title>Entropy Page 1</title>\n</head>\n<body>\n  <nav></nav>\n  <main></main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Generated index.html with required title and empty navigation area as per stage web-001-home goal."
+}

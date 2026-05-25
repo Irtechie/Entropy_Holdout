@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "path": "factory-system/config/stations.json",
+      "content": "[\n  { \"id\": \"intake\", \"name\": \"Intake\", \"next\": \"assembly\" },\n  { \"id\": \"assembly\", \"name\": \"Assembly\", \"next\": \"quality\" },\n  { \"id\": \"quality\", \"name\": \"Quality\", \"next\": \"shipping\" },\n  { \"id\": \"shipping\", \"name\": \"Shipping\", \"next\": \"\" }\n]"
+    },
+    {
+      "path": "factory-system/src/factory.ps1",
+      "content": "param(\n    [string]$ConfigPath,\n    [string]$ProductId\n)\n\n# Read stations from config\n$stations = Get-Content -Path $ConfigPath | ConvertFrom-Json\n\n# Build route\n$route = @()\nforeach ($station in $stations) {\n    $route += $station.id\n}\n\n# Print route\n$route -join \"->\"\n\n# Write report\n$report = @{\n    product_id = $ProductId\n    route = $route -join \"->\"\n}\n\n$report | ConvertTo-Json -Depth 10 | Out-File -FilePath \"factory-system/dashboard/report.json\" -Encoding utf8"
+    },
+    {
+      "path": "factory-system/dashboard/report.json",
+      "content": "{\n  \"product_id\": \"entropy-widget-001\",\n  \"route\": \"intake->assembly->quality->shipping\"\n}"
+    }
+  ],
+  "notes": "All required files are already correctly generated and match the stage goal. No modifications needed."
+}

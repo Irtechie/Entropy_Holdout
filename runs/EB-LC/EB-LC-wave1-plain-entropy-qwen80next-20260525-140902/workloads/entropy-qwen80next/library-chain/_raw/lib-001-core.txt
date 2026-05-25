@@ -1,0 +1,45 @@
+{
+  "files": [
+    {
+      "path": "library-chain/CoreLib/CoreLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>\n  </PropertyGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/CoreLib/Program.cs",
+      "content": "namespace CoreLib;\n\npublic static class Core\n{\n    public static string Execute() => \"core\";\n}"
+    },
+    {
+      "path": "library-chain/FeatureLib/FeatureLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"..\\CoreLib\\CoreLib.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/FeatureLib/Program.cs",
+      "content": "namespace FeatureLib;\n\npublic static class Feature\n{\n    public static string Execute() => Core.Core.Execute() + \"->feature\";\n}"
+    },
+    {
+      "path": "library-chain/PipelineLib/PipelineLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"..\\FeatureLib\\FeatureLib.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/PipelineLib/Program.cs",
+      "content": "namespace PipelineLib;\n\npublic static class Pipeline\n{\n    public static string Execute() => Feature.Feature.Execute() + \"->pipeline\";\n}"
+    },
+    {
+      "path": "library-chain/Contracts/Contracts.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>\n  </PropertyGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/Contracts/IContract.cs",
+      "content": "namespace Contracts;\n\npublic interface IContract\n{\n    string GetResult();\n}"
+    },
+    {
+      "path": "library-chain/SampleApp/SampleApp.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>\n    <OutputType>Exe</OutputType>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"..\\PipelineLib\\PipelineLib.csproj\" />\n    <ProjectReference Include=\"..\\Contracts\\Contracts.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/SampleApp/Program.cs",
+      "content": "using Contracts;\nusing PipelineLib;\n\nnamespace SampleApp;\n\nclass Program\n{\n    static void Main()\n    {\n        Console.WriteLine(Pipeline.Pipeline.Execute() + \"->contract\");\n    }\n}"
+    }
+  ],
+  "notes": "Generated all required projects and files with proper references and a sample app that prints 'core->feature->pipeline->contract'."
+}

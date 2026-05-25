@@ -1,0 +1,38 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/page-3.html\",\n      \"content\": \"<!doctype html>\\n<html>\\n<head>\\n  <title>Entropy Page 3</title>\\n</head>\\n<body>\\n  <nav>\\n    <a href=\\\"page-2.html\\\">Back to Page 2</a>\\n  </nav>\\n  <main></main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Generated page-3.html with required title and backlink to page-2.html, preserving existing page-1 and page-2 links.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 136,
+      "prompt_tokens": 3779,
+      "total_tokens": 3915,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    },
+    "model_name": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+    "system_fingerprint": "b1-983559d",
+    "id": "chatcmpl-Y1t6QT9caa3tHsay3w9896x6p3H3QHtE",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 3779,
+    "output_tokens": 136,
+    "total_tokens": 3915,
+    "input_token_details": {},
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "2937fd021d98b513951c7735acb1b002",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-qwen80next",
+      "webpage-chain"
+    ]
+  }
+}

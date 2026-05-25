@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "site/page-5.html",
+      "content": "<!doctype html>\n<html>\n<head>\n  <title>Entropy Page 5</title>\n</head>\n<body>\n  <nav>\n    <a href=\"page-4.html\">Back to Page 4</a>\n    <a href=\"index.html\">Page 1</a>\n    <a href=\"page-2.html\">Page 2</a>\n    <a href=\"page-3.html\">Page 3</a>\n    <a href=\"page-4.html\">Page 4</a>\n  </nav>\n  <main data-entropy-shared-table=\"factory-links\"></main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Generated page-5.html with required title, backlink to page-4.html, shared navigation linking to all pages 1-4, and data-entropy-shared-table=\"factory-links\" on main element as per stage web-005-nested-shared-table goal."
+}
