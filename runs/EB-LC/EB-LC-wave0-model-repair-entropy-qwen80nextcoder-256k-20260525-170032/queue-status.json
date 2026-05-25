@@ -1,0 +1,17 @@
+{
+  "queue_id": "EB-LC-wave0-model-repair-canary",
+  "target_set_id": "entropy-qwen80nextcoder-256k",
+  "slice_id": "wave0-canary-003",
+  "classification": "completed-data-run",
+  "run_root": ".\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-qwen80nextcoder-256k-20260525-170032",
+  "started_at": "2026-05-25T17:00:32.0313143-04:00",
+  "finished_at": "2026-05-25T17:09:51.4628373-04:00",
+  "elapsed_s": 559.4,
+  "runner_exit_code": 0,
+  "results": ".\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-qwen80nextcoder-256k-20260525-170032\\results.jsonl",
+  "critique": ".\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-qwen80nextcoder-256k-20260525-170032\\critique.md",
+  "critique_json": ".\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-qwen80nextcoder-256k-20260525-170032\\critique.json",
+  "report_json": ".\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-qwen80nextcoder-256k-20260525-170032\\report.json",
+  "wedge_risk": false,
+  "wedge_detail": null
+}

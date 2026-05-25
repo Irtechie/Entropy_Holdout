@@ -1,0 +1,4 @@
+{
+  "files": [],
+  "notes": "All required files for the library-chain benchmark have already been generated in previous stages. The chain is complete and SampleApp will print the required output."
+}

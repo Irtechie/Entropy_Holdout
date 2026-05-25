@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "site/page-4.html",
+      "content": "<!doctype html>\n<html>\n<head>\n  <title>Entropy Page 4</title>\n</head>\n<body>\n  <nav id=\"navigation\">\n    <a href=\"page-3.html\">Back to Page 3</a>\n    <a href=\"index.html\">Home</a>\n    <a href=\"page-2.html\">Page 2</a>\n    <a href=\"page-3.html\">Page 3</a>\n  </nav>\n  <main>\n    <h1>Welcome to Entropy Page 4</h1>\n    <p>This is page 4 in the Entropy benchmark chain.</p>\n  </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created page-4.html with required title, backlink to page-3.html, and shared navigation links to all previous pages."
+}

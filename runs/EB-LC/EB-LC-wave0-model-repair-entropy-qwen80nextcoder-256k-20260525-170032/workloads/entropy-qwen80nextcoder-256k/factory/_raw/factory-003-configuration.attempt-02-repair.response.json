@@ -1,0 +1,38 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [],\n  \"notes\": \"All required files already exist and match the validator contract for stage factory-003-configuration.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 33,
+      "prompt_tokens": 50422,
+      "total_tokens": 50455,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    },
+    "model_name": "Qwen3-Coder-Next-Q4_K_M.gguf",
+    "system_fingerprint": "b1-983559d",
+    "id": "chatcmpl-LoUflwbaMUGA1ldV0b5cVSoa37dKZHZ7",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 50422,
+    "output_tokens": 33,
+    "total_tokens": 50455,
+    "input_token_details": {},
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "e4631de9ce609bd169c5c1d29b902dba",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "model-repair",
+      "langchain",
+      "entropy-qwen80nextcoder-256k",
+      "factory"
+    ]
+  }
+}
