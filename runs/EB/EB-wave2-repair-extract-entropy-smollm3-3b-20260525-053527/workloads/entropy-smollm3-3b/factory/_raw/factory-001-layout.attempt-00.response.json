@@ -1,0 +1,36 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"factory-system/src/main.ts\",\n      \"content\": \"import { Station, Product, Routing } from './station';\nimport { Component } from './component';\nimport { StationComponent } from './station-component';\nimport { ProductComponent } from './product-component';\nimport { RoutingComponent } from './routing-component';\nimport { StationService } from './station.service';\nimport { ProductService } from './product.service';\nimport { RoutingService } from './routing.service';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.css']\n})\nexport class AppComponent {\n  title = 'Factory';\n\n  stations: Station[] = [];\n  products: Product[] = [];\n  routings: Routing[] = [];\n\n  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {\n    this.stationService.getStations().subscribe(stations => this.stations = stations);\n    this.productService.getProducts().subscribe(products => this.products = products);\n    this.routingService.getRoutings().subscribe(routings => this.routings = routings);\n  }\n}\n\"\n}\n],\n  \"notes\": \"Created the factory project layout with component, station, product, and routing concepts.\"\n}\n```"
+      }
+    }
+  ],
+  "created": 1779701842,
+  "model": "SmolLM3-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 276,
+    "prompt_tokens": 252,
+    "total_tokens": 528,
+    "prompt_tokens_details": {
+      "cached_tokens": 70
+    }
+  },
+  "id": "chatcmpl-jtpuYhqlxHVdDtkPMLPiN6RfDFSpJeLU",
+  "timings": {
+    "cache_n": 70,
+    "prompt_n": 182,
+    "prompt_ms": 48.714,
+    "prompt_per_token_ms": 0.26765934065934066,
+    "prompt_per_second": 3736.0922937964447,
+    "predicted_n": 276,
+    "predicted_ms": 3056.027,
+    "predicted_per_token_ms": 11.072561594202899,
+    "predicted_per_second": 90.31333820021878
+  }
+}

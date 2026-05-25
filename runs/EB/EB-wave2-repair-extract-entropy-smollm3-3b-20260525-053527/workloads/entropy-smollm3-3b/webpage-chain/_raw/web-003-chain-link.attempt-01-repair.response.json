@@ -1,0 +1,36 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/page-3.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Webpage 1</title>\\n</head>\\n<body>\\n    <h1>Webpage 1</h1>\\n    <p>Main content</p>\\n    <nav>\\n        <ul>\\n            <li><a href=\\\"https://example.com/page-1\\\">Back to Page 1</a></li>\\n        </ul>\\n    </nav>\\n    <div>\\n        <h2>Webpage 2</h2>\\n        <p>Webpage 2 content</p>\\n        <nav>\\n            <ul>\\n                <li><a href=\\\"https://example.com/page-2\\\">Back to Page 2</a></li>\\n            </ul>\\n        </nav>\\n    </div>\\n    <div>\\n        <h2>Webpage 3</h2>\\n        <p>Webpage 3 content</p>\\n        <nav>\\n            <ul>\\n                <li><a href=\\\"https://example.com/page-2\\\">Back to Page 2</a></li>\\n            </ul>\\n        </nav>\\n    </div>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created page-3.html with a link back to page 2 and preserved links to page 1 and page 2.\"\n}"
+      }
+    }
+  ],
+  "created": 1779701768,
+  "model": "SmolLM3-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 370,
+    "prompt_tokens": 17014,
+    "total_tokens": 17384,
+    "prompt_tokens_details": {
+      "cached_tokens": 58
+    }
+  },
+  "id": "chatcmpl-6zNcm7RuVErL15a2NI4GOB22bd9HurIf",
+  "timings": {
+    "cache_n": 58,
+    "prompt_n": 16956,
+    "prompt_ms": 3102.729,
+    "prompt_per_token_ms": 0.18298708421797594,
+    "prompt_per_second": 5464.866573909613,
+    "predicted_n": 370,
+    "predicted_ms": 6022.272,
+    "predicted_per_token_ms": 16.27641081081081,
+    "predicted_per_second": 61.438606559119215
+  }
+}

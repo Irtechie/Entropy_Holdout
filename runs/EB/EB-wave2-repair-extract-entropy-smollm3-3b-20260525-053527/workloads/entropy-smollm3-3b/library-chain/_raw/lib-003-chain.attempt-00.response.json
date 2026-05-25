@@ -1,0 +1,36 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/feature\",\n      \"content\": \"---BEGIN FILE---\\n\\n// feature.h\\n\\n#ifndef FEATURE_H\\n\\n#define FEATURE_H\\n\\nvoid my_function();\\n\\n#endif\\n\\n\\n// feature.c\\n\\n#include \\\"feature.h\\\"\\n\\nvoid my_function() {\\n  printf(\\\"Hello from my_function!\\\\n\\\");\\n  my_function();\\n  return 0;\\n}\\n\\nint main() {\\n  my_function();\\n  return 0;\\n}\\n\\n---END FILE---\"\n    }\n  ],\n  \"notes\": \"Created a second library that depends on the first library and calls its public function.\"\n}"
+      }
+    }
+  ],
+  "created": 1779701798,
+  "model": "SmolLM3-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 158,
+    "prompt_tokens": 6895,
+    "total_tokens": 7053,
+    "prompt_tokens_details": {
+      "cached_tokens": 58
+    }
+  },
+  "id": "chatcmpl-1fE4ScX1C3YjcAnvC3xqCJQir0sWroha",
+  "timings": {
+    "cache_n": 58,
+    "prompt_n": 6837,
+    "prompt_ms": 1090.871,
+    "prompt_per_token_ms": 0.15955404417142022,
+    "prompt_per_second": 6267.468839120299,
+    "predicted_n": 158,
+    "predicted_ms": 2073.704,
+    "predicted_per_token_ms": 13.124708860759494,
+    "predicted_per_second": 76.19216628795623
+  }
+}

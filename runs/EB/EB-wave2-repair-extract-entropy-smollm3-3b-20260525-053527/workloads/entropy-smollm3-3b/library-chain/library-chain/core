@@ -1,0 +1,27 @@
+---BEGIN FILE---
+
+// core.h
+
+#ifndef CORE_H
+
+#define CORE_H
+
+void my_function();
+
+#endif
+
+
+// core.c
+
+#include "core.h"
+
+void my_function() {
+  printf("Hello from my_function!");
+}
+
+int main() {
+  my_function();
+  return 0;
+}
+
+---END FILE---

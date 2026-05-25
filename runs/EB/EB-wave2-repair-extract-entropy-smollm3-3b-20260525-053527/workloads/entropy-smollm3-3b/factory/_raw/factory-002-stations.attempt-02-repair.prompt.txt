@@ -1,0 +1,952 @@
+You are repairing an Entropy staged code-generation benchmark response.
+
+Workload: factory
+Stage: factory-002-stations
+Order: 2
+
+Stage goal:
+Add multiple stations and a routing flow that moves a product between them.
+
+Expected artifacts:
+- factory-system/stations (source)
+
+The previous response failed with:
+model did not generate expected artifact path: factory-system/stations
+
+Previous response text:
+---BEGIN FAILED RESPONSE---
+{
+  "files": [
+    {
+      "path": "factory-system/src/main.ts",
+      "content": "import { Station, Product, Routing } from './station';\nimport { Component } from './component';\nimport { StationComponent } from './station-component';\nimport { ProductComponent } from './product-component';\nimport { RoutingComponent } from './routing-component';\nimport { StationService } from './station.service';\nimport { ProductService } from './product.service';\nimport { RoutingService } from './routing.service';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.css']\n})\nexport class AppComponent {\n  title = 'Factory';\n\n  stations: Station[] = [];\n  products: Product[] = [];\n  routings: Routing[] = [];\n\n  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {\n    this.stationService.getStations().subscribe(stations => this.stations = stations);\n    this.productService.getProducts().subscribe(products => this.products = products);\n    this.routingService.getRoutings().subscribe(routings => this.routings = routings);\n  }\n}"
+    }
+  ],
+  "notes": "Created the factory project layout with component, station, product, and routing concepts."
+}
+---END FAILED RESPONSE---
+
+Current generated files:
+FILE: factory-system/src/main.ts
+---BEGIN FILE---
+import { Station, Product, Routing } from './station';
+import { Component } from './component';
+import { StationComponent } from './station-component';
+import { ProductComponent } from './product-component';
+import { RoutingComponent } from './routing-component';
+import { StationService } from './station.service';
+import { ProductService } from './product.service';
+import { RoutingService } from './routing.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Factory';
+
+  stations: Station[] = [];
+  products: Product[] = [];
+  routings: Routing[] = [];
+
+  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {
+    this.stationService.getStations().subscribe(stations => this.stations = stations);
+    this.productService.getProducts().subscribe(products => this.products = products);
+    this.routingService.getRoutings().subscribe(routings => this.routings = routings);
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: factory
+Stage: factory-001-layout
+Order: 1
+
+Stage goal:
+Create the factory project layout with component, station, product, and routing concepts.
+
+Expected artifacts:
+- factory-system (project)
+
+Validators that will run:
+- factory-layout-exists: failure_class=missing_artifact
+- factory-core-types-present: failure_class=api_contract
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"factory-system/src/main.ts\",\n      \"content\": \"import { Station, Product, Routing } from './station';\nimport { Component } from './component';\nimport { StationComponent } from './station-component';\nimport { ProductComponent } from './product-component';\nimport { RoutingComponent } from './routing-component';\nimport { StationService } from './station.service';\nimport { ProductService } from './product.service';\nimport { RoutingService } from './routing.service';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.css']\n})\nexport class AppComponent {\n  title = 'Factory';\n\n  stations: Station[] = [];\n  products: Product[] = [];\n  routings: Routing[] = [];\n\n  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {\n    this.stationService.getStations().subscribe(stations => this.stations = stations);\n    this.productService.getProducts().subscribe(products => this.products = products);\n    this.routingService.getRoutings().subscribe(routings => this.routings = routings);\n  }\n}\n\"\n}\n],\n  \"notes\": \"Created the factory project layout with component, station, product, and routing concepts.\"\n}\n```"
+      }
+    }
+  ],
+  "created": 1779701842,
+  "model": "SmolLM3-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 276,
+    "prompt_tokens": 252,
+    "total_tokens": 528,
+    "prompt_tokens_details": {
+      "cached_tokens": 70
+    }
+  },
+  "id": "chatcmpl-jtpuYhqlxHVdDtkPMLPiN6RfDFSpJeLU",
+  "timings": {
+    "cache_n": 70,
+    "prompt_n": 182,
+    "prompt_ms": 48.714,
+    "prompt_per_token_ms": 0.26765934065934066,
+    "prompt_per_second": 3736.0922937964447,
+    "predicted_n": 276,
+    "predicted_ms": 3056.027,
+    "predicted_per_token_ms": 11.072561594202899,
+    "predicted_per_second": 90.31333820021878
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.txt
+---BEGIN FILE---
+```json
+{
+  "files": [
+    {
+      "path": "factory-system/src/main.ts",
+      "content": "import { Station, Product, Routing } from './station';
+import { Component } from './component';
+import { StationComponent } from './station-component';
+import { ProductComponent } from './product-component';
+import { RoutingComponent } from './routing-component';
+import { StationService } from './station.service';
+import { ProductService } from './product.service';
+import { RoutingService } from './routing.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Factory';
+
+  stations: Station[] = [];
+  products: Product[] = [];
+  routings: Routing[] = [];
+
+  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {
+    this.stationService.getStations().subscribe(stations => this.stations = stations);
+    this.productService.getProducts().subscribe(products => this.products = products);
+    this.routingService.getRoutings().subscribe(routings => this.routings = routings);
+  }
+}
+"
+}
+],
+  "notes": "Created the factory project layout with component, station, product, and routing concepts."
+}
+```
+
+---END FILE---
+
+FILE: _raw/factory-002-stations.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: factory
+Stage: factory-002-stations
+Order: 2
+
+Stage goal:
+Add multiple stations and a routing flow that moves a product between them.
+
+Expected artifacts:
+- factory-system/stations (source)
+
+Validators that will run:
+- station-graph-valid: failure_class=dependency_graph
+- product-route-runs: failure_class=runtime_behavior
+
+Existing generated files:
+FILE: factory-system/src/main.ts
+---BEGIN FILE---
+import { Station, Product, Routing } from './station';
+import { Component } from './component';
+import { StationComponent } from './station-component';
+import { ProductComponent } from './product-component';
+import { RoutingComponent } from './routing-component';
+import { StationService } from './station.service';
+import { ProductService } from './product.service';
+import { RoutingService } from './routing.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Factory';
+
+  stations: Station[] = [];
+  products: Product[] = [];
+  routings: Routing[] = [];
+
+  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {
+    this.stationService.getStations().subscribe(stations => this.stations = stations);
+    this.productService.getProducts().subscribe(products => this.products = products);
+    this.routingService.getRoutings().subscribe(routings => this.routings = routings);
+  }
+}
+
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: factory
+Stage: factory-001-layout
+Order: 1
+
+Stage goal:
+Create the factory project layout with component, station, product, and routing concepts.
+
+Expected artifacts:
+- factory-system (project)
+
+Validators that will run:
+- factory-layout-exists: failure_class=missing_artifact
+- factory-core-types-present: failure_class=api_contract
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"factory-system/src/main.ts\",\n      \"content\": \"import { Station, Product, Routing } from './station';\nimport { Component } from './component';\nimport { StationComponent } from './station-component';\nimport { ProductComponent } from './product-component';\nimport { RoutingComponent } from './routing-component';\nimport { StationService } from './station.service';\nimport { ProductService } from './product.service';\nimport { RoutingService } from './routing.service';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.css']\n})\nexport class AppComponent {\n  title = 'Factory';\n\n  stations: Station[] = [];\n  products: Product[] = [];\n  routings: Routing[] = [];\n\n  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {\n    this.stationService.getStations().subscribe(stations => this.stations = stations);\n    this.productService.getProducts().subscribe(products => this.products = products);\n    this.routingService.getRoutings().subscribe(routings => this.routings = routings);\n  }\n}\n\"\n}\n],\n  \"notes\": \"Created the factory project layout with component, station, product, and routing concepts.\"\n}\n```"
+      }
+    }
+  ],
+  "created": 1779701842,
+  "model": "SmolLM3-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 276,
+    "prompt_tokens": 252,
+    "total_tokens": 528,
+    "prompt_tokens_details": {
+      "cached_tokens": 70
+    }
+  },
+  "id": "chatcmpl-jtpuYhqlxHVdDtkPMLPiN6RfDFSpJeLU",
+  "timings": {
+    "cache_n": 70,
+    "prompt_n": 182,
+    "prompt_ms": 48.714,
+    "prompt_per_token_ms": 0.26765934065934066,
+    "prompt_per_second": 3736.0922937964447,
+    "predicted_n": 276,
+    "predicted_ms": 3056.027,
+    "predicted_per_token_ms": 11.072561594202899,
+    "predicted_per_second": 90.31333820021878
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.txt
+---BEGIN FILE---
+```json
+{
+  "files": [
+    {
+      "path": "factory-system/src/main.ts",
+      "content": "import { Station, Product, Routing } from './station';
+import { Component } from './component';
+import { StationComponent } from './station-component';
+import { ProductComponent } from './product-component';
+import { RoutingComponent } from './routing-component';
+import { StationService } from './station.service';
+import { ProductService } from './product.service';
+import { RoutingService } from './routing.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Factory';
+
+  stations: Station[] = [];
+  products: Product[] = [];
+  routings: Routing[] = [];
+
+  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {
+    this.stationService.getStations().subscribe(stations => this.stations = stations);
+    this.productService.getProducts().subscribe(products => this.products = products);
+    this.routingService.getRoutings().subscribe(routings => this.routings = routings);
+  }
+}
+"
+}
+],
+  "notes": "Created the factory project layout with component, station, product, and routing concepts."
+}
+```
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/factory-002-stations.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"factory-system/src/main.ts\",\n      \"content\": \"import { Station, Product, Routing } from './station';\\nimport { Component } from './component';\\nimport { StationComponent } from './station-component';\\nimport { ProductComponent } from './product-component';\\nimport { RoutingComponent } from './routing-component';\\nimport { StationService } from './station.service';\\nimport { ProductService } from './product.service';\\nimport { RoutingService } from './routing.service';\\n\\n@Component({\\n  selector: 'app-root',\\n  templateUrl: './app.component.html',\\n  styleUrls: ['./app.component.css']\\n})\\nexport class AppComponent {\\n  title = 'Factory';\\n\\n  stations: Station[] = [];\\n  products: Product[] = [];\\n  routings: Routing[] = [];\\n\\n  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {\\n    this.stationService.getStations().subscribe(stations => this.stations = stations);\\n    this.productService.getProducts().subscribe(products => this.products = products);\\n    this.routingService.getRoutings().subscribe(routings => this.routings = routings);\\n  }\\n}\"\n    }\n  ],\n  \"notes\": \"Created the factory project layout with component, station, product, and routing concepts.\"\n}"
+      }
+    }
+  ],
+  "created": 1779701847,
+  "model": "SmolLM3-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 315,
+    "prompt_tokens": 1630,
+    "total_tokens": 1945,
+    "prompt_tokens_details": {
+      "cached_tokens": 76
+    }
+  },
+  "id": "chatcmpl-qIi8oLWYuupG1Q4yDhbIL0XJaj5T2mCx",
+  "timings": {
+    "cache_n": 76,
+    "prompt_n": 1554,
+    "prompt_ms": 248.398,
+    "prompt_per_token_ms": 0.15984427284427286,
+    "prompt_per_second": 6256.0890184301,
+    "predicted_n": 315,
+    "predicted_ms": 3619.336,
+    "predicted_per_token_ms": 11.489955555555555,
+    "predicted_per_second": 87.03253856508488
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-002-stations.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "factory-system/src/main.ts",
+      "content": "import { Station, Product, Routing } from './station';\nimport { Component } from './component';\nimport { StationComponent } from './station-component';\nimport { ProductComponent } from './product-component';\nimport { RoutingComponent } from './routing-component';\nimport { StationService } from './station.service';\nimport { ProductService } from './product.service';\nimport { RoutingService } from './routing.service';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.css']\n})\nexport class AppComponent {\n  title = 'Factory';\n\n  stations: Station[] = [];\n  products: Product[] = [];\n  routings: Routing[] = [];\n\n  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {\n    this.stationService.getStations().subscribe(stations => this.stations = stations);\n    this.productService.getProducts().subscribe(products => this.products = products);\n    this.routingService.getRoutings().subscribe(routings => this.routings = routings);\n  }\n}"
+    }
+  ],
+  "notes": "Created the factory project layout with component, station, product, and routing concepts."
+}
+
+---END FILE---
+
+FILE: _raw/factory-002-stations.attempt-01-repair.prompt.txt
+---BEGIN FILE---
+You are repairing an Entropy staged code-generation benchmark response.
+
+Workload: factory
+Stage: factory-002-stations
+Order: 2
+
+Stage goal:
+Add multiple stations and a routing flow that moves a product between them.
+
+Expected artifacts:
+- factory-system/stations (source)
+
+The previous response failed with:
+model did not generate expected artifact path: factory-system/stations
+
+Previous response text:
+---BEGIN FAILED RESPONSE---
+{
+  "files": [
+    {
+      "path": "factory-system/src/main.ts",
+      "content": "import { Station, Product, Routing } from './station';\nimport { Component } from './component';\nimport { StationComponent } from './station-component';\nimport { ProductComponent } from './product-component';\nimport { RoutingComponent } from './routing-component';\nimport { StationService } from './station.service';\nimport { ProductService } from './product.service';\nimport { RoutingService } from './routing.service';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.css']\n})\nexport class AppComponent {\n  title = 'Factory';\n\n  stations: Station[] = [];\n  products: Product[] = [];\n  routings: Routing[] = [];\n\n  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {\n    this.stationService.getStations().subscribe(stations => this.stations = stations);\n    this.productService.getProducts().subscribe(products => this.products = products);\n    this.routingService.getRoutings().subscribe(routings => this.routings = routings);\n  }\n}"
+    }
+  ],
+  "notes": "Created the factory project layout with component, station, product, and routing concepts."
+}
+---END FAILED RESPONSE---
+
+Current generated files:
+FILE: factory-system/src/main.ts
+---BEGIN FILE---
+import { Station, Product, Routing } from './station';
+import { Component } from './component';
+import { StationComponent } from './station-component';
+import { ProductComponent } from './product-component';
+import { RoutingComponent } from './routing-component';
+import { StationService } from './station.service';
+import { ProductService } from './product.service';
+import { RoutingService } from './routing.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Factory';
+
+  stations: Station[] = [];
+  products: Product[] = [];
+  routings: Routing[] = [];
+
+  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {
+    this.stationService.getStations().subscribe(stations => this.stations = stations);
+    this.productService.getProducts().subscribe(products => this.products = products);
+    this.routingService.getRoutings().subscribe(routings => this.routings = routings);
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: factory
+Stage: factory-001-layout
+Order: 1
+
+Stage goal:
+Create the factory project layout with component, station, product, and routing concepts.
+
+Expected artifacts:
+- factory-system (project)
+
+Validators that will run:
+- factory-layout-exists: failure_class=missing_artifact
+- factory-core-types-present: failure_class=api_contract
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"factory-system/src/main.ts\",\n      \"content\": \"import { Station, Product, Routing } from './station';\nimport { Component } from './component';\nimport { StationComponent } from './station-component';\nimport { ProductComponent } from './product-component';\nimport { RoutingComponent } from './routing-component';\nimport { StationService } from './station.service';\nimport { ProductService } from './product.service';\nimport { RoutingService } from './routing.service';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.css']\n})\nexport class AppComponent {\n  title = 'Factory';\n\n  stations: Station[] = [];\n  products: Product[] = [];\n  routings: Routing[] = [];\n\n  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {\n    this.stationService.getStations().subscribe(stations => this.stations = stations);\n    this.productService.getProducts().subscribe(products => this.products = products);\n    this.routingService.getRoutings().subscribe(routings => this.routings = routings);\n  }\n}\n\"\n}\n],\n  \"notes\": \"Created the factory project layout with component, station, product, and routing concepts.\"\n}\n```"
+      }
+    }
+  ],
+  "created": 1779701842,
+  "model": "SmolLM3-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 276,
+    "prompt_tokens": 252,
+    "total_tokens": 528,
+    "prompt_tokens_details": {
+      "cached_tokens": 70
+    }
+  },
+  "id": "chatcmpl-jtpuYhqlxHVdDtkPMLPiN6RfDFSpJeLU",
+  "timings": {
+    "cache_n": 70,
+    "prompt_n": 182,
+    "prompt_ms": 48.714,
+    "prompt_per_token_ms": 0.26765934065934066,
+    "prompt_per_second": 3736.0922937964447,
+    "predicted_n": 276,
+    "predicted_ms": 3056.027,
+    "predicted_per_token_ms": 11.072561594202899,
+    "predicted_per_second": 90.31333820021878
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.txt
+---BEGIN FILE---
+```json
+{
+  "files": [
+    {
+      "path": "factory-system/src/main.ts",
+      "content": "import { Station, Product, Routing } from './station';
+import { Component } from './component';
+import { StationComponent } from './station-component';
+import { ProductComponent } from './product-component';
+import { RoutingComponent } from './routing-component';
+import { StationService } from './station.service';
+import { ProductService } from './product.service';
+import { RoutingService } from './routing.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Factory';
+
+  stations: Station[] = [];
+  products: Product[] = [];
+  routings: Routing[] = [];
+
+  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {
+    this.stationService.getStations().subscribe(stations => this.stations = stations);
+    this.productService.getProducts().subscribe(products => this.products = products);
+    this.routingService.getRoutings().subscribe(routings => this.routings = routings);
+  }
+}
+"
+}
+],
+  "notes": "Created the factory project layout with component, station, product, and routing concepts."
+}
+```
+
+---END FILE---
+
+FILE: _raw/factory-002-stations.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: factory
+Stage: factory-002-stations
+Order: 2
+
+Stage goal:
+Add multiple stations and a routing flow that moves a product between them.
+
+Expected artifacts:
+- factory-system/stations (source)
+
+Validators that will run:
+- station-graph-valid: failure_class=dependency_graph
+- product-route-runs: failure_class=runtime_behavior
+
+Existing generated files:
+FILE: factory-system/src/main.ts
+---BEGIN FILE---
+import { Station, Product, Routing } from './station';
+import { Component } from './component';
+import { StationComponent } from './station-component';
+import { ProductComponent } from './product-component';
+import { RoutingComponent } from './routing-component';
+import { StationService } from './station.service';
+import { ProductService } from './product.service';
+import { RoutingService } from './routing.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Factory';
+
+  stations: Station[] = [];
+  products: Product[] = [];
+  routings: Routing[] = [];
+
+  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {
+    this.stationService.getStations().subscribe(stations => this.stations = stations);
+    this.productService.getProducts().subscribe(products => this.products = products);
+    this.routingService.getRoutings().subscribe(routings => this.routings = routings);
+  }
+}
+
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: factory
+Stage: factory-001-layout
+Order: 1
+
+Stage goal:
+Create the factory project layout with component, station, product, and routing concepts.
+
+Expected artifacts:
+- factory-system (project)
+
+Validators that will run:
+- factory-layout-exists: failure_class=missing_artifact
+- factory-core-types-present: failure_class=api_contract
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"factory-system/src/main.ts\",\n      \"content\": \"import { Station, Product, Routing } from './station';\nimport { Component } from './component';\nimport { StationComponent } from './station-component';\nimport { ProductComponent } from './product-component';\nimport { RoutingComponent } from './routing-component';\nimport { StationService } from './station.service';\nimport { ProductService } from './product.service';\nimport { RoutingService } from './routing.service';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.css']\n})\nexport class AppComponent {\n  title = 'Factory';\n\n  stations: Station[] = [];\n  products: Product[] = [];\n  routings: Routing[] = [];\n\n  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {\n    this.stationService.getStations().subscribe(stations => this.stations = stations);\n    this.productService.getProducts().subscribe(products => this.products = products);\n    this.routingService.getRoutings().subscribe(routings => this.routings = routings);\n  }\n}\n\"\n}\n],\n  \"notes\": \"Created the factory project layout with component, station, product, and routing concepts.\"\n}\n```"
+      }
+    }
+  ],
+  "created": 1779701842,
+  "model": "SmolLM3-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 276,
+    "prompt_tokens": 252,
+    "total_tokens": 528,
+    "prompt_tokens_details": {
+      "cached_tokens": 70
+    }
+  },
+  "id": "chatcmpl-jtpuYhqlxHVdDtkPMLPiN6RfDFSpJeLU",
+  "timings": {
+    "cache_n": 70,
+    "prompt_n": 182,
+    "prompt_ms": 48.714,
+    "prompt_per_token_ms": 0.26765934065934066,
+    "prompt_per_second": 3736.0922937964447,
+    "predicted_n": 276,
+    "predicted_ms": 3056.027,
+    "predicted_per_token_ms": 11.072561594202899,
+    "predicted_per_second": 90.31333820021878
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.txt
+---BEGIN FILE---
+```json
+{
+  "files": [
+    {
+      "path": "factory-system/src/main.ts",
+      "content": "import { Station, Product, Routing } from './station';
+import { Component } from './component';
+import { StationComponent } from './station-component';
+import { ProductComponent } from './product-component';
+import { RoutingComponent } from './routing-component';
+import { StationService } from './station.service';
+import { ProductService } from './product.service';
+import { RoutingService } from './routing.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Factory';
+
+  stations: Station[] = [];
+  products: Product[] = [];
+  routings: Routing[] = [];
+
+  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {
+    this.stationService.getStations().subscribe(stations => this.stations = stations);
+    this.productService.getProducts().subscribe(products => this.products = products);
+    this.routingService.getRoutings().subscribe(routings => this.routings = routings);
+  }
+}
+"
+}
+],
+  "notes": "Created the factory project layout with component, station, product, and routing concepts."
+}
+```
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/factory-002-stations.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"factory-system/src/main.ts\",\n      \"content\": \"import { Station, Product, Routing } from './station';\\nimport { Component } from './component';\\nimport { StationComponent } from './station-component';\\nimport { ProductComponent } from './product-component';\\nimport { RoutingComponent } from './routing-component';\\nimport { StationService } from './station.service';\\nimport { ProductService } from './product.service';\\nimport { RoutingService } from './routing.service';\\n\\n@Component({\\n  selector: 'app-root',\\n  templateUrl: './app.component.html',\\n  styleUrls: ['./app.component.css']\\n})\\nexport class AppComponent {\\n  title = 'Factory';\\n\\n  stations: Station[] = [];\\n  products: Product[] = [];\\n  routings: Routing[] = [];\\n\\n  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {\\n    this.stationService.getStations().subscribe(stations => this.stations = stations);\\n    this.productService.getProducts().subscribe(products => this.products = products);\\n    this.routingService.getRoutings().subscribe(routings => this.routings = routings);\\n  }\\n}\"\n    }\n  ],\n  \"notes\": \"Created the factory project layout with component, station, product, and routing concepts.\"\n}"
+      }
+    }
+  ],
+  "created": 1779701847,
+  "model": "SmolLM3-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 315,
+    "prompt_tokens": 1630,
+    "total_tokens": 1945,
+    "prompt_tokens_details": {
+      "cached_tokens": 76
+    }
+  },
+  "id": "chatcmpl-qIi8oLWYuupG1Q4yDhbIL0XJaj5T2mCx",
+  "timings": {
+    "cache_n": 76,
+    "prompt_n": 1554,
+    "prompt_ms": 248.398,
+    "prompt_per_token_ms": 0.15984427284427286,
+    "prompt_per_second": 6256.0890184301,
+    "predicted_n": 315,
+    "predicted_ms": 3619.336,
+    "predicted_per_token_ms": 11.489955555555555,
+    "predicted_per_second": 87.03253856508488
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-002-stations.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "factory-system/src/main.ts",
+      "content": "import { Station, Product, Routing } from './station';\nimport { Component } from './component';\nimport { StationComponent } from './station-component';\nimport { ProductComponent } from './product-component';\nimport { RoutingComponent } from './routing-component';\nimport { StationService } from './station.service';\nimport { ProductService } from './product.service';\nimport { RoutingService } from './routing.service';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.css']\n})\nexport class AppComponent {\n  title = 'Factory';\n\n  stations: Station[] = [];\n  products: Product[] = [];\n  routings: Routing[] = [];\n\n  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {\n    this.stationService.getStations().subscribe(stations => this.stations = stations);\n    this.productService.getProducts().subscribe(products => this.products = products);\n    this.routingService.getRoutings().subscribe(routings => this.routings = routings);\n  }\n}"
+    }
+  ],
+  "notes": "Created the factory project layout with component, station, product, and routing concepts."
+}
+
+---END FILE---
+
+Return ONLY a corrected JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+- Do not copy placeholder path or content values from the schema.
+
+---END FILE---
+
+FILE: _raw/factory-002-stations.attempt-01-repair.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"factory-system/src/main.ts\",\n      \"content\": \"import { Station, Product, Routing } from './station';\\nimport { Component } from './component';\\nimport { StationComponent } from './station-component';\\nimport { ProductComponent } from './product-component';\\nimport { RoutingComponent } from './routing-component';\\nimport { StationService } from './station.service';\\nimport { ProductService } from './product.service';\\nimport { RoutingService } from './routing.service';\\n\\n@Component({\\n  selector: 'app-root',\\n  templateUrl: './app.component.html',\\n  styleUrls: ['./app.component.css']\\n})\\nexport class AppComponent {\\n  title = 'Factory';\\n\\n  stations: Station[] = [];\\n  products: Product[] = [];\\n  routings: Routing[] = [];\\n\\n  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {\\n    this.stationService.getStations().subscribe(stations => this.stations = stations);\\n    this.productService.getProducts().subscribe(products => this.products = products);\\n    this.routingService.getRoutings().subscribe(routings => this.routings = routings);\\n  }\\n}\"\n    }\n  ],\n  \"notes\": \"Created the factory project layout with component, station, product, and routing concepts.\"\n}"
+      }
+    }
+  ],
+  "created": 1779701851,
+  "model": "SmolLM3-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 315,
+    "prompt_tokens": 4548,
+    "total_tokens": 4863,
+    "prompt_tokens_details": {
+      "cached_tokens": 58
+    }
+  },
+  "id": "chatcmpl-QsK4Ju8tspxhDCNBeeJfSfkYq7XlYR7Q",
+  "timings": {
+    "cache_n": 58,
+    "prompt_n": 4490,
+    "prompt_ms": 698.797,
+    "prompt_per_token_ms": 0.15563407572383073,
+    "prompt_per_second": 6425.328099576844,
+    "predicted_n": 315,
+    "predicted_ms": 3894.736,
+    "predicted_per_token_ms": 12.36424126984127,
+    "predicted_per_second": 80.8783958655991
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-002-stations.attempt-01-repair.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "factory-system/src/main.ts",
+      "content": "import { Station, Product, Routing } from './station';\nimport { Component } from './component';\nimport { StationComponent } from './station-component';\nimport { ProductComponent } from './product-component';\nimport { RoutingComponent } from './routing-component';\nimport { StationService } from './station.service';\nimport { ProductService } from './product.service';\nimport { RoutingService } from './routing.service';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.css']\n})\nexport class AppComponent {\n  title = 'Factory';\n\n  stations: Station[] = [];\n  products: Product[] = [];\n  routings: Routing[] = [];\n\n  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {\n    this.stationService.getStations().subscribe(stations => this.stations = stations);\n    this.productService.getProducts().subscribe(products => this.products = products);\n    this.routingService.getRoutings().subscribe(routings => this.routings = routings);\n  }\n}"
+    }
+  ],
+  "notes": "Created the factory project layout with component, station, product, and routing concepts."
+}
+
+---END FILE---
+
+Return ONLY a corrected JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+- Do not copy placeholder path or content values from the schema.

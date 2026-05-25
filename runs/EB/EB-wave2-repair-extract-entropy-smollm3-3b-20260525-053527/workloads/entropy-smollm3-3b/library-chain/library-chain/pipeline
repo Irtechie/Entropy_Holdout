@@ -1,0 +1,29 @@
+---BEGIN FILE---
+
+// pipeline.h
+
+#ifndef PIPELINE_H
+
+#define PIPELINE_H
+
+void my_function();
+
+#endif
+
+
+// pipeline.c
+
+#include "pipeline.h"
+
+void my_function() {
+  printf("Hello from my_function!\n");
+  my_function();
+  return 0;
+}
+
+int main() {
+  my_function();
+  return 0;
+}
+
+---END FILE---

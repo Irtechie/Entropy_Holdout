@@ -1,0 +1,819 @@
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-003-chain-link
+Order: 3
+
+Stage goal:
+Create webpage 3 and link it back to page 2 while preserving the existing page 1 and page 2 links.
+
+Expected artifacts:
+- site/page-3.html (html)
+
+Validators that will run:
+- page-3-links-page-2: failure_class=link_integrity
+- previous-links-preserved: failure_class=link_integrity
+
+Existing generated files:
+FILE: site/index.html
+---BEGIN FILE---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webpage 1</title>
+</head>
+<body>
+    <h1>Webpage 1</h1>
+    <p>Main content</p>
+    <nav>
+        <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li>Contact</li>
+        </ul>
+    </nav>
+</body>
+</html>
+
+---END FILE---
+
+FILE: site/page-2.html
+---BEGIN FILE---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webpage 1</title>
+</head>
+<body>
+    <h1>Webpage 1</h1>
+    <p>Main content</p>
+    <nav>
+        <ul>
+            <li><a href="https://example.com/page-1">Back to Page 1</a></li>
+        </ul>
+    </nav>
+</body>
+</html>
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-001-home
+Order: 1
+
+Stage goal:
+Create webpage 1 as index.html with a title, main content, and an empty navigation area that can grow later.
+
+Expected artifacts:
+- site/index.html (html)
+
+Validators that will run:
+- file-exists: failure_class=missing_artifact
+- html-parse: failure_class=syntax
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Webpage 1</title>\\n</head>\\n<body>\\n    <h1>Webpage 1</h1>\\n    <p>Main content</p>\\n    <nav>\\n        <ul>\\n            <li>Home</li>\\n            <li>About</li>\\n            <li>Contact</li>\\n        </ul>\\n    </nav>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created index.html with title, main content, and a basic navigation area.\"\n}\n```"
+      }
+    }
+  ],
+  "created": 1779701748,
+  "model": "SmolLM3-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 195,
+    "prompt_tokens": 258,
+    "total_tokens": 453,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-ihS65o5N2tgIK3a5kIjOrMhnhp3L1qlH",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 258,
+    "prompt_ms": 77.694,
+    "prompt_per_token_ms": 0.3011395348837209,
+    "prompt_per_second": 3320.7197466985867,
+    "predicted_n": 195,
+    "predicted_ms": 2140.013,
+    "predicted_per_token_ms": 10.97442564102564,
+    "predicted_per_second": 91.12094178867139
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.txt
+---BEGIN FILE---
+```json
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Webpage 1</title>\n</head>\n<body>\n    <h1>Webpage 1</h1>\n    <p>Main content</p>\n    <nav>\n        <ul>\n            <li>Home</li>\n            <li>About</li>\n            <li>Contact</li>\n        </ul>\n    </nav>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created index.html with title, main content, and a basic navigation area."
+}
+```
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-002-backlink
+Order: 2
+
+Stage goal:
+Create webpage 2 and link it back to page 1 without breaking page 1.
+
+Expected artifacts:
+- site/page-2.html (html)
+
+Validators that will run:
+- page-2-links-index: failure_class=link_integrity
+- all-html-parse: failure_class=syntax
+
+Existing generated files:
+FILE: site/index.html
+---BEGIN FILE---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webpage 1</title>
+</head>
+<body>
+    <h1>Webpage 1</h1>
+    <p>Main content</p>
+    <nav>
+        <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li>Contact</li>
+        </ul>
+    </nav>
+</body>
+</html>
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-001-home
+Order: 1
+
+Stage goal:
+Create webpage 1 as index.html with a title, main content, and an empty navigation area that can grow later.
+
+Expected artifacts:
+- site/index.html (html)
+
+Validators that will run:
+- file-exists: failure_class=missing_artifact
+- html-parse: failure_class=syntax
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Webpage 1</title>\\n</head>\\n<body>\\n    <h1>Webpage 1</h1>\\n    <p>Main content</p>\\n    <nav>\\n        <ul>\\n            <li>Home</li>\\n            <li>About</li>\\n            <li>Contact</li>\\n        </ul>\\n    </nav>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created index.html with title, main content, and a basic navigation area.\"\n}\n```"
+      }
+    }
+  ],
+  "created": 1779701748,
+  "model": "SmolLM3-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 195,
+    "prompt_tokens": 258,
+    "total_tokens": 453,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-ihS65o5N2tgIK3a5kIjOrMhnhp3L1qlH",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 258,
+    "prompt_ms": 77.694,
+    "prompt_per_token_ms": 0.3011395348837209,
+    "prompt_per_second": 3320.7197466985867,
+    "predicted_n": 195,
+    "predicted_ms": 2140.013,
+    "predicted_per_token_ms": 10.97442564102564,
+    "predicted_per_second": 91.12094178867139
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.txt
+---BEGIN FILE---
+```json
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Webpage 1</title>\n</head>\n<body>\n    <h1>Webpage 1</h1>\n    <p>Main content</p>\n    <nav>\n        <ul>\n            <li>Home</li>\n            <li>About</li>\n            <li>Contact</li>\n        </ul>\n    </nav>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created index.html with title, main content, and a basic navigation area."
+}
+```
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Webpage 1</title>\\n</head>\\n<body>\\n    <h1>Webpage 1</h1>\\n    <p>Main content</p>\\n    <nav>\\n        <ul>\\n            <li>Home</li>\\n            <li>About</li>\\n            <li>Contact</li>\\n        </ul>\\n    </nav>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created index.html with title, main content, and a basic navigation area.\"\n}"
+      }
+    }
+  ],
+  "created": 1779701751,
+  "model": "SmolLM3-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 191,
+    "prompt_tokens": 1373,
+    "total_tokens": 1564,
+    "prompt_tokens_details": {
+      "cached_tokens": 77
+    }
+  },
+  "id": "chatcmpl-t6gDRVycr938u1hGkrLHz1383xQjBfE3",
+  "timings": {
+    "cache_n": 77,
+    "prompt_n": 1296,
+    "prompt_ms": 198.09,
+    "prompt_per_token_ms": 0.15284722222222222,
+    "prompt_per_second": 6542.480690595185,
+    "predicted_n": 191,
+    "predicted_ms": 2169.589,
+    "predicted_per_token_ms": 11.359104712041885,
+    "predicted_per_second": 88.03510711014852
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Webpage 1</title>\n</head>\n<body>\n    <h1>Webpage 1</h1>\n    <p>Main content</p>\n    <nav>\n        <ul>\n            <li>Home</li>\n            <li>About</li>\n            <li>Contact</li>\n        </ul>\n    </nav>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created index.html with title, main content, and a basic navigation area."
+}
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.attempt-01-repair.prompt.txt
+---BEGIN FILE---
+You are repairing an Entropy staged code-generation benchmark response.
+
+Workload: webpage-chain
+Stage: web-002-backlink
+Order: 2
+
+Stage goal:
+Create webpage 2 and link it back to page 1 without breaking page 1.
+
+Expected artifacts:
+- site/page-2.html (html)
+
+The previous response failed with:
+model did not generate expected artifact path: site/page-2.html
+
+Previous response text:
+---BEGIN FAILED RESPONSE---
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Webpage 1</title>\n</head>\n<body>\n    <h1>Webpage 1</h1>\n    <p>Main content</p>\n    <nav>\n        <ul>\n            <li>Home</li>\n            <li>About</li>\n            <li>Contact</li>\n        </ul>\n    </nav>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created index.html with title, main content, and a basic navigation area."
+}
+---END FAILED RESPONSE---
+
+Current generated files:
+FILE: site/index.html
+---BEGIN FILE---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webpage 1</title>
+</head>
+<body>
+    <h1>Webpage 1</h1>
+    <p>Main content</p>
+    <nav>
+        <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li>Contact</li>
+        </ul>
+    </nav>
+</body>
+</html>
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-001-home
+Order: 1
+
+Stage goal:
+Create webpage 1 as index.html with a title, main content, and an empty navigation area that can grow later.
+
+Expected artifacts:
+- site/index.html (html)
+
+Validators that will run:
+- file-exists: failure_class=missing_artifact
+- html-parse: failure_class=syntax
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Webpage 1</title>\\n</head>\\n<body>\\n    <h1>Webpage 1</h1>\\n    <p>Main content</p>\\n    <nav>\\n        <ul>\\n            <li>Home</li>\\n            <li>About</li>\\n            <li>Contact</li>\\n        </ul>\\n    </nav>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created index.html with title, main content, and a basic navigation area.\"\n}\n```"
+      }
+    }
+  ],
+  "created": 1779701748,
+  "model": "SmolLM3-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 195,
+    "prompt_tokens": 258,
+    "total_tokens": 453,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-ihS65o5N2tgIK3a5kIjOrMhnhp3L1qlH",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 258,
+    "prompt_ms": 77.694,
+    "prompt_per_token_ms": 0.3011395348837209,
+    "prompt_per_second": 3320.7197466985867,
+    "predicted_n": 195,
+    "predicted_ms": 2140.013,
+    "predicted_per_token_ms": 10.97442564102564,
+    "predicted_per_second": 91.12094178867139
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.txt
+---BEGIN FILE---
+```json
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Webpage 1</title>\n</head>\n<body>\n    <h1>Webpage 1</h1>\n    <p>Main content</p>\n    <nav>\n        <ul>\n            <li>Home</li>\n            <li>About</li>\n            <li>Contact</li>\n        </ul>\n    </nav>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created index.html with title, main content, and a basic navigation area."
+}
+```
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-002-backlink
+Order: 2
+
+Stage goal:
+Create webpage 2 and link it back to page 1 without breaking page 1.
+
+Expected artifacts:
+- site/page-2.html (html)
+
+Validators that will run:
+- page-2-links-index: failure_class=link_integrity
+- all-html-parse: failure_class=syntax
+
+Existing generated files:
+FILE: site/index.html
+---BEGIN FILE---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webpage 1</title>
+</head>
+<body>
+    <h1>Webpage 1</h1>
+    <p>Main content</p>
+    <nav>
+        <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li>Contact</li>
+        </ul>
+    </nav>
+</body>
+</html>
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-001-home
+Order: 1
+
+Stage goal:
+Create webpage 1 as index.html with a title, main content, and an empty navigation area that can grow later.
+
+Expected artifacts:
+- site/index.html (html)
+
+Validators that will run:
+- file-exists: failure_class=missing_artifact
+- html-parse: failure_class=syntax
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Webpage 1</title>\\n</head>\\n<body>\\n    <h1>Webpage 1</h1>\\n    <p>Main content</p>\\n    <nav>\\n        <ul>\\n            <li>Home</li>\\n            <li>About</li>\\n            <li>Contact</li>\\n        </ul>\\n    </nav>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created index.html with title, main content, and a basic navigation area.\"\n}\n```"
+      }
+    }
+  ],
+  "created": 1779701748,
+  "model": "SmolLM3-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 195,
+    "prompt_tokens": 258,
+    "total_tokens": 453,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-ihS65o5N2tgIK3a5kIjOrMhnhp3L1qlH",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 258,
+    "prompt_ms": 77.694,
+    "prompt_per_token_ms": 0.3011395348837209,
+    "prompt_per_second": 3320.7197466985867,
+    "predicted_n": 195,
+    "predicted_ms": 2140.013,
+    "predicted_per_token_ms": 10.97442564102564,
+    "predicted_per_second": 91.12094178867139
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.txt
+---BEGIN FILE---
+```json
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Webpage 1</title>\n</head>\n<body>\n    <h1>Webpage 1</h1>\n    <p>Main content</p>\n    <nav>\n        <ul>\n            <li>Home</li>\n            <li>About</li>\n            <li>Contact</li>\n        </ul>\n    </nav>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created index.html with title, main content, and a basic navigation area."
+}
+```
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Webpage 1</title>\\n</head>\\n<body>\\n    <h1>Webpage 1</h1>\\n    <p>Main content</p>\\n    <nav>\\n        <ul>\\n            <li>Home</li>\\n            <li>About</li>\\n            <li>Contact</li>\\n        </ul>\\n    </nav>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created index.html with title, main content, and a basic navigation area.\"\n}"
+      }
+    }
+  ],
+  "created": 1779701751,
+  "model": "SmolLM3-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 191,
+    "prompt_tokens": 1373,
+    "total_tokens": 1564,
+    "prompt_tokens_details": {
+      "cached_tokens": 77
+    }
+  },
+  "id": "chatcmpl-t6gDRVycr938u1hGkrLHz1383xQjBfE3",
+  "timings": {
+    "cache_n": 77,
+    "prompt_n": 1296,
+    "prompt_ms": 198.09,
+    "prompt_per_token_ms": 0.15284722222222222,
+    "prompt_per_second": 6542.480690595185,
+    "predicted_n": 191,
+    "predicted_ms": 2169.589,
+    "predicted_per_token_ms": 11.359104712041885,
+    "predicted_per_second": 88.03510711014852
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Webpage 1</title>\n</head>\n<body>\n    <h1>Webpage 1</h1>\n    <p>Main content</p>\n    <nav>\n        <ul>\n            <li>Home</li>\n            <li>About</li>\n            <li>Contact</li>\n        </ul>\n    </nav>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created index.html with title, main content, and a basic navigation area."
+}
+
+---END FILE---
+
+Return ONLY a corrected JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+- Do not copy placeholder path or content values from the schema.
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.attempt-01-repair.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/page-2.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Webpage 1</title>\\n</head>\\n<body>\\n    <h1>Webpage 1</h1>\\n    <p>Main content</p>\\n    <nav>\\n        <ul>\\n            <li><a href=\\\"https://example.com/page-1\\\">Back to Page 1</a></li>\\n        </ul>\\n    </nav>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created page-2.html with a link back to page 1.\"\n}"
+      }
+    }
+  ],
+  "created": 1779701754,
+  "model": "SmolLM3-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 193,
+    "prompt_tokens": 3677,
+    "total_tokens": 3870,
+    "prompt_tokens_details": {
+      "cached_tokens": 58
+    }
+  },
+  "id": "chatcmpl-nAu6ElVJ1QsdB33slci0PIEaMBWVpSxV",
+  "timings": {
+    "cache_n": 58,
+    "prompt_n": 3619,
+    "prompt_ms": 565.868,
+    "prompt_per_token_ms": 0.1563603205305333,
+    "prompt_per_second": 6395.484459273187,
+    "predicted_n": 193,
+    "predicted_ms": 2324.193,
+    "predicted_per_token_ms": 12.042450777202074,
+    "predicted_per_second": 83.03957545694354
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.attempt-01-repair.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "site/page-2.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Webpage 1</title>\n</head>\n<body>\n    <h1>Webpage 1</h1>\n    <p>Main content</p>\n    <nav>\n        <ul>\n            <li><a href=\"https://example.com/page-1\">Back to Page 1</a></li>\n        </ul>\n    </nav>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created page-2.html with a link back to page 1."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.

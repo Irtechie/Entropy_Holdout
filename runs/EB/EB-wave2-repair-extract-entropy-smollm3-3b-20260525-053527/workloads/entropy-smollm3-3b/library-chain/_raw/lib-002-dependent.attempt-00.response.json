@@ -1,0 +1,36 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/core\",\n      \"content\": \"---BEGIN FILE---\\n\\n// core.h\\n\\n#ifndef CORE_H\\n\\n#define CORE_H\\n\\nvoid my_function();\\n\\n#endif\\n\\n\\n// core.c\\n\\n#include \\\"core.h\\\"\\n\\nvoid my_function() {\\n  printf(\\\"Hello from my_function!\\\");\\n}\\n\\nint main() {\\n  my_function();\\n  return 0;\\n}\\n\\n---END FILE---\"\n    }\n  ],\n  \"notes\": \"Created a simple core library with a single function and a sample caller.\"\n}"
+      }
+    }
+  ],
+  "created": 1779701791,
+  "model": "SmolLM3-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 140,
+    "prompt_tokens": 1188,
+    "total_tokens": 1328,
+    "prompt_tokens_details": {
+      "cached_tokens": 77
+    }
+  },
+  "id": "chatcmpl-xAXb1KzrPnI2jdNFcUbsWEA44S8TNxH2",
+  "timings": {
+    "cache_n": 77,
+    "prompt_n": 1111,
+    "prompt_ms": 177.852,
+    "prompt_per_token_ms": 0.16008280828082808,
+    "prompt_per_second": 6246.766974788026,
+    "predicted_n": 140,
+    "predicted_ms": 1583.479,
+    "predicted_per_token_ms": 11.310564285714285,
+    "predicted_per_second": 88.41291864306378
+  }
+}

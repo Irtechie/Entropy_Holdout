@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "factory-system/src/main.ts",
+      "content": "import { Station, Product, Routing } from './station';\nimport { Component } from './component';\nimport { StationComponent } from './station-component';\nimport { ProductComponent } from './product-component';\nimport { RoutingComponent } from './routing-component';\nimport { StationService } from './station.service';\nimport { ProductService } from './product.service';\nimport { RoutingService } from './routing.service';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.css']\n})\nexport class AppComponent {\n  title = 'Factory';\n\n  stations: Station[] = [];\n  products: Product[] = [];\n  routings: Routing[] = [];\n\n  constructor(private stationService: StationService, private productService: ProductService, private routingService: RoutingService) {\n    this.stationService.getStations().subscribe(stations => this.stations = stations);\n    this.productService.getProducts().subscribe(products => this.products = products);\n    this.routingService.getRoutings().subscribe(routings => this.routings = routings);\n  }\n}"
+    }
+  ],
+  "notes": "Created the factory project layout with component, station, product, and routing concepts."
+}
