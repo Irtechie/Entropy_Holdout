@@ -1,0 +1,8 @@
+{"ts":"2026-05-25T02:14:01.1585045-04:00","event":"experiment_start","experiment_id":"EB-local-full-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
+{"ts":"2026-05-25T02:14:01.1626013-04:00","event":"target_start","set_id":"entropy-devstral-small2","context_tokens":131072}
+{"ts":"2026-05-25T02:14:30.2423415-04:00","event":"target_ready","set_id":"entropy-devstral-small2","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf"}
+{"ts":"2026-05-25T02:20:21.4191249-04:00","event":"workload_failed","set_id":"entropy-devstral-small2","workload":"webpage-chain","error":"webpage-chain validation failed: page index.html is missing title text"}
+{"ts":"2026-05-25T02:21:45.8553042-04:00","event":"workload_failed","set_id":"entropy-devstral-small2","workload":"library-chain","error":"library-chain validation failed: missing project: CoreLib/CoreLib.csproj"}
+{"ts":"2026-05-25T02:28:30.8657822-04:00","event":"workload_failed","set_id":"entropy-devstral-small2","workload":"factory","error":"factory validation failed: missing station id intake"}
+{"ts":"2026-05-25T02:28:30.8668301-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-devstral-small2-20260525-021400\\results.jsonl"}
+{"ts":"2026-05-25T02:28:30.9541886-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-devstral-small2-20260525-021400\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-devstral-small2-20260525-021400\\critique.json"}

@@ -1,0 +1,36 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"factory-system/stations/assembly.ts\",\n      \"content\": \"import { BaseStation } from './base';\\n\\nexport class AssemblyStation extends BaseStation {\\n  constructor(\\n    id: string,\\n    name: string,\\n    capacity: number,\\n    description?: string\\n  ) {\\n    super(id, name, 'assembly', capacity, 0, description);\\n  }\\n  \\n  process(): void {\\n    console.log(`${this.name} is assembling components`);\\n    this.addToLoad(1);\\n  }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/stations/processing.ts\",\n      \"content\": \"import { BaseStation } from './base';\\n\\nexport class ProcessingStation extends BaseStation {\\n  constructor(\\n    id: string,\\n    name: string,\\n    capacity: number,\\n    description?: string\\n  ) {\\n    super(id, name, 'processing', capacity, 0, description);\\n  }\\n  \\n  process(): void {\\n    console.log(`${this.name} is processing materials`);\\n    this.addToLoad(1);\\n  }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/stations/quality.ts\",\n      \"content\": \"import { BaseStation } from './base';\\n\\nexport class QualityStation extends BaseStation {\\n  constructor(\\n    id: string,\\n    name: string,\\n    capacity: number,\\n    description?: string\\n  ) {\\n    super(id, name, 'quality', capacity, 0, description);\\n  }\\n  \\n  process(): void {\\n    console.log(`${this.name} is performing quality checks`);\\n    this.addToLoad(1);\\n  }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/stations/storage.ts\",\n      \"content\": \"import { BaseStation } from './base';\\n\\nexport class StorageStation extends BaseStation {\\n  constructor(\\n    id: string,\\n    name: string,\\n    capacity: number,\\n    description?: string\\n  ) {\\n    super(id, name, 'storage', capacity, 0, description);\\n  }\\n  \\n  process(): void {\\n    console.log(`${this.name} is storing products`);\\n    this.addToLoad(1);\\n  }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/routing/route.ts\",\n      \"content\": \"import { BaseRoute } from './base';\\nimport { Station } from '../core/types';\\n\\nexport class ProductRoute extends BaseRoute {\\n  constructor(\\n    id: string,\\n    name: string,\\n    public stations: Station[],\\n    productId: string\\n  ) {\\n    super(id, name, stations.map(s => s.id), productId);\\n  }\\n  \\n  execute(): void {\\n    console.log(`Starting route ${this.name} for product ${this.productId}`);\\n    this.stations.forEach(station => {\\n      console.log(`Processing at ${station.name}`);\\n      station.process();\\n    });\\n    console.log(`Route ${this.name} completed`);\\n  }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/products/product.ts\",\n      \"content\": \"import { BaseProduct } from './base';\\n\\nexport class ExampleProduct extends BaseProduct {\\n  constructor() {\\n    super(\\n      'prod-001',\\n      'Example Product',\\n      ['comp-001', 'comp-002'],\\n      10,\\n      'A sample product for testing'\\n    );\\n  }\\n  \\n  assemble(): void {\\n    console.log(`Assembling ${this.name} with components: ${this.components.join(', ')}`);\\n  }\\n}\"\n    }\n  ],\n  \"notes\": \"Added station implementations and routing flow\"\n}"
+      }
+    }
+  ],
+  "created": 1779690237,
+  "model": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 889,
+    "prompt_tokens": 3336,
+    "total_tokens": 4225,
+    "prompt_tokens_details": {
+      "cached_tokens": 42
+    }
+  },
+  "id": "chatcmpl-ZLGineGyYyPo4LHiK4jnd4XGCfgLmmmw",
+  "timings": {
+    "cache_n": 42,
+    "prompt_n": 3294,
+    "prompt_ms": 3247.579,
+    "prompt_per_token_ms": 0.9859074074074075,
+    "prompt_per_second": 1014.2940325701084,
+    "predicted_n": 889,
+    "predicted_ms": 67983.878,
+    "predicted_per_token_ms": 76.472303712036,
+    "predicted_per_second": 13.076629726830234
+  }
+}

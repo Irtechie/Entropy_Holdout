@@ -1,0 +1,36 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"factory-system/README.md\",\n      \"content\": \"# Factory System\\n\\nThis project implements a factory system with components, stations, products, and routing concepts.\\n\\n## Structure\\n- `components/`: Core factory components\\n- `stations/`: Factory station implementations\\n- `products/`: Product definitions\\n- `routing/`: Routing logic\\n- `core/`: Core types and interfaces\\n\"\n    },\n    {\n      \"path\": \"factory-system/core/types.ts\",\n      \"content\": \"export interface Component {\\n  id: string;\\n  name: string;\\n  description?: string;\\n}\\n\\nexport interface Station extends Component {\\n  type: 'assembly' | 'processing' | 'quality' | 'storage';\\n  capacity: number;\\n  currentLoad: number;\\n}\\n\\nexport interface Product {\\n  id: string;\\n  name: string;\\n  description?: string;\\n  components: string[];\\n  assemblyTime: number;\\n}\\n\\nexport interface Route {\\n  id: string;\\n  name: string;\\n  stations: string[];\\n  productId: string;\\n}\\n\"\n    },\n    {\n      \"path\": \"factory-system/components/base.ts\",\n      \"content\": \"import { Component } from '../core/types';\\n\\nexport abstract class BaseComponent implements Component {\\n  constructor(public id: string, public name: string, public description?: string) {}\\n  \\n  abstract operate(): void;\\n}\"\n    },\n    {\n      \"path\": \"factory-system/stations/base.ts\",\n      \"content\": \"import { Station } from '../core/types';\\nimport { BaseComponent } from '../components/base';\\n\\nexport abstract class BaseStation extends BaseComponent implements Station {\\n  constructor(\\n    public id: string,\\n    public name: string,\\n    public type: 'assembly' | 'processing' | 'quality' | 'storage',\\n    public capacity: number,\\n    public currentLoad: number = 0,\\n    description?: string\\n  ) {\\n    super(id, name, description);\\n  }\\n  \\n  abstract process(): void;\\n  \\n  addToLoad(amount: number): void {\\n    this.currentLoad += amount;\\n    if (this.currentLoad > this.capacity) {\\n      throw new Error('Station capacity exceeded');\\n    }\\n  }\\n  \\n  removeFromLoad(amount: number): void {\\n    this.currentLoad -= amount;\\n    if (this.currentLoad < 0) {\\n      throw new Error('Station load cannot be negative');\\n    }\\n  }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/products/base.ts\",\n      \"content\": \"import { Product } from '../core/types';\\n\\nexport abstract class BaseProduct implements Product {\\n  constructor(\\n    public id: string,\\n    public name: string,\\n    public components: string[],\\n    public assemblyTime: number,\\n    public description?: string\\n  ) {}\\n  \\n  abstract assemble(): void;\\n}\"\n    },\n    {\n      \"path\": \"factory-system/routing/base.ts\",\n      \"content\": \"import { Route } from '../core/types';\\n\\nexport abstract class BaseRoute implements Route {\\n  constructor(\\n    public id: string,\\n    public name: string,\\n    public stations: string[],\\n    public productId: string\\n  ) {}\\n  \\n  abstract execute(): void;\\n}\"\n    }\n  ],\n  \"notes\": \"Initial factory system layout with core types and base implementations\"\n}\n```"
+      }
+    }
+  ],
+  "created": 1779690165,
+  "model": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 804,
+    "prompt_tokens": 219,
+    "total_tokens": 1023,
+    "prompt_tokens_details": {
+      "cached_tokens": 34
+    }
+  },
+  "id": "chatcmpl-Qli4LE5b43whUyhr6HDGvrtofwZCd09U",
+  "timings": {
+    "cache_n": 34,
+    "prompt_n": 185,
+    "prompt_ms": 205.827,
+    "prompt_per_token_ms": 1.1125783783783785,
+    "prompt_per_second": 898.8130808883188,
+    "predicted_n": 804,
+    "predicted_ms": 59645.704,
+    "predicted_per_token_ms": 74.18619900497512,
+    "predicted_per_second": 13.479596116427766
+  }
+}

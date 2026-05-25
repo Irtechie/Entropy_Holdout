@@ -1,0 +1,32 @@
+{
+  "stations": [
+    {
+      "id": "station-001",
+      "name": "Assembly Line 1",
+      "type": "assembly",
+      "capacity": 5,
+      "description": "Main assembly station"
+    },
+    {
+      "id": "station-002",
+      "name": "Processing Unit A",
+      "type": "processing",
+      "capacity": 3,
+      "description": "Material processing station"
+    },
+    {
+      "id": "station-003",
+      "name": "Quality Control Bay",
+      "type": "quality",
+      "capacity": 2,
+      "description": "Product quality inspection"
+    },
+    {
+      "id": "station-004",
+      "name": "Storage Warehouse",
+      "type": "storage",
+      "capacity": 10,
+      "description": "Final product storage"
+    }
+  ]
+}

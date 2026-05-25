@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factory Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            margin-top: 0;
+            color: #444;
+        }
+        .stations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        .station-card {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #4169e1;
+        }
+        .station-card h3 {
+            margin-top: 0;
+            color: #4169e1;
+        }
+        .progress-bar {
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #4caf50;
+            transition: width 0.3s;
+        }
+        .product-info {
+            background-color: #fff3e0;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #ff9800;
+        }
+        .product-info h3 {
+            margin-top: 0;
+            color: #ff9800;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <h1>Factory Dashboard</h1>
+        
+        <div class="summary">
+            <div class="card">
+                <h2>Total Stations</h2>
+                <p id="totalStations">0</p>
+            </div>
+            <div class="card">
+                <h2>Total Products</h2>
+                <p id="totalProducts">0</p>
+            </div>
+            <div class="card">
+                <h2>Average Station Load</h2>
+                <p id="avgLoad">0%</p>
+            </div>
+            <div class="card">
+                <h2>Active Routes</h2>
+                <p id="activeRoutes">0</p>
+            </div>
+        </div>
+        
+        <div class="product-info">
+            <h3>Current Product: Example Product</h3>
+            <p><strong>ID:</strong> prod-001</p>
+            <p><strong>Components:</strong> comp-001, comp-002</p>
+            <p><strong>Assembly Time:</strong> 10 units</p>
+            <p><strong>Status:</strong> <span id="productStatus">In Production</span></p>
+        </div>
+        
+        <h2>Station Status</h2>
+        <div class="stations-grid" id="stationsGrid">
+            <!-- Station cards will be populated by JavaScript -->
+        </div>
+        
+        <h2>Route Information</h2>
+        <div class="card">
+            <h3>Example Product Route</h3>
+            <p><strong>Route ID:</strong> route-001</p>
+            <p><strong>Stations:</strong> station-001 → station-002 → station-003 → station-004</p>
+            <p><strong>Status:</strong> <span id="routeStatus">Active</span></p>
+        </div>
+    </div>
+    
+    <script>
+        // Sample data - in a real implementation, this would come from the factory state
+        const factoryData = {
+            stations: [
+                { id: 'station-001', name: 'Assembly Line 1', type: 'assembly', capacity: 5, currentLoad: 2 },
+                { id: 'station-002', name: 'Processing Unit A', type: 'processing', capacity: 3, currentLoad: 1 },
+                { id: 'station-003', name: 'Quality Control Bay', type: 'quality', capacity: 2, currentLoad: 0 },
+                { id: 'station-004', name: 'Storage Warehouse', type: 'storage', capacity: 10, currentLoad: 3 }
+            ],
+            products: [
+                { id: 'prod-001', name: 'Example Product', components: ['comp-001', 'comp-002'], assemblyTime: 10 }
+            ],
+            routes: [
+                { id: 'route-001', name: 'Example Product Route', productId: 'prod-001', stations: ['station-001', 'station-002', 'station-003', 'station-004'] }
+            ]
+        };
+        
+        // Update summary statistics
+        document.getElementById('totalStations').textContent = factoryData.stations.length;
+        document.getElementById('totalProducts').textContent = factoryData.products.length;
+        document.getElementById('activeRoutes').textContent = factoryData.routes.length;
+        
+        // Calculate average load
+        const totalLoad = factoryData.stations.reduce((sum, station) => sum + station.currentLoad, 0);
+        const totalCapacity = factoryData.stations.reduce((sum, station) => sum + station.capacity, 0);
+        const avgLoad = totalCapacity > 0 ? Math.round((totalLoad / totalCapacity) * 100) : 0;
+        document.getElementById('avgLoad').textContent = `${avgLoad}%`;
+        
+        // Populate station cards
+        const stationsGrid = document.getElementById('stationsGrid');
+        factoryData.stations.forEach(station => {
+            const stationCard = document.createElement('div');
+            stationCard.className = 'station-card';
+            
+            const loadPercent = station.capacity > 0 ? Math.round((station.currentLoad / station.capacity) * 100) : 0;
+            const status = loadPercent < 60 ? 'Normal' : loadPercent < 90 ? 'Busy' : 'Overloaded';
+            
+            stationCard.innerHTML = `
+                <h3>${station.name}</h3>
+                <p><strong>Type:</strong> ${station.type}</p>
+                <p><strong>Capacity:</strong> ${station.currentLoad}/${station.capacity}</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${loadPercent}%"></div>
+                </div>
+                <p><strong>Status:</strong> ${status}</p>
+            `;
+            
+            stationsGrid.appendChild(stationCard);
+        });
+        
+        // Simulate real-time updates
+        setInterval(() => {
+            // Randomly update station loads for demonstration
+            factoryData.stations.forEach(station => {
+                const change = Math.random() * 2 - 1; // -1 to 1
+                station.currentLoad = Math.max(0, Math.min(station.capacity, 
+                    Math.round(station.currentLoad + change)));
+            });
+            
+            // Re-render the dashboard
+            location.reload();
+        }, 5000);
+    </script>
+</body>
+</html>

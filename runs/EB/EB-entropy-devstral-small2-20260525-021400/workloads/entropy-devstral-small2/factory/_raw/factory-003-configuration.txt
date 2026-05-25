@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "path": "factory-system/config/stations.json",
+      "content": "{\n  \"stations\": [\n    {\n      \"id\": \"station-001\",\n      \"name\": \"Assembly Line 1\",\n      \"type\": \"assembly\",\n      \"capacity\": 5,\n      \"description\": \"Main assembly station\"\n    },\n    {\n      \"id\": \"station-002\",\n      \"name\": \"Processing Unit A\",\n      \"type\": \"processing\",\n      \"capacity\": 3,\n      \"description\": \"Material processing station\"\n    },\n    {\n      \"id\": \"station-003\",\n      \"name\": \"Quality Control Bay\",\n      \"type\": \"quality\",\n      \"capacity\": 2,\n      \"description\": \"Product quality inspection\"\n    },\n    {\n      \"id\": \"station-004\",\n      \"name\": \"Storage Warehouse\",\n      \"type\": \"storage\",\n      \"capacity\": 10,\n      \"description\": \"Final product storage\"\n    }\n  ]\n}"
+    },
+    {
+      "path": "factory-system/config/routes.json",
+      "content": "{\n  \"routes\": [\n    {\n      \"id\": \"route-001\",\n      \"name\": \"Example Product Route\",\n      \"productId\": \"prod-001\",\n      \"stations\": [\"station-001\", \"station-002\", \"station-003\", \"station-004\"]\n    }\n  ]\n}"
+    },
+    {
+      "path": "factory-system/config/products.json",
+      "content": "{\n  \"products\": [\n    {\n      \"id\": \"prod-001\",\n      \"name\": \"Example Product\",\n      \"components\": [\"comp-001\", \"comp-002\"],\n      \"assemblyTime\": 10,\n      \"description\": \"A sample product for testing\"\n    }\n  ]\n}"
+    }
+  ],
+  "notes": "Created configuration files for stations, routes, and products"
+}
