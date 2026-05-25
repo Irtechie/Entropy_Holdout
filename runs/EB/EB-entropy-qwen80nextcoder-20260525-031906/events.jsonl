@@ -1,0 +1,8 @@
+{"ts":"2026-05-25T03:19:07.0616548-04:00","event":"experiment_start","experiment_id":"EB-local-full-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
+{"ts":"2026-05-25T03:19:07.0645422-04:00","event":"target_start","set_id":"entropy-qwen80nextcoder","context_tokens":131072}
+{"ts":"2026-05-25T03:20:03.7889320-04:00","event":"target_ready","set_id":"entropy-qwen80nextcoder","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"Qwen3-Coder-Next-Q4_K_M.gguf"}
+{"ts":"2026-05-25T03:20:59.1870395-04:00","event":"workload_failed","set_id":"entropy-qwen80nextcoder","workload":"webpage-chain","error":"webpage-chain validation failed: page index.html is missing title text"}
+{"ts":"2026-05-25T03:21:21.4838029-04:00","event":"workload_failed","set_id":"entropy-qwen80nextcoder","workload":"library-chain","error":"Conversion from JSON failed with error: After parsing a value an unexpected character was encountered: l. Path 'files[0].content', line 5, position 37."}
+{"ts":"2026-05-25T03:21:56.9310200-04:00","event":"workload_failed","set_id":"entropy-qwen80nextcoder","workload":"factory","error":"model did not generate expected artifact path: factory-system/stations"}
+{"ts":"2026-05-25T03:21:56.9328657-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-qwen80nextcoder-20260525-031906\\results.jsonl"}
+{"ts":"2026-05-25T03:21:56.9761211-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-qwen80nextcoder-20260525-031906\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-qwen80nextcoder-20260525-031906\\critique.json"}

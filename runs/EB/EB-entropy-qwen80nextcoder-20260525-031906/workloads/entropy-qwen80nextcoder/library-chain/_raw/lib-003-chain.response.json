@@ -1,0 +1,33 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/pipeline/Cargo.toml\",\n      \"content\": \"[package]\\nname = \"library-chain-pipeline\"\\nversion = \"0.1.0\"\\nedition = \"2021\"\\n\\n[dependencies]\\nlibrary-chain-feature = { path = \"../feature\" }\\n\\n[lib]\\nname = \"library_chain_pipeline\"\\npath = \"src/lib.rs\"\\n\\n[[bin]]\\nname = \"library-chain-pipeline-sample\"\\npath = \"src/main.rs\"\\n\"\n    },\n    {\n      \"path\": \"library-chain/pipeline/src/lib.rs\",\n      \"content\": \"use library_chain_feature::feature_function;\\n\\npub fn pipeline_function() -> String {\\n    format!(\\\"{} - pipeline!\", feature_function())\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/pipeline/src/main.rs\",\n      \"content\": \"use library_chain_pipeline::pipeline_function;\\n\\nfn main() {\\n    println!(\"{}\", pipeline_function());\\n}\\n\"\n    }\n  ],\n  \"notes\": \"Created pipeline library that depends on feature library and extends the call chain.\"\n}"
+      }
+    }
+  ],
+  "created": 1779693680,
+  "model": "Qwen3-Coder-Next-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 251,
+    "prompt_tokens": 4044,
+    "total_tokens": 4295
+  },
+  "id": "chatcmpl-N9L4O4JuOvhwvivaOJgAFA6vL3h7OF31",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 4044,
+    "prompt_ms": 4232.139,
+    "prompt_per_token_ms": 1.046522997032641,
+    "prompt_per_second": 955.5451746740831,
+    "predicted_n": 251,
+    "predicted_ms": 5322.29,
+    "predicted_per_token_ms": 21.20434262948207,
+    "predicted_per_second": 47.16015098763879
+  }
+}

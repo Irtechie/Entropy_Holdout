@@ -1,0 +1,33 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n  <meta charset=\\\"UTF-8\\\">\\n  <title>Home Page</title>\\n</head>\\n<body>\\n  <nav></nav>\\n  <main>\\n    <h1>Welcome to the Website</h1>\\n    <p>This is the main content area.</p>\\n  </main>\\n</body>\\n</html>\\n\"\n    }\n  ],\n  \"notes\": \"Created index.html with title, main content, and empty navigation area.\"\n}"
+      }
+    }
+  ],
+  "created": 1779693606,
+  "model": "Qwen3-Coder-Next-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 140,
+    "prompt_tokens": 228,
+    "total_tokens": 368
+  },
+  "id": "chatcmpl-bzsaGeYnvLAVOKG32Luy5MLkH55fqWdp",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 228,
+    "prompt_ms": 504.514,
+    "prompt_per_token_ms": 2.212780701754386,
+    "prompt_per_second": 451.92006564733583,
+    "predicted_n": 140,
+    "predicted_ms": 2891.154,
+    "predicted_per_token_ms": 20.6511,
+    "predicted_per_second": 48.42357065725312
+  }
+}
