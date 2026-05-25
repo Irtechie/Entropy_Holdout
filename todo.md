@@ -14,7 +14,7 @@ Build and run Entropy staged code-generation benchmark workloads to measure how 
 
 ## Current Focus
 
-Wave 2 repair-extract EB is being prepared for the same single-box targets. Wave 1 plain baseline is complete under `runs/EB/`.
+Wave 2 repair-extract EB is complete for all single-box targets. Wave 1 and Wave 2 results are saved under `runs/EB/`.
 
 ## Current Truth
 
@@ -32,11 +32,7 @@ Wave 2 repair-extract EB is being prepared for the same single-box targets. Wave
 
 ## Active Work
 
-Run Wave 2 repair-extract EB queue after harness verification:
-
-```powershell
-pwsh .\tools\run_eb_target_queue.ps1 -QueuePath .\benchmarks\entropy_workloads\wave2.repair-extract.targets.json -ExperimentPath .\benchmarks\entropy_workloads\experiment.wave2-repair-extract-singlebox.json -CommitEach -PushEach -SkipCompleted
-```
+No active KB manifest is currently running.
 
 ## Queued Improvements
 
@@ -67,3 +63,4 @@ pwsh .\tools\run_eb_target_queue.ps1 -QueuePath .\benchmarks\entropy_workloads\w
 - 2026-05-24: Slice 004 done with generic factory seed. `pwsh .\tools\run_entropy_workload.ps1 -Workload factory -Mode mock` validated route `intake->assembly->quality->shipping`.
 - 2026-05-24: Slice 005 done. Default mock matrix passed: webpage 5/5, library 4/4, factory 4/4.
 - 2026-05-25: First EB small serial experiment completed at `runs/EB/EB-local-small-20260525-012128/`. All 4 small targets failed under `plain` mode; best depth was Gemma E2B reaching webpage stage 4/5 and library stage 3/4 before strict artifact-path failures.
+- 2026-05-25: Wave 2 repair-extract EB completed for all 19 single-box targets. Run folders use prefix `runs/EB/EB-wave2-repair-extract-*`.

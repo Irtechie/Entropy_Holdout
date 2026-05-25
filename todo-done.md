@@ -1,5 +1,34 @@
 # Todo Done
 
+## 2026-05-25 - EB Wave 2 Repair-Extract Single-Box Complete
+
+Completed Wave 2 `repair-extract` EB for all 19 single-box targets from the Wave 1 baseline set.
+
+Harness/config baseline commit:
+
+```text
+2028e28 feat: add EB wave 2 repair-extract queue
+```
+
+Queue command:
+
+```powershell
+pwsh .\tools\run_eb_target_queue.ps1 -QueuePath .\benchmarks\entropy_workloads\wave2.repair-extract.targets.json -ExperimentPath .\benchmarks\entropy_workloads\experiment.wave2-repair-extract-singlebox.json -CommitEach -PushEach -SkipCompleted
+```
+
+Run folders:
+
+```text
+runs/EB/EB-wave2-repair-extract-*
+```
+
+Notes:
+
+- All 19 targets classified as `completed-data-run`.
+- Each run was committed and pushed individually after completion.
+- Repair-extract keeps every initial and repair prompt/response under `_raw/`, records `repair_count`, `repair_history`, and aggregates token usage in each result row.
+- No generated files were manually edited; repairs were model calls inside the named Wave 2 harness mode.
+
 ## 2026-05-25 - EB Wave 1 Plain Single-Box Baseline Complete
 
 Completed the full Wave 1 `plain` EB baseline for every single-box target in `llmcommune-entropy-targets.json`.
