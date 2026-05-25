@@ -1,0 +1,37 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"files\":[{\"path\":\"factory-system/package.json\",\"content\":\"{\\n  \\\"name\\\": \\\"factory-system\\\",\\n  \\\"version\\\": \\\"0.1.0\\\",\\n  \\\"main\\\": \\\"dist/index.js\\\",\\n  \\\"scripts\\\": {\\n    \\\"build\\\": \\\"tsc\\\"\\n  },\\n  \\\"devDependencies\\\": {\\n    \\\"typescript\\\": \\\"^5.0.0\\\"\\n  }\\n}\\n\"},{\"path\":\"factory-system/tsconfig.json\",\"content\":\"{\\n  \\\"compilerOptions\\\": {\\n    \\\"target\\\": \\\"ES2020\\\",\\n    \\\"module\\\": \\\"commonjs\\\",\\n    \\\"rootDir\\\": \\\"src\\\",\\n    \\\"outDir\\\": \\\"dist\\\",\\n    \\\"strict\\\": true\\n  }\\n}\\n\"},{\"path\":\"factory-system/src/component.ts\",\"content\":\"export interface Component {\\n  id: string;\\n  name: string;\\n}\\n\"},{\"path\":\"factory-system/src/station.ts\",\"content\":\"export interface Station {\\n  id: string;\\n  name: string;\\n}\\n\"},{\"path\":\"factory-system/src/product.ts\",\"content\":\"export interface Product {\\n  id: string;\\n  name: string;\\n}\\n\"},{\"path\":\"factory-system/src/routing.ts\",\"content\":\"import { Component } from './component';\\nimport { Station } from './station';\\nimport { Product } from './product';\\n\\nexport interface Routing {\\n  from: Station;\\n  to: Station;\\n  component: Component;\\n  product: Product;\\n}\\n\"},{\"path\":\"factory-system/src/index.ts\",\"content\":\"export * from './component';\\nexport * from './station';\\nexport * from './product';\\nexport * from './routing';\\n\"}],\"notes\":\"Factory system layout created\"}",
+        "reasoning_content": "We need to create a factory-system project layout with component, station, product, and routing concepts. The stage is factory-001-layout. We need to produce JSON with files array. We need to create the project layout. The expected artifact is factory-system (project). So we need to create a directory structure: maybe factory-system/ with some files. We need to include component, station, product, routing concepts. Likely we need to create some TypeScript or JavaScript files? The context: \"Entropy staged code-generation benchmark\". The stage goal: Create the factory project layout with component, station, product, and routing concepts. So we need to create a project skeleton. The validators: factory-layout-exists: failure_class=missing_artifact; factory-core-types-present: failure_class=api_contract. So we need to provide core types. So we need to create files that define core types: component, station, product, routing. Maybe in TypeScript. The project name: factory-system. So we need to create a folder factory-system with some files: maybe src/index.ts, src/component.ts, src/station.ts, src/product.ts, src/routing.ts, maybe package.json. But the validator only checks existence of layout and core types. So we need to create at least the core types. Let's create a minimal TypeScript project.\n\nWe need to create a file: factory-system/src/component.ts with interface Component { id: string; name: string; }.\n\nSimilarly station.ts: interface Station { id: string; name: string; }.\n\nproduct.ts: interface Product { id: string; name: string; }.\n\nrouting.ts: interface Routing { from: Station; to: Station; component: Component; product: Product; }.\n\nAlso maybe index.ts that exports them.\n\nAlso maybe a package.json with minimal fields.\n\nBut the validator might only check existence of core types. So we need to create these files.\n\nLet's produce JSON with files array containing these files.\n\nPaths relative to run root: \"factory-system/src/component.ts\" etc.\n\nAlso maybe \"factory-system/package.json\".\n\nLet's create content.\n\npackage.json:\n\n{\n  \"name\": \"factory-system\",\n  \"version\": \"0.1.0\",\n  \"main\": \"dist/index.js\",\n  \"scripts\": {\n    \"build\": \"tsc\"\n  },\n  \"devDependencies\": {\n    \"typescript\": \"^5.0.0\"\n  }\n}\n\nBut we don't need to compile. But it's okay.\n\nAlso tsconfig.json: maybe.\n\nBut not necessary.\n\nLet's create index.ts: export * from './component'; etc.\n\nLet's produce JSON.\n\nAlso note: \"Factory system layout created\".\n\nLet's produce final JSON."
+      }
+    }
+  ],
+  "created": 1779689605,
+  "model": "gpt-oss-20b-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 935,
+    "prompt_tokens": 281,
+    "total_tokens": 1216,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-Rg1qR96fA8CUpyCyenlkqIrFpA0FBeVj",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 281,
+    "prompt_ms": 112.835,
+    "prompt_per_token_ms": 0.4015480427046263,
+    "prompt_per_second": 2490.362033057119,
+    "predicted_n": 935,
+    "predicted_ms": 11341.999,
+    "predicted_per_token_ms": 12.130480213903743,
+    "predicted_per_second": 82.43696724007823
+  }
+}

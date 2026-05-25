@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "site/page-3.html",
+      "content": "<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<title>Page 3</title>\\n</head>\\n<body>\\n<header>\\n<h1>Page 3</h1>\\n</header>\\n<nav>\\n</nav>\\n<main>\\n<p>This is page 3 content.</p>\\n<p><a href=\\\"page-2.html\\\">Back to Page 2</a></p>\\n</main>\\n</body>\\n</html>"
+    }
+  ],
+  "notes": "Created page-3.html linking back to page-2.html."
+}

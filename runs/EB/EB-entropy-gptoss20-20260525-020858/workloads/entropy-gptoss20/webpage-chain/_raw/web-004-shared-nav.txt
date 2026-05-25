@@ -1,0 +1,22 @@
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<title>Home</title>\\n</head>\\n<body>\\n<header>\\n<h1>Welcome</h1>\\n</header>\\n<nav>\\n<a href=\\\"index.html\\\">Home</a>\\n<a href=\\\"page-2.html\\\">Page 2</a>\\n<a href=\\\"page-3.html\\\">Page 3</a>\\n<a href=\\\"page-4.html\\\">Page 4</a>\\n</nav>\\n<main>\\n<p>This is the main content.</p>\\n</main>\\n</body>\\n</html>"
+    },
+    {
+      "path": "site/page-2.html",
+      "content": "<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<title>Page 2</title>\\n</head>\\n<body>\\n<header>\\n<h1>Page 2</h1>\\n</header>\\n<nav>\\n<a href=\\\"index.html\\\">Home</a>\\n<a href=\\\"page-2.html\\\">Page 2</a>\\n<a href=\\\"page-3.html\\\">Page 3</a>\\n<a href=\\\"page-4.html\\\">Page 4</a>\\n</nav>\\n<main>\\n<p>This is page 2 content.</p>\\n<p><a href=\\\"index.html\\\">Back to Home</a></p>\\n</main>\\n</body>\\n</html>"
+    },
+    {
+      "path": "site/page-3.html",
+      "content": "<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<title>Page 3</title>\\n</head>\\n<body>\\n<header>\\n<h1>Page 3</h1>\\n</header>\\n<nav>\\n<a href=\\\"index.html\\\">Home</a>\\n<a href=\\\"page-2.html\\\">Page 2</a>\\n<a href=\\\"page-3.html\\\">Page 3</a>\\n<a href=\\\"page-4.html\\\">Page 4</a>\\n</nav>\\n<main>\\n<p>This is page 3 content.</p>\\n<p><a href=\\\"page-2.html\\\">Back to Page 2</a></p>\\n</main>\\n</body>\\n</html>"
+    },
+    {
+      "path": "site/page-4.html",
+      "content": "<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<title>Page 4</title>\\n</head>\\n<body>\\n<header>\\n<h1>Page 4</h1>\\n</header>\\n<nav>\\n<a href=\\\"index.html\\\">Home</a>\\n<a href=\\\"page-2.html\\\">Page 2</a>\\n<a href=\\\"page-3.html\\\">Page 3</a>\\n<a href=\\\"page-4.html\\\">Page 4</a>\\n</nav>\\n<main>\\n<p>This is page 4 content.</p>\\n<p><a href=\\\"page-3.html\\\">Back to Page 3</a></p>\\n</main>\\n</body>\\n</html>"
+    }
+  ],
+  "notes": "Created page-4.html with shared navigation and link to page-3."
+}
+
