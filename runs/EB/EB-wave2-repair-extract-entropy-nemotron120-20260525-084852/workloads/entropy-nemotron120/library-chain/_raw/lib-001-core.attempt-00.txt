@@ -1,0 +1,21 @@
+{
+  "files": [
+    {
+      "path": "library-chain/core/core.h",
+      "content": "#ifndef CORE_H\n#define CORE_H\n\nint add(int a, int b);\n\n#endif\n"
+    },
+    {
+      "path": "library-chain/core/core.c",
+      "content": "#include \"core.h\"\n\nint add(int a, int b) {\n    return a + b;\n}\n"
+    },
+    {
+      "path": "library-chain/core/main.c",
+      "content": "#include <stdio.h>\n#include \"core.h\"\n\nint main() {\n    int result = add(2, 3);\n    printf(\"%d\\n\", result);\n    return 0;\n}\n"
+    },
+    {
+      "path": "library-chain/core/Makefile",
+      "content": "CC = gcc\nCFLAGS = -Wall -Wextra -std=c11\n\nall: sample\n\nsample: main.o libcore.a\n\\t$(CC) $(CFLAGS) -o sample main.o libcore.a\n\nmain.o: main.c core.h\n\\t$(CC) $(CFLAGS) -c main.c\n\nlibcore.a: core.o\n\\tar rcs libcore.a core.o\n\ncore.o: core.c core.h\n\\t$(CC) $(CFLAGS) -c core.c\n\nclean:\n\\trm -f *.o libcore.a sample\n"
+    }
+  ],
+  "notes": "Created core library with add function and sample caller that prints result."
+}

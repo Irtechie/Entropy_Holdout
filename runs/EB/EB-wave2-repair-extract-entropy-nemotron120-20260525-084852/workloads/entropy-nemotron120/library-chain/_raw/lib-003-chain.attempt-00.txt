@@ -1,0 +1,21 @@
+{
+  "files": [
+    {
+      "path": "library-chain/pipeline/pipeline.h",
+      "content": "#ifndef PIPELINE_H\n#define PIPELINE_H\n\nint pipeline_operation(int a, int b);\n\n#endif\n"
+    },
+    {
+      "path": "library-chain/pipeline/pipeline.c",
+      "content": "#include \"pipeline.h\"\n#include \"feature.h\"\n\nint pipeline_operation(int a, int b) {\n    return feature_multiply(a, b);\n}\n"
+    },
+    {
+      "path": "library-chain/pipeline/main.c",
+      "content": "#include <stdio.h>\n#include \"pipeline.h\"\n\nint main() {\n    int result = pipeline_operation(3, 4);\n    printf(\"%d\\n\", result);\n    return 0;\n}\n"
+    },
+    {
+      "path": "library-chain/pipeline/Makefile",
+      "content": "CC = gcc\nCFLAGS = -Wall -Wextra -std=c11\nCORE_DIR = ../core\nFEATURE_DIR = ../feature\n\nall: sample\n\nsample: main.o libpipeline.a\n\t$(CC) $(CFLAGS) -o sample main.o libpipeline.a -L$(FEATURE_DIR) -lfeature -L$(CORE_DIR) -lcore\n\nmain.o: main.c pipeline.h\n\t$(CC) $(CFLAGS) -c main.c\n\nlibpipeline.a: pipeline.o\n\tar rcs libpipeline.a pipeline.o\n\npipeline.o: pipeline.c pipeline.h feature.h\n\t$(CC) $(CFLAGS) -I$(FEATURE_DIR) -I$(CORE_DIR) -c pipeline.c\n\nclean:\n\trm -f *.o libpipeline.a sample\n"
+    }
+  ],
+  "notes": "Created pipeline library that depends on feature (and transitively on core) to form a three-library chain."
+}

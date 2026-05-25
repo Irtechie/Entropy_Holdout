@@ -1,0 +1,21 @@
+{
+  "files": [
+    {
+      "path": "factory-system/config/stationConfig.ts",
+      "content": "export const stations = [\n  { id: 'station-1', location: 'Assembly Line A' },\n  { id: 'station-2', location: 'Assembly Line B' },\n  { id: 'station-3', location: 'Quality Control' },\n  { id: 'station-4', location: 'Packaging' }\n];\n\nexport const productRouting = {\n  id: 'product-routing-001',\n  steps: stations.map(s => s.id)\n};"
+    },
+    {
+      "path": "factory-system/src/data/stations.ts",
+      "content": "import { stations } from '../../config/stationConfig';\n\nexport { stations };"
+    },
+    {
+      "path": "factory-system/src/data/routing.ts",
+      "content": "import { productRouting } from '../../config/stationConfig';\n\nexport { productRouting };"
+    },
+    {
+      "path": "factory-system/stations/index.ts",
+      "content": "import { stations, productRouting } from '../../config/stationConfig';\n\nexport { stations, productRouting };"
+    }
+  ],
+  "notes": "Moved station definitions and product routing into configuration under factory-system/config."
+}
