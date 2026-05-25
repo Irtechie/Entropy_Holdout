@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "factory-system/dashboard/index.ts",
+      "content": "import { stations } from '../stations/stations';\nimport { productRouting } from '../stations/routing';\nimport { Product } from '../types/product';\n\n// Simulate some throughput data (in a real system, this would come from a database or metrics)\nconst throughputPerStation = 5; // units per minute\n\n// Simulate product state: we don't have any products, so we show an empty array\nconst productState: Product[] = []; // No products in the system\n\nexport function generateDashboardReport() {\n  return {\n    factoryConfiguration: {\n      stations: stations.map(s => ({ id: s.id, location: s.location })),\n      routing: {\n        id: productRouting.id,\n        steps: productRouting.steps\n      }\n    },\n    throughput: {\n      unitsPerMinutePerStation: throughputPerStation,\n      totalUnitsPerMinute: throughputPerStation * stations.length\n    },\n    productState: {\n      totalProducts: productState.length,\n      products: productState\n    }\n  };\n}\n\n// If this script is run directly, print the report\nif (require.main === module) {\n  const report = generateDashboardReport();\n  console.log(JSON.stringify(report, null, 2));}\n"
+    }
+  ],
+  "notes": "Added a simple dashboard that summarizes station throughput and product state."
+}

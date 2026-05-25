@@ -1,0 +1,8 @@
+{
+  "id": "product-assembly-route",
+  "steps": [
+    "station-assembly",
+    "station-test",
+    "station-pack"
+  ]
+}

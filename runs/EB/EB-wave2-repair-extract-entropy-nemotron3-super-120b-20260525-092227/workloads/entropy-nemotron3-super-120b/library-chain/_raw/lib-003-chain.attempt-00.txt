@@ -1,0 +1,21 @@
+{
+  "files": [
+    {
+      "path": "library-chain/chain/chain.h",
+      "content": "#ifndef CHAIN_H\n#define CHAIN_H\n\nint chain_func(int a, int b);\n\n#endif\n"
+    },
+    {
+      "path": "library-chain/chain/chain.c",
+      "content": "#include \"chain.h\"\n#include \"../feature/feature.h\"\n#include \"../core/core.h\"\n\nint chain_func(int a, int b) {\n    int result = multiply(a, b);\n    return add(result, 0);\n}\n"
+    },
+    {
+      "path": "library-chain/chain/main.c",
+      "content": "#include <stdio.h>\n#include \"chain.h\"\n\nint main() {\n    int result = chain_func(5, 6);\n    printf(\"%d\\n\", result);\n    return 0;\n}\n"
+    },
+    {
+      "path": "library-chain/chain/Makefile",
+      "content": "CC = gcc\nCFLAGS = -Wall -Wextra -std=c11\n\nCORE_DIR = ../core\nFEATURE_DIR = ../feature\nLIB_CORE = $(CORE_DIR)/libcore.a\nLIB_FEATURE = $(FEATURE_DIR)/libfeature.a\n\nall: chain-sample\n\n$(LIB_CORE):\n\t$(MAKE) -C $(CORE_DIR) libcore.a\n\n$(LIB_FEATURE):\n\t$(MAKE) -C $(FEATURE_DIR) libfeature.a\n\nlibchain.a: chain.o\n\tar rcs libchain.a chain.o\n\nchain.o: chain.c chain.h\n\t$(CC) $(CFLAGS) -c chain.c -I$(CORE_DIR) -I$(FEATURE_DIR)\n\nchain-sample: main.o libchain.a $(LIB_FEATURE) $(LIB_CORE)\n\t$(CC) $(CFLAGS) -o chain-sample main.o libchain.a $(LIB_FEATURE) $(LIB_CORE)\n\nmain.o: main.c chain.h\n\t$(CC) $(CFLAGS) -c main.c -I$(CORE_DIR) -I$(FEATURE_DIR)\n\nclean:\n\trm -f *.o libchain.a chain-sample\n"
+    }
+  ],
+  "notes": "Created third library that depends on feature (and core) with a sample caller preserving the call chain."
+}

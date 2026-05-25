@@ -1,0 +1,14 @@
+[
+  {
+    "id": "station-assembly",
+    "location": "Assembly Line"
+  },
+  {
+    "id": "station-test",
+    "location": "Testing Area"
+  },
+  {
+    "id": "station-pack",
+    "location": "Packaging Station"
+  }
+]
