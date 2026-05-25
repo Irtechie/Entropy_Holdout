@@ -1,0 +1,8 @@
+{"ts":"2026-05-25T12:53:57.5502830-04:00","event":"experiment_start","experiment_id":"EB-LC-wave1-plain-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
+{"ts":"2026-05-25T12:53:57.5565277-04:00","event":"target_start","set_id":"entropy-granite-code-3b","context_tokens":262144}
+{"ts":"2026-05-25T12:54:24.5784957-04:00","event":"target_ready","set_id":"entropy-granite-code-3b","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"granite-3b-code-instruct.Q8_0.gguf"}
+{"ts":"2026-05-25T12:55:09.0058427-04:00","event":"workload_failed","set_id":"entropy-granite-code-3b","workload":"webpage-chain","error":"model did not return a JSON object"}
+{"ts":"2026-05-25T12:55:20.0601332-04:00","event":"workload_failed","set_id":"entropy-granite-code-3b","workload":"library-chain","error":"model did not return a JSON object"}
+{"ts":"2026-05-25T12:56:05.5492044-04:00","event":"workload_failed","set_id":"entropy-granite-code-3b","workload":"factory","error":"model did not return a JSON object"}
+{"ts":"2026-05-25T12:56:05.5700444-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-granite-code-3b-20260525-125357\\results.jsonl"}
+{"ts":"2026-05-25T12:56:05.6082380-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-granite-code-3b-20260525-125357\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-granite-code-3b-20260525-125357\\critique.json"}

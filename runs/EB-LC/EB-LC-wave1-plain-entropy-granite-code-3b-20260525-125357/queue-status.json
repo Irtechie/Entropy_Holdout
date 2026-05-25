@@ -1,0 +1,17 @@
+{
+  "queue_id": "EB-LC-wave1-plain-singlebox",
+  "target_set_id": "entropy-granite-code-3b",
+  "slice_id": "lc-wave1-003",
+  "classification": "completed-data-run",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-granite-code-3b-20260525-125357",
+  "started_at": "2026-05-25T12:53:57.2663204-04:00",
+  "finished_at": "2026-05-25T12:56:05.6255524-04:00",
+  "elapsed_s": 128.4,
+  "runner_exit_code": 0,
+  "results": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-granite-code-3b-20260525-125357\\results.jsonl",
+  "critique": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-granite-code-3b-20260525-125357\\critique.md",
+  "critique_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-granite-code-3b-20260525-125357\\critique.json",
+  "report_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-granite-code-3b-20260525-125357\\report.json",
+  "wedge_risk": false,
+  "wedge_detail": null
+}

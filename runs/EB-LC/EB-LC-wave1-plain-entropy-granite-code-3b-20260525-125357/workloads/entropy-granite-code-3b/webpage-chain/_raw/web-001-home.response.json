@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "'4'\n'\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n'\n4\n'\n'\n'\n'\n'\n'\n\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n\n'\n\n\n\n\n\n\n\n'\n\n\n\n\n'\n'\n\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n\n'\n'\n'\n'\n'\n\n\n\n\n'\n'\n'\n\n\n'\n\n\n\n'\n\n'\n'\n\n'\n\n\n\n\n'\n'\n\n'\n\n\n\n\n\n\n'\n\n\n\n\n\n\n\n\n\n'\n\n\n\n\n\n\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n'\n\n'\n\n'\n'\n\n'\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n'\n'\n'\n\n'\n'\n\n\n\n\n\n\n\n\n\n\n'\n\n\n\n\n\n'\n",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 1552,
+      "prompt_tokens": 496,
+      "total_tokens": 2048,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "granite-3b-code-instruct.Q8_0.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-m00PtdRs4AvGGWQJT4Ff3dnXtfv0lF9B",
+    "service_tier": null,
+    "finish_reason": "length",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 496,
+    "output_tokens": 1552,
+    "total_tokens": 2048,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "a20e90d937a7d10b254badac5ba1a81d",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-granite-code-3b",
+      "webpage-chain"
+    ]
+  }
+}
