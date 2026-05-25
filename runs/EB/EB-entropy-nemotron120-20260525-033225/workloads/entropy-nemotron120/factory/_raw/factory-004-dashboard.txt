@@ -1,0 +1,13 @@
+{
+  "files": [
+    {
+      "path": "factory-system/state/factoryState.ts",
+      "content": "import { Station } from '../types/station';\nimport { stations } from '../stations/stations';\n\nexport interface StationState extends Station {\n  currentProductId: string | null;\n  throughput: number;\n}\n\nexport const factoryState: StationState[] = stations.map(station => ({\n  ...station,\n  currentProductId: null,\n  throughput: 0\n}));"
+    },
+    {
+      "path": "factory-system/dashboard/dashboard.ts",
+      "content": "import { factoryState } from '../state/factoryState';\nimport { productRouting } from '../stations/routing';\n\nexport function generateDashboardReport() {\n  const totalStations = factoryState.length;\n  const stationsWithProducts = factoryState.filter(s => s.currentProductId !== null).length;\n  const totalThroughput = factoryState.reduce((sum, s) => sum + s.throughport, 0);\n  const routingLength = productRouting.steps.length;\n\n  return {\n    totalStations,\n    stationsWithProducts,\n    totalThroughput,\n    routingLength,\n    stationDetails: factoryState.map(s => ({\n      id: s.id,\n      location: s.location,\n      currentProductId: s.currentProductId,\n      throughput: s.throughput\n    }));\n  }\n}"
+    }
+  ],
+  "notes": "Added factory state and dashboard to summarize station throughput and product state"
+}

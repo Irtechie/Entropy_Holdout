@@ -1,0 +1,37 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <title>Home Page</title>\\n</head>\\n<body>\\n    <nav></nav>\\n    <main>\\n        Welcome to the home page.\\n    </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created index.html with title, empty nav, and main content.\"\n}",
+        "reasoning_content": "We need to output JSON with files array containing site/index.html content. The stage: create webpage 1 as index.html with a title, main content, and an empty navigation area that can grow later.\n\nThus we need to produce a simple HTML file with title, maybe <nav></nav>, main content maybe <main>Hello World</main>. Provide notes.\n\nWe must not include any extra text. Just JSON.\n\nLet's craft:\n\n{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <title>Home Page</title>\\n</head>\\n<body>\\n    <nav></nav>\\n    <main>\\n        Welcome to the home page.\\n    </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created index.html with title, empty nav, and main content.\"\n}\n\nMake sure JSON is valid. No trailing commas. Use double quotes. Ensure proper escaping of newlines inside string? In JSON, we can include actual newline characters inside the string; it's allowed. Usually we can embed literal newlines. It's fine.\n\nReturn only that.\n\n"
+      }
+    }
+  ],
+  "created": 1779694474,
+  "model": "NVIDIA-Nemotron-3-Super-120B-A12B-UD-Q4_K_M-00001-of-00003.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 388,
+    "prompt_tokens": 236,
+    "total_tokens": 624,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-wcVsJ5J04JiA2TvABHEOr1VCjLkqNHN6",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 236,
+    "prompt_ms": 1279.572,
+    "prompt_per_token_ms": 5.4219152542372875,
+    "prompt_per_second": 184.4366710118696,
+    "predicted_n": 388,
+    "predicted_ms": 23473.67,
+    "predicted_per_token_ms": 60.499149484536076,
+    "predicted_per_second": 16.529157988503716
+  }
+}

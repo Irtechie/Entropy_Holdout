@@ -1,0 +1,21 @@
+{
+  "files": [
+    {
+      "path": "library-chain/feature/feature.h",
+      "content": "#ifndef FEATURE_H\\n#define FEATURE_H\\n\\nint feature_add(int a, int b);\\n\\n#endif\\n"
+    },
+    {
+      "path": "library-chain/feature/feature.c",
+      "content": "#include \"feature.h\"\\n#include \"../core/core.h\"\\n\\nint feature_add(int a, int b) {\\n    return add(a, b);\\n}\\n"
+    },
+    {
+      "path": "library-chain/feature/main.c",
+      "content": "#include <stdio.h>\\n#include \"feature.h\"\\n\\nint main() {\\n    int result = feature_add(2, 3);\\n    printf(\\\"%d\\\\n\\\", result);\\n    return 0;\\n}\\n"
+    },
+    {
+      "path": "library-chain/feature/Makefile",
+      "content": "CC = gcc\\nCFLAGS = -Wall -Wextra -std=c11\\nCORE_DIR = ../core\\n\\nall: sample\\n\\nsample: main.o libfeature.a libcore.a\\n\\t$(CC) $(CFLAGS) -o sample main.o libfeature.a libcore.a\\n\\nmain.o: main.c feature.h\\n\\t$(CC) $(CFLAGS) -c main.c\\n\\nlibfeature.a: feature.o\\n\\tar rcs libfeature.a feature.o\\n\\nfeature.o: feature.c feature.h\\n\\t$(CC) $(CFLAGS) -c feature.c\\n\\nlibcore.a: $(CORE_DIR)/core.c $(CORE_DIR)/core.h\\n\\t$(CC) $(CFLAGS) -c $(CORE_DIR)/core.c -o core.o\\n\\tar rcs libcore.a core.o\\n\\trm -f core.o\\n\\nclean:\\n\\trm -f *.o libfeature.a libcore.a sample\\n"
+    }
+  ],
+  "notes": "Created feature library that depends on core and calls its add function, with a sample caller and Makefile."
+}

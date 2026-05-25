@@ -1,0 +1,17 @@
+{
+  "queue_id": "EB-wave1-remaining-singlebox",
+  "target_set_id": "entropy-nemotron120",
+  "slice_id": "slice-012",
+  "classification": "completed-data-run",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225",
+  "started_at": "2026-05-25T03:32:25.1759725-04:00",
+  "finished_at": "2026-05-25T04:04:57.3864929-04:00",
+  "elapsed_s": 1952.2,
+  "runner_exit_code": 0,
+  "results": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\results.jsonl",
+  "critique": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\critique.md",
+  "critique_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\critique.json",
+  "report_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\report.json",
+  "wedge_risk": false,
+  "wedge_detail": null
+}

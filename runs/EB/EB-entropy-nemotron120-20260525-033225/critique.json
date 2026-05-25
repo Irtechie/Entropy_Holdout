@@ -1,0 +1,217 @@
+{
+  "schema_version": 1,
+  "benchmark": "EB",
+  "generated_at": "2026-05-25T04:04:57.3576283-04:00",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225",
+  "results_path": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\results.jsonl",
+  "rubric": {
+    "scale": "0-5",
+    "score_meaning": {
+      "0": "No valid stage output or strict output contract failure before code evaluation.",
+      "1": "Only first-stage or minimal artifact progress.",
+      "2": "Some local continuity, but breaks before deeper dependency pressure.",
+      "3": "Meaningful cross-stage progress, but breaks before completing workload invariants.",
+      "4": "All planned generation stages completed, but final validator failed.",
+      "5": "All planned generation stages and final validation passed."
+    },
+    "dimensions": [
+      "output_contract",
+      "artifact_continuity",
+      "dependency_retention",
+      "validator_readiness",
+      "entropy_pressure"
+    ]
+  },
+  "totals": {
+    "target_workload_count": 3,
+    "fully_validated_count": 0,
+    "prompt_tokens": 96679,
+    "completion_tokens": 27030,
+    "total_tokens": 123709
+  },
+  "critiques": [
+    {
+      "target_set_id": "entropy-nemotron120",
+      "model_id": "NVIDIA-Nemotron-3-Super-120B-A12B-UD-Q4_K_M-00001-of-00003.gguf",
+      "context_tokens": 65536,
+      "harness_mode": "plain",
+      "workload_id": "factory",
+      "planned_stage_count": 4,
+      "stages_seen": 5,
+      "max_pass_stage": 4,
+      "entropy_right_shift": {
+        "passed_stages": 4,
+        "possible_stages": 4,
+        "normalized": 1.0,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "final-validation",
+      "first_failure_class": "missing_artifact",
+      "first_error": "factory validation failed: missing station id intake",
+      "likely_entropy_cause": "The generated tree did not preserve or create a required artifact.",
+      "eb_score": 4,
+      "dimension_scores": {
+        "output_contract": 4,
+        "artifact_continuity": 3,
+        "dependency_retention": 4,
+        "validator_readiness": 3,
+        "entropy_pressure": 5
+      },
+      "token_usage": {
+        "prompt_tokens": 32719,
+        "completion_tokens": 8319,
+        "total_tokens": 41038
+      },
+      "breakpoint_metric": "highest ordered stage with valid component graph, configuration, and end-to-end factory behavior",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\factory\\_raw\\factory-001-layout.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\factory\\_raw\\factory-001-layout.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\factory\\_raw\\factory-002-stations.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\factory\\_raw\\factory-002-stations.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\factory\\_raw\\factory-003-configuration.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\factory\\_raw\\factory-003-configuration.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\factory\\_raw\\factory-004-dashboard.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\factory\\_raw\\factory-004-dashboard.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\factory\\_raw\\factory-001-layout.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\factory\\_raw\\factory-002-stations.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\factory\\_raw\\factory-003-configuration.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\factory\\_raw\\factory-004-dashboard.prompt.txt"
+      ],
+      "generated_file_count": 12,
+      "generated_files": [
+        "factory-system/package.json",
+        "factory-system/tsconfig.json",
+        "factory-system/src/types/component.ts",
+        "factory-system/src/types/station.ts",
+        "factory-system/src/types/product.ts",
+        "factory-system/src/types/routing.ts",
+        "factory-system/stations/stations.ts",
+        "factory-system/stations/routing.ts",
+        "factory-system/config/stations.json",
+        "factory-system/config/routing.json",
+        "factory-system/state/factoryState.ts",
+        "factory-system/dashboard/dashboard.ts"
+      ]
+    },
+    {
+      "target_set_id": "entropy-nemotron120",
+      "model_id": "NVIDIA-Nemotron-3-Super-120B-A12B-UD-Q4_K_M-00001-of-00003.gguf",
+      "context_tokens": 65536,
+      "harness_mode": "plain",
+      "workload_id": "library-chain",
+      "planned_stage_count": 4,
+      "stages_seen": 3,
+      "max_pass_stage": 2,
+      "entropy_right_shift": {
+        "passed_stages": 2,
+        "possible_stages": 4,
+        "normalized": 0.5,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "lib-003-chain",
+      "first_failure_class": "generation",
+      "first_error": "model did not generate expected artifact path: library-chain/pipeline",
+      "likely_entropy_cause": "The model produced files, but not at the paths required by the stage contract.",
+      "eb_score": 2,
+      "dimension_scores": {
+        "output_contract": 1,
+        "artifact_continuity": 2,
+        "dependency_retention": 2,
+        "validator_readiness": 2,
+        "entropy_pressure": 2
+      },
+      "token_usage": {
+        "prompt_tokens": 20538,
+        "completion_tokens": 10058,
+        "total_tokens": 30596
+      },
+      "breakpoint_metric": "highest ordered stage with valid dependency references, build output, and sample call",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\library-chain\\_raw\\lib-001-core.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\library-chain\\_raw\\lib-001-core.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\library-chain\\_raw\\lib-002-dependent.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\library-chain\\_raw\\lib-002-dependent.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\library-chain\\_raw\\lib-003-chain.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\library-chain\\_raw\\lib-003-chain.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\library-chain\\_raw\\lib-001-core.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\library-chain\\_raw\\lib-002-dependent.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\library-chain\\_raw\\lib-003-chain.prompt.txt"
+      ],
+      "generated_file_count": 8,
+      "generated_files": [
+        "library-chain/core/core.h",
+        "library-chain/core/core.c",
+        "library-chain/core/main.c",
+        "library-chain/core/Makefile",
+        "library-chain/feature/feature.h",
+        "library-chain/feature/feature.c",
+        "library-chain/feature/main.c",
+        "library-chain/feature/Makefile"
+      ]
+    },
+    {
+      "target_set_id": "entropy-nemotron120",
+      "model_id": "NVIDIA-Nemotron-3-Super-120B-A12B-UD-Q4_K_M-00001-of-00003.gguf",
+      "context_tokens": 65536,
+      "harness_mode": "plain",
+      "workload_id": "webpage-chain",
+      "planned_stage_count": 5,
+      "stages_seen": 5,
+      "max_pass_stage": 4,
+      "entropy_right_shift": {
+        "passed_stages": 4,
+        "possible_stages": 5,
+        "normalized": 0.8,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "web-005-nested-shared-table",
+      "first_failure_class": "generation",
+      "first_error": "Conversion from JSON failed with error: Unexpected end when deserializing object. Path 'files[0]', line 6, position 5.",
+      "likely_entropy_cause": "The model lost the strict JSON response contract before code could be evaluated.",
+      "eb_score": 3,
+      "dimension_scores": {
+        "output_contract": 0,
+        "artifact_continuity": 3,
+        "dependency_retention": 3,
+        "validator_readiness": 2,
+        "entropy_pressure": 4
+      },
+      "token_usage": {
+        "prompt_tokens": 43422,
+        "completion_tokens": 8653,
+        "total_tokens": 52075
+      },
+      "breakpoint_metric": "highest ordered stage with valid pages, backlinks, and shared structure",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\webpage-chain\\_raw\\web-001-home.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\webpage-chain\\_raw\\web-001-home.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\webpage-chain\\_raw\\web-002-backlink.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\webpage-chain\\_raw\\web-002-backlink.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\webpage-chain\\_raw\\web-003-chain-link.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\webpage-chain\\_raw\\web-003-chain-link.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\webpage-chain\\_raw\\web-004-shared-nav.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\webpage-chain\\_raw\\web-004-shared-nav.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\webpage-chain\\_raw\\web-005-nested-shared-table.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\webpage-chain\\_raw\\web-005-nested-shared-table.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\webpage-chain\\_raw\\web-001-home.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\webpage-chain\\_raw\\web-002-backlink.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\webpage-chain\\_raw\\web-003-chain-link.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\webpage-chain\\_raw\\web-004-shared-nav.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\workloads\\entropy-nemotron120\\webpage-chain\\_raw\\web-005-nested-shared-table.prompt.txt"
+      ],
+      "generated_file_count": 4,
+      "generated_files": [
+        "site/index.html",
+        "site/page-2.html",
+        "site/page-3.html",
+        "site/page-4.html"
+      ]
+    }
+  ]
+}

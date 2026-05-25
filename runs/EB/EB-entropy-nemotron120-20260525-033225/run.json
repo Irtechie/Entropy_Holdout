@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "benchmark": "EB",
+  "created_at": "2026-05-25T03:32:25.2976495-04:00",
+  "experiment_path": "E:\\Dev\\AI\\remote\\Entropy\\benchmarks\\entropy_workloads\\experiment.local-full-singlebox.json",
+  "targets_path": "E:\\Dev\\AI\\remote\\Entropy\\llmcommune-entropy-targets.json",
+  "controller": "http://192.168.1.203:4000",
+  "git_head": "ba4a826820fac79d5020a398d056ffdc3e707783",
+  "command": "pwsh \"E:\\Dev\\AI\\remote\\Entropy\\tools\\run_entropy_serial_experiment.ps1\" -ExperimentPath \"E:\\Dev\\AI\\remote\\Entropy\\benchmarks\\entropy_workloads\\experiment.local-full-singlebox.json\" -TargetsPath \"E:\\Dev\\AI\\remote\\Entropy\\llmcommune-entropy-targets.json\" -Base \"http://192.168.1.203:4000\" -ResultRoot \"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\" -OnlySet \"entropy-nemotron120\"",
+  "result_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225",
+  "aggregate_results": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\results.jsonl",
+  "events": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\events.jsonl",
+  "critique": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\critique.md",
+  "critique_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron120-20260525-033225\\critique.json",
+  "keep_run_outputs": true,
+  "targets": [
+    {
+      "set_id": "entropy-nemotron120",
+      "profile_id": "entropy_gguf_nemotron_super_120b_a12b_large",
+      "parameter_count_b": 120,
+      "context_tokens": 65536,
+      "runtime_family": "llama.cpp",
+      "requires_gx10": false
+    }
+  ],
+  "workloads": [
+    "webpage-chain",
+    "library-chain",
+    "factory"
+  ]
+}

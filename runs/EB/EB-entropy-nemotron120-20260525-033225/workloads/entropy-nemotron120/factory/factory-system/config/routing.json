@@ -1,0 +1,9 @@
+{
+  "id": "product-1-routing",
+  "steps": [
+    "station-1",
+    "station-2",
+    "station-3",
+    "station-4"
+  ]
+}
