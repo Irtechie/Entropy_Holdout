@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "path": "library-chain/core/src/lib.rs",
+      "content": "pub fn core_function() -> &'static str {\n    \"Hello from core!\"\n}\n"
+    },
+    {
+      "path": "library-chain/core/src/main.rs",
+      "content": "use library_chain_core::core_function;\n\nfn main() {\n    println!(\"{}\", core_function());\n}\n"
+    },
+    {
+      "path": "library-chain/core/Cargo.toml",
+      "content": "[package]\nname = \"library-chain-core\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\nname = \"library_chain_core\"\npath = \"src/lib.rs\"\n\n[[bin]]\nname = \"library-chain-core-sample\"\npath = \"src/main.rs\"\n"
+    }
+  ],
+  "notes": "Created core library with public function and sample caller binary."
+}

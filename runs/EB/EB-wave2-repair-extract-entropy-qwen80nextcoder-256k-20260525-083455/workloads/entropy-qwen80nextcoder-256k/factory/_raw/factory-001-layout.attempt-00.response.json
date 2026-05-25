@@ -1,0 +1,33 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"factory-system/src/main/java/com/example/factory/Component.java\",\n      \"content\": \"package com.example.factory;\\n\\npublic class Component {\\n    private String id;\\n    private String name;\\n\\n    public Component(String id, String name) {\\n        this.id = id;\\n        this.name = name;\\n    }\\n\\n    public String getId() { return id; }\\n    public String getName() { return name; }\\n}\\n\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/example/factory/Station.java\",\n      \"content\": \"package com.example.factory;\\n\\nimport java.util.List;\\n\\npublic class Station {\\n    private String id;\\n    private String name;\\n    private List<String> supportedComponents;\\n\\n    public Station(String id, String name, List<String> supportedComponents) {\\n        this.id = id;\\n        this.name = name;\\n        this.supportedComponents = supportedComponents;\\n    }\\n\\n    public String getId() { return id; }\\n    public String getName() { return name; }\\n    public List<String> getSupportedComponents() { return supportedComponents; }\\n}\\n\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/example/factory/Product.java\",\n      \"content\": \"package com.example.factory;\\n\\nimport java.util.List;\\n\\npublic class Product {\\n    private String id;\\n    private String name;\\n    private List<Component> components;\\n\\n    public Product(String id, String name, List<Component> components) {\\n        this.id = id;\\n        this.name = name;\\n        this.components = components;\\n    }\\n\\n    public String getId() { return id; }\\n    public String getName() { return name; }\\n    public List<Component> getComponents() { return components; }\\n}\\n\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/example/factory/Routing.java\",\n      \"content\": \"package com.example.factory;\\n\\nimport java.util.List;\\n\\npublic class Routing {\\n    private String id;\\n    private String productId;\\n    private List<String> stationSequence;\\n\\n    public Routing(String id, String productId, List<String> stationSequence) {\\n        this.id = id;\\n        this.productId = productId;\\n        this.stationSequence = stationSequence;\\n    }\\n\\n    public String getId() { return id; }\\n    public String getProductId() { return productId; }\\n    public List<String> getStationSequence() { return stationSequence; }\\n}\\n\"\n    },\n    {\n      \"path\": \"factory-system/pom.xml\",\n      \"content\": \"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?>\\n<project xmlns=\\\"http://maven.apache.org/POM/4.0.0\\\"\\n         xmlns:xsi=\\\"http://www.w3.org/2001/XMLSchema-instance\\\"\\n         xsi:schemaLocation=\\\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\\\">\\n    <modelVersion>4.0.0</modelVersion>\\n\\n    <groupId>com.example</groupId>\\n    <artifactId>factory-system</artifactId>\\n    <version>1.0.0</version>\\n    <packaging>jar</packaging>\\n\\n    <properties>\\n        <maven.compiler.source>17</maven.compiler.source>\\n        <maven.compiler.target>17</maven.compiler.target>\\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\\n    </properties>\\n\\n    <dependencies>\\n    </dependencies>\\n</project>\\n\"\n    }\n  ],\n  \"notes\": \"Created factory project layout with core domain types: Component, Station, Product, and Routing.\"\n}"
+      }
+    }
+  ],
+  "created": 1779712670,
+  "model": "Qwen3-Coder-Next-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 847,
+    "prompt_tokens": 222,
+    "total_tokens": 1069
+  },
+  "id": "chatcmpl-3IMjoOm4w2afkSV9PoXz7fbFg41hYAQK",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 222,
+    "prompt_ms": 323.952,
+    "prompt_per_token_ms": 1.4592432432432432,
+    "prompt_per_second": 685.2867091420951,
+    "predicted_n": 847,
+    "predicted_ms": 17503.107,
+    "predicted_per_token_ms": 20.664825265643447,
+    "predicted_per_second": 48.39140845108243
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"factory-system/src/main/java/com/example/factory/StationGraph.java\",\n      \"content\": \"package com.example.factory;\\n\\nimport java.util.HashMap;\\nimport java.util.HashSet;\\nimport java.util.Map;\\nimport java.util.Set;\\n\\npublic class StationGraph {\\n    private Map<String, Station> stations = new HashMap<>();\\n    private Map<String, Set<String>> transitions = new HashMap<>();\\n\\n    public void addStation(Station station) {\\n        stations.put(station.getId(), station);\\n    }\\n\\n    public void addTransition(String fromStationId, String toStationId) {\\n        transitions.computeIfAbsent(fromStationId, k -> new HashSet<>()).add(toStationId);\\n    }\\n\\n    public Station getStation(String id) {\\n        return stations.get(id);\\n    }\\n\\n    public boolean hasStation(String id) {\\n        return stations.containsKey(id);\\n    }\\n\\n    public Set<String> getTransitions(String stationId) {\\n        return transitions.getOrDefault(stationId, new HashSet<>());\\n    }\\n}\\n\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/example/factory/RouteEngine.java\",\n      \"content\": \"package com.example.factory;\\n\\nimport java.util.List;\\n\\npublic class RouteEngine {\\n    private StationGraph stationGraph;\\n\\n    public RouteEngine(StationGraph stationGraph) {\\n        this.stationGraph = stationGraph;\\n    }\\n\\n    public boolean canRoute(Product product, Routing routing) {\\n        List<String> stations = routing.getStationSequence();\\n        for (String stationId : stations) {\\n            if (!stationGraph.hasStation(stationId)) {\\n                return false;\\n            }\\n        }\\n        return true;\\n    }\\n\\n    public void executeRoute(Product product, Routing routing) {\\n        if (!canRoute(product, routing)) {\\n            throw new IllegalArgumentException(\\\"Cannot route product: invalid station sequence\\\");\\n        }\\n        for (String stationId : routing.getStationSequence()) {\\n            Station station = stationGraph.getStation(stationId);\\n            processAtStation(product, station);\\n        }\\n    }\\n\\n    private void processAtStation(Product product, Station station) {\\n        // Simulate processing at station\\n    }\\n}\\n\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/example/factory/FactoryService.java\",\n      \"content\": \"package com.example.factory;\\n\\nimport java.util.Arrays;\\nimport java.util.List;\\n\\npublic class FactoryService {\\n    private StationGraph stationGraph;\\n    private RouteEngine routeEngine;\\n\\n    public FactoryService() {\\n        this.stationGraph = new StationGraph();\\n        this.routeEngine = new RouteEngine(stationGraph);\\n        initializeStations();\\n    }\\n\\n    private void initializeStations() {\\n        Station receiving = new Station(\\\"receiving\\\", \\\"Receiving\\\", Arrays.asList(\\\"c1\\\"));\\n        Station assembly = new Station(\\\"assembly\\\", \\\"Assembly\\\", Arrays.asList(\\\"c1\\\", \\\"c2\\\"));\\n        Station testing = new Station(\\\"testing\\\", \\\"Testing\\\", Arrays.asList(\\\"c1\\\", \\\"c2\\\"));\\n        Station shipping = new Station(\\\"shipping\\\", \\\"Shipping\\\", Arrays.asList(\\\"c1\\\", \\\"c2\\\"));\\n\\n        stationGraph.addStation(receiving);\\n        stationGraph.addStation(assembly);\\n        stationGraph.addStation(testing);\\n        stationGraph.addStation(shipping);\\n\\n        stationGraph.addTransition(\\\"receiving\\\", \\\"assembly\\\");\\n        stationGraph.addTransition(\\\"assembly\\\", \\\"testing\\\");\\n        stationGraph.addTransition(\\\"testing\\\", \\\"shipping\\\");\\n    }\\n\\n    public void routeProduct(Product product, Routing routing) {\\n        routeEngine.executeRoute(product, routing);\\n    }\\n\\n    public StationGraph getStationGraph() {\\n        return stationGraph;\\n    }\\n}\\n\"\n    }\n  ],\n  \"notes\": \"Added StationGraph with proper transition tracking, RouteEngine for routing execution, and FactoryService to initialize multiple stations and define routing flow between them.\"\n}"
+      }
+    }
+  ],
+  "created": 1779712715,
+  "model": "Qwen3-Coder-Next-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 900,
+    "prompt_tokens": 9285,
+    "total_tokens": 10185
+  },
+  "id": "chatcmpl-wi6ShDsuvzRgz7UklL5JHg0SGVxcwQf1",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 9285,
+    "prompt_ms": 9734.123,
+    "prompt_per_token_ms": 1.0483708131394722,
+    "prompt_per_second": 953.8609692932789,
+    "predicted_n": 900,
+    "predicted_ms": 19904.392,
+    "predicted_per_token_ms": 22.11599111111111,
+    "predicted_per_second": 45.216151289624925
+  }
+}

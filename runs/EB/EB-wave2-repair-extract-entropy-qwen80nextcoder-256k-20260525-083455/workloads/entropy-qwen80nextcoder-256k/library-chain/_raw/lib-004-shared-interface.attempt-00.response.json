@@ -1,0 +1,33 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/contracts/src/lib.rs\",\n      \"content\": \"pub trait SharedContract {\\n    fn contract_name() -> &'static str;\\n    fn version() -> &'static str;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/contracts/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"library-chain-contracts\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[lib]\\nname = \\\"library_chain_contracts\\\"\\npath = \\\"src/lib.rs\\\"\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/src/lib.rs\",\n      \"content\": \"use library_chain_contracts::SharedContract;\\n\\npub fn core_function() -> &'static str {\\n    \\\"Hello from core!\\\"\\n}\\n\\npub struct CoreImpl;\\n\\nimpl SharedContract for CoreImpl {\\n    fn contract_name() -> &'static str {\\n        \\\"core\\\"\\n    }\\n\\n    fn version() -> &'static str {\\n        \\\"0.1.0\\\"\\n    }\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/feature/src/lib.rs\",\n      \"content\": \"use library_chain_core::core_function;\\nuse library_chain_contracts::SharedContract;\\n\\npub fn feature_function() -> String {\\n    format!(\\\"{} - extended!\\\", core_function())\\n}\\n\\npub struct FeatureImpl;\\n\\nimpl SharedContract for FeatureImpl {\\n    fn contract_name() -> &'static str {\\n        \\\"feature\\\"\\n    }\\n\\n    fn version() -> &'static str {\\n        \\\"0.1.0\\\"\\n    }\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/pipeline/src/lib.rs\",\n      \"content\": \"use library_chain_feature::feature_function;\\nuse library_chain_contracts::SharedContract;\\n\\npub fn pipeline_function() -> String {\\n    format!(\\\"{} - pipeline!\\\", feature_function())\\n}\\n\\npub struct PipelineImpl;\\n\\nimpl SharedContract for PipelineImpl {\\n    fn contract_name() -> &'static str {\\n        \\\"pipeline\\\"\\n    }\\n\\n    fn version() -> &'static str {\\n        \\\"0.1.0\\\"\\n    }\\n}\\n\"\n    }\n  ],\n  \"notes\": \"Created shared contracts library with SharedContract trait and implemented it in all three libraries.\"\n}"
+      }
+    }
+  ],
+  "created": 1779712652,
+  "model": "Qwen3-Coder-Next-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 530,
+    "prompt_tokens": 19732,
+    "total_tokens": 20262
+  },
+  "id": "chatcmpl-77q1h6aj9An2KvxAnFdKj7fDqhNJ108e",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 19732,
+    "prompt_ms": 20481.41,
+    "prompt_per_token_ms": 1.0379794242854248,
+    "prompt_per_second": 963.4102339633844,
+    "predicted_n": 530,
+    "predicted_ms": 12396.632,
+    "predicted_per_token_ms": 23.389871698113208,
+    "predicted_per_second": 42.75354789913906
+  }
+}

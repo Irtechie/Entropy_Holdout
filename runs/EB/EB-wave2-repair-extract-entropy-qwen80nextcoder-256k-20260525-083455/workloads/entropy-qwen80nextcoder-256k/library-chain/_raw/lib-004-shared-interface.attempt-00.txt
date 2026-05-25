@@ -1,0 +1,25 @@
+{
+  "files": [
+    {
+      "path": "library-chain/contracts/src/lib.rs",
+      "content": "pub trait SharedContract {\n    fn contract_name() -> &'static str;\n    fn version() -> &'static str;\n}\n"
+    },
+    {
+      "path": "library-chain/contracts/Cargo.toml",
+      "content": "[package]\nname = \"library-chain-contracts\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\nname = \"library_chain_contracts\"\npath = \"src/lib.rs\"\n"
+    },
+    {
+      "path": "library-chain/core/src/lib.rs",
+      "content": "use library_chain_contracts::SharedContract;\n\npub fn core_function() -> &'static str {\n    \"Hello from core!\"\n}\n\npub struct CoreImpl;\n\nimpl SharedContract for CoreImpl {\n    fn contract_name() -> &'static str {\n        \"core\"\n    }\n\n    fn version() -> &'static str {\n        \"0.1.0\"\n    }\n}\n"
+    },
+    {
+      "path": "library-chain/feature/src/lib.rs",
+      "content": "use library_chain_core::core_function;\nuse library_chain_contracts::SharedContract;\n\npub fn feature_function() -> String {\n    format!(\"{} - extended!\", core_function())\n}\n\npub struct FeatureImpl;\n\nimpl SharedContract for FeatureImpl {\n    fn contract_name() -> &'static str {\n        \"feature\"\n    }\n\n    fn version() -> &'static str {\n        \"0.1.0\"\n    }\n}\n"
+    },
+    {
+      "path": "library-chain/pipeline/src/lib.rs",
+      "content": "use library_chain_feature::feature_function;\nuse library_chain_contracts::SharedContract;\n\npub fn pipeline_function() -> String {\n    format!(\"{} - pipeline!\", feature_function())\n}\n\npub struct PipelineImpl;\n\nimpl SharedContract for PipelineImpl {\n    fn contract_name() -> &'static str {\n        \"pipeline\"\n    }\n\n    fn version() -> &'static str {\n        \"0.1.0\"\n    }\n}\n"
+    }
+  ],
+  "notes": "Created shared contracts library with SharedContract trait and implemented it in all three libraries."
+}
