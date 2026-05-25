@@ -1,9 +1,0 @@
-{
-  "files": [
-    {
-      "path": "site/page-3.html",
-      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 3</title>\n</head>\n<body>\n    <nav id=\"main-nav\">\n        <!-- Navigation area -->\n    </nav>\n    <main>\n        <h1>Welcome to Page 3</h1>\n        <p>This is the third page of the website.</p>\n        <p><a href=\"page-2.html\">Back to Page 2</a></p>\n    </main>\n</body>\n</html>"
-    }
-  ],
-  "notes": "Created site/page-3.html with a link back to site/page-2.html, preserving the existing chain."
-}

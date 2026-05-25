@@ -1,8 +1,0 @@
-{"ts":"2026-05-25T01:50:25.6110062-04:00","event":"experiment_start","experiment_id":"EB-local-full-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
-{"ts":"2026-05-25T01:50:25.6598954-04:00","event":"target_start","set_id":"entropy-gemma4-e4b","context_tokens":262144}
-{"ts":"2026-05-25T01:50:46.5730898-04:00","event":"target_ready","set_id":"entropy-gemma4-e4b","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"gemma-4-E4B-it-Q4_K_M.gguf"}
-{"ts":"2026-05-25T01:53:57.6327617-04:00","event":"workload_failed","set_id":"entropy-gemma4-e4b","workload":"webpage-chain","error":"webpage-chain validation failed: page index.html is missing title text"}
-{"ts":"2026-05-25T01:54:31.9905652-04:00","event":"workload_failed","set_id":"entropy-gemma4-e4b","workload":"library-chain","error":"model did not generate expected artifact path: library-chain/feature"}
-{"ts":"2026-05-25T01:54:57.0400020-04:00","event":"workload_failed","set_id":"entropy-gemma4-e4b","workload":"factory","error":"Conversion from JSON failed with error: After parsing a value an unexpected character was encountered: \\. Path 'files[4].content', line 21, position 1238."}
-{"ts":"2026-05-25T01:54:57.0414572-04:00","event":"experiment_done","results":".\\runs\\EB\\EB-entropy-gemma4-e4b-20260525-015024\\results.jsonl"}
-{"ts":"2026-05-25T01:54:57.4474658-04:00","event":"critique_written","markdown":".\\runs\\EB\\EB-entropy-gemma4-e4b-20260525-015024\\critique.md","json":".\\runs\\EB\\EB-entropy-gemma4-e4b-20260525-015024\\critique.json"}

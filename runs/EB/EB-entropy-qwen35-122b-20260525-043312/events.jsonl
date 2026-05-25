@@ -1,8 +1,0 @@
-{"ts":"2026-05-25T04:33:12.1637643-04:00","event":"experiment_start","experiment_id":"EB-local-full-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
-{"ts":"2026-05-25T04:33:12.1670383-04:00","event":"target_start","set_id":"entropy-qwen35-122b","context_tokens":65536}
-{"ts":"2026-05-25T04:35:09.9707315-04:00","event":"target_ready","set_id":"entropy-qwen35-122b","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"Qwen3.5-122B-A10B-Q4_K_M-00001-of-00003.gguf"}
-{"ts":"2026-05-25T04:42:42.9097543-04:00","event":"workload_failed","set_id":"entropy-qwen35-122b","workload":"webpage-chain","error":"Conversion from JSON failed with error: Unexpected end when deserializing object. Path 'files[0]', line 6, position 5."}
-{"ts":"2026-05-25T04:52:44.0746256-04:00","event":"workload_failed","set_id":"entropy-qwen35-122b","workload":"library-chain","error":"model response did not include choices text"}
-{"ts":"2026-05-25T04:57:43.2683109-04:00","event":"workload_failed","set_id":"entropy-qwen35-122b","workload":"factory","error":"model response did not include choices text"}
-{"ts":"2026-05-25T04:57:43.2701574-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-qwen35-122b-20260525-043312\\results.jsonl"}
-{"ts":"2026-05-25T04:57:43.3210245-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-qwen35-122b-20260525-043312\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-qwen35-122b-20260525-043312\\critique.json"}

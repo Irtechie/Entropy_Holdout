@@ -1,8 +1,0 @@
-{"ts":"2026-05-25T05:37:41.2518891-04:00","event":"experiment_start","experiment_id":"EB-wave2-repair-extract-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
-{"ts":"2026-05-25T05:37:41.2552001-04:00","event":"target_start","set_id":"entropy-gemma4-e4b","context_tokens":262144}
-{"ts":"2026-05-25T05:38:05.2959113-04:00","event":"target_ready","set_id":"entropy-gemma4-e4b","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"gemma-4-E4B-it-Q4_K_M.gguf"}
-{"ts":"2026-05-25T05:40:54.2949430-04:00","event":"workload_failed","set_id":"entropy-gemma4-e4b","workload":"webpage-chain","error":"webpage-chain validation failed: page index.html is missing title text"}
-{"ts":"2026-05-25T05:43:40.9615517-04:00","event":"workload_failed","set_id":"entropy-gemma4-e4b","workload":"library-chain","error":"library-chain validation failed: missing project: CoreLib/CoreLib.csproj"}
-{"ts":"2026-05-25T05:47:55.1428639-04:00","event":"workload_failed","set_id":"entropy-gemma4-e4b","workload":"factory","error":"model did not generate expected artifact path: factory-system/stations"}
-{"ts":"2026-05-25T05:47:55.1439984-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gemma4-e4b-20260525-053741\\results.jsonl"}
-{"ts":"2026-05-25T05:47:55.1938081-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gemma4-e4b-20260525-053741\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gemma4-e4b-20260525-053741\\critique.json"}

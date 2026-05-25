@@ -5,3 +5,7 @@
 venv/
 __pycache__/
 *.pyc
+
+# Historical direct-run EB evidence is archived at tag archive/pre-langchain-eb-evidence.
+# Canonical reproducible reruns belong under runs/EB-LC/.
+runs/EB/

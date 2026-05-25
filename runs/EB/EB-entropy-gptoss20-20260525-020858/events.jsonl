@@ -1,8 +1,0 @@
-{"ts":"2026-05-25T02:08:58.1724694-04:00","event":"experiment_start","experiment_id":"EB-local-full-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
-{"ts":"2026-05-25T02:08:58.2108813-04:00","event":"target_start","set_id":"entropy-gptoss20","context_tokens":131072}
-{"ts":"2026-05-25T02:09:25.1507315-04:00","event":"target_ready","set_id":"entropy-gptoss20","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"gpt-oss-20b-Q4_K_M.gguf"}
-{"ts":"2026-05-25T02:11:54.1119359-04:00","event":"workload_failed","set_id":"entropy-gptoss20","workload":"webpage-chain","error":"webpage-chain validation failed: page index.html is missing title text"}
-{"ts":"2026-05-25T02:13:14.2002878-04:00","event":"workload_failed","set_id":"entropy-gptoss20","workload":"library-chain","error":"model did not generate expected artifact path: library-chain/feature"}
-{"ts":"2026-05-25T02:13:57.0765784-04:00","event":"workload_failed","set_id":"entropy-gptoss20","workload":"factory","error":"model did not generate expected artifact path: factory-system/config"}
-{"ts":"2026-05-25T02:13:57.0793238-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss20-20260525-020858\\results.jsonl"}
-{"ts":"2026-05-25T02:13:57.4999867-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss20-20260525-020858\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss20-20260525-020858\\critique.json"}

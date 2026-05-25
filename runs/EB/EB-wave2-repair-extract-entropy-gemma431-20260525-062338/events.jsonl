@@ -1,8 +1,0 @@
-{"ts":"2026-05-25T06:23:39.0421044-04:00","event":"experiment_start","experiment_id":"EB-wave2-repair-extract-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
-{"ts":"2026-05-25T06:23:39.0470990-04:00","event":"target_start","set_id":"entropy-gemma431","context_tokens":262144}
-{"ts":"2026-05-25T06:24:21.9489864-04:00","event":"target_ready","set_id":"entropy-gemma431","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"gemma-4-31B-it-Q4_K_M.gguf"}
-{"ts":"2026-05-25T06:51:41.6587442-04:00","event":"workload_failed","set_id":"entropy-gemma431","workload":"webpage-chain","error":"webpage-chain validation failed: page index.html is missing title text"}
-{"ts":"2026-05-25T07:09:24.5467230-04:00","event":"workload_failed","set_id":"entropy-gemma431","workload":"library-chain","error":"model response did not include choices text"}
-{"ts":"2026-05-25T08:03:37.4957157-04:00","event":"workload_failed","set_id":"entropy-gemma431","workload":"factory","error":"curl exited 28 posting http://192.168.1.203:8000/v1/completions body="}
-{"ts":"2026-05-25T08:03:37.4968370-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gemma431-20260525-062338\\results.jsonl"}
-{"ts":"2026-05-25T08:03:37.5412345-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gemma431-20260525-062338\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gemma431-20260525-062338\\critique.json"}

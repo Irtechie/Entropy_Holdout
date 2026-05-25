@@ -1,9 +1,0 @@
-{
-  "files": [
-    {
-      "path": "factory-system/stations.ts",
-      "content": "import { Station } from './src/types/station';\nimport { Routing } from './src/types/routing';\n\nexport const stations: Station[] = [\n  { id: 's1', location: 'Assembly Line 1' },\n  { id: 's2', location: 'Assembly Line 2' },\n  { id: 's3', location: 'Quality Check' },\n  { id: 's4', location: 'Packaging' }\n];\n\nexport const productRouting: Routing = {\n  id: 'routing-1',\n  steps: ['s1', 's2', 's3', 's4']\n};"
-    }
-  ],
-  "notes": "Added multiple stations and a routing flow for product movement between stations."
-}

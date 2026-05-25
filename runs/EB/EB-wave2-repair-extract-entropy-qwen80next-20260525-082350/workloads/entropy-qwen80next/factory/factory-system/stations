@@ -1,7 +1,0 @@
-assembly-station: station-001
-inspection-station: station-002
-packaging-station: station-003
-
-routing:
-  product-A: [station-001, station-002, station-003]
-  product-B: [station-001, station-002, station-003]

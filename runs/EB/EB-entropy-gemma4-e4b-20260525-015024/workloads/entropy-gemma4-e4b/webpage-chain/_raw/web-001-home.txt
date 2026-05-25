@@ -1,9 +1,0 @@
-{
-  "files": [
-    {
-      "path": "site/index.html",
-      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Home Page - Webpage Chain</title>\n</head>\n<body>\n    <nav id=\"navigation\">\n        <!-- Navigation links will be added here later -->\n    </nav>\n    <main id=\"main-content\">\n        <h1>Welcome to the Webpage Chain Benchmark</h1>\n        <p>This is the home page (web-001-home). Content will be added and expanded in subsequent stages.</p>\n    </main>\n</body>\n</html>"
-    }
-  ],
-  "notes": "Created the initial index.html with title, main content, and an empty navigation area."
-}

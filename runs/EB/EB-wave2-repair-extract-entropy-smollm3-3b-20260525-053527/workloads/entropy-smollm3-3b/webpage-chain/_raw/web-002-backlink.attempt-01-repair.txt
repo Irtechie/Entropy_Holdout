@@ -1,9 +1,0 @@
-{
-  "files": [
-    {
-      "path": "site/page-2.html",
-      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Webpage 1</title>\n</head>\n<body>\n    <h1>Webpage 1</h1>\n    <p>Main content</p>\n    <nav>\n        <ul>\n            <li><a href=\"https://example.com/page-1\">Back to Page 1</a></li>\n        </ul>\n    </nav>\n</body>\n</html>"
-    }
-  ],
-  "notes": "Created page-2.html with a link back to page 1."
-}

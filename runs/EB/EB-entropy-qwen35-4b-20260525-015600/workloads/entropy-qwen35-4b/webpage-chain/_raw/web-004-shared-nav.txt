@@ -1,9 +1,0 @@
-{
-  "files": [
-    {
-      "path": "site/page-4.html",
-      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Page 4</title>\n</head>\n<body>\n  <nav>\n    <a href=\"page-3.html\">Back to Page 3</a>\n  </nav>\n  <main>\n    <h1>Welcome to Page 4</h1>\n    <p>This is the fourth page in the chain.</p>\n  </main>\n</body>\n</html>"
-    }
-  ],
-  "notes": "Created page-4.html with shared navigation linking back to page-3.html"
-}

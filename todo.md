@@ -14,7 +14,7 @@ Build and run Entropy staged code-generation benchmark workloads to measure how 
 
 ## Current Focus
 
-Wave 1 and Wave 2 are complete as first-pass data. The next focus is a clean reproducible rerun with versioned EB skills and pass-through LangChain/Langfuse instrumentation.
+Wave 1 and Wave 2 direct-run data are archived as historical evidence. The next focus is a clean reproducible rerun with versioned EB skills and pass-through LangChain/Langfuse instrumentation.
 
 ## Current Truth
 
@@ -26,9 +26,10 @@ Wave 1 and Wave 2 are complete as first-pass data. The next focus is a clean rep
   - Factory workload: generate the actual factory/system under increasing dependency pressure.
 - The mock benchmark path now reports where runs break by target/model, context size, harness mode, and workload.
 - Real model execution pattern is implemented via `tools/run_entropy_serial_experiment.ps1`.
-- EB run folders live under `runs/EB/`.
+- Historical direct-run EB folders were removed from active `main` and preserved at git tag `archive/pre-langchain-eb-evidence`.
+- Canonical EB-LC run folders live under `runs/EB-LC/`.
 - Each EB run folder keeps `run.json`, `events.jsonl`, `results.jsonl`, `critique.md`, `critique.json`, prompts, raw model responses, raw API response JSON, token usage, and generated files.
-- The Wave 1 plain baseline shows the harness is working and most model failures are benchmark-output failures, not LLMCommune wedges.
+- The archived Wave 1 plain baseline showed the harness working and most model failures were benchmark-output failures, not LLMCommune wedges.
 
 ## Active Work
 
@@ -77,3 +78,4 @@ pwsh .\tools\run_eb_target_queue.ps1 -QueuePath .\benchmarks\entropy_workloads\w
 - 2026-05-25: First EB small serial experiment completed at `runs/EB/EB-local-small-20260525-012128/`. All 4 small targets failed under `plain` mode; best depth was Gemma E2B reaching webpage stage 4/5 and library stage 3/4 before strict artifact-path failures.
 - 2026-05-25: Wave 2 repair-extract EB completed for all 19 single-box targets. Run folders use prefix `runs/EB/EB-wave2-repair-extract-*`.
 - 2026-05-25: EB-LC LangChain/Langfuse harness added. Preflight is blocked until Langfuse env vars are set.
+- 2026-05-25: Historical direct-run EB evidence and derived reports were archived at tag `archive/pre-langchain-eb-evidence` and removed from active `main` to keep the canonical branch clean.

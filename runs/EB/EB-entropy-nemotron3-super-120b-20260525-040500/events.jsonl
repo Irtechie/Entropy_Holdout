@@ -1,8 +1,0 @@
-{"ts":"2026-05-25T04:05:00.1672920-04:00","event":"experiment_start","experiment_id":"EB-local-full-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
-{"ts":"2026-05-25T04:05:00.1704449-04:00","event":"target_start","set_id":"entropy-nemotron3-super-120b","context_tokens":65536}
-{"ts":"2026-05-25T04:06:52.3617705-04:00","event":"target_ready","set_id":"entropy-nemotron3-super-120b","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"NVIDIA-Nemotron-3-Super-120B-A12B-UD-Q4_K_M-00001-of-00003.gguf"}
-{"ts":"2026-05-25T04:20:39.0844445-04:00","event":"workload_failed","set_id":"entropy-nemotron3-super-120b","workload":"webpage-chain","error":"model response did not include choices text"}
-{"ts":"2026-05-25T04:27:54.7736469-04:00","event":"workload_failed","set_id":"entropy-nemotron3-super-120b","workload":"library-chain","error":"Conversion from JSON failed with error: Unexpected end when deserializing object. Path 'files[2]', line 14, position 5."}
-{"ts":"2026-05-25T04:33:09.5974215-04:00","event":"workload_failed","set_id":"entropy-nemotron3-super-120b","workload":"factory","error":"model did not generate expected artifact path: factory-system/stations"}
-{"ts":"2026-05-25T04:33:09.5985690-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron3-super-120b-20260525-040500\\results.jsonl"}
-{"ts":"2026-05-25T04:33:09.6281381-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron3-super-120b-20260525-040500\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-nemotron3-super-120b-20260525-040500\\critique.json"}

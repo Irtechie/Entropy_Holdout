@@ -1,6 +1,0 @@
-{
-  "files": [
-    { "path": "relative/path/from/run/root", "content": "complete file content" }
-  ],
-  "notes": "short note"
-}

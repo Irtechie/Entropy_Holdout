@@ -1,9 +1,0 @@
-{
-  "files": [
-    {
-      "path": "site/index.html",
-      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Home Page</title>\n</head>\n<body>\n    <nav>\n        <!-- Navigation area -->\n    </nav>\n    <main>\n        <h1>Welcome to the Entropy Benchmark</h1>\n        <p>This is the home page for the webpage-chain workload.</p>\n    </main>\n</body>\n</html>"
-    }
-  ],
-  "notes": "Created site/index.html with title, main content, and empty nav area."
-}

@@ -1,9 +1,0 @@
-{
-  "files": [
-    {
-      "path": "site/page-5.html",
-      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Page 5</title>\n</head>\n<body>\n  <nav>\n    <a href=\"index.html\">Home</a> |\n    <a href=\"page-2.html\">Page 2</a> |\n    <a href=\"page-3.html\">Page 3</a> |\n    <a href=\"page-4.html\">Page 4</a> |\n    <a href=\"page-5.html\">Page 5</a>\n  </nav>\n  <main>\n    <h1>Page 5</h1>\n    <p>This is page 5.</p>\n    <a href=\"page-4.html\">Back to Page 4</a>\n    <section id=\"shared-data\">\n      <h2>Shared Data Section</h2>\n      <table border=\"1\">\n        <thead>\n          <tr><th>Key</th><th>Value</th></tr>\n        </thead>\n        <tbody>\n          <tr><td>Version</td><td>5.0</td></tr>\n          <tr><td>Status</td><td>Active</td></tr>\n          <tr><td>Shared</td><td>Yes</td></tr>\n        </tbody>\n      </table>\n    </section>\n  </main>\n</body>\n</html>\n"
-    }
-  ],
-  "notes": "Created page-5.html with shared navigation and a shared nested table section consistent across all pages."
-}

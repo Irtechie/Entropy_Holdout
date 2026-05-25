@@ -1,8 +1,0 @@
-{"ts":"2026-05-25T08:30:21.2055432-04:00","event":"experiment_start","experiment_id":"EB-wave2-repair-extract-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
-{"ts":"2026-05-25T08:30:21.2085277-04:00","event":"target_start","set_id":"entropy-qwen80nextcoder","context_tokens":131072}
-{"ts":"2026-05-25T08:31:18.4071352-04:00","event":"target_ready","set_id":"entropy-qwen80nextcoder","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"Qwen3-Coder-Next-Q4_K_M.gguf"}
-{"ts":"2026-05-25T08:32:14.2198436-04:00","event":"workload_failed","set_id":"entropy-qwen80nextcoder","workload":"webpage-chain","error":"webpage-chain validation failed: page index.html is missing title text"}
-{"ts":"2026-05-25T08:33:25.9937792-04:00","event":"workload_failed","set_id":"entropy-qwen80nextcoder","workload":"library-chain","error":"library-chain validation failed: missing project: CoreLib/CoreLib.csproj"}
-{"ts":"2026-05-25T08:34:52.3417734-04:00","event":"workload_failed","set_id":"entropy-qwen80nextcoder","workload":"factory","error":"model did not generate expected artifact path: factory-system/stations"}
-{"ts":"2026-05-25T08:34:52.3434713-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80nextcoder-20260525-083021\\results.jsonl"}
-{"ts":"2026-05-25T08:34:52.3881956-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80nextcoder-20260525-083021\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80nextcoder-20260525-083021\\critique.json"}

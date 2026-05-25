@@ -1,9 +1,0 @@
-{
-  "files": [
-    {
-      "path": "site/page-5.html",
-      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Page 5</title>\n</head>\n<body>\n  <nav>\n    <a href=\"page-4.html\">Back to Page 4</a>\n  </nav>\n  <main>\n    <h1>Welcome to Page 5</h1>\n    <p>This is the fifth page in the chain.</p>\n    <table class=\"shared-table\">\n      <thead>\n        <tr>\n          <th>Page</th>\n          <th>Status</th>\n          <th>Link</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr>\n          <td>Home</td>\n          <td>Active</td>\n          <td><a href=\"index.html\">View</a></td>\n        </tr>\n        <tr>\n          <td>Page 2</td>\n          <td>Active</td>\n          <td><a href=\"page-2.html\">View</a></td>\n        </tr>\n        <tr>\n          <td>Page 3</td>\n          <td>Active</td>\n          <td><a href=\"page-3.html\">View</a></td>\n        </tr>\n        <tr>\n          <td>Page 4</td>\n          <td>Active</td>\n          <td><a href=\"page-4.html\">View</a></td>\n        </tr>\n        <tr>\n          <td>Page 5</td>\n          <td>Active</td>\n          <td><a href=\"page-5.html\">View</a></td>\n        </tr>\n      </tbody>\n    </table>\n  </main>\n</body>\n</html>"
-    }
-  ],
-  "notes": "Created page-5.html with shared nested table showing all 5 pages in the chain"
-}

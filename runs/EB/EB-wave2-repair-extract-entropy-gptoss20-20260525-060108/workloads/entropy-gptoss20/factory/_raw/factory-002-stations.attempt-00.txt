@@ -1,9 +1,0 @@
-{
-  "files": [
-    {
-      "path": "factory-system/stations.ts",
-      "content": "import { Station } from './station';\nimport { Product } from './product';\nimport { Routing } from './routing';\nimport { Component } from './component';\n\nexport const stations: Station[] = [\n  { id: 's1', name: 'Station 1' },\n  { id: 's2', name: 'Station 2' },\n  { id: 's3', name: 'Station 3' }\n];\n\nexport const component: Component = { id: 'c1', name: 'Component 1' };\n\nexport const product: Product = { id: 'p1', name: 'Product 1' };\n\nexport const routing: Routing[] = [\n  { from: stations[0], to: stations[1], component, product },\n  { from: stations[1], to: stations[2], component, product }\n];\n\nexport function runRouting(): void {\n  console.log(`Starting routing for product ${product.id}`);\n  for (const r of routing) {\n    console.log(`Moving product ${product.id} from ${r.from.name} to ${r.to.name} using component ${r.component.name}`);\n  }\n  console.log(`Routing complete for product ${product.id}`);\n}\n"
-    }
-  ],
-  "notes": "Added stations and routing flow"
-}

@@ -1,7 +1,0 @@
-{
-  "files": [
-    { "path": "factory-system/package.json", "content": "{\n  \"name\": \"factory-system\",\n  \"version\": \"1.0.0\",\n  \"description\": \"Factory project layout with component, station, product, and routing concepts\",\n  \"main\": \"dist/index.js\",\n  \"scripts\": { \"build\": \"tsc\" },\n  \"devDependencies\": { \"typescript\": \"^5.0.0\" }\n}" },
-    { "path": "factory-system/tsconfig.json", "content": "{\n  \"compilerOptions\": {\n    \"target\": \"ES2020\",\n    \"module\": \"commonjs\",\n    \"outDir\": \"./dist\",\n    \"rootDir\": \"./src\",\n    \"strict\": true,\n    \"esModuleInterop\": true,\n    \"declaration\": true\n  },\n  \"include\": [\"src/**/*\"]\n}" },
-    { "path": "factory-system/src/types/component.ts", "content": "export interface Component {\n  id: string;\n  name: string;\n  type: string;\n  status: 'idle' | 'active' | 'error' | 'offline';\n  metadata?: Record<string, any>;\n}" },
-    { "path": "factory-system/src/types/station.ts", "content": "export interface Station {\n  id: string;\n  name: string;\n  components: string[];\n  capacity: number;\n  state: 'running' | 'stopped' | 'maintenance' | 'error';\n  throughput?: number;\n}" },
-

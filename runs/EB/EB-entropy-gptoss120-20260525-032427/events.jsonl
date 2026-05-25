@@ -1,8 +1,0 @@
-{"ts":"2026-05-25T03:24:27.5436918-04:00","event":"experiment_start","experiment_id":"EB-local-full-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
-{"ts":"2026-05-25T03:24:27.5468795-04:00","event":"target_start","set_id":"entropy-gptoss120","context_tokens":65536}
-{"ts":"2026-05-25T03:26:12.8840881-04:00","event":"target_ready","set_id":"entropy-gptoss120","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"gpt-oss-120b-Q4_K_M-00001-of-00002.gguf"}
-{"ts":"2026-05-25T03:29:56.5505410-04:00","event":"workload_failed","set_id":"entropy-gptoss120","workload":"webpage-chain","error":"Conversion from JSON failed with error: Unexpected end when deserializing object. Path 'files[1]', line 10, position 5."}
-{"ts":"2026-05-25T03:31:42.8882687-04:00","event":"workload_failed","set_id":"entropy-gptoss120","workload":"library-chain","error":"library-chain validation failed: missing project: CoreLib/CoreLib.csproj"}
-{"ts":"2026-05-25T03:32:22.3353855-04:00","event":"workload_failed","set_id":"entropy-gptoss120","workload":"factory","error":"model did not generate expected artifact path: factory-system/stations"}
-{"ts":"2026-05-25T03:32:22.3369410-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\results.jsonl"}
-{"ts":"2026-05-25T03:32:22.3639837-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\critique.json"}

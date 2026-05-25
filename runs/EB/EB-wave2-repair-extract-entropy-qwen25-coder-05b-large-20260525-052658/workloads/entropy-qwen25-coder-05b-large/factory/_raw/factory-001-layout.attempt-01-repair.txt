@@ -1,6 +1,0 @@
-{
-  "files": [
-    { "path": "relative/path/to/run/root/factory-system", "content": "complete file content" }
-  ],
-  "notes": "factory-system project layout created"
-}

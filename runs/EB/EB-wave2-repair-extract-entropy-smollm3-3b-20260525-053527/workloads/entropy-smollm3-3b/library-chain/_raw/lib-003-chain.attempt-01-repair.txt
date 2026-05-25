@@ -1,9 +1,0 @@
-{
-  "files": [
-    {
-      "path": "library-chain/feature",
-      "content": "---BEGIN FILE---\n\n// feature.h\n\n#ifndef FEATURE_H\n\n#define FEATURE_H\n\nvoid my_function();\n\n#endif\n\n\n// feature.c\n\n#include \"feature.h\"\n\nvoid my_function() {\n  printf(\"Hello from my_function!\\n\");\n  my_function();\n  return 0;\n}\n\nint main() {\n  my_function();\n  return 0;\n}\n\n---END FILE---"
-    }
-  ],
-  "notes": "Created a second library that depends on the first library and calls its public function."
-}

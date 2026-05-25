@@ -1,6 +1,0 @@
-{
-  "files": [
-    { "path": "webpage-chain/web-001-home/index.html", "content": "complete file content" }
-  ],
-  "notes": "This is the index.html file for the webpage chain stage."
-}

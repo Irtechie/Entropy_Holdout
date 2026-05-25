@@ -1,9 +1,0 @@
-{
-  "files": [
-    {
-      "path": "factory-system/dashboard/index.ts",
-      "content": "import { stations, productRouting } from '../../config/stationConfig';\n\nexport function generateDashboard() {\n  return {\n    stationCount: stations.length,\n    stations: stations.map(s => ({ id: s.id, location: s.location })),\n    routing: productRouting,\n  };\n}"
-    }
-  ],
-  "notes": "Added dashboard that summarizes station configuration and product routing."
-}

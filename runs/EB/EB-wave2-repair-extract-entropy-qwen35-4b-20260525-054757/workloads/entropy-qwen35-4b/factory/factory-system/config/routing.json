@@ -1,9 +1,0 @@
-{
-  "routes": [
-    {
-      "source": "station-1",
-      "destination": "station-3",
-      "path": ["station-1", "station-2", "station-3"]
-    }
-  ]
-}
