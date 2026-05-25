@@ -1,0 +1,36 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Home Page</title>\\n</head>\\n<body>\\n    <nav>\\n        <!-- Navigation area -->\\n    </nav>\\n    <main>\\n        <h1>Welcome to Our Website</h1>\\n        <p>This is the main content area.</p>\\n    </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created basic homepage with navigation and main content areas.\"\n}\n```"
+      }
+    }
+  ],
+  "created": 1779703595,
+  "model": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 174,
+    "prompt_tokens": 225,
+    "total_tokens": 399,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-NJSeiA5snoeo3cUMqP9UpAwJcyoGcTAd",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 225,
+    "prompt_ms": 261.789,
+    "prompt_per_token_ms": 1.1635066666666667,
+    "prompt_per_second": 859.4707951823797,
+    "predicted_n": 174,
+    "predicted_ms": 12785.462,
+    "predicted_per_token_ms": 73.47966666666666,
+    "predicted_per_second": 13.609207082231366
+  }
+}

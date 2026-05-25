@@ -1,0 +1,27 @@
+```json
+{
+  "files": [
+    {
+      "path": "library-chain/contracts/src/lib.rs",
+      "content": "pub trait MathOperation {\n    fn add(a: i32, b: i32) -> i32;\n}\n\nimpl MathOperation for i32 {\n    fn add(a: i32, b: i32) -> i32 {\n        a + b\n    }\n}"
+    },
+    {
+      "path": "library-chain/contracts/Cargo.toml",
+      "content": "[package]\nname = \"contracts\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\nname = \"contracts\"\npath = \"src/lib.rs\"\n\n[dependencies]"
+    },
+    {
+      "path": "library-chain/core/src/lib.rs",
+      "content": "pub use contracts::MathOperation;\n\npub fn add(a: i32, b: i32) -> i32 {\n    MathOperation::add(a, b)\n}"
+    },
+    {
+      "path": "library-chain/feature/src/lib.rs",
+      "content": "pub use contracts::MathOperation;\n\npub fn use_core_add(a: i32, b: i32) -> i32 {\n    core::add(a, b)\n}"
+    },
+    {
+      "path": "library-chain/pipeline/src/lib.rs",
+      "content": "pub use contracts::MathOperation;\n\npub fn use_feature_add(a: i32, b: i32) -> i32 {\n    feature::use_core_add(a, b)\n}"
+    }
+  ],
+  "notes": "Created shared MathOperation trait and updated all libraries to use it"
+}
+```

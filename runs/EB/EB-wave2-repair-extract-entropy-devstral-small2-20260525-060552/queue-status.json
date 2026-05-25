@@ -1,0 +1,17 @@
+{
+  "queue_id": "EB-wave2-repair-extract-singlebox",
+  "target_set_id": "entropy-devstral-small2",
+  "slice_id": "wave2-repair-008",
+  "classification": "completed-data-run",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-devstral-small2-20260525-060552",
+  "started_at": "2026-05-25T06:05:52.6519520-04:00",
+  "finished_at": "2026-05-25T06:19:05.1212994-04:00",
+  "elapsed_s": 792.5,
+  "runner_exit_code": 0,
+  "results": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-devstral-small2-20260525-060552\\results.jsonl",
+  "critique": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-devstral-small2-20260525-060552\\critique.md",
+  "critique_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-devstral-small2-20260525-060552\\critique.json",
+  "report_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-devstral-small2-20260525-060552\\report.json",
+  "wedge_risk": false,
+  "wedge_detail": null
+}

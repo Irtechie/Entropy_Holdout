@@ -1,0 +1,32 @@
+{
+  "stations": [
+    {
+      "id": "station-001",
+      "name": "Assembly Line",
+      "type": "assembly",
+      "capacity": 10,
+      "description": "Assembly station"
+    },
+    {
+      "id": "station-002",
+      "name": "Processing Unit",
+      "type": "processing",
+      "capacity": 5,
+      "description": "Processing station"
+    },
+    {
+      "id": "station-003",
+      "name": "Quality Check",
+      "type": "quality",
+      "capacity": 3,
+      "description": "Quality control station"
+    },
+    {
+      "id": "station-004",
+      "name": "Warehouse",
+      "type": "storage",
+      "capacity": 20,
+      "description": "Storage station"
+    }
+  ]
+}

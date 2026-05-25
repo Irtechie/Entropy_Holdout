@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "factory-system/dashboard/index.ts",
+      "content": "import stationsConfig from '../config/stations.json';\nimport routesConfig from '../config/routes.json';\nimport productsConfig from '../config/products.json';\n\n// Load configuration\nconst stations = stationsConfig.stations;\nconst routes = routesConfig.routes;\nconst products = productsConfig.products;\n\n// Calculate station throughput\nconst stationThroughput = stations.map(station => ({\n  id: station.id,\n  name: station.name,\n  type: station.type,\n  capacity: station.capacity,\n  utilization: Math.random() * 100 // Simulated utilization\n}));\n\n// Calculate product state\nconst productState = products.map(product => ({\n  id: product.id,\n  name: product.name,\n  components: product.components,\n  assemblyTime: product.assemblyTime,\n  status: 'In Production' // Simulated status\n}));\n\n// Generate dashboard report\nconsole.log('=== Factory Dashboard ===');\nconsole.log('\\nStation Throughput:');\nstationThroughput.forEach(station => {\n  console.log(`- ${station.name} (${station.type}): ${station.utilization.toFixed(1)}% utilization`);\n});\n\nconsole.log('\\nProduct State:');\nproductState.forEach(product => {\n  console.log(`- ${product.name}: ${product.status}`);\n});\n\nconsole.log('\\nRoute Information:');\nroutes.forEach(route => {\n  console.log(`- ${route.name}: ${route.stations.join(' -> ')}`);\n});\n\nconsole.log('\\n=== Dashboard Report Complete ===');"
+    }
+  ],
+  "notes": "Added dashboard to summarize factory state and throughput"
+}

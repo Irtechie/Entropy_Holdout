@@ -1,0 +1,428 @@
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-003-chain
+Order: 3
+
+Stage goal:
+Create a third library that depends on the second library, preserving the full call chain.
+
+Expected artifacts:
+- library-chain/pipeline (project)
+
+Validators that will run:
+- pipeline-references-feature: failure_class=api_contract
+- chain-sample-runs: failure_class=runtime_behavior
+
+Existing generated files:
+FILE: library-chain/core/Cargo.toml
+---BEGIN FILE---
+[package]
+name = "core"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "core"
+path = "src/lib.rs"
+
+[dependencies]
+
+---END FILE---
+
+FILE: library-chain/core/examples/sample.rs
+---BEGIN FILE---
+use core::add;
+
+fn main() {
+    let result = add(2, 3);
+    println!("2 + 3 = {}", result);
+}
+
+---END FILE---
+
+FILE: library-chain/core/src/lib.rs
+---BEGIN FILE---
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+---END FILE---
+
+FILE: library-chain/feature/Cargo.toml
+---BEGIN FILE---
+[package]
+name = "feature"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "feature"
+path = "src/lib.rs"
+
+[dependencies]
+core = { path = "../core" }
+
+
+---END FILE---
+
+FILE: library-chain/feature/src/lib.rs
+---BEGIN FILE---
+pub fn use_core_add(a: i32, b: i32) -> i32 {
+    core::add(a, b)
+}
+
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-001-core
+Order: 1
+
+Stage goal:
+Create the first library with one public function and a tiny sample caller.
+
+Expected artifacts:
+- library-chain/core (project)
+
+Validators that will run:
+- core-builds: failure_class=build
+- core-sample-runs: failure_class=runtime_behavior
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"library-chain/core/src/lib.rs\",\n      \"content\": \"pub fn add(a: i32, b: i32) -> i32 {\\n    a + b\\n}\"\n    },\n    {\n      \"path\": \"library-chain/core/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"core\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[lib]\\nname = \\\"core\\\"\\npath = \\\"src/lib.rs\\\"\\n\\n[dependencies]\"\n    },\n    {\n      \"path\": \"library-chain/core/examples/sample.rs\",\n      \"content\": \"use core::add;\\n\\nfn main() {\\n    let result = add(2, 3);\\n    println!(\\\"2 + 3 = {}\\\", result);\\n}\"\n    }\n  ],\n  \"notes\": \"Created core library with add function and sample caller\"\n}\n```"
+      }
+    }
+  ],
+  "created": 1779703948,
+  "model": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 214,
+    "prompt_tokens": 216,
+    "total_tokens": 430,
+    "prompt_tokens_details": {
+      "cached_tokens": 34
+    }
+  },
+  "id": "chatcmpl-xZn5WYZEYVmNkOnLvmlooFhVdSA9Gi2R",
+  "timings": {
+    "cache_n": 34,
+    "prompt_n": 182,
+    "prompt_ms": 206.396,
+    "prompt_per_token_ms": 1.134043956043956,
+    "prompt_per_second": 881.8000348843971,
+    "predicted_n": 214,
+    "predicted_ms": 15730.966,
+    "predicted_per_token_ms": 73.50918691588785,
+    "predicted_per_second": 13.603741817253942
+  }
+}
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.txt
+---BEGIN FILE---
+```json
+{
+  "files": [
+    {
+      "path": "library-chain/core/src/lib.rs",
+      "content": "pub fn add(a: i32, b: i32) -> i32 {\n    a + b\n}"
+    },
+    {
+      "path": "library-chain/core/Cargo.toml",
+      "content": "[package]\nname = \"core\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\nname = \"core\"\npath = \"src/lib.rs\"\n\n[dependencies]"
+    },
+    {
+      "path": "library-chain/core/examples/sample.rs",
+      "content": "use core::add;\n\nfn main() {\n    let result = add(2, 3);\n    println!(\"2 + 3 = {}\", result);\n}"
+    }
+  ],
+  "notes": "Created core library with add function and sample caller"
+}
+```
+
+---END FILE---
+
+FILE: _raw/lib-002-dependent.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-002-dependent
+Order: 2
+
+Stage goal:
+Create a second library that depends on the first library and calls its public function.
+
+Expected artifacts:
+- library-chain/feature (project)
+
+Validators that will run:
+- feature-references-core: failure_class=api_contract
+- feature-builds: failure_class=build
+
+Existing generated files:
+FILE: library-chain/core/Cargo.toml
+---BEGIN FILE---
+[package]
+name = "core"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "core"
+path = "src/lib.rs"
+
+[dependencies]
+
+---END FILE---
+
+FILE: library-chain/core/examples/sample.rs
+---BEGIN FILE---
+use core::add;
+
+fn main() {
+    let result = add(2, 3);
+    println!("2 + 3 = {}", result);
+}
+
+---END FILE---
+
+FILE: library-chain/core/src/lib.rs
+---BEGIN FILE---
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-001-core
+Order: 1
+
+Stage goal:
+Create the first library with one public function and a tiny sample caller.
+
+Expected artifacts:
+- library-chain/core (project)
+
+Validators that will run:
+- core-builds: failure_class=build
+- core-sample-runs: failure_class=runtime_behavior
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"library-chain/core/src/lib.rs\",\n      \"content\": \"pub fn add(a: i32, b: i32) -> i32 {\\n    a + b\\n}\"\n    },\n    {\n      \"path\": \"library-chain/core/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"core\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[lib]\\nname = \\\"core\\\"\\npath = \\\"src/lib.rs\\\"\\n\\n[dependencies]\"\n    },\n    {\n      \"path\": \"library-chain/core/examples/sample.rs\",\n      \"content\": \"use core::add;\\n\\nfn main() {\\n    let result = add(2, 3);\\n    println!(\\\"2 + 3 = {}\\\", result);\\n}\"\n    }\n  ],\n  \"notes\": \"Created core library with add function and sample caller\"\n}\n```"
+      }
+    }
+  ],
+  "created": 1779703948,
+  "model": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 214,
+    "prompt_tokens": 216,
+    "total_tokens": 430,
+    "prompt_tokens_details": {
+      "cached_tokens": 34
+    }
+  },
+  "id": "chatcmpl-xZn5WYZEYVmNkOnLvmlooFhVdSA9Gi2R",
+  "timings": {
+    "cache_n": 34,
+    "prompt_n": 182,
+    "prompt_ms": 206.396,
+    "prompt_per_token_ms": 1.134043956043956,
+    "prompt_per_second": 881.8000348843971,
+    "predicted_n": 214,
+    "predicted_ms": 15730.966,
+    "predicted_per_token_ms": 73.50918691588785,
+    "predicted_per_second": 13.603741817253942
+  }
+}
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.txt
+---BEGIN FILE---
+```json
+{
+  "files": [
+    {
+      "path": "library-chain/core/src/lib.rs",
+      "content": "pub fn add(a: i32, b: i32) -> i32 {\n    a + b\n}"
+    },
+    {
+      "path": "library-chain/core/Cargo.toml",
+      "content": "[package]\nname = \"core\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\nname = \"core\"\npath = \"src/lib.rs\"\n\n[dependencies]"
+    },
+    {
+      "path": "library-chain/core/examples/sample.rs",
+      "content": "use core::add;\n\nfn main() {\n    let result = add(2, 3);\n    println!(\"2 + 3 = {}\", result);\n}"
+    }
+  ],
+  "notes": "Created core library with add function and sample caller"
+}
+```
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/lib-002-dependent.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/feature/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"feature\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[lib]\\nname = \\\"feature\\\"\\npath = \\\"src/lib.rs\\\"\\n\\n[dependencies]\\ncore = { path = \\\"../core\\\" }\\n\"\n    },\n    {\n      \"path\": \"library-chain/feature/src/lib.rs\",\n      \"content\": \"pub fn use_core_add(a: i32, b: i32) -> i32 {\\n    core::add(a, b)\\n}\\n\"\n    }\n  ],\n  \"notes\": \"Created feature library that depends on core and uses its add function\"\n}"
+      }
+    }
+  ],
+  "created": 1779703963,
+  "model": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 172,
+    "prompt_tokens": 1601,
+    "total_tokens": 1773,
+    "prompt_tokens_details": {
+      "cached_tokens": 43
+    }
+  },
+  "id": "chatcmpl-ahQWRDQ9LFsyA4mXMRhnxwr4kLFGBIyU",
+  "timings": {
+    "cache_n": 43,
+    "prompt_n": 1558,
+    "prompt_ms": 1579.832,
+    "prompt_per_token_ms": 1.014012836970475,
+    "prompt_per_second": 986.180809098689,
+    "predicted_n": 172,
+    "predicted_ms": 12806.937,
+    "predicted_per_token_ms": 74.45893604651162,
+    "predicted_per_second": 13.430221449515992
+  }
+}
+
+---END FILE---
+
+FILE: _raw/lib-002-dependent.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "library-chain/feature/Cargo.toml",
+      "content": "[package]\nname = \"feature\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\nname = \"feature\"\npath = \"src/lib.rs\"\n\n[dependencies]\ncore = { path = \"../core\" }\n"
+    },
+    {
+      "path": "library-chain/feature/src/lib.rs",
+      "content": "pub fn use_core_add(a: i32, b: i32) -> i32 {\n    core::add(a, b)\n}\n"
+    }
+  ],
+  "notes": "Created feature library that depends on core and uses its add function"
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.

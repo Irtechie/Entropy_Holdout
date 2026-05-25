@@ -1,0 +1,36 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/feature/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"feature\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[lib]\\nname = \\\"feature\\\"\\npath = \\\"src/lib.rs\\\"\\n\\n[dependencies]\\ncore = { path = \\\"../core\\\" }\\n\"\n    },\n    {\n      \"path\": \"library-chain/feature/src/lib.rs\",\n      \"content\": \"pub fn use_core_add(a: i32, b: i32) -> i32 {\\n    core::add(a, b)\\n}\\n\"\n    }\n  ],\n  \"notes\": \"Created feature library that depends on core and uses its add function\"\n}"
+      }
+    }
+  ],
+  "created": 1779703963,
+  "model": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 172,
+    "prompt_tokens": 1601,
+    "total_tokens": 1773,
+    "prompt_tokens_details": {
+      "cached_tokens": 43
+    }
+  },
+  "id": "chatcmpl-ahQWRDQ9LFsyA4mXMRhnxwr4kLFGBIyU",
+  "timings": {
+    "cache_n": 43,
+    "prompt_n": 1558,
+    "prompt_ms": 1579.832,
+    "prompt_per_token_ms": 1.014012836970475,
+    "prompt_per_second": 986.180809098689,
+    "predicted_n": 172,
+    "predicted_ms": 12806.937,
+    "predicted_per_token_ms": 74.45893604651162,
+    "predicted_per_second": 13.430221449515992
+  }
+}
