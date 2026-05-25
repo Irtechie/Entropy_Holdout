@@ -1,0 +1,24 @@
+{
+  "id": "EB-LC-wave0-model-repair-canary",
+  "description": "Three-target Wave 0 canary for final EB protocol. Uses capable non-tiny targets that should pass at least one workload if the benchmark is viable.",
+  "harness_mode": "model-repair",
+  "completion_provider": "langchain",
+  "run_prefix": "EB-LC-wave0-model-repair",
+  "targets": [
+    {
+      "set_id": "entropy-gptoss20",
+      "slice_id": "wave0-canary-001",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-devstral-small2",
+      "slice_id": "wave0-canary-002",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-qwen80nextcoder-256k",
+      "slice_id": "wave0-canary-003",
+      "enabled": true
+    }
+  ]
+}

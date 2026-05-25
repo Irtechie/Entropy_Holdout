@@ -88,6 +88,8 @@ This repo currently has no application source tree. It contains:
 | Activation smoke runner | `docs/context/operations/testing.md` | Checking existing model readiness proof | verified |
 | Workload benchmark plan | `docs/context/architecture/entropy-workloads.md` | Building the staged generation harness | mixed |
 | EB-LC LangChain/Langfuse harness | `docs/operations/langchain-langfuse-eb.md` | Running/exporting canonical EB-LC evidence | verified |
+| Final EB test waves | `docs/context/epics/final-eb-test-waves.md` | Freezing the final benchmark protocol and wave gates | active |
+| Benchmark wave design research | `docs/context/research/benchmark-wave-design.md` | Explaining why gates/quarantine beat repeated full reruns | active |
 | Existing target state | `llmcommune-entropy-smoke-summary.md` | Choosing model/context targets | verified |
 
 ## Current Work Pointers
@@ -96,7 +98,9 @@ This repo currently has no application source tree. It contains:
 - Completed mock harness manifest: `docs/plans/2026-05-24-000-kb-entropy-workload-harness-manifest.md`
 - Completed handoff archive: `docs/handoffs/done/2026-05-24-entropy-workload-harness.md`
 - Current canonical data: completed EB-LC Wave 1 run folders under `runs/EB-LC/`, with Langfuse exports under each run's `langfuse/` folder.
-- Next likely work: analyze EB-LC Wave 1 against archived direct-run Wave 1/Wave 2 evidence and produce right-shift deltas.
+- Active epic: `docs/context/epics/final-eb-test-waves.md`
+- Active manifest: `docs/plans/2026-05-25-000-kb-final-eb-test-waves-manifest.md`
+- Next work: freeze the final EB protocol and pass the local no-spend gate before any full Wave 2/final queue.
 
 ## Known Sharp Edges
 
@@ -107,11 +111,15 @@ This repo currently has no application source tree. It contains:
 - `run_entropy_serial_experiment.ps1` can activate Entropy targets and run workloads in `api` mode one by one.
 - `run_eb_target_queue.ps1` can run target queues one at a time, commit each completed target folder, and push after each commit.
 - MiniMax EB-LC has two Wave 1 folders. Prefer `runs/EB-LC/EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529/` for analysis because it was rerun after fixing Windows console JSON escaping in `tools/langchain_completion.py`.
+- A full Wave 2/final queue is blocked until `docs/context/epics/final-eb-test-waves.md` Gate A passes and the Wave 0 canary spec is approved.
+- `library-chain` currently has a known contract mismatch: `workloads.json` expected artifacts use lowercase folders while `library_chain.json` and the validator require exact .NET project paths such as `CoreLib/CoreLib.csproj`.
+- Current `repair-extract` is model-assisted repair in `tools/run_entropy_workload.ps1`, not deterministic extraction.
+- Four EB-LC Wave 1 factory rows hit a null-method harness failure at `factory-002-stations`; do not score those rows as model failures until diagnosed or quarantined.
 
 ## Research Index
 
-- Existing local research is mainly in root-level summary and JSON files.
-- No external research has been performed for benchmark harness design in this repo.
+- `docs/context/research/README.md`
+- `docs/context/research/benchmark-wave-design.md`
 
 ## Do Not Repeat
 

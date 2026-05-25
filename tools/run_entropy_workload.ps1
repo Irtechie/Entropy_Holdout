@@ -508,7 +508,8 @@ function New-ApiWorkload($runRoot) {
       $prompt = New-StagePrompt $Workload $stage $existing
       $rawDir = Join-Path $runRoot '_raw'
       New-Item -ItemType Directory -Force -Path $rawDir | Out-Null
-      $maxRepairs = if ($HarnessMode -eq 'repair-extract') { 2 } else { 0 }
+      $usesModelRepair = $HarnessMode -in @('model-repair','repair-extract')
+      $maxRepairs = if ($usesModelRepair) { 2 } else { 0 }
       $attemptIndex = 0
       $attemptPrompt = $prompt
       $attemptReason = 'initial'
@@ -516,7 +517,7 @@ function New-ApiWorkload($runRoot) {
       $tokenUsage = $null
 
       while ($true) {
-        $label = if ($HarnessMode -eq 'repair-extract') {
+        $label = if ($usesModelRepair) {
           if ($attemptIndex -eq 0) { 'attempt-00' } else { "attempt-$('{0:d2}' -f $attemptIndex)-repair" }
         } else {
           ''

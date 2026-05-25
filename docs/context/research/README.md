@@ -1,6 +1,8 @@
 # Research Index
 
-No dedicated benchmark-harness research notes yet.
+| Topic | Checked | Budget | Use When |
+|---|---|---|---|
+| [Benchmark Wave Design](benchmark-wave-design.md) | 2026-05-25 | standard | Designing EB/EB-LC waves, canary gates, failure-origin rules, or final benchmark claims. |
 
 Existing local evidence is in:
 

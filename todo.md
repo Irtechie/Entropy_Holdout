@@ -14,7 +14,10 @@ Build and run Entropy staged code-generation benchmark workloads to measure how 
 
 ## Current Focus
 
-Wave 1 EB-LC has completed as the clean reproducible LangChain/Langfuse baseline. Wave 1 and Wave 2 direct-run data are archived as historical evidence, not canonical paper evidence. Next focus is analysis/reporting over the completed EB-LC run folders.
+Freeze the final EB test-wave protocol before spending more operator time on model queues. Wave 1 EB-LC has completed as the clean reproducible LangChain/Langfuse baseline. Wave 1 and Wave 2 direct-run data are archived as historical evidence, not canonical paper evidence.
+
+Active epic: `docs/context/epics/final-eb-test-waves.md`
+Active manifest: `docs/plans/2026-05-25-000-kb-final-eb-test-waves-manifest.md`
 
 ## Current Truth
 
@@ -37,14 +40,15 @@ Wave 1 EB-LC has completed as the clean reproducible LangChain/Langfuse baseline
 
 ## Active Work
 
-Analyze the completed clean EB-LC rerun harness:
+Finalize and gate the completed clean EB-LC rerun harness:
 
 - LangChain/Langfuse pass-through harness is staged in code.
 - Canonical clean runs must use `runs/EB-LC/`.
 - Preflight command: `pwsh .\tools\check_langchain_langfuse.ps1`.
 - Langfuse is configured against the DGX-hosted instance and preflight passes locally.
 - Langfuse traces for completed EB-LC runs are exported with `pwsh .\tools\export_eb_langfuse_traces.ps1`.
-- Re-run command if evidence must be regenerated:
+- Do not launch a full Wave 2/final queue until the protocol-freeze manifest reaches the Wave 0 canary slice.
+- Previous full queue command is retained for provenance only, not as the next action:
 
 ```powershell
 pwsh .\tools\run_eb_target_queue.ps1 -QueuePath .\benchmarks\entropy_workloads\wave1.langchain.targets.json -ExperimentPath .\benchmarks\entropy_workloads\experiment.langchain-wave1-plain-singlebox.json -ResultRootBase .\runs\EB-LC -CommitEach -PushEach -SkipCompleted
@@ -52,9 +56,14 @@ pwsh .\tools\run_eb_target_queue.ps1 -QueuePath .\benchmarks\entropy_workloads\w
 
 ## Queued Improvements
 
-- Compare Wave 2 against Wave 1 by target/workload using right-shift deltas.
-- Package each wave harness so a third party can clone the repo, replace the model-serving backend or harness under test, and rerun the same wave.
-- Add harness modes beyond `mock`/`plain`: likely `repair-extract`, `file-carry`, and `entropy`.
+- Resolve the protocol-freeze blockers before any all-target wave:
+  - align `library-chain` expected artifacts with exact validator/spec paths,
+  - reproduce/fix or quarantine the factory null-method harness failure,
+  - adjudicate current `repair-extract` as model-assisted repair or implement deterministic extraction,
+  - add/verify local golden gate checks.
+- Compare Wave 2 against Wave 1 by target/workload using right-shift deltas only after the protocol is frozen.
+- Package each frozen wave harness so a third party can clone the repo, replace the model-serving backend or harness under test, and rerun the same wave.
+- Add harness modes beyond `mock`/`plain` only when their mechanics are frozen and named precisely.
 - Decide whether later large generated artifacts should be retained per real run or compacted after validation. Current EB default is retain.
 
 ## Handoff Queue

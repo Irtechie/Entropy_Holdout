@@ -1,0 +1,15 @@
+{
+  "id": "EB-LC-wave0-model-repair-canary",
+  "description": "LangChain/Langfuse Wave 0 canary using model-assisted repair over three medium-or-better targets.",
+  "base_url": "http://192.168.1.203:4000",
+  "harness_mode": "model-repair",
+  "completion_provider": "langchain",
+  "require_langfuse": true,
+  "include_dual_box": false,
+  "targets": "wave0-canary",
+  "workloads": [
+    "webpage-chain",
+    "library-chain",
+    "factory"
+  ]
+}

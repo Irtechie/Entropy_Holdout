@@ -11,6 +11,14 @@
       "description": "Prompt with current task plus relevant generated files from previous stages."
     },
     {
+      "id": "model-repair",
+      "description": "Prompt with current task, then reprompt the model after parse or artifact failures."
+    },
+    {
+      "id": "deterministic-extract",
+      "description": "Extract files from an allowed structured response format without asking the model again."
+    },
+    {
       "id": "entropy",
       "description": "Prompt through the Entropy harness mode under test."
     }
@@ -139,7 +147,7 @@
           "prompt_goal": "Create the first library with one public function and a tiny sample caller.",
           "expected_artifacts": [
             {
-              "path": "library-chain/core",
+              "path": "library-chain/CoreLib/CoreLib.csproj",
               "kind": "project"
             }
           ],
@@ -160,7 +168,7 @@
           "prompt_goal": "Create a second library that depends on the first library and calls its public function.",
           "expected_artifacts": [
             {
-              "path": "library-chain/feature",
+              "path": "library-chain/FeatureLib/FeatureLib.csproj",
               "kind": "project"
             }
           ],
@@ -181,7 +189,7 @@
           "prompt_goal": "Create a third library that depends on the second library, preserving the full call chain.",
           "expected_artifacts": [
             {
-              "path": "library-chain/pipeline",
+              "path": "library-chain/PipelineLib/PipelineLib.csproj",
               "kind": "project"
             }
           ],
@@ -202,7 +210,11 @@
           "prompt_goal": "Introduce a shared interface or contract that all three libraries must use without breaking the sample.",
           "expected_artifacts": [
             {
-              "path": "library-chain/contracts",
+              "path": "library-chain/Contracts/Contracts.csproj",
+              "kind": "project"
+            },
+            {
+              "path": "library-chain/SampleApp/SampleApp.csproj",
               "kind": "project"
             }
           ],
@@ -251,7 +263,7 @@
           "prompt_goal": "Add multiple stations and a routing flow that moves a product between them.",
           "expected_artifacts": [
             {
-              "path": "factory-system/stations",
+              "path": "factory-system/src/factory.ps1",
               "kind": "source"
             }
           ],
@@ -272,7 +284,7 @@
           "prompt_goal": "Move station definitions and product routing into configuration while preserving end-to-end behavior.",
           "expected_artifacts": [
             {
-              "path": "factory-system/config",
+              "path": "factory-system/config/stations.json",
               "kind": "configuration"
             }
           ],
@@ -293,7 +305,7 @@
           "prompt_goal": "Add a simple dashboard or report that summarizes station throughput and product state from the configured factory.",
           "expected_artifacts": [
             {
-              "path": "factory-system/dashboard",
+              "path": "factory-system/dashboard/report.json",
               "kind": "source"
             }
           ],
