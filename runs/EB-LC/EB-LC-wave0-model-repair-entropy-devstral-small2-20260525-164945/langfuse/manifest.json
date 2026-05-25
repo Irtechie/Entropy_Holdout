@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "exported_at": "2026-05-25T17:10:25.3804390-04:00",
+  "langfuse_host": "http://192.168.1.203:3100",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945",
+  "results": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\results.jsonl",
+  "row_count": 15,
+  "trace_row_count": 13,
+  "exported_trace_count": 13,
+  "error_count": 0,
+  "errors": []
+}

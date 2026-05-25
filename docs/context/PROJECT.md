@@ -100,7 +100,8 @@ This repo currently has no application source tree. It contains:
 - Current canonical data: completed EB-LC Wave 1 run folders under `runs/EB-LC/`, with Langfuse exports under each run's `langfuse/` folder.
 - Active epic: `docs/context/epics/final-eb-test-waves.md`
 - Active manifest: `docs/plans/2026-05-25-000-kb-final-eb-test-waves-manifest.md`
-- Next work: freeze the final EB protocol and pass the local no-spend gate before any full Wave 2/final queue.
+- Wave 0 model-repair canary judgment: `docs/reports/2026-05-25-eb-lc-wave0-model-repair-canary-judgment.md`
+- Next work: diagnose or quarantine the two Qwen Coder harness-null rows before pilot expansion.
 
 ## Known Sharp Edges
 

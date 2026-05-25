@@ -14,7 +14,7 @@ Build and run Entropy staged code-generation benchmark workloads to measure how 
 
 ## Current Focus
 
-Freeze the final EB test-wave protocol before spending more operator time on model queues. Wave 1 EB-LC has completed as the clean reproducible LangChain/Langfuse baseline. Wave 1 and Wave 2 direct-run data are archived as historical evidence, not canonical paper evidence.
+Judge and repair the final EB Wave 0 canary before expanding to a pilot. Wave 1 EB-LC has completed as the clean reproducible LangChain/Langfuse baseline. Wave 1 and Wave 2 direct-run data are archived as historical evidence, not canonical paper evidence.
 
 Active epic: `docs/context/epics/final-eb-test-waves.md`
 Active manifest: `docs/plans/2026-05-25-000-kb-final-eb-test-waves-manifest.md`
@@ -48,6 +48,9 @@ Finalize and gate the completed clean EB-LC rerun harness:
 - Langfuse is configured against the DGX-hosted instance and preflight passes locally.
 - Langfuse traces for completed EB-LC runs are exported with `pwsh .\tools\export_eb_langfuse_traces.ps1`.
 - Do not launch a full Wave 2/final queue until the protocol-freeze manifest reaches the Wave 0 canary slice.
+- Wave 0 model-repair canary completed for `entropy-gptoss20`, `entropy-devstral-small2`, and `entropy-qwen80nextcoder-256k`.
+- Wave 0 judgment: `docs/reports/2026-05-25-eb-lc-wave0-model-repair-canary-judgment.md`
+- Expansion is blocked until the two Qwen Coder harness-null failures are diagnosed or explicitly quarantined.
 - Previous full queue command is retained for provenance only, not as the next action:
 
 ```powershell

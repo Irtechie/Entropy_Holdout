@@ -1,0 +1,208 @@
+{
+  "id": "cc26f75cefccb759760fad2a15f4222e",
+  "projectId": "entropy-benchmark",
+  "name": "EB entropy-gptoss20 library-chain lib-001-core",
+  "timestamp": "2026-05-25T20:43:25.81Z",
+  "environment": "default",
+  "tags": [
+    "EB",
+    "entropy-gptoss20",
+    "langchain",
+    "library-chain",
+    "model-repair"
+  ],
+  "bookmarked": false,
+  "release": null,
+  "version": null,
+  "userId": null,
+  "sessionId": "library-chain",
+  "public": false,
+  "input": [
+    {
+      "role": "system",
+      "content": "You are a code generator. Return only the requested JSON object. No prose."
+    },
+    {
+      "role": "user",
+      "content": "You are repairing an Entropy staged code-generation benchmark response.\n\nWorkload: library-chain\nStage: lib-001-core\nOrder: 1\n\nStage goal:\nCreate the first library with one public function and a tiny sample caller.\n\nExpected artifacts:\n- library-chain/CoreLib/CoreLib.csproj (project)\n\nExact validator contract:\nGenerate a .NET project tree under library-chain/.\nTarget framework must be net10.0.\nRequired project files:\n- CoreLib: CoreLib/CoreLib.csproj\n- FeatureLib: FeatureLib/FeatureLib.csproj references: CoreLib/CoreLib.csproj\n- PipelineLib: PipelineLib/PipelineLib.csproj references: FeatureLib/FeatureLib.csproj\n- Contracts: Contracts/Contracts.csproj\n- SampleApp: SampleApp/SampleApp.csproj references: PipelineLib/PipelineLib.csproj, Contracts/Contracts.csproj\nSampleApp must build and dotnet run --project SampleApp/SampleApp.csproj --no-build --nologo must print exactly core->feature->pipeline->contract.\n\nThe previous response failed with:\nConversion from JSON failed with error: Unexpected end when deserializing object. Path 'files[5]', line 26, position 5.\n\nPrevious response text:\n---BEGIN FAILED RESPONSE---\n{\n  \"files\": [\n    {\n      \"path\": \"CoreLib/CoreLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"CoreLib/Core.cs\",\n      \"content\": \"namespace CoreLib;\\npublic class Core\\n{\\n    public static string Get() => \\\"core\\\";\\n}\\n\"\n    },\n    {\n      \"path\": \"FeatureLib/FeatureLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\CoreLib\\\\CoreLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"FeatureLib/Feature.cs\",\n      \"content\": \"using CoreLib;\\nnamespace FeatureLib;\\npublic class Feature\\n{\\n    public static string Get() => Core.Get() + \\\"->feature\\\";\\n}\\n\"\n    },\n    {\n      \"path\": \"PipelineLib/PipelineLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\FeatureLib\\\\FeatureLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"PipelineLib/Pipeline.cs\",\n      \"content\": \"using FeatureLib;\\nnamespace PipelineLib;\\npublic class Pipeline\\n{\\n    public static string Get() => Feature.Get() + \\\"->pipeline\\\";\\n}\\n\"\n    },\n   \n---END FAILED RESPONSE---\n\nCurrent generated files:\nFILE: _raw/lib-001-core.attempt-00.prompt.txt\n---BEGIN FILE---\nYou are running an Entropy staged code-generation benchmark.\n\nWorkload: library-chain\nStage: lib-001-core\nOrder: 1\n\nStage goal:\nCreate the first library with one public function and a tiny sample caller.\n\nExpected artifacts:\n- library-chain/CoreLib/CoreLib.csproj (project)\n\nValidators that will run:\n- core-builds: failure_class=build\n- core-sample-runs: failure_class=runtime_behavior\n\nExact validator contract:\nGenerate a .NET project tree under library-chain/.\nTarget framework must be net10.0.\nRequired project files:\n- CoreLib: CoreLib/CoreLib.csproj\n- FeatureLib: FeatureLib/FeatureLib.csproj references: CoreLib/CoreLib.csproj\n- PipelineLib: PipelineLib/PipelineLib.csproj references: FeatureLib/FeatureLib.csproj\n- Contracts: Contracts/Contracts.csproj\n- SampleApp: SampleApp/SampleApp.csproj references: PipelineLib/PipelineLib.csproj, Contracts/Contracts.csproj\nSampleApp must build and dotnet run --project SampleApp/SampleApp.csproj --no-build --nologo must print exactly core->feature->pipeline->contract.\n\nExisting generated files:\nFILE: \n---BEGIN FILE---\n\n---END FILE---\n\nReturn ONLY a JSON object in this exact shape:\n{\n  \"files\": [\n    { \"path\": \"relative/path/from/run/root\", \"content\": \"complete file content\" }\n  ],\n  \"notes\": \"short note\"\n}\n\nRules:\n- Include every new or modified file needed for this stage to pass.\n- Use only relative paths.\n- Do not include markdown fences outside the JSON.\n- Do not explain the answer outside the JSON.\r\n\n---END FILE---\r\n\r\nFILE: _raw/lib-001-core.attempt-00.response.json\n---BEGIN FILE---\n{\r\n  \"provider\": \"langchain\",\r\n  \"kind\": \"chat\",\r\n  \"content\": \"\",\r\n  \"response_metadata\": {\r\n    \"token_usage\": {\r\n      \"completion_tokens\": 4096,\r\n      \"prompt_tokens\": 433,\r\n      \"total_tokens\": 4529,\r\n      \"completion_tokens_details\": null,\r\n      \"prompt_tokens_details\": {\r\n        \"audio_tokens\": null,\r\n        \"cached_tokens\": 0\r\n      }\r\n    },\r\n    \"model_name\": \"gpt-oss-20b-Q4_K_M.gguf\",\r\n    \"system_fingerprint\": \"b1-25eec6f\",\r\n    \"id\": \"chatcmpl-nkGwGL1rWoKIqZxtGjsY6Nt4h7PoRbZN\",\r\n    \"service_tier\": null,\r\n    \"finish_reason\": \"length\",\r\n    \"logprobs\": null\r\n  },\r\n  \"usage_metadata\": {\r\n    \"input_tokens\": 433,\r\n    \"output_tokens\": 4096,\r\n    \"total_tokens\": 4529,\r\n    \"input_token_details\": {\r\n      \"cache_read\": 0\r\n    },\r\n    \"output_token_details\": {}\r\n  },\r\n  \"langfuse\": {\r\n    \"trace_id\": \"7dbc2eaa85f01499343be578bfbbc1f5\",\r\n    \"host\": \"http://192.168.1.203:3100\",\r\n    \"tags\": [\r\n      \"EB\",\r\n      \"model-repair\",\r\n      \"langchain\",\r\n      \"entropy-gptoss20\",\r\n      \"library-chain\"\r\n    ]\r\n  }\r\n}\r\n\n---END FILE---\r\n\r\nFILE: _raw/lib-001-core.attempt-00.txt\n---BEGIN FILE---\n\r\n\n---END FILE---\r\n\r\nFILE: _raw/lib-001-core.attempt-01-repair.prompt.txt\n---BEGIN FILE---\nYou are repairing an Entropy staged code-generation benchmark response.\n\nWorkload: library-chain\nStage: lib-001-core\nOrder: 1\n\nStage goal:\nCreate the first library with one public function and a tiny sample caller.\n\nExpected artifacts:\n- library-chain/CoreLib/CoreLib.csproj (project)\n\nExact validator contract:\nGenerate a .NET project tree under library-chain/.\nTarget framework must be net10.0.\nRequired project files:\n- CoreLib: CoreLib/CoreLib.csproj\n- FeatureLib: FeatureLib/FeatureLib.csproj references: CoreLib/CoreLib.csproj\n- PipelineLib: PipelineLib/PipelineLib.csproj references: FeatureLib/FeatureLib.csproj\n- Contracts: Contracts/Contracts.csproj\n- SampleApp: SampleApp/SampleApp.csproj references: PipelineLib/PipelineLib.csproj, Contracts/Contracts.csproj\nSampleApp must build and dotnet run --project SampleApp/SampleApp.csproj --no-build --nologo must print exactly core->feature->pipeline->contract.\n\nThe previous response failed with:\nmodel did not return a JSON object\n\nPrevious response text:\n---BEGIN FAILED RESPONSE---\n\n---END FAILED RESPONSE---\n\nCurrent generated files:\nFILE: _raw/lib-001-core.attempt-00.prompt.txt\n---BEGIN FILE---\nYou are running an Entropy staged code-generation benchmark.\n\nWorkload: library-chain\nStage: lib-001-core\nOrder: 1\n\nStage goal:\nCreate the first library with one public function and a tiny sample caller.\n\nExpected artifacts:\n- library-chain/CoreLib/CoreLib.csproj (project)\n\nValidators that will run:\n- core-builds: failure_class=build\n- core-sample-runs: failure_class=runtime_behavior\n\nExact validator contract:\nGenerate a .NET project tree under library-chain/.\nTarget framework must be net10.0.\nRequired project files:\n- CoreLib: CoreLib/CoreLib.csproj\n- FeatureLib: FeatureLib/FeatureLib.csproj references: CoreLib/CoreLib.csproj\n- PipelineLib: PipelineLib/PipelineLib.csproj references: FeatureLib/FeatureLib.csproj\n- Contracts: Contracts/Contracts.csproj\n- SampleApp: SampleApp/SampleApp.csproj references: PipelineLib/PipelineLib.csproj, Contracts/Contracts.csproj\nSampleApp must build and dotnet run --project SampleApp/SampleApp.csproj --no-build --nologo must print exactly core->feature->pipeline->contract.\n\nExisting generated files:\nFILE: \n---BEGIN FILE---\n\n---END FILE---\n\nReturn ONLY a JSON object in this exact shape:\n{\n  \"files\": [\n    { \"path\": \"relative/path/from/run/root\", \"content\": \"complete file content\" }\n  ],\n  \"notes\": \"short note\"\n}\n\nRules:\n- Include every new or modified file needed for this stage to pass.\n- Use only relative paths.\n- Do not include markdown fences outside the JSON.\n- Do not explain the answer outside the JSON.\r\n\n---END FILE---\r\n\r\nFILE: _raw/lib-001-core.attempt-00.response.json\n---BEGIN FILE---\n{\r\n  \"provider\": \"langchain\",\r\n  \"kind\": \"chat\",\r\n  \"content\": \"\",\r\n  \"response_metadata\": {\r\n    \"token_usage\": {\r\n      \"completion_tokens\": 4096,\r\n      \"prompt_tokens\": 433,\r\n      \"total_tokens\": 4529,\r\n      \"completion_tokens_details\": null,\r\n      \"prompt_tokens_details\": {\r\n        \"audio_tokens\": null,\r\n        \"cached_tokens\": 0\r\n      }\r\n    },\r\n    \"model_name\": \"gpt-oss-20b-Q4_K_M.gguf\",\r\n    \"system_fingerprint\": \"b1-25eec6f\",\r\n    \"id\": \"chatcmpl-nkGwGL1rWoKIqZxtGjsY6Nt4h7PoRbZN\",\r\n    \"service_tier\": null,\r\n    \"finish_reason\": \"length\",\r\n    \"logprobs\": null\r\n  },\r\n  \"usage_metadata\": {\r\n    \"input_tokens\": 433,\r\n    \"output_tokens\": 4096,\r\n    \"total_tokens\": 4529,\r\n    \"input_token_details\": {\r\n      \"cache_read\": 0\r\n    },\r\n    \"output_token_details\": {}\r\n  },\r\n  \"langfuse\": {\r\n    \"trace_id\": \"7dbc2eaa85f01499343be578bfbbc1f5\",\r\n    \"host\": \"http://192.168.1.203:3100\",\r\n    \"tags\": [\r\n      \"EB\",\r\n      \"model-repair\",\r\n      \"langchain\",\r\n      \"entropy-gptoss20\",\r\n      \"library-chain\"\r\n    ]\r\n  }\r\n}\r\n\n---END FILE---\r\n\r\nFILE: _raw/lib-001-core.attempt-00.txt\n---BEGIN FILE---\n\r\n\n---END FILE---\n\nReturn ONLY a corrected JSON object in this exact shape:\n{\n  \"files\": [\n    { \"path\": \"relative/path/from/run/root\", \"content\": \"complete file content\" }\n  ],\n  \"notes\": \"short note\"\n}\n\nRules:\n- Include every new or modified file needed for this stage to pass.\n- Use only relative paths.\n- Do not include markdown fences outside the JSON.\n- Do not explain the answer outside the JSON.\n- Do not copy placeholder path or content values from the schema.\r\n\n---END FILE---\r\n\r\nFILE: _raw/lib-001-core.attempt-01-repair.response.json\n---BEGIN FILE---\n{\r\n  \"provider\": \"langchain\",\r\n  \"kind\": \"chat\",\r\n  \"content\": \"{\\n  \\\"files\\\": [\\n    {\\n      \\\"path\\\": \\\"CoreLib/CoreLib.csproj\\\",\\n      \\\"content\\\": \\\"<Project Sdk=\\\\\\\"Microsoft.NET.Sdk\\\\\\\">\\\\n  <PropertyGroup>\\\\n    <TargetFramework>net10.0</TargetFramework>\\\\n  </PropertyGroup>\\\\n</Project>\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"CoreLib/Core.cs\\\",\\n      \\\"content\\\": \\\"namespace CoreLib;\\\\npublic class Core\\\\n{\\\\n    public static string Get() => \\\\\\\"core\\\\\\\";\\\\n}\\\\n\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"FeatureLib/FeatureLib.csproj\\\",\\n      \\\"content\\\": \\\"<Project Sdk=\\\\\\\"Microsoft.NET.Sdk\\\\\\\">\\\\n  <PropertyGroup>\\\\n    <TargetFramework>net10.0</TargetFramework>\\\\n  </PropertyGroup>\\\\n  <ItemGroup>\\\\n    <ProjectReference Include=\\\\\\\"..\\\\\\\\CoreLib\\\\\\\\CoreLib.csproj\\\\\\\" />\\\\n  </ItemGroup>\\\\n</Project>\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"FeatureLib/Feature.cs\\\",\\n      \\\"content\\\": \\\"using CoreLib;\\\\nnamespace FeatureLib;\\\\npublic class Feature\\\\n{\\\\n    public static string Get() => Core.Get() + \\\\\\\"->feature\\\\\\\";\\\\n}\\\\n\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"PipelineLib/PipelineLib.csproj\\\",\\n      \\\"content\\\": \\\"<Project Sdk=\\\\\\\"Microsoft.NET.Sdk\\\\\\\">\\\\n  <PropertyGroup>\\\\n    <TargetFramework>net10.0</TargetFramework>\\\\n  </PropertyGroup>\\\\n  <ItemGroup>\\\\n    <ProjectReference Include=\\\\\\\"..\\\\\\\\FeatureLib\\\\\\\\FeatureLib.csproj\\\\\\\" />\\\\n  </ItemGroup>\\\\n</Project>\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"PipelineLib/Pipeline.cs\\\",\\n      \\\"content\\\": \\\"using FeatureLib;\\\\nnamespace PipelineLib;\\\\npublic class Pipeline\\\\n{\\\\n    public static string Get() => Feature.Get() + \\\\\\\"->pipeline\\\\\\\";\\\\n}\\\\n\\\"\\n    },\\n   \",\r\n  \"response_metadata\": {\r\n    \"token_usage\": {\r\n      \"completion_tokens\": 4096,\r\n      \"prompt_tokens\": 1183,\r\n      \"total_tokens\": 5279,\r\n      \"completion_tokens_details\": null,\r\n      \"prompt_tokens_details\": {\r\n        \"audio_tokens\": null,\r\n        \"cached_tokens\": 0\r\n      }\r\n    },\r\n    \"model_name\": \"gpt-oss-20b-Q4_K_M.gguf\",\r\n    \"system_fingerprint\": \"b1-25eec6f\",\r\n    \"id\": \"chatcmpl-GKz13IcZ5V52oqnrg3scnlgkeusaNteL\",\r\n    \"service_tier\": null,\r\n    \"finish_reason\": \"length\",\r\n    \"logprobs\": null\r\n  },\r\n  \"usage_metadata\": {\r\n    \"input_tokens\": 1183,\r\n    \"output_tokens\": 4096,\r\n    \"total_tokens\": 5279,\r\n    \"input_token_details\": {\r\n      \"cache_read\": 0\r\n    },\r\n    \"output_token_details\": {}\r\n  },\r\n  \"langfuse\": {\r\n    \"trace_id\": \"507b1260c7797a591a98d608da6f578a\",\r\n    \"host\": \"http://192.168.1.203:3100\",\r\n    \"tags\": [\r\n      \"EB\",\r\n      \"model-repair\",\r\n      \"langchain\",\r\n      \"entropy-gptoss20\",\r\n      \"library-chain\"\r\n    ]\r\n  }\r\n}\r\n\n---END FILE---\r\n\r\nFILE: _raw/lib-001-core.attempt-01-repair.txt\n---BEGIN FILE---\n{\n  \"files\": [\n    {\n      \"path\": \"CoreLib/CoreLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"CoreLib/Core.cs\",\n      \"content\": \"namespace CoreLib;\\npublic class Core\\n{\\n    public static string Get() => \\\"core\\\";\\n}\\n\"\n    },\n    {\n      \"path\": \"FeatureLib/FeatureLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\CoreLib\\\\CoreLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"FeatureLib/Feature.cs\",\n      \"content\": \"using CoreLib;\\nnamespace FeatureLib;\\npublic class Feature\\n{\\n    public static string Get() => Core.Get() + \\\"->feature\\\";\\n}\\n\"\n    },\n    {\n      \"path\": \"PipelineLib/PipelineLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\FeatureLib\\\\FeatureLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"PipelineLib/Pipeline.cs\",\n      \"content\": \"using FeatureLib;\\nnamespace PipelineLib;\\npublic class Pipeline\\n{\\n    public static string Get() => Feature.Get() + \\\"->pipeline\\\";\\n}\\n\"\n    },\n   \r\n\n---END FILE---\n\nReturn ONLY a corrected JSON object in this exact shape:\n{\n  \"files\": [\n    { \"path\": \"relative/path/from/run/root\", \"content\": \"complete file content\" }\n  ],\n  \"notes\": \"short note\"\n}\n\nRules:\n- Include every new or modified file needed for this stage to pass.\n- Use only relative paths.\n- Do not include markdown fences outside the JSON.\n- Do not explain the answer outside the JSON.\n- Do not copy placeholder path or content values from the schema."
+    }
+  ],
+  "output": {
+    "role": "assistant",
+    "content": "{\n  \"files\": [\n    {\n      \"path\": \"CoreLib/CoreLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"CoreLib/Core.cs\",\n      \"content\": \"namespace CoreLib;\\npublic class Core\\n{\\n    public static string Get() => \\\"core\\\";\\n}\"\n    },\n    {\n      \"path\": \"FeatureLib/FeatureLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\\\\\CoreLib\\\\\\\\CoreLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"FeatureLib/Feature.cs\",\n      \"content\": \"using CoreLib;\\nnamespace FeatureLib;\\npublic class Feature\\n{\\n    public static string Get() => Core.Get() + \\\"->feature\\\";\\n}\"\n    },\n    {\n      \"path\": \"PipelineLib/PipelineLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\\\\\FeatureLib\\\\\\\\FeatureLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"PipelineLib/Pipeline.cs\",\n      \"content\": \"using FeatureLib;\\nnamespace PipelineLib;\\npublic class Pipeline\\n{\\n    public static string Get() => Feature.Get() + \\\"->pipeline\\\";\\n}\"\n    },\n    {\n      \"path\": \"Contracts/Contracts.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"Contracts/Contracts.cs\",\n      \"content\": \"namespace Contracts;\\npublic class Contracts\\n{\\n    public static string Get() => \\\"contract\\\";\\n}\"\n    },\n    {\n      \"path\": \"SampleApp/Sample",
+    "additional_kwargs": {
+      "refusal": null
+    }
+  },
+  "metadata": {
+    "tags": [
+      "EB",
+      "model-repair",
+      "langchain",
+      "entropy-gptoss20",
+      "library-chain"
+    ],
+    "benchmark": "EB",
+    "target_set_id": "entropy-gptoss20",
+    "workload_id": "library-chain",
+    "stage_id": "lib-001-core",
+    "stage_order": 1,
+    "harness_mode": "model-repair",
+    "completion_provider": "langchain",
+    "attempt_index": 2,
+    "attempt_reason": "generation",
+    "context_tokens": 131072,
+    "langfuse_session_id": "library-chain",
+    "langfuse_tags": [
+      "EB",
+      "model-repair",
+      "langchain",
+      "entropy-gptoss20",
+      "library-chain"
+    ],
+    "ls_provider": "openai",
+    "ls_model_name": "gpt-oss-20b-Q4_K_M.gguf",
+    "ls_model_type": "chat",
+    "ls_temperature": 0,
+    "ls_max_tokens": 4096,
+    "is_langchain_root": true,
+    "resourceAttributes": {
+      "telemetry.sdk.language": "python",
+      "telemetry.sdk.name": "opentelemetry",
+      "telemetry.sdk.version": "1.41.0",
+      "service.name": "unknown_service"
+    },
+    "scope": {
+      "name": "langfuse-sdk",
+      "version": "3.15.0",
+      "attributes": {
+        "public_key": "pk-lf-eb-5c9a7383438865b8fba1b4fb663746471cd786db2cb1c450"
+      }
+    }
+  },
+  "createdAt": "2026-05-25T20:44:21.414Z",
+  "updatedAt": "2026-05-25T20:44:21.425Z",
+  "externalId": null,
+  "scores": [],
+  "latency": 55.336,
+  "observations": [
+    {
+      "id": "8017e5940e9f18f6",
+      "traceId": "cc26f75cefccb759760fad2a15f4222e",
+      "startTime": "2026-05-25T20:43:25.81Z",
+      "endTime": "2026-05-25T20:44:21.146Z",
+      "projectId": "entropy-benchmark",
+      "parentObservationId": null,
+      "type": "GENERATION",
+      "environment": "default",
+      "name": "EB entropy-gptoss20 library-chain lib-001-core",
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "version": null,
+      "createdAt": "2026-05-25T20:44:21.409Z",
+      "updatedAt": "2026-05-25T20:44:21.423Z",
+      "input": [
+        {
+          "role": "system",
+          "content": "You are a code generator. Return only the requested JSON object. No prose."
+        },
+        {
+          "role": "user",
+          "content": "You are repairing an Entropy staged code-generation benchmark response.\n\nWorkload: library-chain\nStage: lib-001-core\nOrder: 1\n\nStage goal:\nCreate the first library with one public function and a tiny sample caller.\n\nExpected artifacts:\n- library-chain/CoreLib/CoreLib.csproj (project)\n\nExact validator contract:\nGenerate a .NET project tree under library-chain/.\nTarget framework must be net10.0.\nRequired project files:\n- CoreLib: CoreLib/CoreLib.csproj\n- FeatureLib: FeatureLib/FeatureLib.csproj references: CoreLib/CoreLib.csproj\n- PipelineLib: PipelineLib/PipelineLib.csproj references: FeatureLib/FeatureLib.csproj\n- Contracts: Contracts/Contracts.csproj\n- SampleApp: SampleApp/SampleApp.csproj references: PipelineLib/PipelineLib.csproj, Contracts/Contracts.csproj\nSampleApp must build and dotnet run --project SampleApp/SampleApp.csproj --no-build --nologo must print exactly core->feature->pipeline->contract.\n\nThe previous response failed with:\nConversion from JSON failed with error: Unexpected end when deserializing object. Path 'files[5]', line 26, position 5.\n\nPrevious response text:\n---BEGIN FAILED RESPONSE---\n{\n  \"files\": [\n    {\n      \"path\": \"CoreLib/CoreLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"CoreLib/Core.cs\",\n      \"content\": \"namespace CoreLib;\\npublic class Core\\n{\\n    public static string Get() => \\\"core\\\";\\n}\\n\"\n    },\n    {\n      \"path\": \"FeatureLib/FeatureLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\CoreLib\\\\CoreLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"FeatureLib/Feature.cs\",\n      \"content\": \"using CoreLib;\\nnamespace FeatureLib;\\npublic class Feature\\n{\\n    public static string Get() => Core.Get() + \\\"->feature\\\";\\n}\\n\"\n    },\n    {\n      \"path\": \"PipelineLib/PipelineLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\FeatureLib\\\\FeatureLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"PipelineLib/Pipeline.cs\",\n      \"content\": \"using FeatureLib;\\nnamespace PipelineLib;\\npublic class Pipeline\\n{\\n    public static string Get() => Feature.Get() + \\\"->pipeline\\\";\\n}\\n\"\n    },\n   \n---END FAILED RESPONSE---\n\nCurrent generated files:\nFILE: _raw/lib-001-core.attempt-00.prompt.txt\n---BEGIN FILE---\nYou are running an Entropy staged code-generation benchmark.\n\nWorkload: library-chain\nStage: lib-001-core\nOrder: 1\n\nStage goal:\nCreate the first library with one public function and a tiny sample caller.\n\nExpected artifacts:\n- library-chain/CoreLib/CoreLib.csproj (project)\n\nValidators that will run:\n- core-builds: failure_class=build\n- core-sample-runs: failure_class=runtime_behavior\n\nExact validator contract:\nGenerate a .NET project tree under library-chain/.\nTarget framework must be net10.0.\nRequired project files:\n- CoreLib: CoreLib/CoreLib.csproj\n- FeatureLib: FeatureLib/FeatureLib.csproj references: CoreLib/CoreLib.csproj\n- PipelineLib: PipelineLib/PipelineLib.csproj references: FeatureLib/FeatureLib.csproj\n- Contracts: Contracts/Contracts.csproj\n- SampleApp: SampleApp/SampleApp.csproj references: PipelineLib/PipelineLib.csproj, Contracts/Contracts.csproj\nSampleApp must build and dotnet run --project SampleApp/SampleApp.csproj --no-build --nologo must print exactly core->feature->pipeline->contract.\n\nExisting generated files:\nFILE: \n---BEGIN FILE---\n\n---END FILE---\n\nReturn ONLY a JSON object in this exact shape:\n{\n  \"files\": [\n    { \"path\": \"relative/path/from/run/root\", \"content\": \"complete file content\" }\n  ],\n  \"notes\": \"short note\"\n}\n\nRules:\n- Include every new or modified file needed for this stage to pass.\n- Use only relative paths.\n- Do not include markdown fences outside the JSON.\n- Do not explain the answer outside the JSON.\r\n\n---END FILE---\r\n\r\nFILE: _raw/lib-001-core.attempt-00.response.json\n---BEGIN FILE---\n{\r\n  \"provider\": \"langchain\",\r\n  \"kind\": \"chat\",\r\n  \"content\": \"\",\r\n  \"response_metadata\": {\r\n    \"token_usage\": {\r\n      \"completion_tokens\": 4096,\r\n      \"prompt_tokens\": 433,\r\n      \"total_tokens\": 4529,\r\n      \"completion_tokens_details\": null,\r\n      \"prompt_tokens_details\": {\r\n        \"audio_tokens\": null,\r\n        \"cached_tokens\": 0\r\n      }\r\n    },\r\n    \"model_name\": \"gpt-oss-20b-Q4_K_M.gguf\",\r\n    \"system_fingerprint\": \"b1-25eec6f\",\r\n    \"id\": \"chatcmpl-nkGwGL1rWoKIqZxtGjsY6Nt4h7PoRbZN\",\r\n    \"service_tier\": null,\r\n    \"finish_reason\": \"length\",\r\n    \"logprobs\": null\r\n  },\r\n  \"usage_metadata\": {\r\n    \"input_tokens\": 433,\r\n    \"output_tokens\": 4096,\r\n    \"total_tokens\": 4529,\r\n    \"input_token_details\": {\r\n      \"cache_read\": 0\r\n    },\r\n    \"output_token_details\": {}\r\n  },\r\n  \"langfuse\": {\r\n    \"trace_id\": \"7dbc2eaa85f01499343be578bfbbc1f5\",\r\n    \"host\": \"http://192.168.1.203:3100\",\r\n    \"tags\": [\r\n      \"EB\",\r\n      \"model-repair\",\r\n      \"langchain\",\r\n      \"entropy-gptoss20\",\r\n      \"library-chain\"\r\n    ]\r\n  }\r\n}\r\n\n---END FILE---\r\n\r\nFILE: _raw/lib-001-core.attempt-00.txt\n---BEGIN FILE---\n\r\n\n---END FILE---\r\n\r\nFILE: _raw/lib-001-core.attempt-01-repair.prompt.txt\n---BEGIN FILE---\nYou are repairing an Entropy staged code-generation benchmark response.\n\nWorkload: library-chain\nStage: lib-001-core\nOrder: 1\n\nStage goal:\nCreate the first library with one public function and a tiny sample caller.\n\nExpected artifacts:\n- library-chain/CoreLib/CoreLib.csproj (project)\n\nExact validator contract:\nGenerate a .NET project tree under library-chain/.\nTarget framework must be net10.0.\nRequired project files:\n- CoreLib: CoreLib/CoreLib.csproj\n- FeatureLib: FeatureLib/FeatureLib.csproj references: CoreLib/CoreLib.csproj\n- PipelineLib: PipelineLib/PipelineLib.csproj references: FeatureLib/FeatureLib.csproj\n- Contracts: Contracts/Contracts.csproj\n- SampleApp: SampleApp/SampleApp.csproj references: PipelineLib/PipelineLib.csproj, Contracts/Contracts.csproj\nSampleApp must build and dotnet run --project SampleApp/SampleApp.csproj --no-build --nologo must print exactly core->feature->pipeline->contract.\n\nThe previous response failed with:\nmodel did not return a JSON object\n\nPrevious response text:\n---BEGIN FAILED RESPONSE---\n\n---END FAILED RESPONSE---\n\nCurrent generated files:\nFILE: _raw/lib-001-core.attempt-00.prompt.txt\n---BEGIN FILE---\nYou are running an Entropy staged code-generation benchmark.\n\nWorkload: library-chain\nStage: lib-001-core\nOrder: 1\n\nStage goal:\nCreate the first library with one public function and a tiny sample caller.\n\nExpected artifacts:\n- library-chain/CoreLib/CoreLib.csproj (project)\n\nValidators that will run:\n- core-builds: failure_class=build\n- core-sample-runs: failure_class=runtime_behavior\n\nExact validator contract:\nGenerate a .NET project tree under library-chain/.\nTarget framework must be net10.0.\nRequired project files:\n- CoreLib: CoreLib/CoreLib.csproj\n- FeatureLib: FeatureLib/FeatureLib.csproj references: CoreLib/CoreLib.csproj\n- PipelineLib: PipelineLib/PipelineLib.csproj references: FeatureLib/FeatureLib.csproj\n- Contracts: Contracts/Contracts.csproj\n- SampleApp: SampleApp/SampleApp.csproj references: PipelineLib/PipelineLib.csproj, Contracts/Contracts.csproj\nSampleApp must build and dotnet run --project SampleApp/SampleApp.csproj --no-build --nologo must print exactly core->feature->pipeline->contract.\n\nExisting generated files:\nFILE: \n---BEGIN FILE---\n\n---END FILE---\n\nReturn ONLY a JSON object in this exact shape:\n{\n  \"files\": [\n    { \"path\": \"relative/path/from/run/root\", \"content\": \"complete file content\" }\n  ],\n  \"notes\": \"short note\"\n}\n\nRules:\n- Include every new or modified file needed for this stage to pass.\n- Use only relative paths.\n- Do not include markdown fences outside the JSON.\n- Do not explain the answer outside the JSON.\r\n\n---END FILE---\r\n\r\nFILE: _raw/lib-001-core.attempt-00.response.json\n---BEGIN FILE---\n{\r\n  \"provider\": \"langchain\",\r\n  \"kind\": \"chat\",\r\n  \"content\": \"\",\r\n  \"response_metadata\": {\r\n    \"token_usage\": {\r\n      \"completion_tokens\": 4096,\r\n      \"prompt_tokens\": 433,\r\n      \"total_tokens\": 4529,\r\n      \"completion_tokens_details\": null,\r\n      \"prompt_tokens_details\": {\r\n        \"audio_tokens\": null,\r\n        \"cached_tokens\": 0\r\n      }\r\n    },\r\n    \"model_name\": \"gpt-oss-20b-Q4_K_M.gguf\",\r\n    \"system_fingerprint\": \"b1-25eec6f\",\r\n    \"id\": \"chatcmpl-nkGwGL1rWoKIqZxtGjsY6Nt4h7PoRbZN\",\r\n    \"service_tier\": null,\r\n    \"finish_reason\": \"length\",\r\n    \"logprobs\": null\r\n  },\r\n  \"usage_metadata\": {\r\n    \"input_tokens\": 433,\r\n    \"output_tokens\": 4096,\r\n    \"total_tokens\": 4529,\r\n    \"input_token_details\": {\r\n      \"cache_read\": 0\r\n    },\r\n    \"output_token_details\": {}\r\n  },\r\n  \"langfuse\": {\r\n    \"trace_id\": \"7dbc2eaa85f01499343be578bfbbc1f5\",\r\n    \"host\": \"http://192.168.1.203:3100\",\r\n    \"tags\": [\r\n      \"EB\",\r\n      \"model-repair\",\r\n      \"langchain\",\r\n      \"entropy-gptoss20\",\r\n      \"library-chain\"\r\n    ]\r\n  }\r\n}\r\n\n---END FILE---\r\n\r\nFILE: _raw/lib-001-core.attempt-00.txt\n---BEGIN FILE---\n\r\n\n---END FILE---\n\nReturn ONLY a corrected JSON object in this exact shape:\n{\n  \"files\": [\n    { \"path\": \"relative/path/from/run/root\", \"content\": \"complete file content\" }\n  ],\n  \"notes\": \"short note\"\n}\n\nRules:\n- Include every new or modified file needed for this stage to pass.\n- Use only relative paths.\n- Do not include markdown fences outside the JSON.\n- Do not explain the answer outside the JSON.\n- Do not copy placeholder path or content values from the schema.\r\n\n---END FILE---\r\n\r\nFILE: _raw/lib-001-core.attempt-01-repair.response.json\n---BEGIN FILE---\n{\r\n  \"provider\": \"langchain\",\r\n  \"kind\": \"chat\",\r\n  \"content\": \"{\\n  \\\"files\\\": [\\n    {\\n      \\\"path\\\": \\\"CoreLib/CoreLib.csproj\\\",\\n      \\\"content\\\": \\\"<Project Sdk=\\\\\\\"Microsoft.NET.Sdk\\\\\\\">\\\\n  <PropertyGroup>\\\\n    <TargetFramework>net10.0</TargetFramework>\\\\n  </PropertyGroup>\\\\n</Project>\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"CoreLib/Core.cs\\\",\\n      \\\"content\\\": \\\"namespace CoreLib;\\\\npublic class Core\\\\n{\\\\n    public static string Get() => \\\\\\\"core\\\\\\\";\\\\n}\\\\n\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"FeatureLib/FeatureLib.csproj\\\",\\n      \\\"content\\\": \\\"<Project Sdk=\\\\\\\"Microsoft.NET.Sdk\\\\\\\">\\\\n  <PropertyGroup>\\\\n    <TargetFramework>net10.0</TargetFramework>\\\\n  </PropertyGroup>\\\\n  <ItemGroup>\\\\n    <ProjectReference Include=\\\\\\\"..\\\\\\\\CoreLib\\\\\\\\CoreLib.csproj\\\\\\\" />\\\\n  </ItemGroup>\\\\n</Project>\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"FeatureLib/Feature.cs\\\",\\n      \\\"content\\\": \\\"using CoreLib;\\\\nnamespace FeatureLib;\\\\npublic class Feature\\\\n{\\\\n    public static string Get() => Core.Get() + \\\\\\\"->feature\\\\\\\";\\\\n}\\\\n\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"PipelineLib/PipelineLib.csproj\\\",\\n      \\\"content\\\": \\\"<Project Sdk=\\\\\\\"Microsoft.NET.Sdk\\\\\\\">\\\\n  <PropertyGroup>\\\\n    <TargetFramework>net10.0</TargetFramework>\\\\n  </PropertyGroup>\\\\n  <ItemGroup>\\\\n    <ProjectReference Include=\\\\\\\"..\\\\\\\\FeatureLib\\\\\\\\FeatureLib.csproj\\\\\\\" />\\\\n  </ItemGroup>\\\\n</Project>\\\"\\n    },\\n    {\\n      \\\"path\\\": \\\"PipelineLib/Pipeline.cs\\\",\\n      \\\"content\\\": \\\"using FeatureLib;\\\\nnamespace PipelineLib;\\\\npublic class Pipeline\\\\n{\\\\n    public static string Get() => Feature.Get() + \\\\\\\"->pipeline\\\\\\\";\\\\n}\\\\n\\\"\\n    },\\n   \",\r\n  \"response_metadata\": {\r\n    \"token_usage\": {\r\n      \"completion_tokens\": 4096,\r\n      \"prompt_tokens\": 1183,\r\n      \"total_tokens\": 5279,\r\n      \"completion_tokens_details\": null,\r\n      \"prompt_tokens_details\": {\r\n        \"audio_tokens\": null,\r\n        \"cached_tokens\": 0\r\n      }\r\n    },\r\n    \"model_name\": \"gpt-oss-20b-Q4_K_M.gguf\",\r\n    \"system_fingerprint\": \"b1-25eec6f\",\r\n    \"id\": \"chatcmpl-GKz13IcZ5V52oqnrg3scnlgkeusaNteL\",\r\n    \"service_tier\": null,\r\n    \"finish_reason\": \"length\",\r\n    \"logprobs\": null\r\n  },\r\n  \"usage_metadata\": {\r\n    \"input_tokens\": 1183,\r\n    \"output_tokens\": 4096,\r\n    \"total_tokens\": 5279,\r\n    \"input_token_details\": {\r\n      \"cache_read\": 0\r\n    },\r\n    \"output_token_details\": {}\r\n  },\r\n  \"langfuse\": {\r\n    \"trace_id\": \"507b1260c7797a591a98d608da6f578a\",\r\n    \"host\": \"http://192.168.1.203:3100\",\r\n    \"tags\": [\r\n      \"EB\",\r\n      \"model-repair\",\r\n      \"langchain\",\r\n      \"entropy-gptoss20\",\r\n      \"library-chain\"\r\n    ]\r\n  }\r\n}\r\n\n---END FILE---\r\n\r\nFILE: _raw/lib-001-core.attempt-01-repair.txt\n---BEGIN FILE---\n{\n  \"files\": [\n    {\n      \"path\": \"CoreLib/CoreLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"CoreLib/Core.cs\",\n      \"content\": \"namespace CoreLib;\\npublic class Core\\n{\\n    public static string Get() => \\\"core\\\";\\n}\\n\"\n    },\n    {\n      \"path\": \"FeatureLib/FeatureLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\CoreLib\\\\CoreLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"FeatureLib/Feature.cs\",\n      \"content\": \"using CoreLib;\\nnamespace FeatureLib;\\npublic class Feature\\n{\\n    public static string Get() => Core.Get() + \\\"->feature\\\";\\n}\\n\"\n    },\n    {\n      \"path\": \"PipelineLib/PipelineLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\FeatureLib\\\\FeatureLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"PipelineLib/Pipeline.cs\",\n      \"content\": \"using FeatureLib;\\nnamespace PipelineLib;\\npublic class Pipeline\\n{\\n    public static string Get() => Feature.Get() + \\\"->pipeline\\\";\\n}\\n\"\n    },\n   \r\n\n---END FILE---\n\nReturn ONLY a corrected JSON object in this exact shape:\n{\n  \"files\": [\n    { \"path\": \"relative/path/from/run/root\", \"content\": \"complete file content\" }\n  ],\n  \"notes\": \"short note\"\n}\n\nRules:\n- Include every new or modified file needed for this stage to pass.\n- Use only relative paths.\n- Do not include markdown fences outside the JSON.\n- Do not explain the answer outside the JSON.\n- Do not copy placeholder path or content values from the schema."
+        }
+      ],
+      "output": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"CoreLib/CoreLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"CoreLib/Core.cs\",\n      \"content\": \"namespace CoreLib;\\npublic class Core\\n{\\n    public static string Get() => \\\"core\\\";\\n}\"\n    },\n    {\n      \"path\": \"FeatureLib/FeatureLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\\\\\CoreLib\\\\\\\\CoreLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"FeatureLib/Feature.cs\",\n      \"content\": \"using CoreLib;\\nnamespace FeatureLib;\\npublic class Feature\\n{\\n    public static string Get() => Core.Get() + \\\"->feature\\\";\\n}\"\n    },\n    {\n      \"path\": \"PipelineLib/PipelineLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\\\\\FeatureLib\\\\\\\\FeatureLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"PipelineLib/Pipeline.cs\",\n      \"content\": \"using FeatureLib;\\nnamespace PipelineLib;\\npublic class Pipeline\\n{\\n    public static string Get() => Feature.Get() + \\\"->pipeline\\\";\\n}\"\n    },\n    {\n      \"path\": \"Contracts/Contracts.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"Contracts/Contracts.cs\",\n      \"content\": \"namespace Contracts;\\npublic class Contracts\\n{\\n    public static string Get() => \\\"contract\\\";\\n}\"\n    },\n    {\n      \"path\": \"SampleApp/Sample",
+        "additional_kwargs": {
+          "refusal": null
+        }
+      },
+      "metadata": {
+        "tags": [
+          "EB",
+          "model-repair",
+          "langchain",
+          "entropy-gptoss20",
+          "library-chain"
+        ],
+        "benchmark": "EB",
+        "target_set_id": "entropy-gptoss20",
+        "workload_id": "library-chain",
+        "stage_id": "lib-001-core",
+        "stage_order": 1,
+        "harness_mode": "model-repair",
+        "completion_provider": "langchain",
+        "attempt_index": 2,
+        "attempt_reason": "generation",
+        "context_tokens": 131072,
+        "langfuse_session_id": "library-chain",
+        "langfuse_tags": [
+          "EB",
+          "model-repair",
+          "langchain",
+          "entropy-gptoss20",
+          "library-chain"
+        ],
+        "ls_provider": "openai",
+        "ls_model_name": "gpt-oss-20b-Q4_K_M.gguf",
+        "ls_model_type": "chat",
+        "ls_temperature": 0,
+        "ls_max_tokens": 4096,
+        "is_langchain_root": true,
+        "resourceAttributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.41.0",
+          "service.name": "unknown_service"
+        },
+        "scope": {
+          "name": "langfuse-sdk",
+          "version": "3.15.0",
+          "attributes": {
+            "public_key": "pk-lf-eb-5c9a7383438865b8fba1b4fb663746471cd786db2cb1c450"
+          }
+        }
+      },
+      "model": "gpt-oss-20b-Q4_K_M.gguf",
+      "modelParameters": {
+        "temperature": 0,
+        "max_completion_tokens": 4096
+      },
+      "completionStartTime": null,
+      "promptId": null,
+      "promptName": null,
+      "promptVersion": null,
+      "latency": 55.336,
+      "timeToFirstToken": null,
+      "usageDetails": {
+        "input": 3720,
+        "output": 4096,
+        "total": 8120,
+        "input_cache_read": 304
+      },
+      "costDetails": {},
+      "usagePricingTierId": null,
+      "usagePricingTierName": null,
+      "inputPrice": 0,
+      "outputPrice": 0,
+      "totalPrice": 0,
+      "calculatedInputCost": null,
+      "calculatedOutputCost": null,
+      "calculatedTotalCost": 0,
+      "unit": "TOKENS",
+      "promptTokens": 4024,
+      "completionTokens": 4096,
+      "totalTokens": 8120,
+      "modelId": null,
+      "usage": {
+        "unit": "TOKENS",
+        "input": 4024,
+        "output": 4096,
+        "total": 8120
+      }
+    }
+  ],
+  "htmlPath": "/project/entropy-benchmark/traces/cc26f75cefccb759760fad2a15f4222e",
+  "totalCost": 0
+}

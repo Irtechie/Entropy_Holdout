@@ -13,12 +13,12 @@ slices:
     test_level: none
     functional_risk: narrow
     hitl: true
-    status: pending
+    status: done
     owner: agent
     blocked_reason: ""
     resume_when: ""
-    next_agent_action: "Turn the epic into a frozen run protocol with claims, quarantine rules, harness-mode names, and non-rerun policy."
-    human_action: "Confirm the frozen protocol is the one to run."
+    next_agent_action: "Done. Continue with local no-spend gate."
+    human_action: ""
     can_continue_other_slices: false
     notes: ""
   - id: slice-002
@@ -29,14 +29,14 @@ slices:
     test_level: functional-cli
     functional_risk: broad
     hitl: false
-    status: pending
+    status: done
     owner: agent
     blocked_reason: ""
     resume_when: ""
-    next_agent_action: "Align workload contracts, add/reuse golden checks, and prove mock/golden runs before any model queue."
+    next_agent_action: "Done. Continue with Wave 0 canary."
     human_action: ""
     can_continue_other_slices: false
-    notes: "Known blockers: library expected-artifact mismatch, factory null-method failure, repair-extract naming."
+    notes: "Passed entropy_workload_check, Langfuse preflight, and mock matrix. Aligned library/factory expected artifacts and renamed current repair behavior as model-repair."
   - id: slice-003
     title: "Run and judge three-target Wave 0 canary"
     path: docs/plans/2026-05-25-018-functional-final-eb-wave0-canary-plan.md
@@ -45,14 +45,14 @@ slices:
     test_level: functional-cli
     functional_risk: broad
     hitl: true
-    status: pending
+    status: done
     owner: agent
     blocked_reason: ""
     resume_when: ""
-    next_agent_action: "Run three medium-or-better targets that should pass at least one workload, export traces, audit failure origins, and write outcome judgment."
-    human_action: "Approve expansion or quarantine decision after judgment."
+    next_agent_action: "Done. Diagnose harness-null blocker before pilot expansion."
+    human_action: "Review canary judgment and decide whether to fix/quarantine Qwen Coder harness-null rows before pilot."
     can_continue_other_slices: false
-    notes: ""
+    notes: "Canary completed and pushed for gptoss20, devstral-small2, and qwen80nextcoder-256k. Devstral passed webpage 5/5; expansion blocked by two Qwen Coder harness-null rows."
   - id: slice-004
     title: "Run pilot then final full wave"
     path: docs/plans/2026-05-25-019-functional-final-eb-pilot-full-wave-plan.md
@@ -86,9 +86,9 @@ This is a protocol-freeze plan, not an open-ended benchmark-improvement plan. Af
 
 | # | Slice | Blocked By | Verification | HITL | Status |
 |---|---|---|---|---|---|
-| 1 | Freeze final EB protocol | - | verification-only | yes | pending |
-| 2 | Pass local no-spend gate | 1 | integration | no | pending |
-| 3 | Run and judge three-target Wave 0 canary | 2 | functional-cli | yes | pending |
+| 1 | Freeze final EB protocol | - | verification-only | yes | done |
+| 2 | Pass local no-spend gate | 1 | integration | no | done |
+| 3 | Run and judge three-target Wave 0 canary | 2 | functional-cli | yes | done |
 | 4 | Run pilot then final full wave | 3 | functional-cli | yes | blocked |
 
 ## Done Means

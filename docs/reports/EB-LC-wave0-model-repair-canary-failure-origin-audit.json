@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "wave_id": "EB-LC-wave0-model-repair-canary",
+  "generated_at": "2026-05-25T17:10:39.3151738-04:00",
+  "run_root_base": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC",
+  "run_glob": "EB-LC-wave0-model-repair-*",
+  "run_count": 3,
+  "failure_count": 8,
+  "origin_counts": [
+    {
+      "origin": "context_budget",
+      "count": 1
+    },
+    {
+      "origin": "harness",
+      "count": 2
+    },
+    {
+      "origin": "model_or_entropy",
+      "count": 5
+    }
+  ],
+  "failure_class_counts": [
+    {
+      "failure_class": "generation",
+      "count": 3
+    },
+    {
+      "failure_class": "harness",
+      "count": 2
+    },
+    {
+      "failure_class": "missing_artifact",
+      "count": 3
+    }
+  ],
+  "records": [
+    {
+      "wave_id": "EB-LC-wave0-model-repair-canary",
+      "run_name": "EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945",
+      "target_set_id": "entropy-devstral-small2",
+      "model_id": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+      "context_tokens": 131072,
+      "harness_mode": "model-repair",
+      "workload_id": "factory",
+      "stage_id": "final-validation",
+      "stage_order": 5,
+      "status": "fail",
+      "failure_class": "missing_artifact",
+      "failure_origin": "model_or_entropy",
+      "error": "factory validation failed: missing station id intake",
+      "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945"
+    },
+    {
+      "wave_id": "EB-LC-wave0-model-repair-canary",
+      "run_name": "EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945",
+      "target_set_id": "entropy-devstral-small2",
+      "model_id": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+      "context_tokens": 131072,
+      "harness_mode": "model-repair",
+      "workload_id": "library-chain",
+      "stage_id": "final-validation",
+      "stage_order": 5,
+      "status": "fail",
+      "failure_class": "missing_artifact",
+      "failure_origin": "model_or_entropy",
+      "error": "library-chain validation failed: project FeatureLib missing reference CoreLib/CoreLib.csproj",
+      "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945"
+    },
+    {
+      "wave_id": "EB-LC-wave0-model-repair-canary",
+      "run_name": "EB-LC-wave0-model-repair-entropy-gptoss20-20260525-163307",
+      "target_set_id": "entropy-gptoss20",
+      "model_id": "gpt-oss-20b-Q4_K_M.gguf",
+      "context_tokens": 131072,
+      "harness_mode": "model-repair",
+      "workload_id": "factory",
+      "stage_id": "factory-003-configuration",
+      "stage_order": 3,
+      "status": "fail",
+      "failure_class": "generation",
+      "failure_origin": "model_or_entropy",
+      "error": "model did not return a JSON object",
+      "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-gptoss20-20260525-163307"
+    },
+    {
+      "wave_id": "EB-LC-wave0-model-repair-canary",
+      "run_name": "EB-LC-wave0-model-repair-entropy-gptoss20-20260525-163307",
+      "target_set_id": "entropy-gptoss20",
+      "model_id": "gpt-oss-20b-Q4_K_M.gguf",
+      "context_tokens": 131072,
+      "harness_mode": "model-repair",
+      "workload_id": "library-chain",
+      "stage_id": "lib-001-core",
+      "stage_order": 1,
+      "status": "fail",
+      "failure_class": "generation",
+      "failure_origin": "model_or_entropy",
+      "error": "Conversion from JSON failed with error: Unexpected end when deserializing object. Path 'files[7]', line 34, position 5.",
+      "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-gptoss20-20260525-163307"
+    },
+    {
+      "wave_id": "EB-LC-wave0-model-repair-canary",
+      "run_name": "EB-LC-wave0-model-repair-entropy-gptoss20-20260525-163307",
+      "target_set_id": "entropy-gptoss20",
+      "model_id": "gpt-oss-20b-Q4_K_M.gguf",
+      "context_tokens": 131072,
+      "harness_mode": "model-repair",
+      "workload_id": "webpage-chain",
+      "stage_id": "web-005-nested-shared-table",
+      "stage_order": 5,
+      "status": "fail",
+      "failure_class": "generation",
+      "failure_origin": "context_budget",
+      "error": "langchain adapter exited 1: Traceback (most recent call last):\r\n  File \"E:\\Dev\\AI\\remote\\Entropy\\tools\\langchain_completion.py\", line 184, in <module>\r\n    raise SystemExit(main())\r\n                     ^^^^^^\r\n  File \"E:\\Dev\\AI\\remote\\Entropy\\tools\\langchain_completion.py\", line 178, in main\r\n    response = invoke(request)\r\n               ^^^^^^^^^^^^^^^\r\n  File \"E:\\Dev\\AI\\remote\\Entropy\\tools\\langchain_completion.py\", line 154, in invoke\r\n    message = completion.invoke(str(request[\"prompt\"]), config=config)\r\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\marowe\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\langchain_core\\language_models\\llms.py\", line 392, in invoke\r\n    self.generate_prompt(\r\n  File \"C:\\Users\\marowe\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\langchain_core\\language_models\\llms.py\", line 791, in generate_prompt\r\n    return self.generate(prompt_strings, stop=stop, callbacks=callbacks, **kwargs)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\marowe\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\langchain_core\\language_models\\llms.py\", line 1002, in generate\r\n    return self._generate_helper(\r\n           ^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\marowe\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\langchain_core\\language_models\\llms.py\", line 817, in _generate_helper\r\n    self._generate(\r\n  File \"C:\\Users\\marowe\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\langchain_openai\\llms\\base.py\", line 453, in _generate\r\n    response = self.client.create(prompt=_prompts, **params)\r\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\marowe\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\openai\\_utils\\_utils.py\", line 286, in wrapper\r\n    return func(*args, **kwargs)\r\n           ^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\marowe\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\openai\\resources\\completions.py\", line 554, in create\r\n    return self._post(\r\n           ^^^^^^^^^^^\r\n  File \"C:\\Users\\marowe\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\openai\\_base_client.py\", line 1314, in post\r\n    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))\r\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\marowe\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\openai\\_base_client.py\", line 1087, in request\r\n    raise self._make_status_error_from_response(err.response) from None\r\nopenai.BadRequestError: Error code: 400 - {'error': {'code': 400, 'message': 'request (185893 tokens) exceeds the available context size (131072 tokens), try increasing it', 'type': 'exceed_context_size_error', 'n_prompt_tokens': 185893, 'n_ctx': 131072}}",
+      "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-gptoss20-20260525-163307"
+    },
+    {
+      "wave_id": "EB-LC-wave0-model-repair-canary",
+      "run_name": "EB-LC-wave0-model-repair-entropy-qwen80nextcoder-256k-20260525-170032",
+      "target_set_id": "entropy-qwen80nextcoder-256k",
+      "model_id": "Qwen3-Coder-Next-Q4_K_M.gguf",
+      "context_tokens": 262144,
+      "harness_mode": "model-repair",
+      "workload_id": "factory",
+      "stage_id": "factory-003-configuration",
+      "stage_order": 3,
+      "status": "fail",
+      "failure_class": "harness",
+      "failure_origin": "harness",
+      "error": "You cannot call a method on a null-valued expression.",
+      "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-qwen80nextcoder-256k-20260525-170032"
+    },
+    {
+      "wave_id": "EB-LC-wave0-model-repair-canary",
+      "run_name": "EB-LC-wave0-model-repair-entropy-qwen80nextcoder-256k-20260525-170032",
+      "target_set_id": "entropy-qwen80nextcoder-256k",
+      "model_id": "Qwen3-Coder-Next-Q4_K_M.gguf",
+      "context_tokens": 262144,
+      "harness_mode": "model-repair",
+      "workload_id": "library-chain",
+      "stage_id": "lib-003-chain",
+      "stage_order": 3,
+      "status": "fail",
+      "failure_class": "harness",
+      "failure_origin": "harness",
+      "error": "You cannot call a method on a null-valued expression.",
+      "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-qwen80nextcoder-256k-20260525-170032"
+    },
+    {
+      "wave_id": "EB-LC-wave0-model-repair-canary",
+      "run_name": "EB-LC-wave0-model-repair-entropy-qwen80nextcoder-256k-20260525-170032",
+      "target_set_id": "entropy-qwen80nextcoder-256k",
+      "model_id": "Qwen3-Coder-Next-Q4_K_M.gguf",
+      "context_tokens": 262144,
+      "harness_mode": "model-repair",
+      "workload_id": "webpage-chain",
+      "stage_id": "final-validation",
+      "stage_order": 6,
+      "status": "fail",
+      "failure_class": "missing_artifact",
+      "failure_origin": "model_or_entropy",
+      "error": "webpage-chain validation failed: page page-4.html shared nav is missing page-4.html",
+      "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-qwen80nextcoder-256k-20260525-170032"
+    }
+  ]
+}
