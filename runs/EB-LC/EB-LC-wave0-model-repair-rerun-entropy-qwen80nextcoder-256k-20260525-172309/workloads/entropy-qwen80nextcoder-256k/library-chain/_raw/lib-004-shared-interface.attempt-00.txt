@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "library-chain/Contracts/Contracts.cs",
+      "content": "namespace LibraryChain;\n\npublic interface IContract\n{\n    string Name { get; }\n}\n\npublic static class Contract : IContract\n{\n    public static string Name => \"contract\";\n}"
+    }
+  ],
+  "notes": "Added IContract interface to Contracts library so all libraries can reference a shared contract interface."
+}

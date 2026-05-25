@@ -1,0 +1,38 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/page-4.html\",\n      \"content\": \"<!doctype html>\\n<html>\\n<head>\\n  <title>Entropy Page 4</title>\\n</head>\\n<body>\\n  <nav id=\\\"navigation\\\">\\n    <a href=\\\"page-3.html\\\">Back to Page 3</a>\\n    <a href=\\\"index.html\\\">Home</a>\\n    <a href=\\\"page-2.html\\\">Page 2</a>\\n    <a href=\\\"page-3.html\\\">Page 3</a>\\n  </nav>\\n  <main>\\n    <h1>Welcome to Entropy Page 4</h1>\\n    <p>This is page 4 in the Entropy benchmark chain.</p>\\n  </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created page-4.html with required title, backlink to page-3.html, and shared navigation linking to all pages 1-4.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 224,
+      "prompt_tokens": 9178,
+      "total_tokens": 9402,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    },
+    "model_name": "Qwen3-Coder-Next-Q4_K_M.gguf",
+    "system_fingerprint": "b1-983559d",
+    "id": "chatcmpl-wp0O06UfQ6hIOuEQvB5FvA5JVyCO4BgG",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 9178,
+    "output_tokens": 224,
+    "total_tokens": 9402,
+    "input_token_details": {},
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "199c9d2705a446874f715e82d43ce4b8",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "model-repair",
+      "langchain",
+      "entropy-qwen80nextcoder-256k",
+      "webpage-chain"
+    ]
+  }
+}

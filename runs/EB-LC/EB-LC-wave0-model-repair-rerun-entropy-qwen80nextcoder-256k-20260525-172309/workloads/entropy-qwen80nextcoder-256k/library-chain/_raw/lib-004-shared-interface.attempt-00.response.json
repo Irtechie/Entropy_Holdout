@@ -1,0 +1,38 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/Contracts/Contracts.cs\",\n      \"content\": \"namespace LibraryChain;\\n\\npublic interface IContract\\n{\\n    string Name { get; }\\n}\\n\\npublic static class Contract : IContract\\n{\\n    public static string Name => \\\"contract\\\";\\n}\"\n    }\n  ],\n  \"notes\": \"Added IContract interface to Contracts library so all libraries can reference a shared contract interface.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 100,
+      "prompt_tokens": 16393,
+      "total_tokens": 16493,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    },
+    "model_name": "Qwen3-Coder-Next-Q4_K_M.gguf",
+    "system_fingerprint": "b1-983559d",
+    "id": "chatcmpl-goSyBeehZlWeqHBETVL604xEAr7VUf54",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 16393,
+    "output_tokens": 100,
+    "total_tokens": 16493,
+    "input_token_details": {},
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "37be4f7a50040f26eba0f58697f6d4ba",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "model-repair",
+      "langchain",
+      "entropy-qwen80nextcoder-256k",
+      "library-chain"
+    ]
+  }
+}

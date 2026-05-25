@@ -1,0 +1,8 @@
+{"ts":"2026-05-25T17:23:09.4859079-04:00","event":"experiment_start","experiment_id":"EB-LC-wave0-model-repair-canary","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
+{"ts":"2026-05-25T17:23:09.5238885-04:00","event":"target_start","set_id":"entropy-qwen80nextcoder-256k","context_tokens":262144}
+{"ts":"2026-05-25T17:23:10.3022723-04:00","event":"target_ready","set_id":"entropy-qwen80nextcoder-256k","activation_status":"skipped","lane_base_url":"http://192.168.1.203:8000","served_model_id":"Qwen3-Coder-Next-Q4_K_M.gguf"}
+{"ts":"2026-05-25T17:25:04.8926089-04:00","event":"workload_failed","set_id":"entropy-qwen80nextcoder-256k","workload":"webpage-chain","error":"webpage-chain validation failed: page page-4.html shared nav is missing page-4.html"}
+{"ts":"2026-05-25T17:26:37.9885086-04:00","event":"workload_failed","set_id":"entropy-qwen80nextcoder-256k","workload":"library-chain","error":"library-chain validation failed: project FeatureLib missing reference CoreLib/CoreLib.csproj"}
+{"ts":"2026-05-25T17:28:13.7628363-04:00","event":"workload_failed","set_id":"entropy-qwen80nextcoder-256k","workload":"factory","error":"factory validation failed: missing station id intake"}
+{"ts":"2026-05-25T17:28:13.7648609-04:00","event":"experiment_done","results":".\\runs\\EB-LC\\EB-LC-wave0-model-repair-rerun-entropy-qwen80nextcoder-256k-20260525-172309\\results.jsonl"}
+{"ts":"2026-05-25T17:28:14.1310229-04:00","event":"critique_written","markdown":".\\runs\\EB-LC\\EB-LC-wave0-model-repair-rerun-entropy-qwen80nextcoder-256k-20260525-172309\\critique.md","json":".\\runs\\EB-LC\\EB-LC-wave0-model-repair-rerun-entropy-qwen80nextcoder-256k-20260525-172309\\critique.json"}

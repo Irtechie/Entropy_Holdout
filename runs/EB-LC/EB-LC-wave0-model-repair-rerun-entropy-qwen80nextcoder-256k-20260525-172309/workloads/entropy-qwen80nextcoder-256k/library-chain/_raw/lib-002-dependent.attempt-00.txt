@@ -1,0 +1,4 @@
+{
+  "files": [],
+  "notes": "All required files for the library-chain benchmark have already been generated in the previous stage (lib-001-core). The current stage (lib-002-dependent) does not require any changes or additions as the dependency chain and sample app are already correctly configured."
+}

@@ -1,0 +1,17 @@
+{
+  "queue_id": "EB-LC-wave0-model-repair-qwen80-rerun",
+  "target_set_id": "entropy-qwen80nextcoder-256k",
+  "slice_id": "wave0-rerun-001",
+  "classification": "completed-data-run",
+  "run_root": ".\\runs\\EB-LC\\EB-LC-wave0-model-repair-rerun-entropy-qwen80nextcoder-256k-20260525-172309",
+  "started_at": "2026-05-25T17:23:09.2783033-04:00",
+  "finished_at": "2026-05-25T17:28:14.2210608-04:00",
+  "elapsed_s": 304.9,
+  "runner_exit_code": 0,
+  "results": ".\\runs\\EB-LC\\EB-LC-wave0-model-repair-rerun-entropy-qwen80nextcoder-256k-20260525-172309\\results.jsonl",
+  "critique": ".\\runs\\EB-LC\\EB-LC-wave0-model-repair-rerun-entropy-qwen80nextcoder-256k-20260525-172309\\critique.md",
+  "critique_json": ".\\runs\\EB-LC\\EB-LC-wave0-model-repair-rerun-entropy-qwen80nextcoder-256k-20260525-172309\\critique.json",
+  "report_json": ".\\runs\\EB-LC\\EB-LC-wave0-model-repair-rerun-entropy-qwen80nextcoder-256k-20260525-172309\\report.json",
+  "wedge_risk": false,
+  "wedge_detail": null
+}

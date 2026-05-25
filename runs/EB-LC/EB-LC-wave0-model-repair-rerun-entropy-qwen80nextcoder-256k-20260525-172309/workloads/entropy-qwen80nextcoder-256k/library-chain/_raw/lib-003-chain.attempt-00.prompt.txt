@@ -1,0 +1,673 @@
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-003-chain
+Order: 3
+
+Stage goal:
+Create a third library that depends on the second library, preserving the full call chain.
+
+Expected artifacts:
+- library-chain/PipelineLib/PipelineLib.csproj (project)
+
+Validators that will run:
+- pipeline-references-feature: failure_class=api_contract
+- chain-sample-runs: failure_class=runtime_behavior
+
+Exact validator contract:
+Generate a .NET project tree under library-chain/.
+Target framework must be net10.0.
+Required project files:
+- CoreLib: CoreLib/CoreLib.csproj
+- FeatureLib: FeatureLib/FeatureLib.csproj references: CoreLib/CoreLib.csproj
+- PipelineLib: PipelineLib/PipelineLib.csproj references: FeatureLib/FeatureLib.csproj
+- Contracts: Contracts/Contracts.csproj
+- SampleApp: SampleApp/SampleApp.csproj references: PipelineLib/PipelineLib.csproj, Contracts/Contracts.csproj
+SampleApp must build and dotnet run --project SampleApp/SampleApp.csproj --no-build --nologo must print exactly core->feature->pipeline->contract.
+
+Existing generated files:
+FILE: library-chain/Contracts/Contracts.cs
+---BEGIN FILE---
+namespace LibraryChain;
+
+public static class Contract
+{
+    public static string Name => "contract";
+}
+
+---END FILE---
+
+FILE: library-chain/Contracts/Contracts.csproj
+---BEGIN FILE---
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+</Project>
+
+---END FILE---
+
+FILE: library-chain/CoreLib/CoreLib.cs
+---BEGIN FILE---
+namespace LibraryChain;
+
+public static class CoreLib
+{
+    public static string Process() => "core";
+}
+
+---END FILE---
+
+FILE: library-chain/CoreLib/CoreLib.csproj
+---BEGIN FILE---
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+</Project>
+
+---END FILE---
+
+FILE: library-chain/FeatureLib/FeatureLib.cs
+---BEGIN FILE---
+namespace LibraryChain;
+
+public static class FeatureLib
+{
+    public static string Process() => "feature";
+}
+
+---END FILE---
+
+FILE: library-chain/FeatureLib/FeatureLib.csproj
+---BEGIN FILE---
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../CoreLib/CoreLib.csproj" />
+  </ItemGroup>
+</Project>
+
+---END FILE---
+
+FILE: library-chain/PipelineLib/PipelineLib.cs
+---BEGIN FILE---
+namespace LibraryChain;
+
+public static class PipelineLib
+{
+    public static string Process() => "pipeline";
+}
+
+---END FILE---
+
+FILE: library-chain/PipelineLib/PipelineLib.csproj
+---BEGIN FILE---
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../FeatureLib/FeatureLib.csproj" />
+  </ItemGroup>
+</Project>
+
+---END FILE---
+
+FILE: library-chain/SampleApp/Program.cs
+---BEGIN FILE---
+using LibraryChain;
+
+Console.WriteLine($"{CoreLib.Process()}->{FeatureLib.Process()}->{PipelineLib.Process()}->{Contract.Name}");
+
+---END FILE---
+
+FILE: library-chain/SampleApp/SampleApp.csproj
+---BEGIN FILE---
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../PipelineLib/PipelineLib.csproj" />
+    <ProjectReference Include="../Contracts/Contracts.csproj" />
+  </ItemGroup>
+</Project>
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-001-core
+Order: 1
+
+Stage goal:
+Create the first library with one public function and a tiny sample caller.
+
+Expected artifacts:
+- library-chain/CoreLib/CoreLib.csproj (project)
+
+Validators that will run:
+- core-builds: failure_class=build
+- core-sample-runs: failure_class=runtime_behavior
+
+Exact validator contract:
+Generate a .NET project tree under library-chain/.
+Target framework must be net10.0.
+Required project files:
+- CoreLib: CoreLib/CoreLib.csproj
+- FeatureLib: FeatureLib/FeatureLib.csproj references: CoreLib/CoreLib.csproj
+- PipelineLib: PipelineLib/PipelineLib.csproj references: FeatureLib/FeatureLib.csproj
+- Contracts: Contracts/Contracts.csproj
+- SampleApp: SampleApp/SampleApp.csproj references: PipelineLib/PipelineLib.csproj, Contracts/Contracts.csproj
+SampleApp must build and dotnet run --project SampleApp/SampleApp.csproj --no-build --nologo must print exactly core->feature->pipeline->contract.
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.response.json
+---BEGIN FILE---
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/CoreLib/CoreLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/CoreLib/CoreLib.cs\",\n      \"content\": \"namespace LibraryChain;\\n\\npublic static class CoreLib\\n{\\n    public static string Process() => \\\"core\\\";\\n}\"\n    },\n    {\n      \"path\": \"library-chain/FeatureLib/FeatureLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"../CoreLib/CoreLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/FeatureLib/FeatureLib.cs\",\n      \"content\": \"namespace LibraryChain;\\n\\npublic static class FeatureLib\\n{\\n    public static string Process() => \\\"feature\\\";\\n}\"\n    },\n    {\n      \"path\": \"library-chain/PipelineLib/PipelineLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"../FeatureLib/FeatureLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/PipelineLib/PipelineLib.cs\",\n      \"content\": \"namespace LibraryChain;\\n\\npublic static class PipelineLib\\n{\\n    public static string Process() => \\\"pipeline\\\";\\n}\"\n    },\n    {\n      \"path\": \"library-chain/Contracts/Contracts.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/Contracts/Contracts.cs\",\n      \"content\": \"namespace LibraryChain;\\n\\npublic static class Contract\\n{\\n    public static string Name => \\\"contract\\\";\\n}\"\n    },\n    {\n      \"path\": \"library-chain/SampleApp/SampleApp.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <OutputType>Exe</OutputType>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"../PipelineLib/PipelineLib.csproj\\\" />\\n    <ProjectReference Include=\\\"../Contracts/Contracts.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/SampleApp/Program.cs\",\n      \"content\": \"using LibraryChain;\\n\\nConsole.WriteLine($\\\"{CoreLib.Process()}->{FeatureLib.Process()}->{PipelineLib.Process()}->{Contract.Name}\\\");\"\n    }\n  ],\n  \"notes\": \"Created CoreLib and supporting libraries for the library-chain benchmark. CoreLib defines the initial 'core' function. SampleApp prints the required output.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 835,
+      "prompt_tokens": 375,
+      "total_tokens": 1210,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    },
+    "model_name": "Qwen3-Coder-Next-Q4_K_M.gguf",
+    "system_fingerprint": "b1-983559d",
+    "id": "chatcmpl-MnnVj9aOdtUcx1Yf12bcNc86ke9Tr9v7",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 375,
+    "output_tokens": 835,
+    "total_tokens": 1210,
+    "input_token_details": {},
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "540b8a36150a973f43de8f893f1d9181",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "model-repair",
+      "langchain",
+      "entropy-qwen80nextcoder-256k",
+      "library-chain"
+    ]
+  }
+}
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "library-chain/CoreLib/CoreLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/CoreLib/CoreLib.cs",
+      "content": "namespace LibraryChain;\n\npublic static class CoreLib\n{\n    public static string Process() => \"core\";\n}"
+    },
+    {
+      "path": "library-chain/FeatureLib/FeatureLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"../CoreLib/CoreLib.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/FeatureLib/FeatureLib.cs",
+      "content": "namespace LibraryChain;\n\npublic static class FeatureLib\n{\n    public static string Process() => \"feature\";\n}"
+    },
+    {
+      "path": "library-chain/PipelineLib/PipelineLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"../FeatureLib/FeatureLib.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/PipelineLib/PipelineLib.cs",
+      "content": "namespace LibraryChain;\n\npublic static class PipelineLib\n{\n    public static string Process() => \"pipeline\";\n}"
+    },
+    {
+      "path": "library-chain/Contracts/Contracts.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/Contracts/Contracts.cs",
+      "content": "namespace LibraryChain;\n\npublic static class Contract\n{\n    public static string Name => \"contract\";\n}"
+    },
+    {
+      "path": "library-chain/SampleApp/SampleApp.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <OutputType>Exe</OutputType>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"../PipelineLib/PipelineLib.csproj\" />\n    <ProjectReference Include=\"../Contracts/Contracts.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/SampleApp/Program.cs",
+      "content": "using LibraryChain;\n\nConsole.WriteLine($\"{CoreLib.Process()}->{FeatureLib.Process()}->{PipelineLib.Process()}->{Contract.Name}\");"
+    }
+  ],
+  "notes": "Created CoreLib and supporting libraries for the library-chain benchmark. CoreLib defines the initial 'core' function. SampleApp prints the required output."
+}
+
+---END FILE---
+
+FILE: _raw/lib-002-dependent.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-002-dependent
+Order: 2
+
+Stage goal:
+Create a second library that depends on the first library and calls its public function.
+
+Expected artifacts:
+- library-chain/FeatureLib/FeatureLib.csproj (project)
+
+Validators that will run:
+- feature-references-core: failure_class=api_contract
+- feature-builds: failure_class=build
+
+Exact validator contract:
+Generate a .NET project tree under library-chain/.
+Target framework must be net10.0.
+Required project files:
+- CoreLib: CoreLib/CoreLib.csproj
+- FeatureLib: FeatureLib/FeatureLib.csproj references: CoreLib/CoreLib.csproj
+- PipelineLib: PipelineLib/PipelineLib.csproj references: FeatureLib/FeatureLib.csproj
+- Contracts: Contracts/Contracts.csproj
+- SampleApp: SampleApp/SampleApp.csproj references: PipelineLib/PipelineLib.csproj, Contracts/Contracts.csproj
+SampleApp must build and dotnet run --project SampleApp/SampleApp.csproj --no-build --nologo must print exactly core->feature->pipeline->contract.
+
+Existing generated files:
+FILE: library-chain/Contracts/Contracts.cs
+---BEGIN FILE---
+namespace LibraryChain;
+
+public static class Contract
+{
+    public static string Name => "contract";
+}
+
+---END FILE---
+
+FILE: library-chain/Contracts/Contracts.csproj
+---BEGIN FILE---
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+</Project>
+
+---END FILE---
+
+FILE: library-chain/CoreLib/CoreLib.cs
+---BEGIN FILE---
+namespace LibraryChain;
+
+public static class CoreLib
+{
+    public static string Process() => "core";
+}
+
+---END FILE---
+
+FILE: library-chain/CoreLib/CoreLib.csproj
+---BEGIN FILE---
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+</Project>
+
+---END FILE---
+
+FILE: library-chain/FeatureLib/FeatureLib.cs
+---BEGIN FILE---
+namespace LibraryChain;
+
+public static class FeatureLib
+{
+    public static string Process() => "feature";
+}
+
+---END FILE---
+
+FILE: library-chain/FeatureLib/FeatureLib.csproj
+---BEGIN FILE---
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../CoreLib/CoreLib.csproj" />
+  </ItemGroup>
+</Project>
+
+---END FILE---
+
+FILE: library-chain/PipelineLib/PipelineLib.cs
+---BEGIN FILE---
+namespace LibraryChain;
+
+public static class PipelineLib
+{
+    public static string Process() => "pipeline";
+}
+
+---END FILE---
+
+FILE: library-chain/PipelineLib/PipelineLib.csproj
+---BEGIN FILE---
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../FeatureLib/FeatureLib.csproj" />
+  </ItemGroup>
+</Project>
+
+---END FILE---
+
+FILE: library-chain/SampleApp/Program.cs
+---BEGIN FILE---
+using LibraryChain;
+
+Console.WriteLine($"{CoreLib.Process()}->{FeatureLib.Process()}->{PipelineLib.Process()}->{Contract.Name}");
+
+---END FILE---
+
+FILE: library-chain/SampleApp/SampleApp.csproj
+---BEGIN FILE---
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../PipelineLib/PipelineLib.csproj" />
+    <ProjectReference Include="../Contracts/Contracts.csproj" />
+  </ItemGroup>
+</Project>
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-001-core
+Order: 1
+
+Stage goal:
+Create the first library with one public function and a tiny sample caller.
+
+Expected artifacts:
+- library-chain/CoreLib/CoreLib.csproj (project)
+
+Validators that will run:
+- core-builds: failure_class=build
+- core-sample-runs: failure_class=runtime_behavior
+
+Exact validator contract:
+Generate a .NET project tree under library-chain/.
+Target framework must be net10.0.
+Required project files:
+- CoreLib: CoreLib/CoreLib.csproj
+- FeatureLib: FeatureLib/FeatureLib.csproj references: CoreLib/CoreLib.csproj
+- PipelineLib: PipelineLib/PipelineLib.csproj references: FeatureLib/FeatureLib.csproj
+- Contracts: Contracts/Contracts.csproj
+- SampleApp: SampleApp/SampleApp.csproj references: PipelineLib/PipelineLib.csproj, Contracts/Contracts.csproj
+SampleApp must build and dotnet run --project SampleApp/SampleApp.csproj --no-build --nologo must print exactly core->feature->pipeline->contract.
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.response.json
+---BEGIN FILE---
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/CoreLib/CoreLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/CoreLib/CoreLib.cs\",\n      \"content\": \"namespace LibraryChain;\\n\\npublic static class CoreLib\\n{\\n    public static string Process() => \\\"core\\\";\\n}\"\n    },\n    {\n      \"path\": \"library-chain/FeatureLib/FeatureLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"../CoreLib/CoreLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/FeatureLib/FeatureLib.cs\",\n      \"content\": \"namespace LibraryChain;\\n\\npublic static class FeatureLib\\n{\\n    public static string Process() => \\\"feature\\\";\\n}\"\n    },\n    {\n      \"path\": \"library-chain/PipelineLib/PipelineLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"../FeatureLib/FeatureLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/PipelineLib/PipelineLib.cs\",\n      \"content\": \"namespace LibraryChain;\\n\\npublic static class PipelineLib\\n{\\n    public static string Process() => \\\"pipeline\\\";\\n}\"\n    },\n    {\n      \"path\": \"library-chain/Contracts/Contracts.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/Contracts/Contracts.cs\",\n      \"content\": \"namespace LibraryChain;\\n\\npublic static class Contract\\n{\\n    public static string Name => \\\"contract\\\";\\n}\"\n    },\n    {\n      \"path\": \"library-chain/SampleApp/SampleApp.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <OutputType>Exe</OutputType>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"../PipelineLib/PipelineLib.csproj\\\" />\\n    <ProjectReference Include=\\\"../Contracts/Contracts.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/SampleApp/Program.cs\",\n      \"content\": \"using LibraryChain;\\n\\nConsole.WriteLine($\\\"{CoreLib.Process()}->{FeatureLib.Process()}->{PipelineLib.Process()}->{Contract.Name}\\\");\"\n    }\n  ],\n  \"notes\": \"Created CoreLib and supporting libraries for the library-chain benchmark. CoreLib defines the initial 'core' function. SampleApp prints the required output.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 835,
+      "prompt_tokens": 375,
+      "total_tokens": 1210,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    },
+    "model_name": "Qwen3-Coder-Next-Q4_K_M.gguf",
+    "system_fingerprint": "b1-983559d",
+    "id": "chatcmpl-MnnVj9aOdtUcx1Yf12bcNc86ke9Tr9v7",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 375,
+    "output_tokens": 835,
+    "total_tokens": 1210,
+    "input_token_details": {},
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "540b8a36150a973f43de8f893f1d9181",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "model-repair",
+      "langchain",
+      "entropy-qwen80nextcoder-256k",
+      "library-chain"
+    ]
+  }
+}
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "library-chain/CoreLib/CoreLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/CoreLib/CoreLib.cs",
+      "content": "namespace LibraryChain;\n\npublic static class CoreLib\n{\n    public static string Process() => \"core\";\n}"
+    },
+    {
+      "path": "library-chain/FeatureLib/FeatureLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"../CoreLib/CoreLib.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/FeatureLib/FeatureLib.cs",
+      "content": "namespace LibraryChain;\n\npublic static class FeatureLib\n{\n    public static string Process() => \"feature\";\n}"
+    },
+    {
+      "path": "library-chain/PipelineLib/PipelineLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"../FeatureLib/FeatureLib.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/PipelineLib/PipelineLib.cs",
+      "content": "namespace LibraryChain;\n\npublic static class PipelineLib\n{\n    public static string Process() => \"pipeline\";\n}"
+    },
+    {
+      "path": "library-chain/Contracts/Contracts.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/Contracts/Contracts.cs",
+      "content": "namespace LibraryChain;\n\npublic static class Contract\n{\n    public static string Name => \"contract\";\n}"
+    },
+    {
+      "path": "library-chain/SampleApp/SampleApp.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <OutputType>Exe</OutputType>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"../PipelineLib/PipelineLib.csproj\" />\n    <ProjectReference Include=\"../Contracts/Contracts.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/SampleApp/Program.cs",
+      "content": "using LibraryChain;\n\nConsole.WriteLine($\"{CoreLib.Process()}->{FeatureLib.Process()}->{PipelineLib.Process()}->{Contract.Name}\");"
+    }
+  ],
+  "notes": "Created CoreLib and supporting libraries for the library-chain benchmark. CoreLib defines the initial 'core' function. SampleApp prints the required output."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/lib-002-dependent.attempt-00.response.json
+---BEGIN FILE---
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [],\n  \"notes\": \"All required files for the library-chain benchmark have already been generated in the previous stage (lib-001-core). The current stage (lib-002-dependent) does not require any changes or additions as the dependency chain and sample app are already correctly configured.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 67,
+      "prompt_tokens": 3685,
+      "total_tokens": 3752,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    },
+    "model_name": "Qwen3-Coder-Next-Q4_K_M.gguf",
+    "system_fingerprint": "b1-983559d",
+    "id": "chatcmpl-DCUj2scjsSXpKZvVFYXBl3kkMoS80pz6",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 3685,
+    "output_tokens": 67,
+    "total_tokens": 3752,
+    "input_token_details": {},
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "0bc6d04f51af896c7fe511197143d74b",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "model-repair",
+      "langchain",
+      "entropy-qwen80nextcoder-256k",
+      "library-chain"
+    ]
+  }
+}
+
+---END FILE---
+
+FILE: _raw/lib-002-dependent.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [],
+  "notes": "All required files for the library-chain benchmark have already been generated in the previous stage (lib-001-core). The current stage (lib-002-dependent) does not require any changes or additions as the dependency chain and sample app are already correctly configured."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
