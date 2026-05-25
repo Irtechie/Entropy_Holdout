@@ -16,6 +16,7 @@ param(
 $ErrorActionPreference = 'Stop'
 
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+. (Join-Path $PSScriptRoot 'Import-DotEnv.ps1')
 $experiment = Get-Content -Raw -LiteralPath $ExperimentPath | ConvertFrom-Json -Depth 64
 $manifest = Get-Content -Raw -LiteralPath $TargetsPath | ConvertFrom-Json -Depth 64
 

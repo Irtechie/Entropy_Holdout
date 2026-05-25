@@ -18,6 +18,7 @@ param(
 $ErrorActionPreference = 'Stop'
 
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+. (Join-Path $PSScriptRoot 'Import-DotEnv.ps1')
 
 if (-not $OutputRoot) {
   $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'

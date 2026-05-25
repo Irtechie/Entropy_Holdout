@@ -21,6 +21,10 @@ $env:LANGFUSE_HOST = "http://<langfuse-host>:<port>"
 $env:OPENAI_API_KEY = "not-needed-for-local-openai-compatible-backends"
 ```
 
+On the DGX-hosted shared Langfuse instance, the host is currently `http://192.168.1.203:3100`.
+
+The EB PowerShell scripts load a repo-local `.env` automatically if it exists. Keep real keys in `.env`; it is ignored by Git.
+
 ## Preflight
 
 ```powershell

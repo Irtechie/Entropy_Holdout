@@ -15,6 +15,7 @@ param(
 $ErrorActionPreference = 'Stop'
 
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+. (Join-Path $PSScriptRoot 'Import-DotEnv.ps1')
 $queue = Get-Content -Raw -LiteralPath $QueuePath | ConvertFrom-Json -Depth 32
 $experiment = Get-Content -Raw -LiteralPath $ExperimentPath | ConvertFrom-Json -Depth 32
 $baseUrl = if ($experiment.base_url) { [string]$experiment.base_url } else { 'http://192.168.1.203:4000' }

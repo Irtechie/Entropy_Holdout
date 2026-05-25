@@ -2,6 +2,7 @@ $ErrorActionPreference = 'Stop'
 
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $script = Join-Path $PSScriptRoot 'langchain_completion.py'
+. (Join-Path $PSScriptRoot 'Import-DotEnv.ps1')
 
 Write-Host "Python:"
 python --version
