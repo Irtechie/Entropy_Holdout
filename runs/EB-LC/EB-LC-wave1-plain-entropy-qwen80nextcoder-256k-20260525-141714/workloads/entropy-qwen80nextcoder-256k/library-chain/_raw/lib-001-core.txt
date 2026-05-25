@@ -1,0 +1,45 @@
+{
+  "files": [
+    {
+      "path": "library-chain/CoreLib/CoreLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/CoreLib/Core.cs",
+      "content": "namespace CoreLib;\n\npublic static class Core\n{\n    public static string Process() => \"core\";\n}"
+    },
+    {
+      "path": "library-chain/FeatureLib/FeatureLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"..\\CoreLib\\CoreLib.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/FeatureLib/Feature.cs",
+      "content": "namespace FeatureLib;\n\npublic static class Feature\n{\n    public static string Process() => \"feature\";\n}"
+    },
+    {
+      "path": "library-chain/PipelineLib/PipelineLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"..\\FeatureLib\\FeatureLib.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/PipelineLib/Pipeline.cs",
+      "content": "namespace PipelineLib;\n\npublic static class Pipeline\n{\n    public static string Process() => \"pipeline\";\n}"
+    },
+    {
+      "path": "library-chain/Contracts/Contracts.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/Contracts/Contract.cs",
+      "content": "namespace Contracts;\n\npublic static class Contract\n{\n    public static string Process() => \"contract\";\n}"
+    },
+    {
+      "path": "library-chain/SampleApp/SampleApp.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <OutputType>Exe</OutputType>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"..\\PipelineLib\\PipelineLib.csproj\" />\n    <ProjectReference Include=\"..\\Contracts\\Contracts.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/SampleApp/Program.cs",
+      "content": "using CoreLib;\nusing FeatureLib;\nusing PipelineLib;\nusing Contracts;\n\nConsole.WriteLine($\"{Core.Process()}->{Feature.Process()}->{Pipeline.Process()}->{Contract.Process()}\");"
+    }
+  ],
+  "notes": "Created a 5-library chain with CoreLib as the base, referencing up through FeatureLib and PipelineLib, plus a Contracts library. SampleApp references PipelineLib and Contracts, and prints the required chain output."
+}

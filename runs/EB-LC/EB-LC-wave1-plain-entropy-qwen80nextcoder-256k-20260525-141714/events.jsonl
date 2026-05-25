@@ -1,0 +1,8 @@
+{"ts":"2026-05-25T14:17:14.6207239-04:00","event":"experiment_start","experiment_id":"EB-LC-wave1-plain-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
+{"ts":"2026-05-25T14:17:14.6252585-04:00","event":"target_start","set_id":"entropy-qwen80nextcoder-256k","context_tokens":262144}
+{"ts":"2026-05-25T14:17:47.8857695-04:00","event":"target_ready","set_id":"entropy-qwen80nextcoder-256k","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"Qwen3-Coder-Next-Q4_K_M.gguf"}
+{"ts":"2026-05-25T14:19:37.4187752-04:00","event":"workload_failed","set_id":"entropy-qwen80nextcoder-256k","workload":"webpage-chain","error":"webpage-chain validation failed: page page-4.html shared nav is missing page-4.html"}
+{"ts":"2026-05-25T14:20:05.5755021-04:00","event":"workload_failed","set_id":"entropy-qwen80nextcoder-256k","workload":"library-chain","error":"model did not generate expected artifact path: library-chain/core"}
+{"ts":"2026-05-25T14:20:37.5172848-04:00","event":"workload_failed","set_id":"entropy-qwen80nextcoder-256k","workload":"factory","error":"You cannot call a method on a null-valued expression."}
+{"ts":"2026-05-25T14:20:37.5190066-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-qwen80nextcoder-256k-20260525-141714\\results.jsonl"}
+{"ts":"2026-05-25T14:20:37.5474587-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-qwen80nextcoder-256k-20260525-141714\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-qwen80nextcoder-256k-20260525-141714\\critique.json"}
