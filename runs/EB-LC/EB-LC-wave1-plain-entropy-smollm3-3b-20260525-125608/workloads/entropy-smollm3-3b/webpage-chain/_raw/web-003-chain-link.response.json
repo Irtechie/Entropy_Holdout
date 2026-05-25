@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/page-2.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Entropy Page 2</title>\\n</head>\\n<body>\\n    <main>\\n        <h1>Entropy Page 2</h1>\\n        <p>This is the main content for page 2.</p>\\n    </main>\\n    <nav>\\n        <ul>\\n            <li><a href=\\\"index.html\\\">Home</a></li>\\n            <li><a href=\\\"page-2.html\\\">Page 2</a></li>\\n            <li><a href=\\\"page-3.html\\\">Page 3</a></li>\\n            <li><a href=\\\"page-4.html\\\">Page 4</a></li>\\n            <li><a href=\\\"page-5.html\\\">Page 5</a></li>\\n        </ul>\\n    </nav>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created page-2.html with the required title and backlink to index.html.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 287,
+      "prompt_tokens": 5321,
+      "total_tokens": 5608,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 77
+      }
+    },
+    "model_name": "SmolLM3-Q4_K_M.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-WWb099p1YKNoLZ3hj3XMKxhc4v3JpuHa",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 5321,
+    "output_tokens": 287,
+    "total_tokens": 5608,
+    "input_token_details": {
+      "cache_read": 77
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "784b3e414e12f5a5b83c45e9052470f7",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-smollm3-3b",
+      "webpage-chain"
+    ]
+  }
+}

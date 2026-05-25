@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Entropy Page 1</title>\n</head>\n<body>\n    <main>\n        <h1>Entropy Page 1</h1>\n        <p>This is the main content for page 1.</p>\n    </main>\n    <nav>\n        <ul>\n            <li><a href=\"index.html\">Home</a></li>\n            <li><a href=\"page-2.html\">Page 2</a></li>\n            <li><a href=\"page-3.html\">Page 3</a></li>\n            <li><a href=\"page-4.html\">Page 4</a></li>\n            <li><a href=\"page-5.html\">Page 5</a></li>\n        </ul>\n    </nav>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created index.html with the required title and navigation links."
+}

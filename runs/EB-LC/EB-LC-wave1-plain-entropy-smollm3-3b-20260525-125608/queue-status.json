@@ -1,0 +1,17 @@
+{
+  "queue_id": "EB-LC-wave1-plain-singlebox",
+  "target_set_id": "entropy-smollm3-3b",
+  "slice_id": "lc-wave1-004",
+  "classification": "completed-data-run",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608",
+  "started_at": "2026-05-25T12:56:08.4349885-04:00",
+  "finished_at": "2026-05-25T12:58:49.2514181-04:00",
+  "elapsed_s": 160.8,
+  "runner_exit_code": 0,
+  "results": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\results.jsonl",
+  "critique": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\critique.md",
+  "critique_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\critique.json",
+  "report_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\report.json",
+  "wedge_risk": false,
+  "wedge_detail": null
+}

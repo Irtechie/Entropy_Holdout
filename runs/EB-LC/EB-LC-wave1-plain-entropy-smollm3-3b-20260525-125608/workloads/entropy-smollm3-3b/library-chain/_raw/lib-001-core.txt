@@ -1,0 +1,27 @@
+```json
+{
+  "files": [
+    {
+      "path": "library-chain/core/CoreLib/CoreLib.csproj",
+      "content": "[Your .NET 10.0 compatible .csproj file here]"
+    },
+    {
+      "path": "library-chain/core/FeatureLib/FeatureLib.csproj",
+      "content": "[Your .NET 10.0 compatible .csproj file here]"
+    },
+    {
+      "path": "library-chain/core/PipelineLib/PipelineLib.csproj",
+      "content": "[Your .NET 10.0 compatible .csproj file here]"
+    },
+    {
+      "path": "library-chain/Contracts/Contracts.csproj",
+      "content": "[Your .NET 10.0 compatible .csproj file here]"
+    },
+    {
+      "path": "library-chain/SampleApp/SampleApp.csproj",
+      "content": "[Your .NET 10.0 compatible .csproj file here]"
+    }
+  ],
+  "notes": "Ensure all projects are compatible with .NET 10.0 and follow the specified structure."
+}
+```

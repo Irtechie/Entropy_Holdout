@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "benchmark": "EB",
+  "generated_at": "2026-05-25T12:58:49.2287611-04:00",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608",
+  "results_path": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\results.jsonl",
+  "rubric": {
+    "scale": "0-5",
+    "score_meaning": {
+      "0": "No valid stage output or strict output contract failure before code evaluation.",
+      "1": "Only first-stage or minimal artifact progress.",
+      "2": "Some local continuity, but breaks before deeper dependency pressure.",
+      "3": "Meaningful cross-stage progress, but breaks before completing workload invariants.",
+      "4": "All planned generation stages completed, but final validator failed.",
+      "5": "All planned generation stages and final validation passed."
+    },
+    "dimensions": [
+      "output_contract",
+      "artifact_continuity",
+      "dependency_retention",
+      "validator_readiness",
+      "entropy_pressure"
+    ]
+  },
+  "totals": {
+    "target_workload_count": 3,
+    "fully_validated_count": 0,
+    "prompt_tokens": 10439,
+    "completion_tokens": 5420,
+    "total_tokens": 15859
+  },
+  "critiques": [
+    {
+      "target_set_id": "entropy-smollm3-3b",
+      "model_id": "SmolLM3-Q4_K_M.gguf",
+      "context_tokens": 262144,
+      "harness_mode": "plain",
+      "workload_id": "factory",
+      "planned_stage_count": 4,
+      "stages_seen": 1,
+      "max_pass_stage": 0,
+      "entropy_right_shift": {
+        "passed_stages": 0,
+        "possible_stages": 4,
+        "normalized": 0.0,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "factory-001-layout",
+      "first_failure_class": "generation",
+      "first_error": "Conversion from JSON failed with error: After parsing a value an unexpected character was encountered: \". Path 'files[0].content', line 6, position 16.",
+      "likely_entropy_cause": "The model lost the strict JSON response contract before code could be evaluated.",
+      "eb_score": 0,
+      "dimension_scores": {
+        "output_contract": 0,
+        "artifact_continuity": 0,
+        "dependency_retention": 0,
+        "validator_readiness": 0,
+        "entropy_pressure": 0
+      },
+      "token_usage": {
+        "prompt_tokens": 400,
+        "completion_tokens": 4096,
+        "total_tokens": 4496
+      },
+      "breakpoint_metric": "highest ordered stage with valid component graph, configuration, and end-to-end factory behavior",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\workloads\\entropy-smollm3-3b\\factory\\_raw\\factory-001-layout.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\workloads\\entropy-smollm3-3b\\factory\\_raw\\factory-001-layout.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\workloads\\entropy-smollm3-3b\\factory\\_raw\\factory-001-layout.prompt.txt"
+      ],
+      "generated_file_count": 0,
+      "generated_files": []
+    },
+    {
+      "target_set_id": "entropy-smollm3-3b",
+      "model_id": "SmolLM3-Q4_K_M.gguf",
+      "context_tokens": 262144,
+      "harness_mode": "plain",
+      "workload_id": "library-chain",
+      "planned_stage_count": 4,
+      "stages_seen": 2,
+      "max_pass_stage": 1,
+      "entropy_right_shift": {
+        "passed_stages": 1,
+        "possible_stages": 4,
+        "normalized": 0.25,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "lib-002-dependent",
+      "first_failure_class": "generation",
+      "first_error": "model did not generate expected artifact path: library-chain/feature",
+      "likely_entropy_cause": "The model produced files, but not at the paths required by the stage contract.",
+      "eb_score": 1,
+      "dimension_scores": {
+        "output_contract": 1,
+        "artifact_continuity": 1,
+        "dependency_retention": 1,
+        "validator_readiness": 1,
+        "entropy_pressure": 1
+      },
+      "token_usage": {
+        "prompt_tokens": 2201,
+        "completion_tokens": 470,
+        "total_tokens": 2671
+      },
+      "breakpoint_metric": "highest ordered stage with valid dependency references, build output, and sample call",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\workloads\\entropy-smollm3-3b\\library-chain\\_raw\\lib-001-core.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\workloads\\entropy-smollm3-3b\\library-chain\\_raw\\lib-001-core.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\workloads\\entropy-smollm3-3b\\library-chain\\_raw\\lib-002-dependent.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\workloads\\entropy-smollm3-3b\\library-chain\\_raw\\lib-002-dependent.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\workloads\\entropy-smollm3-3b\\library-chain\\_raw\\lib-001-core.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\workloads\\entropy-smollm3-3b\\library-chain\\_raw\\lib-002-dependent.prompt.txt"
+      ],
+      "generated_file_count": 5,
+      "generated_files": [
+        "library-chain/core/CoreLib/CoreLib.csproj",
+        "library-chain/core/FeatureLib/FeatureLib.csproj",
+        "library-chain/core/PipelineLib/PipelineLib.csproj",
+        "library-chain/Contracts/Contracts.csproj",
+        "library-chain/SampleApp/SampleApp.csproj"
+      ]
+    },
+    {
+      "target_set_id": "entropy-smollm3-3b",
+      "model_id": "SmolLM3-Q4_K_M.gguf",
+      "context_tokens": 262144,
+      "harness_mode": "plain",
+      "workload_id": "webpage-chain",
+      "planned_stage_count": 5,
+      "stages_seen": 3,
+      "max_pass_stage": 2,
+      "entropy_right_shift": {
+        "passed_stages": 2,
+        "possible_stages": 5,
+        "normalized": 0.4,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "web-003-chain-link",
+      "first_failure_class": "generation",
+      "first_error": "model did not generate expected artifact path: site/page-3.html",
+      "likely_entropy_cause": "The model produced files, but not at the paths required by the stage contract.",
+      "eb_score": 1,
+      "dimension_scores": {
+        "output_contract": 1,
+        "artifact_continuity": 1,
+        "dependency_retention": 1,
+        "validator_readiness": 1,
+        "entropy_pressure": 2
+      },
+      "token_usage": {
+        "prompt_tokens": 7838,
+        "completion_tokens": 854,
+        "total_tokens": 8692
+      },
+      "breakpoint_metric": "highest ordered stage with valid pages, backlinks, and shared structure",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\workloads\\entropy-smollm3-3b\\webpage-chain\\_raw\\web-001-home.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\workloads\\entropy-smollm3-3b\\webpage-chain\\_raw\\web-001-home.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\workloads\\entropy-smollm3-3b\\webpage-chain\\_raw\\web-002-backlink.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\workloads\\entropy-smollm3-3b\\webpage-chain\\_raw\\web-002-backlink.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\workloads\\entropy-smollm3-3b\\webpage-chain\\_raw\\web-003-chain-link.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\workloads\\entropy-smollm3-3b\\webpage-chain\\_raw\\web-003-chain-link.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\workloads\\entropy-smollm3-3b\\webpage-chain\\_raw\\web-001-home.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\workloads\\entropy-smollm3-3b\\webpage-chain\\_raw\\web-002-backlink.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\workloads\\entropy-smollm3-3b\\webpage-chain\\_raw\\web-003-chain-link.prompt.txt"
+      ],
+      "generated_file_count": 2,
+      "generated_files": [
+        "site/index.html",
+        "site/page-2.html"
+      ]
+    }
+  ]
+}

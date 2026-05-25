@@ -1,0 +1,8 @@
+{"ts":"2026-05-25T12:56:08.7724127-04:00","event":"experiment_start","experiment_id":"EB-LC-wave1-plain-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
+{"ts":"2026-05-25T12:56:08.7768320-04:00","event":"target_start","set_id":"entropy-smollm3-3b","context_tokens":262144}
+{"ts":"2026-05-25T12:56:29.8704725-04:00","event":"target_ready","set_id":"entropy-smollm3-3b","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"SmolLM3-Q4_K_M.gguf"}
+{"ts":"2026-05-25T12:57:11.9202141-04:00","event":"workload_failed","set_id":"entropy-smollm3-3b","workload":"webpage-chain","error":"model did not generate expected artifact path: site/page-3.html"}
+{"ts":"2026-05-25T12:57:47.7919643-04:00","event":"workload_failed","set_id":"entropy-smollm3-3b","workload":"library-chain","error":"model did not generate expected artifact path: library-chain/feature"}
+{"ts":"2026-05-25T12:58:49.1946970-04:00","event":"workload_failed","set_id":"entropy-smollm3-3b","workload":"factory","error":"Conversion from JSON failed with error: After parsing a value an unexpected character was encountered: \". Path 'files[0].content', line 6, position 16."}
+{"ts":"2026-05-25T12:58:49.2019908-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\results.jsonl"}
+{"ts":"2026-05-25T12:58:49.2358157-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-smollm3-3b-20260525-125608\\critique.json"}

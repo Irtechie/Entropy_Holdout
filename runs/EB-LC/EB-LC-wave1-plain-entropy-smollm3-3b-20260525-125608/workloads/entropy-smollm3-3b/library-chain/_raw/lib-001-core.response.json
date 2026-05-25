@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"library-chain/core/CoreLib/CoreLib.csproj\",\n      \"content\": \"[Your .NET 10.0 compatible .csproj file here]\"\n    },\n    {\n      \"path\": \"library-chain/core/FeatureLib/FeatureLib.csproj\",\n      \"content\": \"[Your .NET 10.0 compatible .csproj file here]\"\n    },\n    {\n      \"path\": \"library-chain/core/PipelineLib/PipelineLib.csproj\",\n      \"content\": \"[Your .NET 10.0 compatible .csproj file here]\"\n    },\n    {\n      \"path\": \"library-chain/Contracts/Contracts.csproj\",\n      \"content\": \"[Your .NET 10.0 compatible .csproj file here]\"\n    },\n    {\n      \"path\": \"library-chain/SampleApp/SampleApp.csproj\",\n      \"content\": \"[Your .NET 10.0 compatible .csproj file here]\"\n    }\n  ],\n  \"notes\": \"Ensure all projects are compatible with .NET 10.0 and follow the specified structure.\"\n}\n```",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 235,
+      "prompt_tokens": 399,
+      "total_tokens": 634,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 70
+      }
+    },
+    "model_name": "SmolLM3-Q4_K_M.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-vOtSrvB8faxkdV22aKhTIjevQACTI01o",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 399,
+    "output_tokens": 235,
+    "total_tokens": 634,
+    "input_token_details": {
+      "cache_read": 70
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "a1eadfadc80a8b9ba5aab0356bf36f00",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-smollm3-3b",
+      "library-chain"
+    ]
+  }
+}
