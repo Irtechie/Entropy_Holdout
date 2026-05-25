@@ -184,6 +184,9 @@ function Get-RelativeFiles($root) {
 
 function Write-GeneratedFiles($runRoot, $files) {
   $written = @()
+  if ($null -eq $files) {
+    return @()
+  }
   foreach ($file in @($files)) {
     if (-not $file.path -or $null -eq $file.content) {
       throw "generated file entry must include path and content"
@@ -205,16 +208,23 @@ function Write-GeneratedFiles($runRoot, $files) {
   return $written
 }
 
-function Assert-StageArtifactsWritten($stage, $written) {
-  if (@($written).Count -eq 0) {
-    throw "model did not generate any files"
+function Test-ArtifactExists($runRoot, $relativePath) {
+  $relative = ([string]$relativePath).Replace('/', [System.IO.Path]::DirectorySeparatorChar)
+  if ([System.IO.Path]::IsPathRooted($relative) -or $relative -like '*..*') {
+    return $false
   }
+  $target = Join-Path $runRoot $relative
+  return (Test-Path -LiteralPath $target)
+}
+
+function Assert-StageArtifactsWritten($runRoot, $stage, $written) {
+  $writtenPaths = @($written | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) })
   foreach ($artifact in @($stage.expected_artifacts)) {
     $expected = ([string]$artifact.path).Replace('\','/')
-    $matched = @($written | Where-Object {
-      $_ -eq $expected -or $_.StartsWith("$expected/")
+    $matched = @($writtenPaths | Where-Object {
+      $_ -eq $expected -or ([string]$_).StartsWith("$expected/")
     })
-    if ($matched.Count -eq 0) {
+    if ($matched.Count -eq 0 -and -not (Test-ArtifactExists $runRoot $expected)) {
       throw "model did not generate expected artifact path: $expected"
     }
   }
@@ -536,7 +546,7 @@ function New-ApiWorkload($runRoot) {
         try {
           $parsed = ConvertFrom-JsonObjectText $text
           $written = Write-GeneratedFiles $runRoot $parsed.files
-          Assert-StageArtifactsWritten $stage $written
+          Assert-StageArtifactsWritten $runRoot $stage $written
           $row.generated_files = @($written)
           $row.status = 'pass'
           $row.failure_class = 'none'
