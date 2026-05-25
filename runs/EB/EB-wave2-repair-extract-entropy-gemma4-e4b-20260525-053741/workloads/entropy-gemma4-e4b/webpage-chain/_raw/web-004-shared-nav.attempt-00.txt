@@ -1,0 +1,23 @@
+```json
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Home Page - Webpage Chain</title>\n</head>\n<body>\n    <nav id=\"navigation\">\n        <a href=\"index.html\">Page 1</a> | \n        <a href=\"page-2.html\">Page 2</a> | \n        <a href=\"page-3.html\">Page 3</a> | \n        <a href=\"page-4.html\">Page 4</a>\n    </nav>\n    <main id=\"main-content\">\n        <h1>Welcome to the Webpage Chain Benchmark</h1>\n        <p>This is the home page (web-001-home). Content will be added and expanded in subsequent stages.</p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-2.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 2 - Webpage Chain</title>\n</head>\n<body>\n    <nav id=\"navigation\">\n        <a href=\"index.html\">Page 1</a> | \n        <a href=\"page-2.html\">Page 2</a> | \n        <a href=\"page-3.html\">Page 3</a> | \n        <a href=\"page-4.html\">Page 4</a>\n    </nav>\n    <main id=\"main-content\">\n        <h1>Welcome to Page 2</h1>\n        <p>This is the second page in the webpage chain (web-002-backlink).</p>\n        <p>You can return to the home page:</p>\n        <p><a href=\"index.html\">Go back to Home Page (Page 1)</a></p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-3.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 3 - Webpage Chain</title>\n</head>\n<body>\n    <nav id=\"navigation\">\n        <a href=\"index.html\">Page 1</a> | \n        <a href=\"page-2.html\">Page 2</a> | \n        <a href=\"page-3.html\">Page 3</a> | \n        <a href=\"page-4.html\">Page 4</a>\n    </nav>\n    <main id=\"main-content\">\n        <h1>Welcome to Page 3</h1>\n        <p>This is the third page in the webpage chain (web-003-chain-link).</p>\n        <p>You can return to the previous page:</p>\n        <p><a href=\"page-2.html\">Go back to Page 2</a></p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-4.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 4 - Webpage Chain</title>\n</head>\n<body>\n    <nav id=\"navigation\">\n        <a href=\"index.html\">Page 1</a> | \n        <a href=\"page-2.html\">Page 2</a> | \n        <a href=\"page-3.html\">Page 3</a> | \n        <a href=\"page-4.html\">Page 4</a>\n    </nav>\n    <main id=\"main-content\">\n        <h1>Welcome to Page 4</h1>\n        <p>This is the fourth page in the webpage chain (web-004-shared-nav).</p>\n        <p>You can return to the previous page:</p>\n        <p><a href=\"page-3.html\">Go back to Page 3</a></p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created site/page-4.html and updated all existing pages (1, 2, 3) to include shared navigation linking to all four pages."
+}
+```

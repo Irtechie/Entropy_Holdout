@@ -1,0 +1,17 @@
+{
+  "queue_id": "EB-wave2-repair-extract-singlebox",
+  "target_set_id": "entropy-gemma4-e4b",
+  "slice_id": "wave2-repair-005",
+  "classification": "completed-data-run",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gemma4-e4b-20260525-053741",
+  "started_at": "2026-05-25T05:37:41.1609748-04:00",
+  "finished_at": "2026-05-25T05:47:55.2181543-04:00",
+  "elapsed_s": 614.1,
+  "runner_exit_code": 0,
+  "results": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gemma4-e4b-20260525-053741\\results.jsonl",
+  "critique": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gemma4-e4b-20260525-053741\\critique.md",
+  "critique_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gemma4-e4b-20260525-053741\\critique.json",
+  "report_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gemma4-e4b-20260525-053741\\report.json",
+  "wedge_risk": false,
+  "wedge_detail": null
+}

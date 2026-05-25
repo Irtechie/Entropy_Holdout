@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "benchmark": "EB",
+  "created_at": "2026-05-25T05:37:41.2532853-04:00",
+  "experiment_path": "E:\\Dev\\AI\\remote\\Entropy\\benchmarks\\entropy_workloads\\experiment.wave2-repair-extract-singlebox.json",
+  "targets_path": "E:\\Dev\\AI\\remote\\Entropy\\llmcommune-entropy-targets.json",
+  "controller": "http://192.168.1.203:4000",
+  "git_head": "5522c6cd29c56deafee2c4303c340f0b72da7309",
+  "command": "pwsh \"E:\\Dev\\AI\\remote\\Entropy\\tools\\run_entropy_serial_experiment.ps1\" -ExperimentPath \"E:\\Dev\\AI\\remote\\Entropy\\benchmarks\\entropy_workloads\\experiment.wave2-repair-extract-singlebox.json\" -TargetsPath \"E:\\Dev\\AI\\remote\\Entropy\\llmcommune-entropy-targets.json\" -Base \"http://192.168.1.203:4000\" -ResultRoot \"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gemma4-e4b-20260525-053741\" -OnlySet \"entropy-gemma4-e4b\"",
+  "result_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gemma4-e4b-20260525-053741",
+  "aggregate_results": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gemma4-e4b-20260525-053741\\results.jsonl",
+  "events": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gemma4-e4b-20260525-053741\\events.jsonl",
+  "critique": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gemma4-e4b-20260525-053741\\critique.md",
+  "critique_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-gemma4-e4b-20260525-053741\\critique.json",
+  "keep_run_outputs": true,
+  "targets": [
+    {
+      "set_id": "entropy-gemma4-e4b",
+      "profile_id": "entropy_gguf_gemma4_e4b_large",
+      "parameter_count_b": 4,
+      "context_tokens": 262144,
+      "runtime_family": "llama.cpp",
+      "requires_gx10": false
+    }
+  ],
+  "workloads": [
+    "webpage-chain",
+    "library-chain",
+    "factory"
+  ]
+}

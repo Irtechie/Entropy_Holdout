@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "path": "library-chain/feature/__init__.py",
+      "content": ""
+    },
+    {
+      "path": "library-chain/feature/feature.py",
+      "content": "from core import greet\n\ndef process_greeting(name: str) -> str:\n    \"\"\"Processes a greeting using the core library.\n    \"\"\"\n    base_greeting = greet(name)\n    return f\"Feature processed: {base_greeting.upper()}\"\n"
+    },
+    {
+      "path": "library-chain/sample_caller.py",
+      "content": "from feature import process_greeting\n\ndef main():\n    # Use the new feature library which depends on core\n    message = process_greeting(\"Entropy User\")\n    print(message)\n\nif __name__ == \"__main__\":\n    main()"
+    }
+  ],
+  "notes": "Created the 'feature' library which depends on 'core' and updated the sample caller to demonstrate the dependency chain."
+}
