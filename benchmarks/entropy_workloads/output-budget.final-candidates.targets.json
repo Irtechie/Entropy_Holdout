@@ -1,0 +1,24 @@
+{
+  "id": "output-budget-final-candidates",
+  "description": "Live LLMCommune completion-budget probes for final EB candidate targets. First pass should run 8192 before deeper 16384/32768 probes.",
+  "base_url": "http://192.168.1.203:4000",
+  "max_tokens": [8192],
+  "targets": [
+    { "set_id": "entropy-qwen25-coder-05b-large", "enabled": true, "notes": "Floor/control; not a headline coding-agent target." },
+    { "set_id": "entropy-gemma4-e2b", "enabled": true },
+    { "set_id": "entropy-smollm3-3b", "enabled": true },
+    { "set_id": "entropy-gemma4-e4b", "enabled": true },
+    { "set_id": "entropy-qwen35-4b", "enabled": true },
+    { "set_id": "entropy-gptoss20", "enabled": true },
+    { "set_id": "entropy-devstral-small2", "enabled": true },
+    { "set_id": "entropy-nemotron-cascade-30b", "enabled": true },
+    { "set_id": "entropy-gemma431", "enabled": true },
+    { "set_id": "entropy-qwen36", "enabled": true },
+    { "set_id": "entropy-qwen80next", "enabled": true },
+    { "set_id": "entropy-qwen80nextcoder-256k", "enabled": true },
+    { "set_id": "entropy-gptoss120", "enabled": true },
+    { "set_id": "entropy-nemotron3-super-120b", "enabled": true },
+    { "set_id": "entropy-qwen35-122b", "enabled": true },
+    { "set_id": "entropy-minimax-m27", "enabled": true, "notes": "Known conservative 16K context lane; stop at 8K unless explicitly approved for deeper probes." }
+  ]
+}

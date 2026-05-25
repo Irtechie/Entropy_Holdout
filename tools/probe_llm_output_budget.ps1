@@ -88,8 +88,13 @@ Rules:
 
     $choice = $response.choices[0]
     $text = if ($choice.message -and $choice.message.content) { [string]$choice.message.content } else { [string]$choice.text }
+    $completionTokens = if ($response.usage -and $null -ne $response.usage.completion_tokens) { [int]$response.usage.completion_tokens } else { $null }
+    $finishReason = [string]$choice.finish_reason
+    $budgetOk = ($null -ne $completionTokens -and $completionTokens -ge $max)
+    $result = if ($budgetOk) { 'ok' } else { 'serving_cap_below_requested' }
     Write-Row ([ordered]@{
-      ok = $true
+      ok = $budgetOk
+      result = $result
       checked_at = (Get-Date).ToString('o')
       set_id = if ($SetId) { $SetId } else { $current.desired_state.active_set_id }
       profile_id = $lane.profile_id
@@ -97,9 +102,9 @@ Rules:
       base_url = $laneBase
       context_tokens = $lane.adapter.context_tokens
       requested_max_tokens = $max
-      finish_reason = [string]$choice.finish_reason
+      finish_reason = $finishReason
       prompt_tokens = $response.usage.prompt_tokens
-      completion_tokens = $response.usage.completion_tokens
+      completion_tokens = $completionTokens
       total_tokens = $response.usage.total_tokens
       response_chars = $text.Length
       elapsed_s = [math]::Round(((Get-Date) - $started).TotalSeconds, 1)
@@ -107,6 +112,7 @@ Rules:
   } catch {
     Write-Row ([ordered]@{
       ok = $false
+      result = 'request_failed'
       checked_at = (Get-Date).ToString('o')
       set_id = if ($SetId) { $SetId } else { $current.desired_state.active_set_id }
       profile_id = $lane.profile_id
