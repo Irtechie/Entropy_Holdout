@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/page-2.html\",\n      \"content\": \"<!doctype html>\\n<html>\\n<head>\\n<title>Entropy Page 2</title>\\n</head>\\n<body>\\n<nav>\\n  <a href=\\\"index.html\\\">Back to Page 1</a>\\n</nav>\\n<main>\\n  Main content for page 2\\n</main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created page-2.html with required title and backlink to index.html.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 1081,
+      "prompt_tokens": 1676,
+      "total_tokens": 2757,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "NVIDIA-Nemotron-3-Super-120B-A12B-UD-Q4_K_M-00001-of-00003.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-4yAdc1SSZp7zsYW98qrDypPKzl15uprZ",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 1676,
+    "output_tokens": 1081,
+    "total_tokens": 2757,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "ae923ef1dfe12f9cd6766849c6a09495",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-nemotron120",
+      "webpage-chain"
+    ]
+  }
+}

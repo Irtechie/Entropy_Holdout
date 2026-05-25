@@ -1,0 +1,4 @@
+{
+  "files": [],
+  "notes": "No changes required; existing files satisfy the stage goals."
+}

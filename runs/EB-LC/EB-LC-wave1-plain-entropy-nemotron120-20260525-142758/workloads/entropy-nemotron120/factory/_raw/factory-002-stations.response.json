@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [],\n  \"notes\": \"No changes required; existing files satisfy the stage goals.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 662,
+      "prompt_tokens": 3385,
+      "total_tokens": 4047,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "NVIDIA-Nemotron-3-Super-120B-A12B-UD-Q4_K_M-00001-of-00003.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-YuYSR6mcpfo1iF7v7yGZo5aQ2Z5AAjgK",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 3385,
+    "output_tokens": 662,
+    "total_tokens": 4047,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "d032685a38bbdfd3be04a51f490d4bf1",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-nemotron120",
+      "factory"
+    ]
+  }
+}
