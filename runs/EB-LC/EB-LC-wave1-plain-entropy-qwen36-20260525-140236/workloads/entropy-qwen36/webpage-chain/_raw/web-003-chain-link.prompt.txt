@@ -1,0 +1,432 @@
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-003-chain-link
+Order: 3
+
+Stage goal:
+Create webpage 3 and link it back to page 2 while preserving the existing page 1 and page 2 links.
+
+Expected artifacts:
+- site/page-3.html (html)
+
+Validators that will run:
+- page-3-links-page-2: failure_class=link_integrity
+- previous-links-preserved: failure_class=link_integrity
+
+Exact validator contract:
+Generate files under site/ only.
+Every HTML page must include <!doctype html>.
+Required pages and literals:
+- index.html: title text must include 'Entropy Page 1'
+- page-2.html: title text must include 'Entropy Page 2'; backlink href must be 'index.html'
+- page-3.html: title text must include 'Entropy Page 3'; backlink href must be 'page-2.html'
+- page-4.html: title text must include 'Entropy Page 4'; backlink href must be 'page-3.html'
+- page-5.html: title text must include 'Entropy Page 5'; backlink href must be 'page-4.html'
+From page order 4, every page must link to index.html, page-2.html, page-3.html, and page-4.html.
+By stage 5, index.html and page-5.html must include data-entropy-shared-table="factory-links".
+
+Existing generated files:
+FILE: site/index.html
+---BEGIN FILE---
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entropy Page 1</title>
+</head>
+<body>
+    <h1>Welcome to Entropy Page 1</h1>
+    <nav id="entropy-nav"></nav>
+</body>
+</html>
+
+---END FILE---
+
+FILE: site/page-2.html
+---BEGIN FILE---
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entropy Page 2</title>
+</head>
+<body>
+    <h1>Welcome to Entropy Page 2</h1>
+    <nav>
+        <a href="index.html">Back to Page 1</a>
+    </nav>
+</body>
+</html>
+
+---END FILE---
+
+FILE: _raw/web-001-home.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-001-home
+Order: 1
+
+Stage goal:
+Create webpage 1 as index.html with a title, main content, and an empty navigation area that can grow later.
+
+Expected artifacts:
+- site/index.html (html)
+
+Validators that will run:
+- file-exists: failure_class=missing_artifact
+- html-parse: failure_class=syntax
+
+Exact validator contract:
+Generate files under site/ only.
+Every HTML page must include <!doctype html>.
+Required pages and literals:
+- index.html: title text must include 'Entropy Page 1'
+- page-2.html: title text must include 'Entropy Page 2'; backlink href must be 'index.html'
+- page-3.html: title text must include 'Entropy Page 3'; backlink href must be 'page-2.html'
+- page-4.html: title text must include 'Entropy Page 4'; backlink href must be 'page-3.html'
+- page-5.html: title text must include 'Entropy Page 5'; backlink href must be 'page-4.html'
+From page order 4, every page must link to index.html, page-2.html, page-3.html, and page-4.html.
+By stage 5, index.html and page-5.html must include data-entropy-shared-table="factory-links".
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/web-001-home.response.json
+---BEGIN FILE---
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!doctype html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Entropy Page 1</title>\\n</head>\\n<body>\\n    <h1>Welcome to Entropy Page 1</h1>\\n    <nav id=\\\"entropy-nav\\\"></nav>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Stage 1: Created index.html with required title and empty navigation area.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 1473,
+      "prompt_tokens": 459,
+      "total_tokens": 1932,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-lfPqocBPhhRB46yoqOtmuUOus8lypx8V",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 459,
+    "output_tokens": 1473,
+    "total_tokens": 1932,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "22ea34b9b1858793f55a96b977224ea6",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-qwen36",
+      "webpage-chain"
+    ]
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-001-home.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Entropy Page 1</title>\n</head>\n<body>\n    <h1>Welcome to Entropy Page 1</h1>\n    <nav id=\"entropy-nav\"></nav>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Stage 1: Created index.html with required title and empty navigation area."
+}
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-002-backlink
+Order: 2
+
+Stage goal:
+Create webpage 2 and link it back to page 1 without breaking page 1.
+
+Expected artifacts:
+- site/page-2.html (html)
+
+Validators that will run:
+- page-2-links-index: failure_class=link_integrity
+- all-html-parse: failure_class=syntax
+
+Exact validator contract:
+Generate files under site/ only.
+Every HTML page must include <!doctype html>.
+Required pages and literals:
+- index.html: title text must include 'Entropy Page 1'
+- page-2.html: title text must include 'Entropy Page 2'; backlink href must be 'index.html'
+- page-3.html: title text must include 'Entropy Page 3'; backlink href must be 'page-2.html'
+- page-4.html: title text must include 'Entropy Page 4'; backlink href must be 'page-3.html'
+- page-5.html: title text must include 'Entropy Page 5'; backlink href must be 'page-4.html'
+From page order 4, every page must link to index.html, page-2.html, page-3.html, and page-4.html.
+By stage 5, index.html and page-5.html must include data-entropy-shared-table="factory-links".
+
+Existing generated files:
+FILE: site/index.html
+---BEGIN FILE---
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entropy Page 1</title>
+</head>
+<body>
+    <h1>Welcome to Entropy Page 1</h1>
+    <nav id="entropy-nav"></nav>
+</body>
+</html>
+
+---END FILE---
+
+FILE: _raw/web-001-home.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-001-home
+Order: 1
+
+Stage goal:
+Create webpage 1 as index.html with a title, main content, and an empty navigation area that can grow later.
+
+Expected artifacts:
+- site/index.html (html)
+
+Validators that will run:
+- file-exists: failure_class=missing_artifact
+- html-parse: failure_class=syntax
+
+Exact validator contract:
+Generate files under site/ only.
+Every HTML page must include <!doctype html>.
+Required pages and literals:
+- index.html: title text must include 'Entropy Page 1'
+- page-2.html: title text must include 'Entropy Page 2'; backlink href must be 'index.html'
+- page-3.html: title text must include 'Entropy Page 3'; backlink href must be 'page-2.html'
+- page-4.html: title text must include 'Entropy Page 4'; backlink href must be 'page-3.html'
+- page-5.html: title text must include 'Entropy Page 5'; backlink href must be 'page-4.html'
+From page order 4, every page must link to index.html, page-2.html, page-3.html, and page-4.html.
+By stage 5, index.html and page-5.html must include data-entropy-shared-table="factory-links".
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/web-001-home.response.json
+---BEGIN FILE---
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!doctype html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Entropy Page 1</title>\\n</head>\\n<body>\\n    <h1>Welcome to Entropy Page 1</h1>\\n    <nav id=\\\"entropy-nav\\\"></nav>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Stage 1: Created index.html with required title and empty navigation area.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 1473,
+      "prompt_tokens": 459,
+      "total_tokens": 1932,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-lfPqocBPhhRB46yoqOtmuUOus8lypx8V",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 459,
+    "output_tokens": 1473,
+    "total_tokens": 1932,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "22ea34b9b1858793f55a96b977224ea6",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-qwen36",
+      "webpage-chain"
+    ]
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-001-home.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Entropy Page 1</title>\n</head>\n<body>\n    <h1>Welcome to Entropy Page 1</h1>\n    <nav id=\"entropy-nav\"></nav>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Stage 1: Created index.html with required title and empty navigation area."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.response.json
+---BEGIN FILE---
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/page-2.html\",\n      \"content\": \"<!doctype html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Entropy Page 2</title>\\n</head>\\n<body>\\n    <h1>Welcome to Entropy Page 2</h1>\\n    <nav>\\n        <a href=\\\"index.html\\\">Back to Page 1</a>\\n    </nav>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Stage 2: Created page-2.html with required title and backlink to index.html.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 1604,
+      "prompt_tokens": 1805,
+      "total_tokens": 3409,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-gfKGorXb8K60pojTg13pcdG2gGRcBmhS",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 1805,
+    "output_tokens": 1604,
+    "total_tokens": 3409,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "644bd39f7c597f38a751cb701e682cbf",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-qwen36",
+      "webpage-chain"
+    ]
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "site/page-2.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Entropy Page 2</title>\n</head>\n<body>\n    <h1>Welcome to Entropy Page 2</h1>\n    <nav>\n        <a href=\"index.html\">Back to Page 1</a>\n    </nav>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Stage 2: Created page-2.html with required title and backlink to index.html."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.

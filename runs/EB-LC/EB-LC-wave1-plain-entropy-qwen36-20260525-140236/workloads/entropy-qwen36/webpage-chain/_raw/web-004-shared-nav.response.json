@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 4096,
+      "prompt_tokens": 10157,
+      "total_tokens": 14253,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-IL7TfRbh6vUihO7DDaxuXPw5Uls0XlH2",
+    "service_tier": null,
+    "finish_reason": "length",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 10157,
+    "output_tokens": 4096,
+    "total_tokens": 14253,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "39c1268bf961deae2495a9ed8461923b",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-qwen36",
+      "webpage-chain"
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "files": [
+    {
+      "path": "CoreLib/CoreLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <OutputType>Library</OutputType>\n  </PropertyGroup>\n</Project>"
+    },
+    {
+      "path": "CoreLib/CoreLib.cs",
+      "content": "namespace CoreLib\n{\n    public static class CoreLib\n    {\n        public static string GetCore() => \"core\";\n    }\n}"
+    },
+    {
+      "path": "FeatureLib/FeatureLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <OutputType>Library</OutputType>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"..\\CoreLib\\CoreLib.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "FeatureLib/FeatureLib.cs",
+      "content": "using CoreLib;\n\nnamespace FeatureLib\n{\n    public static class FeatureLib\n    {\n        public static string GetFeature() => $\"{CoreLib.GetCore()}->feature\";\n    }\n}"
+    },
+    {
+      "path": "PipelineLib/PipelineLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <OutputType>Library</OutputType>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"..\\FeatureLib\\FeatureLib.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "PipelineLib/PipelineLib.cs",
+      "content": "using FeatureLib;\n\nnamespace PipelineLib\n{\n    public static class PipelineLib\n    {\n        public static string GetPipeline() => $\"{FeatureLib.GetFeature()}->pipeline\";\n    }\n}"
+    },
+    {
+      "path": "Contracts/Contracts.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <OutputType>Library</OutputType>\n  </PropertyGroup>\n</Project>"
+    },
+    {
+      "path": "Contracts/Contracts.cs",
+      "content": "namespace Contracts\n{\n    public static class Contracts\n    {\n        public static string GetContract() => \"contract\";\n    }\n}"
+    },
+    {
+      "path": "SampleApp/SampleApp.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <OutputType>Exe</OutputType>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"..\\PipelineLib\\PipelineLib.csproj\" />\n    <ProjectReference Include=\"..\\Contracts\\Contracts.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "SampleApp/Program.cs",
+      "content": "using PipelineLib;\nusing Contracts;\n\nConsole.WriteLine($\"{PipelineLib.GetPipeline()}->{Contracts.GetContract()}\");"
+    }
+  ],
+  "notes": "Generated library-chain structure with net10.0 target framework. CoreLib provides 'core', FeatureLib appends '->feature', PipelineLib appends '->pipeline', and Contracts provides 'contract'. SampleApp chains them to output 'core->feature->pipeline->contract'."
+}

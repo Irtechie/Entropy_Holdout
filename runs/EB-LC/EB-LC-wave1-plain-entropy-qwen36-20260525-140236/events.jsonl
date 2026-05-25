@@ -1,0 +1,8 @@
+{"ts":"2026-05-25T14:02:36.2409539-04:00","event":"experiment_start","experiment_id":"EB-LC-wave1-plain-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
+{"ts":"2026-05-25T14:02:36.2447318-04:00","event":"target_start","set_id":"entropy-qwen36","context_tokens":262144}
+{"ts":"2026-05-25T14:03:13.6920465-04:00","event":"target_ready","set_id":"entropy-qwen36","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"Qwen3.6-35B-A3B-UD-Q4_K_M.gguf"}
+{"ts":"2026-05-25T14:06:48.4143164-04:00","event":"workload_failed","set_id":"entropy-qwen36","workload":"webpage-chain","error":"model did not return a JSON object"}
+{"ts":"2026-05-25T14:07:53.9070154-04:00","event":"workload_failed","set_id":"entropy-qwen36","workload":"library-chain","error":"model did not generate expected artifact path: library-chain/core"}
+{"ts":"2026-05-25T14:08:51.5067046-04:00","event":"workload_failed","set_id":"entropy-qwen36","workload":"factory","error":"Conversion from JSON failed with error: Unexpected character encountered while parsing value: F. Path '', line 0, position 0."}
+{"ts":"2026-05-25T14:08:51.5289869-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-qwen36-20260525-140236\\results.jsonl"}
+{"ts":"2026-05-25T14:08:51.5624973-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-qwen36-20260525-140236\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-qwen36-20260525-140236\\critique.json"}
