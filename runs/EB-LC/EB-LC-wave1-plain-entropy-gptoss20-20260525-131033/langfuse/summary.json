@@ -1,0 +1,178 @@
+[
+  {
+    "trace_id": "216e745043deaac0411113f3f5a32eb6",
+    "target_set_id": "entropy-gptoss20",
+    "workload_id": "factory",
+    "stage_id": "factory-001-layout",
+    "stage_order": 1,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-gptoss20 factory factory-001-layout",
+    "langfuse_timestamp": "2026-05-25T17:14:59.111Z",
+    "langfuse_latency_s": 20.917,
+    "observation_count": 1,
+    "model": "gpt-oss-20b-Q4_K_M.gguf",
+    "usage": {
+      "input": 431,
+      "output": 1687,
+      "total": 2118
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/216e745043deaac0411113f3f5a32eb6",
+    "trace_file": "langfuse/traces/216e745043deaac0411113f3f5a32eb6.json"
+  },
+  {
+    "trace_id": "3dd36cc428ed64e292d25d32feac6cbc",
+    "target_set_id": "entropy-gptoss20",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-001-home",
+    "stage_order": 1,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-gptoss20 webpage-chain web-001-home",
+    "langfuse_timestamp": "2026-05-25T17:11:07.842Z",
+    "langfuse_latency_s": 5.007,
+    "observation_count": 1,
+    "model": "gpt-oss-20b-Q4_K_M.gguf",
+    "usage": {
+      "input": 483,
+      "output": 354,
+      "total": 837
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/3dd36cc428ed64e292d25d32feac6cbc",
+    "trace_file": "langfuse/traces/3dd36cc428ed64e292d25d32feac6cbc.json"
+  },
+  {
+    "trace_id": "626e3c75cc87b454fe0b6f84fb4045b1",
+    "target_set_id": "entropy-gptoss20",
+    "workload_id": "factory",
+    "stage_id": "factory-002-stations",
+    "stage_order": 2,
+    "status": "fail",
+    "failure_class": "generation",
+    "langfuse_name": "EB entropy-gptoss20 factory factory-002-stations",
+    "langfuse_timestamp": "2026-05-25T17:15:30.036Z",
+    "langfuse_latency_s": 10.712,
+    "observation_count": 1,
+    "model": "gpt-oss-20b-Q4_K_M.gguf",
+    "usage": {
+      "input": 2457,
+      "output": 799,
+      "total": 3256
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/626e3c75cc87b454fe0b6f84fb4045b1",
+    "trace_file": "langfuse/traces/626e3c75cc87b454fe0b6f84fb4045b1.json"
+  },
+  {
+    "trace_id": "8f42b7fd7bea29f6daaade2b752bcf28",
+    "target_set_id": "entropy-gptoss20",
+    "workload_id": "library-chain",
+    "stage_id": "lib-001-core",
+    "stage_order": 1,
+    "status": "fail",
+    "failure_class": "generation",
+    "langfuse_name": "EB entropy-gptoss20 library-chain lib-001-core",
+    "langfuse_timestamp": "2026-05-25T17:14:09.71Z",
+    "langfuse_latency_s": 40.317,
+    "observation_count": 1,
+    "model": "gpt-oss-20b-Q4_K_M.gguf",
+    "usage": {
+      "input": 338,
+      "output": 3268,
+      "total": 3606
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/8f42b7fd7bea29f6daaade2b752bcf28",
+    "trace_file": "langfuse/traces/8f42b7fd7bea29f6daaade2b752bcf28.json"
+  },
+  {
+    "trace_id": "9c0d9b7eda13dc33c1313574271696c1",
+    "target_set_id": "entropy-gptoss20",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-004-shared-nav",
+    "stage_order": 4,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-gptoss20 webpage-chain web-004-shared-nav",
+    "langfuse_timestamp": "2026-05-25T17:11:57.31Z",
+    "langfuse_latency_s": 42.756,
+    "observation_count": 1,
+    "model": "gpt-oss-20b-Q4_K_M.gguf",
+    "usage": {
+      "input": 9641,
+      "output": 2950,
+      "total": 12591
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/9c0d9b7eda13dc33c1313574271696c1",
+    "trace_file": "langfuse/traces/9c0d9b7eda13dc33c1313574271696c1.json"
+  },
+  {
+    "trace_id": "aa8a17bc1432573663a7c6d8444c0784",
+    "target_set_id": "entropy-gptoss20",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-002-backlink",
+    "stage_order": 2,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-gptoss20 webpage-chain web-002-backlink",
+    "langfuse_timestamp": "2026-05-25T17:11:22.339Z",
+    "langfuse_latency_s": 7.546,
+    "observation_count": 1,
+    "model": "gpt-oss-20b-Q4_K_M.gguf",
+    "usage": {
+      "input": 1751,
+      "output": 560,
+      "total": 2311
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/aa8a17bc1432573663a7c6d8444c0784",
+    "trace_file": "langfuse/traces/aa8a17bc1432573663a7c6d8444c0784.json"
+  },
+  {
+    "trace_id": "befb67e4d28089f59a6c839006105aa5",
+    "target_set_id": "entropy-gptoss20",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-003-chain-link",
+    "stage_order": 3,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-gptoss20 webpage-chain web-003-chain-link",
+    "langfuse_timestamp": "2026-05-25T17:11:38.834Z",
+    "langfuse_latency_s": 9.056,
+    "observation_count": 1,
+    "model": "gpt-oss-20b-Q4_K_M.gguf",
+    "usage": {
+      "input": 4383,
+      "output": 614,
+      "total": 4997
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/befb67e4d28089f59a6c839006105aa5",
+    "trace_file": "langfuse/traces/befb67e4d28089f59a6c839006105aa5.json"
+  },
+  {
+    "trace_id": "efd2e1e48a2a471dc501b378af1136a1",
+    "target_set_id": "entropy-gptoss20",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-005-nested-shared-table",
+    "stage_order": 5,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-gptoss20 webpage-chain web-005-nested-shared-table",
+    "langfuse_timestamp": "2026-05-25T17:12:49.057Z",
+    "langfuse_latency_s": 43.438,
+    "observation_count": 1,
+    "model": "gpt-oss-20b-Q4_K_M.gguf",
+    "usage": {
+      "input": 21900,
+      "output": 2424,
+      "total": 24324
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/efd2e1e48a2a471dc501b378af1136a1",
+    "trace_file": "langfuse/traces/efd2e1e48a2a471dc501b378af1136a1.json"
+  }
+]

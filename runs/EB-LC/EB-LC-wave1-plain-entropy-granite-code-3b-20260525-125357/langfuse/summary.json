@@ -1,0 +1,68 @@
+[
+  {
+    "trace_id": "80874d26fbaf11054afafc1aa96a87ce",
+    "target_set_id": "entropy-granite-code-3b",
+    "workload_id": "library-chain",
+    "stage_id": "lib-001-core",
+    "stage_order": 1,
+    "status": "fail",
+    "failure_class": "generation",
+    "langfuse_name": "EB entropy-granite-code-3b library-chain lib-001-core",
+    "langfuse_timestamp": "2026-05-25T16:55:16.364Z",
+    "langfuse_latency_s": 0.913,
+    "observation_count": 1,
+    "model": "granite-3b-code-instruct.Q8_0.gguf",
+    "usage": {
+      "input": 421,
+      "output": 16,
+      "total": 437
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/80874d26fbaf11054afafc1aa96a87ce",
+    "trace_file": "langfuse/traces/80874d26fbaf11054afafc1aa96a87ce.json"
+  },
+  {
+    "trace_id": "8ce2f3444e723c409ac20ac49356cb10",
+    "target_set_id": "entropy-granite-code-3b",
+    "workload_id": "factory",
+    "stage_id": "factory-001-layout",
+    "stage_order": 1,
+    "status": "fail",
+    "failure_class": "generation",
+    "langfuse_name": "EB entropy-granite-code-3b factory factory-001-layout",
+    "langfuse_timestamp": "2026-05-25T16:55:28.645Z",
+    "langfuse_latency_s": 33.596,
+    "observation_count": 1,
+    "model": "granite-3b-code-instruct.Q8_0.gguf",
+    "usage": {
+      "input": 443,
+      "output": 1605,
+      "total": 2048
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/8ce2f3444e723c409ac20ac49356cb10",
+    "trace_file": "langfuse/traces/8ce2f3444e723c409ac20ac49356cb10.json"
+  },
+  {
+    "trace_id": "a20e90d937a7d10b254badac5ba1a81d",
+    "target_set_id": "entropy-granite-code-3b",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-001-home",
+    "stage_order": 1,
+    "status": "fail",
+    "failure_class": "generation",
+    "langfuse_name": "EB entropy-granite-code-3b webpage-chain web-001-home",
+    "langfuse_timestamp": "2026-05-25T16:54:33.147Z",
+    "langfuse_latency_s": 32.699,
+    "observation_count": 1,
+    "model": "granite-3b-code-instruct.Q8_0.gguf",
+    "usage": {
+      "input": 496,
+      "output": 1552,
+      "total": 2048
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/a20e90d937a7d10b254badac5ba1a81d",
+    "trace_file": "langfuse/traces/a20e90d937a7d10b254badac5ba1a81d.json"
+  }
+]

@@ -1,0 +1,178 @@
+[
+  {
+    "trace_id": "4fcdd675fe9bd1e9106a74c5b2e3495d",
+    "target_set_id": "entropy-devstral-small2",
+    "workload_id": "factory",
+    "stage_id": "factory-001-layout",
+    "stage_order": 1,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-devstral-small2 factory factory-001-layout",
+    "langfuse_timestamp": "2026-05-25T17:22:31.364Z",
+    "langfuse_latency_s": 40.888,
+    "observation_count": 1,
+    "model": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+    "usage": {
+      "input": 378,
+      "output": 543,
+      "total": 921
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/4fcdd675fe9bd1e9106a74c5b2e3495d",
+    "trace_file": "langfuse/traces/4fcdd675fe9bd1e9106a74c5b2e3495d.json"
+  },
+  {
+    "trace_id": "50a06a71bf4886fb7b39283460f69fe6",
+    "target_set_id": "entropy-devstral-small2",
+    "workload_id": "library-chain",
+    "stage_id": "lib-001-core",
+    "stage_order": 1,
+    "status": "fail",
+    "failure_class": "generation",
+    "langfuse_name": "EB entropy-devstral-small2 library-chain lib-001-core",
+    "langfuse_timestamp": "2026-05-25T17:21:38.391Z",
+    "langfuse_latency_s": 42.83,
+    "observation_count": 1,
+    "model": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+    "usage": {
+      "input": 371,
+      "output": 541,
+      "total": 912
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/50a06a71bf4886fb7b39283460f69fe6",
+    "trace_file": "langfuse/traces/50a06a71bf4886fb7b39283460f69fe6.json"
+  },
+  {
+    "trace_id": "91c6e5100d1f1ee2e6bd1fcee8b38f93",
+    "target_set_id": "entropy-devstral-small2",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-003-chain-link",
+    "stage_order": 3,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-devstral-small2 webpage-chain web-003-chain-link",
+    "langfuse_timestamp": "2026-05-25T17:17:11.631Z",
+    "langfuse_latency_s": 21.201,
+    "observation_count": 1,
+    "model": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+    "usage": {
+      "input": 4975,
+      "output": 207,
+      "total": 5182
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/91c6e5100d1f1ee2e6bd1fcee8b38f93",
+    "trace_file": "langfuse/traces/91c6e5100d1f1ee2e6bd1fcee8b38f93.json"
+  },
+  {
+    "trace_id": "b2ef92c0d80d7e509566313171234bcf",
+    "target_set_id": "entropy-devstral-small2",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-001-home",
+    "stage_order": 1,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-devstral-small2 webpage-chain web-001-home",
+    "langfuse_timestamp": "2026-05-25T17:16:21.4Z",
+    "langfuse_latency_s": 14.547,
+    "observation_count": 1,
+    "model": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+    "usage": {
+      "input": 432,
+      "output": 188,
+      "total": 620
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/b2ef92c0d80d7e509566313171234bcf",
+    "trace_file": "langfuse/traces/b2ef92c0d80d7e509566313171234bcf.json"
+  },
+  {
+    "trace_id": "b981c3584beb2802b77c1d06a095d1fb",
+    "target_set_id": "entropy-devstral-small2",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-002-backlink",
+    "stage_order": 2,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-devstral-small2 webpage-chain web-002-backlink",
+    "langfuse_timestamp": "2026-05-25T17:16:45.139Z",
+    "langfuse_latency_s": 17.262,
+    "observation_count": 1,
+    "model": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+    "usage": {
+      "input": 1920,
+      "output": 203,
+      "total": 2123
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/b981c3584beb2802b77c1d06a095d1fb",
+    "trace_file": "langfuse/traces/b981c3584beb2802b77c1d06a095d1fb.json"
+  },
+  {
+    "trace_id": "bd1bd2c19349fed2482f1140dcb864a4",
+    "target_set_id": "entropy-devstral-small2",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-005-nested-shared-table",
+    "stage_order": 5,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-devstral-small2 webpage-chain web-005-nested-shared-table",
+    "langfuse_timestamp": "2026-05-25T17:19:19.835Z",
+    "langfuse_latency_s": 128.469,
+    "observation_count": 1,
+    "model": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+    "usage": {
+      "input": 25135,
+      "output": 1078,
+      "total": 26213
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/bd1bd2c19349fed2482f1140dcb864a4",
+    "trace_file": "langfuse/traces/bd1bd2c19349fed2482f1140dcb864a4.json"
+  },
+  {
+    "trace_id": "be7f5382161f692909f1e9c4fa230123",
+    "target_set_id": "entropy-devstral-small2",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-004-shared-nav",
+    "stage_order": 4,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-devstral-small2 webpage-chain web-004-shared-nav",
+    "langfuse_timestamp": "2026-05-25T17:17:41.749Z",
+    "langfuse_latency_s": 88.408,
+    "observation_count": 1,
+    "model": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+    "usage": {
+      "input": 11079,
+      "output": 934,
+      "total": 12013
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/be7f5382161f692909f1e9c4fa230123",
+    "trace_file": "langfuse/traces/be7f5382161f692909f1e9c4fa230123.json"
+  },
+  {
+    "trace_id": "c9b66466ae1fb3647a39dfeeff5fe424",
+    "target_set_id": "entropy-devstral-small2",
+    "workload_id": "factory",
+    "stage_id": "factory-002-stations",
+    "stage_order": 2,
+    "status": "fail",
+    "failure_class": "generation",
+    "langfuse_name": "EB entropy-devstral-small2 factory factory-002-stations",
+    "langfuse_timestamp": "2026-05-25T17:23:21.75Z",
+    "langfuse_latency_s": 43.885,
+    "observation_count": 1,
+    "model": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+    "usage": {
+      "input": 2933,
+      "output": 537,
+      "total": 3470
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/c9b66466ae1fb3647a39dfeeff5fe424",
+    "trace_file": "langfuse/traces/c9b66466ae1fb3647a39dfeeff5fe424.json"
+  }
+]

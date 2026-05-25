@@ -1,0 +1,178 @@
+[
+  {
+    "trace_id": "0d107f22035b321d87349c67b0e10059",
+    "target_set_id": "entropy-nemotron3-super-120b",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-002-backlink",
+    "stage_order": 2,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-nemotron3-super-120b webpage-chain web-002-backlink",
+    "langfuse_timestamp": "2026-05-25T18:46:10.006Z",
+    "langfuse_latency_s": 69.465,
+    "observation_count": 1,
+    "model": "NVIDIA-Nemotron-3-Super-120B-A12B-UD-Q4_K_M-00001-of-00003.gguf",
+    "usage": {
+      "input": 1681,
+      "output": 1057,
+      "total": 2738
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/0d107f22035b321d87349c67b0e10059",
+    "trace_file": "langfuse/traces/0d107f22035b321d87349c67b0e10059.json"
+  },
+  {
+    "trace_id": "44483fe2fc7f0a8fab34c5f34852f4bb",
+    "target_set_id": "entropy-nemotron3-super-120b",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-005-nested-shared-table",
+    "stage_order": 5,
+    "status": "fail",
+    "failure_class": "generation",
+    "langfuse_name": "EB entropy-nemotron3-super-120b webpage-chain web-005-nested-shared-table",
+    "langfuse_timestamp": "2026-05-25T18:53:58.485Z",
+    "langfuse_latency_s": 297.468,
+    "observation_count": 1,
+    "model": "NVIDIA-Nemotron-3-Super-120B-A12B-UD-Q4_K_M-00001-of-00003.gguf",
+    "usage": {
+      "input": 20825,
+      "output": 4096,
+      "total": 24921
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/44483fe2fc7f0a8fab34c5f34852f4bb",
+    "trace_file": "langfuse/traces/44483fe2fc7f0a8fab34c5f34852f4bb.json"
+  },
+  {
+    "trace_id": "5751c7008d53ac22cc65e091387e41da",
+    "target_set_id": "entropy-nemotron3-super-120b",
+    "workload_id": "factory",
+    "stage_id": "factory-002-stations",
+    "stage_order": 2,
+    "status": "fail",
+    "failure_class": "harness",
+    "langfuse_name": "EB entropy-nemotron3-super-120b factory factory-002-stations",
+    "langfuse_timestamp": "2026-05-25T19:06:01.665Z",
+    "langfuse_latency_s": 56.536,
+    "observation_count": 1,
+    "model": "NVIDIA-Nemotron-3-Super-120B-A12B-UD-Q4_K_M-00001-of-00003.gguf",
+    "usage": {
+      "input": 3389,
+      "output": 793,
+      "total": 4182
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/5751c7008d53ac22cc65e091387e41da",
+    "trace_file": "langfuse/traces/5751c7008d53ac22cc65e091387e41da.json"
+  },
+  {
+    "trace_id": "581af913e4494e2b64bf96d0810298d7",
+    "target_set_id": "entropy-nemotron3-super-120b",
+    "workload_id": "library-chain",
+    "stage_id": "lib-001-core",
+    "stage_order": 1,
+    "status": "fail",
+    "failure_class": "generation",
+    "langfuse_name": "EB entropy-nemotron3-super-120b library-chain lib-001-core",
+    "langfuse_timestamp": "2026-05-25T18:59:07.694Z",
+    "langfuse_latency_s": 255.539,
+    "observation_count": 1,
+    "model": "NVIDIA-Nemotron-3-Super-120B-A12B-UD-Q4_K_M-00001-of-00003.gguf",
+    "usage": {
+      "input": 382,
+      "output": 4096,
+      "total": 4478
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/581af913e4494e2b64bf96d0810298d7",
+    "trace_file": "langfuse/traces/581af913e4494e2b64bf96d0810298d7.json"
+  },
+  {
+    "trace_id": "6c40dec3724f4e2564e477c330c124f5",
+    "target_set_id": "entropy-nemotron3-super-120b",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-001-home",
+    "stage_order": 1,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-nemotron3-super-120b webpage-chain web-001-home",
+    "langfuse_timestamp": "2026-05-25T18:45:30.815Z",
+    "langfuse_latency_s": 28.409,
+    "observation_count": 1,
+    "model": "NVIDIA-Nemotron-3-Super-120B-A12B-UD-Q4_K_M-00001-of-00003.gguf",
+    "usage": {
+      "input": 443,
+      "output": 428,
+      "total": 871
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/6c40dec3724f4e2564e477c330c124f5",
+    "trace_file": "langfuse/traces/6c40dec3724f4e2564e477c330c124f5.json"
+  },
+  {
+    "trace_id": "79b8b2cad2527423b30aed22f39b6020",
+    "target_set_id": "entropy-nemotron3-super-120b",
+    "workload_id": "factory",
+    "stage_id": "factory-001-layout",
+    "stage_order": 1,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-nemotron3-super-120b factory factory-001-layout",
+    "langfuse_timestamp": "2026-05-25T19:03:35.569Z",
+    "langfuse_latency_s": 135.652,
+    "observation_count": 1,
+    "model": "NVIDIA-Nemotron-3-Super-120B-A12B-UD-Q4_K_M-00001-of-00003.gguf",
+    "usage": {
+      "input": 389,
+      "output": 2172,
+      "total": 2561
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/79b8b2cad2527423b30aed22f39b6020",
+    "trace_file": "langfuse/traces/79b8b2cad2527423b30aed22f39b6020.json"
+  },
+  {
+    "trace_id": "c2085d3640c0451892d1ad2994d1d01b",
+    "target_set_id": "entropy-nemotron3-super-120b",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-003-chain-link",
+    "stage_order": 3,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-nemotron3-super-120b webpage-chain web-003-chain-link",
+    "langfuse_timestamp": "2026-05-25T18:47:31.045Z",
+    "langfuse_latency_s": 140.91,
+    "observation_count": 1,
+    "model": "NVIDIA-Nemotron-3-Super-120B-A12B-UD-Q4_K_M-00001-of-00003.gguf",
+    "usage": {
+      "input": 4254,
+      "output": 2121,
+      "total": 6375
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/c2085d3640c0451892d1ad2994d1d01b",
+    "trace_file": "langfuse/traces/c2085d3640c0451892d1ad2994d1d01b.json"
+  },
+  {
+    "trace_id": "fd87544e0449e0dd6b52196441e77868",
+    "target_set_id": "entropy-nemotron3-super-120b",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-004-shared-nav",
+    "stage_order": 4,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-nemotron3-super-120b webpage-chain web-004-shared-nav",
+    "langfuse_timestamp": "2026-05-25T18:50:03.037Z",
+    "langfuse_latency_s": 225.632,
+    "observation_count": 1,
+    "model": "NVIDIA-Nemotron-3-Super-120B-A12B-UD-Q4_K_M-00001-of-00003.gguf",
+    "usage": {
+      "input": 9394,
+      "output": 3318,
+      "total": 12712
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/fd87544e0449e0dd6b52196441e77868",
+    "trace_file": "langfuse/traces/fd87544e0449e0dd6b52196441e77868.json"
+  }
+]

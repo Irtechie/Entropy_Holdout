@@ -1,0 +1,208 @@
+{
+  "id": "050863a1c3380b9df71345bb33d0365c",
+  "projectId": "entropy-benchmark",
+  "name": "EB entropy-minimax-m27 library-chain lib-001-core",
+  "timestamp": "2026-05-25T19:39:51.388Z",
+  "environment": "default",
+  "tags": [
+    "EB",
+    "entropy-minimax-m27",
+    "langchain",
+    "library-chain",
+    "plain"
+  ],
+  "bookmarked": false,
+  "release": null,
+  "version": null,
+  "userId": null,
+  "sessionId": "library-chain",
+  "public": false,
+  "input": [
+    {
+      "role": "system",
+      "content": "You are a code generator. Return only the requested JSON object. No prose."
+    },
+    {
+      "role": "user",
+      "content": "You are running an Entropy staged code-generation benchmark.\n\nWorkload: library-chain\nStage: lib-001-core\nOrder: 1\n\nStage goal:\nCreate the first library with one public function and a tiny sample caller.\n\nExpected artifacts:\n- library-chain/core (project)\n\nValidators that will run:\n- core-builds: failure_class=build\n- core-sample-runs: failure_class=runtime_behavior\n\nExact validator contract:\nGenerate a .NET project tree under library-chain/.\nTarget framework must be net10.0.\nRequired project files:\n- CoreLib: CoreLib/CoreLib.csproj\n- FeatureLib: FeatureLib/FeatureLib.csproj references: CoreLib/CoreLib.csproj\n- PipelineLib: PipelineLib/PipelineLib.csproj references: FeatureLib/FeatureLib.csproj\n- Contracts: Contracts/Contracts.csproj\n- SampleApp: SampleApp/SampleApp.csproj references: PipelineLib/PipelineLib.csproj, Contracts/Contracts.csproj\nSampleApp must build and dotnet run --project SampleApp/SampleApp.csproj --no-build --nologo must print exactly core->feature->pipeline->contract.\n\nExisting generated files:\nFILE: \n---BEGIN FILE---\n\n---END FILE---\n\nReturn ONLY a JSON object in this exact shape:\n{\n  \"files\": [\n    { \"path\": \"relative/path/from/run/root\", \"content\": \"complete file content\" }\n  ],\n  \"notes\": \"short note\"\n}\n\nRules:\n- Include every new or modified file needed for this stage to pass.\n- Use only relative paths.\n- Do not include markdown fences outside the JSON.\n- Do not explain the answer outside the JSON."
+    }
+  ],
+  "output": {
+    "role": "assistant",
+    "content": "The user wants me to create a .NET project tree under library-chain/. Let me break down the requirements:\n\n1. Target framework: net10.0\n2. Projects needed:\n   - CoreLib: CoreLib/CoreLib.csproj\n   - FeatureLib: FeatureLib/FeatureLib.csproj (references CoreLib)\n   - PipelineLib: PipelineLib/PipelineLib.csproj (references FeatureLib)\n   - Contracts: Contracts/Contracts.csproj\n   - SampleApp: SampleApp/SampleApp.csproj (references PipelineLib and Contracts)\n\n3. SampleApp must print exactly: core->feature->pipeline->contract\n\nLet me create the project structure:\n\n1. CoreLib - has a function that prints \"core\"\n2. FeatureLib - references CoreLib, has a function that prints \"feature\" and calls core\n3. PipelineLib - references FeatureLib, has a function that prints \"pipeline\" and calls feature\n4. Contracts - has a function that prints \"contract\"\n5. SampleApp - references PipelineLib and Contracts, prints all in order\n\nLet me create each file:\n\nCoreLib/CoreLib.csproj:\n```xml\n<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n</Project>\n```\n\nCoreLib/CoreLib.cs:\n```csharp\nnamespace CoreLib;\n\npublic static class CoreLib\n{\n    public static void Run()\n    {\n        Console.Write(\"core\");\n    }\n}\n```\n\nFeatureLib/FeatureLib.csproj:\n```xml\n<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"..\\CoreLib\\CoreLib.csproj\" />\n  </ItemGroup>\n</Project>\n```\n\nFeatureLib/FeatureLib.cs:\n```csharp\nnamespace FeatureLib;\n\npublic static class FeatureLib\n{\n    public static void Run()\n    {\n        CoreLib.CoreLib.Run();\n        Console.Write(\"->feature\");\n    }\n}\n```\n\nPipelineLib/PipelineLib.csproj:\n```xml\n<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"..\\FeatureLib\\FeatureLib.csproj\" />\n  </ItemGroup>\n</Project>\n```\n\nPipelineLib/PipelineLib.cs:\n```csharp\nnamespace PipelineLib;\n\npublic static class PipelineLib\n{\n    public static void Run()\n    {\n        FeatureLib.FeatureLib.Run();\n        Console.Write(\"->pipeline\");\n    }\n}\n```\n\nContracts/Contracts.csproj:\n```xml\n<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n</Project>\n```\n\nContracts/Contracts.cs:\n```csharp\nnamespace Contracts;\n\npublic static class Contracts\n{\n    public static void Run()\n    {\n        Console.Write(\"->contract\");\n    }\n}\n```\n\nSampleApp/SampleApp.csproj:\n```xml\n<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <OutputType>Exe</OutputType>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"..\\PipelineLib\\PipelineLib.csproj\" />\n    <ProjectReference Include=\"..\\Contracts\\Contracts.csproj\" />\n  </ItemGroup>\n</Project>\n```\n\nSampleApp/Program.cs:\n```csharp\nusing PipelineLib;\nusing Contracts;\n\nPipelineLib.Run();\nContracts.Run();\nConsole.WriteLine();\n```\n\nThe output should be: core->feature->pipeline->contract\n\nI need to reconsider the structure. The requirement specifies SampleApp must print exactly core->feature->pipeline->contract, which means I need to chain the calls properly through the library dependencies. CoreLib prints \"core\", FeatureLib references CoreLib and prints \"->feature\", PipelineLib references FeatureLib and prints \"->pipeline\", and Contracts prints \"->contract\". SampleApp then orchestrates these calls in sequence.\n\nLooking at the dependency chain, FeatureLib → CoreLib, PipelineLib → FeatureLib, and SampleApp → PipelineLib + Contracts. This means SampleApp can access everything through the chain, so I can call PipelineLib.Run() which internally calls FeatureLib.Run() which internally calls CoreLib.Run(), then call Contracts.Run() separately.\n\nThe output should be: core->feature->pipeline->contract\n\nI need to reconsider the execution order. If PipelineLib.Run() internally calls CoreLib.Run() first, then FeatureLib.Run(), then prints \"->pipeline\", the sequence would be: CoreLib prints \"core\", FeatureLib prints \"->feature\", PipelineLib prints \"->pipeline\", and finally Contracts prints \"->contract\". This gives the correct output.\n\nNow I'll set up the project structure with the necessary files and folders.\n</think>\n\n{\n  \"files\": [\n    { \"path\": \"library-chain/CoreLib/CoreLib.csproj\", \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n</Project>\\n\" },\n    { \"path\": \"library-chain/CoreLib/CoreLib.cs\", \"content\": \"namespace CoreLib;\\n\\npublic static class CoreLib\\n{\\n    public static void Run()\\n    {\\n        Console.Write(\\\"core\\\");\\n    }\\n}\\n\" },\n    { \"path\": \"library-chain/FeatureLib/FeatureLib.csproj\", \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\CoreLib\\\\CoreLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\\n\" },\n    { \"path\": \"library-chain/FeatureLib/FeatureLib.cs\", \"content\": \"namespace FeatureLib;\\n\\npublic static class FeatureLib\\n{\\n    public static void Run()\\n    {\\n        CoreLib.CoreLib.Run();\\n        Console.Write(\\\"->feature\\\");\\n    }\\n}\\n\" },\n    { \"path\": \"library-chain/PipelineLib/PipelineLib.csproj\", \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\FeatureLib\\\\FeatureLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\\n\" },\n    { \"path\": \"library-chain/PipelineLib/PipelineLib.cs\", \"content\": \"namespace PipelineLib;\\n\\npublic static class PipelineLib\\n{\\n    public static void Run()\\n    {\\n        FeatureLib.FeatureLib.Run();\\n        Console.Write(\\\"->pipeline\\\");\\n    }\\n}\\n\" },\n    { \"path\": \"library-chain/Contracts/Contracts.csproj\", \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n</Project>\\n\" },\n    { \"path\": \"library-chain/Contracts/Contracts.cs\", \"content\": \"namespace Contracts;\\n\\npublic static class Contracts\\n{\\n    public static void Run()\\n    {\\n        Console.Write(\\\"->contract\\\");\\n    }\\n}\\n\" },\n    { \"path\": \"library-chain/SampleApp/SampleApp.csproj\", \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <OutputType>Exe</OutputType>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\PipelineLib\\\\PipelineLib.csproj\\\" />\\n    <ProjectReference Include=\\\"..\\\\Contracts\\\\Contracts.csproj\\\" />\\n  </ItemGroup>\\n</Project>\\n\" },\n    { \"path\": \"library-chain/SampleApp/Program.cs\", \"content\": \"using PipelineLib;\\nusing Contracts;\\n\\nPipelineLib.Run();\\nContracts.Run();\\nConsole.WriteLine();\\n\" }\n  ],\n  \"notes\": \"Created 5 .NET projects with proper project references forming a dependency chain. SampleApp prints core->feature->pipeline->contract when run.\"\n}",
+    "additional_kwargs": {
+      "refusal": null
+    }
+  },
+  "metadata": {
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-minimax-m27",
+      "library-chain"
+    ],
+    "benchmark": "EB",
+    "target_set_id": "entropy-minimax-m27",
+    "workload_id": "library-chain",
+    "stage_id": "lib-001-core",
+    "stage_order": 1,
+    "harness_mode": "plain",
+    "completion_provider": "langchain",
+    "attempt_index": 0,
+    "attempt_reason": "initial",
+    "context_tokens": 16384,
+    "langfuse_session_id": "library-chain",
+    "langfuse_tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-minimax-m27",
+      "library-chain"
+    ],
+    "ls_provider": "openai",
+    "ls_model_name": "MiniMax-M2.7-UD-IQ4_XS-00001-of-00004.gguf",
+    "ls_model_type": "chat",
+    "ls_temperature": 0,
+    "ls_max_tokens": 4096,
+    "is_langchain_root": true,
+    "resourceAttributes": {
+      "telemetry.sdk.language": "python",
+      "telemetry.sdk.name": "opentelemetry",
+      "telemetry.sdk.version": "1.41.0",
+      "service.name": "unknown_service"
+    },
+    "scope": {
+      "name": "langfuse-sdk",
+      "version": "3.15.0",
+      "attributes": {
+        "public_key": "pk-lf-eb-5c9a7383438865b8fba1b4fb663746471cd786db2cb1c450"
+      }
+    }
+  },
+  "createdAt": "2026-05-25T19:41:18.581Z",
+  "updatedAt": "2026-05-25T19:41:18.604Z",
+  "externalId": null,
+  "scores": [],
+  "latency": 87.264,
+  "observations": [
+    {
+      "id": "91ad0cceb29b2350",
+      "traceId": "050863a1c3380b9df71345bb33d0365c",
+      "startTime": "2026-05-25T19:39:51.388Z",
+      "endTime": "2026-05-25T19:41:18.652Z",
+      "projectId": "entropy-benchmark",
+      "parentObservationId": null,
+      "type": "GENERATION",
+      "environment": "default",
+      "name": "EB entropy-minimax-m27 library-chain lib-001-core",
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "version": null,
+      "createdAt": "2026-05-25T19:41:18.573Z",
+      "updatedAt": "2026-05-25T19:41:18.594Z",
+      "input": [
+        {
+          "role": "system",
+          "content": "You are a code generator. Return only the requested JSON object. No prose."
+        },
+        {
+          "role": "user",
+          "content": "You are running an Entropy staged code-generation benchmark.\n\nWorkload: library-chain\nStage: lib-001-core\nOrder: 1\n\nStage goal:\nCreate the first library with one public function and a tiny sample caller.\n\nExpected artifacts:\n- library-chain/core (project)\n\nValidators that will run:\n- core-builds: failure_class=build\n- core-sample-runs: failure_class=runtime_behavior\n\nExact validator contract:\nGenerate a .NET project tree under library-chain/.\nTarget framework must be net10.0.\nRequired project files:\n- CoreLib: CoreLib/CoreLib.csproj\n- FeatureLib: FeatureLib/FeatureLib.csproj references: CoreLib/CoreLib.csproj\n- PipelineLib: PipelineLib/PipelineLib.csproj references: FeatureLib/FeatureLib.csproj\n- Contracts: Contracts/Contracts.csproj\n- SampleApp: SampleApp/SampleApp.csproj references: PipelineLib/PipelineLib.csproj, Contracts/Contracts.csproj\nSampleApp must build and dotnet run --project SampleApp/SampleApp.csproj --no-build --nologo must print exactly core->feature->pipeline->contract.\n\nExisting generated files:\nFILE: \n---BEGIN FILE---\n\n---END FILE---\n\nReturn ONLY a JSON object in this exact shape:\n{\n  \"files\": [\n    { \"path\": \"relative/path/from/run/root\", \"content\": \"complete file content\" }\n  ],\n  \"notes\": \"short note\"\n}\n\nRules:\n- Include every new or modified file needed for this stage to pass.\n- Use only relative paths.\n- Do not include markdown fences outside the JSON.\n- Do not explain the answer outside the JSON."
+        }
+      ],
+      "output": {
+        "role": "assistant",
+        "content": "The user wants me to create a .NET project tree under library-chain/. Let me break down the requirements:\n\n1. Target framework: net10.0\n2. Projects needed:\n   - CoreLib: CoreLib/CoreLib.csproj\n   - FeatureLib: FeatureLib/FeatureLib.csproj (references CoreLib)\n   - PipelineLib: PipelineLib/PipelineLib.csproj (references FeatureLib)\n   - Contracts: Contracts/Contracts.csproj\n   - SampleApp: SampleApp/SampleApp.csproj (references PipelineLib and Contracts)\n\n3. SampleApp must print exactly: core->feature->pipeline->contract\n\nLet me create the project structure:\n\n1. CoreLib - has a function that prints \"core\"\n2. FeatureLib - references CoreLib, has a function that prints \"feature\" and calls core\n3. PipelineLib - references FeatureLib, has a function that prints \"pipeline\" and calls feature\n4. Contracts - has a function that prints \"contract\"\n5. SampleApp - references PipelineLib and Contracts, prints all in order\n\nLet me create each file:\n\nCoreLib/CoreLib.csproj:\n```xml\n<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n</Project>\n```\n\nCoreLib/CoreLib.cs:\n```csharp\nnamespace CoreLib;\n\npublic static class CoreLib\n{\n    public static void Run()\n    {\n        Console.Write(\"core\");\n    }\n}\n```\n\nFeatureLib/FeatureLib.csproj:\n```xml\n<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"..\\CoreLib\\CoreLib.csproj\" />\n  </ItemGroup>\n</Project>\n```\n\nFeatureLib/FeatureLib.cs:\n```csharp\nnamespace FeatureLib;\n\npublic static class FeatureLib\n{\n    public static void Run()\n    {\n        CoreLib.CoreLib.Run();\n        Console.Write(\"->feature\");\n    }\n}\n```\n\nPipelineLib/PipelineLib.csproj:\n```xml\n<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"..\\FeatureLib\\FeatureLib.csproj\" />\n  </ItemGroup>\n</Project>\n```\n\nPipelineLib/PipelineLib.cs:\n```csharp\nnamespace PipelineLib;\n\npublic static class PipelineLib\n{\n    public static void Run()\n    {\n        FeatureLib.FeatureLib.Run();\n        Console.Write(\"->pipeline\");\n    }\n}\n```\n\nContracts/Contracts.csproj:\n```xml\n<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n</Project>\n```\n\nContracts/Contracts.cs:\n```csharp\nnamespace Contracts;\n\npublic static class Contracts\n{\n    public static void Run()\n    {\n        Console.Write(\"->contract\");\n    }\n}\n```\n\nSampleApp/SampleApp.csproj:\n```xml\n<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <OutputType>Exe</OutputType>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"..\\PipelineLib\\PipelineLib.csproj\" />\n    <ProjectReference Include=\"..\\Contracts\\Contracts.csproj\" />\n  </ItemGroup>\n</Project>\n```\n\nSampleApp/Program.cs:\n```csharp\nusing PipelineLib;\nusing Contracts;\n\nPipelineLib.Run();\nContracts.Run();\nConsole.WriteLine();\n```\n\nThe output should be: core->feature->pipeline->contract\n\nI need to reconsider the structure. The requirement specifies SampleApp must print exactly core->feature->pipeline->contract, which means I need to chain the calls properly through the library dependencies. CoreLib prints \"core\", FeatureLib references CoreLib and prints \"->feature\", PipelineLib references FeatureLib and prints \"->pipeline\", and Contracts prints \"->contract\". SampleApp then orchestrates these calls in sequence.\n\nLooking at the dependency chain, FeatureLib → CoreLib, PipelineLib → FeatureLib, and SampleApp → PipelineLib + Contracts. This means SampleApp can access everything through the chain, so I can call PipelineLib.Run() which internally calls FeatureLib.Run() which internally calls CoreLib.Run(), then call Contracts.Run() separately.\n\nThe output should be: core->feature->pipeline->contract\n\nI need to reconsider the execution order. If PipelineLib.Run() internally calls CoreLib.Run() first, then FeatureLib.Run(), then prints \"->pipeline\", the sequence would be: CoreLib prints \"core\", FeatureLib prints \"->feature\", PipelineLib prints \"->pipeline\", and finally Contracts prints \"->contract\". This gives the correct output.\n\nNow I'll set up the project structure with the necessary files and folders.\n</think>\n\n{\n  \"files\": [\n    { \"path\": \"library-chain/CoreLib/CoreLib.csproj\", \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n</Project>\\n\" },\n    { \"path\": \"library-chain/CoreLib/CoreLib.cs\", \"content\": \"namespace CoreLib;\\n\\npublic static class CoreLib\\n{\\n    public static void Run()\\n    {\\n        Console.Write(\\\"core\\\");\\n    }\\n}\\n\" },\n    { \"path\": \"library-chain/FeatureLib/FeatureLib.csproj\", \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\CoreLib\\\\CoreLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\\n\" },\n    { \"path\": \"library-chain/FeatureLib/FeatureLib.cs\", \"content\": \"namespace FeatureLib;\\n\\npublic static class FeatureLib\\n{\\n    public static void Run()\\n    {\\n        CoreLib.CoreLib.Run();\\n        Console.Write(\\\"->feature\\\");\\n    }\\n}\\n\" },\n    { \"path\": \"library-chain/PipelineLib/PipelineLib.csproj\", \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\FeatureLib\\\\FeatureLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\\n\" },\n    { \"path\": \"library-chain/PipelineLib/PipelineLib.cs\", \"content\": \"namespace PipelineLib;\\n\\npublic static class PipelineLib\\n{\\n    public static void Run()\\n    {\\n        FeatureLib.FeatureLib.Run();\\n        Console.Write(\\\"->pipeline\\\");\\n    }\\n}\\n\" },\n    { \"path\": \"library-chain/Contracts/Contracts.csproj\", \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n</Project>\\n\" },\n    { \"path\": \"library-chain/Contracts/Contracts.cs\", \"content\": \"namespace Contracts;\\n\\npublic static class Contracts\\n{\\n    public static void Run()\\n    {\\n        Console.Write(\\\"->contract\\\");\\n    }\\n}\\n\" },\n    { \"path\": \"library-chain/SampleApp/SampleApp.csproj\", \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <OutputType>Exe</OutputType>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\PipelineLib\\\\PipelineLib.csproj\\\" />\\n    <ProjectReference Include=\\\"..\\\\Contracts\\\\Contracts.csproj\\\" />\\n  </ItemGroup>\\n</Project>\\n\" },\n    { \"path\": \"library-chain/SampleApp/Program.cs\", \"content\": \"using PipelineLib;\\nusing Contracts;\\n\\nPipelineLib.Run();\\nContracts.Run();\\nConsole.WriteLine();\\n\" }\n  ],\n  \"notes\": \"Created 5 .NET projects with proper project references forming a dependency chain. SampleApp prints core->feature->pipeline->contract when run.\"\n}",
+        "additional_kwargs": {
+          "refusal": null
+        }
+      },
+      "metadata": {
+        "tags": [
+          "EB",
+          "plain",
+          "langchain",
+          "entropy-minimax-m27",
+          "library-chain"
+        ],
+        "benchmark": "EB",
+        "target_set_id": "entropy-minimax-m27",
+        "workload_id": "library-chain",
+        "stage_id": "lib-001-core",
+        "stage_order": 1,
+        "harness_mode": "plain",
+        "completion_provider": "langchain",
+        "attempt_index": 0,
+        "attempt_reason": "initial",
+        "context_tokens": 16384,
+        "langfuse_session_id": "library-chain",
+        "langfuse_tags": [
+          "EB",
+          "plain",
+          "langchain",
+          "entropy-minimax-m27",
+          "library-chain"
+        ],
+        "ls_provider": "openai",
+        "ls_model_name": "MiniMax-M2.7-UD-IQ4_XS-00001-of-00004.gguf",
+        "ls_model_type": "chat",
+        "ls_temperature": 0,
+        "ls_max_tokens": 4096,
+        "is_langchain_root": true,
+        "resourceAttributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.41.0",
+          "service.name": "unknown_service"
+        },
+        "scope": {
+          "name": "langfuse-sdk",
+          "version": "3.15.0",
+          "attributes": {
+            "public_key": "pk-lf-eb-5c9a7383438865b8fba1b4fb663746471cd786db2cb1c450"
+          }
+        }
+      },
+      "model": "MiniMax-M2.7-UD-IQ4_XS-00001-of-00004.gguf",
+      "modelParameters": {
+        "temperature": 0,
+        "max_completion_tokens": 4096
+      },
+      "completionStartTime": null,
+      "promptId": null,
+      "promptName": null,
+      "promptVersion": null,
+      "latency": 87.264,
+      "timeToFirstToken": null,
+      "usageDetails": {
+        "input": 333,
+        "output": 2016,
+        "total": 2388,
+        "input_cache_read": 39
+      },
+      "costDetails": {},
+      "usagePricingTierId": null,
+      "usagePricingTierName": null,
+      "inputPrice": 0,
+      "outputPrice": 0,
+      "totalPrice": 0,
+      "calculatedInputCost": null,
+      "calculatedOutputCost": null,
+      "calculatedTotalCost": 0,
+      "unit": "TOKENS",
+      "promptTokens": 372,
+      "completionTokens": 2016,
+      "totalTokens": 2388,
+      "modelId": null,
+      "usage": {
+        "unit": "TOKENS",
+        "input": 372,
+        "output": 2016,
+        "total": 2388
+      }
+    }
+  ],
+  "htmlPath": "/project/entropy-benchmark/traces/050863a1c3380b9df71345bb33d0365c",
+  "totalCost": 0
+}

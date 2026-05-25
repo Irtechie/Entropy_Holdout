@@ -1,0 +1,134 @@
+[
+  {
+    "trace_id": "0fcb2afb28c9502f66db8e515aaf6f25",
+    "target_set_id": "entropy-smollm3-3b",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-002-backlink",
+    "stage_order": 2,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-smollm3-3b webpage-chain web-002-backlink",
+    "langfuse_timestamp": "2026-05-25T16:56:49.98Z",
+    "langfuse_latency_s": 3.858,
+    "observation_count": 1,
+    "model": "SmolLM3-Q4_K_M.gguf",
+    "usage": {
+      "input": 2061,
+      "output": 287,
+      "total": 2348
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/0fcb2afb28c9502f66db8e515aaf6f25",
+    "trace_file": "langfuse/traces/0fcb2afb28c9502f66db8e515aaf6f25.json"
+  },
+  {
+    "trace_id": "784b3e414e12f5a5b83c45e9052470f7",
+    "target_set_id": "entropy-smollm3-3b",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-003-chain-link",
+    "stage_order": 3,
+    "status": "fail",
+    "failure_class": "generation",
+    "langfuse_name": "EB entropy-smollm3-3b webpage-chain web-003-chain-link",
+    "langfuse_timestamp": "2026-05-25T16:57:04.328Z",
+    "langfuse_latency_s": 4.699,
+    "observation_count": 1,
+    "model": "SmolLM3-Q4_K_M.gguf",
+    "usage": {
+      "input": 5321,
+      "output": 287,
+      "total": 5608
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/784b3e414e12f5a5b83c45e9052470f7",
+    "trace_file": "langfuse/traces/784b3e414e12f5a5b83c45e9052470f7.json"
+  },
+  {
+    "trace_id": "96aa0be71e6d10ecac85013f2584feeb",
+    "target_set_id": "entropy-smollm3-3b",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-001-home",
+    "stage_order": 1,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-smollm3-3b webpage-chain web-001-home",
+    "langfuse_timestamp": "2026-05-25T16:56:37.391Z",
+    "langfuse_latency_s": 3.411,
+    "observation_count": 1,
+    "model": "SmolLM3-Q4_K_M.gguf",
+    "usage": {
+      "input": 456,
+      "output": 280,
+      "total": 736
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/96aa0be71e6d10ecac85013f2584feeb",
+    "trace_file": "langfuse/traces/96aa0be71e6d10ecac85013f2584feeb.json"
+  },
+  {
+    "trace_id": "a1eadfadc80a8b9ba5aab0356bf36f00",
+    "target_set_id": "entropy-smollm3-3b",
+    "workload_id": "library-chain",
+    "stage_id": "lib-001-core",
+    "stage_order": 1,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-smollm3-3b library-chain lib-001-core",
+    "langfuse_timestamp": "2026-05-25T16:57:18.985Z",
+    "langfuse_latency_s": 3.068,
+    "observation_count": 1,
+    "model": "SmolLM3-Q4_K_M.gguf",
+    "usage": {
+      "input": 399,
+      "output": 235,
+      "total": 634
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/a1eadfadc80a8b9ba5aab0356bf36f00",
+    "trace_file": "langfuse/traces/a1eadfadc80a8b9ba5aab0356bf36f00.json"
+  },
+  {
+    "trace_id": "a460baab8d27ab5eb491957cc1cedc85",
+    "target_set_id": "entropy-smollm3-3b",
+    "workload_id": "factory",
+    "stage_id": "factory-001-layout",
+    "stage_order": 1,
+    "status": "fail",
+    "failure_class": "generation",
+    "langfuse_name": "EB entropy-smollm3-3b factory factory-001-layout",
+    "langfuse_timestamp": "2026-05-25T16:57:58.745Z",
+    "langfuse_latency_s": 48.14,
+    "observation_count": 1,
+    "model": "SmolLM3-Q4_K_M.gguf",
+    "usage": {
+      "input": 400,
+      "output": 4096,
+      "total": 4496
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/a460baab8d27ab5eb491957cc1cedc85",
+    "trace_file": "langfuse/traces/a460baab8d27ab5eb491957cc1cedc85.json"
+  },
+  {
+    "trace_id": "e9e85935a44d814e78da417ee4782a1f",
+    "target_set_id": "entropy-smollm3-3b",
+    "workload_id": "library-chain",
+    "stage_id": "lib-002-dependent",
+    "stage_order": 2,
+    "status": "fail",
+    "failure_class": "generation",
+    "langfuse_name": "EB entropy-smollm3-3b library-chain lib-002-dependent",
+    "langfuse_timestamp": "2026-05-25T16:57:40.948Z",
+    "langfuse_latency_s": 3.476,
+    "observation_count": 1,
+    "model": "SmolLM3-Q4_K_M.gguf",
+    "usage": {
+      "input": 1802,
+      "output": 235,
+      "total": 2037
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/e9e85935a44d814e78da417ee4782a1f",
+    "trace_file": "langfuse/traces/e9e85935a44d814e78da417ee4782a1f.json"
+  }
+]

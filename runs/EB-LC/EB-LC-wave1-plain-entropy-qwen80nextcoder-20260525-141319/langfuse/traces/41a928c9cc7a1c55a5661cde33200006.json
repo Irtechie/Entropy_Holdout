@@ -1,0 +1,207 @@
+{
+  "id": "41a928c9cc7a1c55a5661cde33200006",
+  "projectId": "entropy-benchmark",
+  "name": "EB entropy-qwen80nextcoder webpage-chain web-002-backlink",
+  "timestamp": "2026-05-25T18:14:39.751Z",
+  "environment": "default",
+  "tags": [
+    "EB",
+    "entropy-qwen80nextcoder",
+    "langchain",
+    "plain",
+    "webpage-chain"
+  ],
+  "bookmarked": false,
+  "release": null,
+  "version": null,
+  "userId": null,
+  "sessionId": "webpage-chain",
+  "public": false,
+  "input": [
+    {
+      "role": "system",
+      "content": "You are a code generator. Return only the requested JSON object. No prose."
+    },
+    {
+      "role": "user",
+      "content": "You are running an Entropy staged code-generation benchmark.\n\nWorkload: webpage-chain\nStage: web-002-backlink\nOrder: 2\n\nStage goal:\nCreate webpage 2 and link it back to page 1 without breaking page 1.\n\nExpected artifacts:\n- site/page-2.html (html)\n\nValidators that will run:\n- page-2-links-index: failure_class=link_integrity\n- all-html-parse: failure_class=syntax\n\nExact validator contract:\nGenerate files under site/ only.\nEvery HTML page must include <!doctype html>.\nRequired pages and literals:\n- index.html: title text must include 'Entropy Page 1'\n- page-2.html: title text must include 'Entropy Page 2'; backlink href must be 'index.html'\n- page-3.html: title text must include 'Entropy Page 3'; backlink href must be 'page-2.html'\n- page-4.html: title text must include 'Entropy Page 4'; backlink href must be 'page-3.html'\n- page-5.html: title text must include 'Entropy Page 5'; backlink href must be 'page-4.html'\nFrom page order 4, every page must link to index.html, page-2.html, page-3.html, and page-4.html.\nBy stage 5, index.html and page-5.html must include data-entropy-shared-table=\"factory-links\".\n\nExisting generated files:\nFILE: site/index.html\n---BEGIN FILE---\n<!doctype html>\n<html>\n<head>\n  <title>Entropy Page 1</title>\n</head>\n<body>\n  <nav id=\"navigation\"></nav>\n  <main>\n    <h1>Welcome to Entropy Page 1</h1>\n    <p>This is the home page for the Entropy benchmark.</p>\n  </main>\n</body>\n</html>\r\n\n---END FILE---\r\n\r\nFILE: _raw/web-001-home.prompt.txt\n---BEGIN FILE---\nYou are running an Entropy staged code-generation benchmark.\n\nWorkload: webpage-chain\nStage: web-001-home\nOrder: 1\n\nStage goal:\nCreate webpage 1 as index.html with a title, main content, and an empty navigation area that can grow later.\n\nExpected artifacts:\n- site/index.html (html)\n\nValidators that will run:\n- file-exists: failure_class=missing_artifact\n- html-parse: failure_class=syntax\n\nExact validator contract:\nGenerate files under site/ only.\nEvery HTML page must include <!doctype html>.\nRequired pages and literals:\n- index.html: title text must include 'Entropy Page 1'\n- page-2.html: title text must include 'Entropy Page 2'; backlink href must be 'index.html'\n- page-3.html: title text must include 'Entropy Page 3'; backlink href must be 'page-2.html'\n- page-4.html: title text must include 'Entropy Page 4'; backlink href must be 'page-3.html'\n- page-5.html: title text must include 'Entropy Page 5'; backlink href must be 'page-4.html'\nFrom page order 4, every page must link to index.html, page-2.html, page-3.html, and page-4.html.\nBy stage 5, index.html and page-5.html must include data-entropy-shared-table=\"factory-links\".\n\nExisting generated files:\nFILE: \n---BEGIN FILE---\n\n---END FILE---\n\nReturn ONLY a JSON object in this exact shape:\n{\n  \"files\": [\n    { \"path\": \"relative/path/from/run/root\", \"content\": \"complete file content\" }\n  ],\n  \"notes\": \"short note\"\n}\n\nRules:\n- Include every new or modified file needed for this stage to pass.\n- Use only relative paths.\n- Do not include markdown fences outside the JSON.\n- Do not explain the answer outside the JSON.\r\n\n---END FILE---\r\n\r\nFILE: _raw/web-001-home.response.json\n---BEGIN FILE---\n{\r\n  \"provider\": \"langchain\",\r\n  \"kind\": \"chat\",\r\n  \"content\": \"{\\n  \\\"files\\\": [\\n    {\\n      \\\"path\\\": \\\"site/index.html\\\",\\n      \\\"content\\\": \\\"<!doctype html>\\\\n<html>\\\\n<head>\\\\n  <title>Entropy Page 1</title>\\\\n</head>\\\\n<body>\\\\n  <nav id=\\\\\\\"navigation\\\\\\\"></nav>\\\\n  <main>\\\\n    <h1>Welcome to Entropy Page 1</h1>\\\\n    <p>This is the home page for the Entropy benchmark.</p>\\\\n  </main>\\\\n</body>\\\\n</html>\\\"\\n    }\\n  ],\\n  \\\"notes\\\": \\\"Created index.html with required title and empty navigation area for future growth.\\\"\\n}\",\r\n  \"response_metadata\": {\r\n    \"token_usage\": {\r\n      \"completion_tokens\": 137,\r\n      \"prompt_tokens\": 426,\r\n      \"total_tokens\": 563,\r\n      \"completion_tokens_details\": null,\r\n      \"prompt_tokens_details\": null\r\n    },\r\n    \"model_name\": \"Qwen3-Coder-Next-Q4_K_M.gguf\",\r\n    \"system_fingerprint\": \"b1-983559d\",\r\n    \"id\": \"chatcmpl-HfaR6UvKjrpQdu5dWKJn0X2KUoEtskTS\",\r\n    \"service_tier\": null,\r\n    \"finish_reason\": \"stop\",\r\n    \"logprobs\": null\r\n  },\r\n  \"usage_metadata\": {\r\n    \"input_tokens\": 426,\r\n    \"output_tokens\": 137,\r\n    \"total_tokens\": 563,\r\n    \"input_token_details\": {},\r\n    \"output_token_details\": {}\r\n  },\r\n  \"langfuse\": {\r\n    \"trace_id\": \"23d5c40fc3dccf55c688f6ace80a2b3f\",\r\n    \"host\": \"http://192.168.1.203:3100\",\r\n    \"tags\": [\r\n      \"EB\",\r\n      \"plain\",\r\n      \"langchain\",\r\n      \"entropy-qwen80nextcoder\",\r\n      \"webpage-chain\"\r\n    ]\r\n  }\r\n}\r\n\n---END FILE---\r\n\r\nFILE: _raw/web-001-home.txt\n---BEGIN FILE---\n{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!doctype html>\\n<html>\\n<head>\\n  <title>Entropy Page 1</title>\\n</head>\\n<body>\\n  <nav id=\\\"navigation\\\"></nav>\\n  <main>\\n    <h1>Welcome to Entropy Page 1</h1>\\n    <p>This is the home page for the Entropy benchmark.</p>\\n  </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created index.html with required title and empty navigation area for future growth.\"\n}\r\n\n---END FILE---\n\nReturn ONLY a JSON object in this exact shape:\n{\n  \"files\": [\n    { \"path\": \"relative/path/from/run/root\", \"content\": \"complete file content\" }\n  ],\n  \"notes\": \"short note\"\n}\n\nRules:\n- Include every new or modified file needed for this stage to pass.\n- Use only relative paths.\n- Do not include markdown fences outside the JSON.\n- Do not explain the answer outside the JSON."
+    }
+  ],
+  "output": {
+    "role": "assistant",
+    "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/page-2.html\",\n      \"content\": \"<!doctype html>\\n<html>\\n<head>\\n  <title>Entropy Page 2</title>\\n</head>\\n<body>\\n  <nav id=\\\"navigation\\\">\\n    <a href=\\\"index.html\\\">Back to Home</a>\\n  </nav>\\n  <main>\\n    <h1>Welcome to Entropy Page 2</h1>\\n    <p>This is page 2 in the Entropy benchmark chain.</p>\\n  </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created page-2.html with required title and backlink to index.html.\"\n}",
+    "additional_kwargs": {
+      "refusal": null
+    }
+  },
+  "metadata": {
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-qwen80nextcoder",
+      "webpage-chain"
+    ],
+    "benchmark": "EB",
+    "target_set_id": "entropy-qwen80nextcoder",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-002-backlink",
+    "stage_order": 2,
+    "harness_mode": "plain",
+    "completion_provider": "langchain",
+    "attempt_index": 0,
+    "attempt_reason": "initial",
+    "context_tokens": 131072,
+    "langfuse_session_id": "webpage-chain",
+    "langfuse_tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-qwen80nextcoder",
+      "webpage-chain"
+    ],
+    "ls_provider": "openai",
+    "ls_model_name": "Qwen3-Coder-Next-Q4_K_M.gguf",
+    "ls_model_type": "chat",
+    "ls_temperature": 0,
+    "ls_max_tokens": 4096,
+    "is_langchain_root": true,
+    "resourceAttributes": {
+      "telemetry.sdk.language": "python",
+      "telemetry.sdk.name": "opentelemetry",
+      "telemetry.sdk.version": "1.41.0",
+      "service.name": "unknown_service"
+    },
+    "scope": {
+      "name": "langfuse-sdk",
+      "version": "3.15.0",
+      "attributes": {
+        "public_key": "pk-lf-eb-5c9a7383438865b8fba1b4fb663746471cd786db2cb1c450"
+      }
+    }
+  },
+  "createdAt": "2026-05-25T18:14:45.064Z",
+  "updatedAt": "2026-05-25T18:14:45.082Z",
+  "externalId": null,
+  "scores": [],
+  "latency": 5.395,
+  "observations": [
+    {
+      "id": "665041fd46a9d4e6",
+      "traceId": "41a928c9cc7a1c55a5661cde33200006",
+      "startTime": "2026-05-25T18:14:39.751Z",
+      "endTime": "2026-05-25T18:14:45.146Z",
+      "projectId": "entropy-benchmark",
+      "parentObservationId": null,
+      "type": "GENERATION",
+      "environment": "default",
+      "name": "EB entropy-qwen80nextcoder webpage-chain web-002-backlink",
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "version": null,
+      "createdAt": "2026-05-25T18:14:45.061Z",
+      "updatedAt": "2026-05-25T18:14:45.08Z",
+      "input": [
+        {
+          "role": "system",
+          "content": "You are a code generator. Return only the requested JSON object. No prose."
+        },
+        {
+          "role": "user",
+          "content": "You are running an Entropy staged code-generation benchmark.\n\nWorkload: webpage-chain\nStage: web-002-backlink\nOrder: 2\n\nStage goal:\nCreate webpage 2 and link it back to page 1 without breaking page 1.\n\nExpected artifacts:\n- site/page-2.html (html)\n\nValidators that will run:\n- page-2-links-index: failure_class=link_integrity\n- all-html-parse: failure_class=syntax\n\nExact validator contract:\nGenerate files under site/ only.\nEvery HTML page must include <!doctype html>.\nRequired pages and literals:\n- index.html: title text must include 'Entropy Page 1'\n- page-2.html: title text must include 'Entropy Page 2'; backlink href must be 'index.html'\n- page-3.html: title text must include 'Entropy Page 3'; backlink href must be 'page-2.html'\n- page-4.html: title text must include 'Entropy Page 4'; backlink href must be 'page-3.html'\n- page-5.html: title text must include 'Entropy Page 5'; backlink href must be 'page-4.html'\nFrom page order 4, every page must link to index.html, page-2.html, page-3.html, and page-4.html.\nBy stage 5, index.html and page-5.html must include data-entropy-shared-table=\"factory-links\".\n\nExisting generated files:\nFILE: site/index.html\n---BEGIN FILE---\n<!doctype html>\n<html>\n<head>\n  <title>Entropy Page 1</title>\n</head>\n<body>\n  <nav id=\"navigation\"></nav>\n  <main>\n    <h1>Welcome to Entropy Page 1</h1>\n    <p>This is the home page for the Entropy benchmark.</p>\n  </main>\n</body>\n</html>\r\n\n---END FILE---\r\n\r\nFILE: _raw/web-001-home.prompt.txt\n---BEGIN FILE---\nYou are running an Entropy staged code-generation benchmark.\n\nWorkload: webpage-chain\nStage: web-001-home\nOrder: 1\n\nStage goal:\nCreate webpage 1 as index.html with a title, main content, and an empty navigation area that can grow later.\n\nExpected artifacts:\n- site/index.html (html)\n\nValidators that will run:\n- file-exists: failure_class=missing_artifact\n- html-parse: failure_class=syntax\n\nExact validator contract:\nGenerate files under site/ only.\nEvery HTML page must include <!doctype html>.\nRequired pages and literals:\n- index.html: title text must include 'Entropy Page 1'\n- page-2.html: title text must include 'Entropy Page 2'; backlink href must be 'index.html'\n- page-3.html: title text must include 'Entropy Page 3'; backlink href must be 'page-2.html'\n- page-4.html: title text must include 'Entropy Page 4'; backlink href must be 'page-3.html'\n- page-5.html: title text must include 'Entropy Page 5'; backlink href must be 'page-4.html'\nFrom page order 4, every page must link to index.html, page-2.html, page-3.html, and page-4.html.\nBy stage 5, index.html and page-5.html must include data-entropy-shared-table=\"factory-links\".\n\nExisting generated files:\nFILE: \n---BEGIN FILE---\n\n---END FILE---\n\nReturn ONLY a JSON object in this exact shape:\n{\n  \"files\": [\n    { \"path\": \"relative/path/from/run/root\", \"content\": \"complete file content\" }\n  ],\n  \"notes\": \"short note\"\n}\n\nRules:\n- Include every new or modified file needed for this stage to pass.\n- Use only relative paths.\n- Do not include markdown fences outside the JSON.\n- Do not explain the answer outside the JSON.\r\n\n---END FILE---\r\n\r\nFILE: _raw/web-001-home.response.json\n---BEGIN FILE---\n{\r\n  \"provider\": \"langchain\",\r\n  \"kind\": \"chat\",\r\n  \"content\": \"{\\n  \\\"files\\\": [\\n    {\\n      \\\"path\\\": \\\"site/index.html\\\",\\n      \\\"content\\\": \\\"<!doctype html>\\\\n<html>\\\\n<head>\\\\n  <title>Entropy Page 1</title>\\\\n</head>\\\\n<body>\\\\n  <nav id=\\\\\\\"navigation\\\\\\\"></nav>\\\\n  <main>\\\\n    <h1>Welcome to Entropy Page 1</h1>\\\\n    <p>This is the home page for the Entropy benchmark.</p>\\\\n  </main>\\\\n</body>\\\\n</html>\\\"\\n    }\\n  ],\\n  \\\"notes\\\": \\\"Created index.html with required title and empty navigation area for future growth.\\\"\\n}\",\r\n  \"response_metadata\": {\r\n    \"token_usage\": {\r\n      \"completion_tokens\": 137,\r\n      \"prompt_tokens\": 426,\r\n      \"total_tokens\": 563,\r\n      \"completion_tokens_details\": null,\r\n      \"prompt_tokens_details\": null\r\n    },\r\n    \"model_name\": \"Qwen3-Coder-Next-Q4_K_M.gguf\",\r\n    \"system_fingerprint\": \"b1-983559d\",\r\n    \"id\": \"chatcmpl-HfaR6UvKjrpQdu5dWKJn0X2KUoEtskTS\",\r\n    \"service_tier\": null,\r\n    \"finish_reason\": \"stop\",\r\n    \"logprobs\": null\r\n  },\r\n  \"usage_metadata\": {\r\n    \"input_tokens\": 426,\r\n    \"output_tokens\": 137,\r\n    \"total_tokens\": 563,\r\n    \"input_token_details\": {},\r\n    \"output_token_details\": {}\r\n  },\r\n  \"langfuse\": {\r\n    \"trace_id\": \"23d5c40fc3dccf55c688f6ace80a2b3f\",\r\n    \"host\": \"http://192.168.1.203:3100\",\r\n    \"tags\": [\r\n      \"EB\",\r\n      \"plain\",\r\n      \"langchain\",\r\n      \"entropy-qwen80nextcoder\",\r\n      \"webpage-chain\"\r\n    ]\r\n  }\r\n}\r\n\n---END FILE---\r\n\r\nFILE: _raw/web-001-home.txt\n---BEGIN FILE---\n{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!doctype html>\\n<html>\\n<head>\\n  <title>Entropy Page 1</title>\\n</head>\\n<body>\\n  <nav id=\\\"navigation\\\"></nav>\\n  <main>\\n    <h1>Welcome to Entropy Page 1</h1>\\n    <p>This is the home page for the Entropy benchmark.</p>\\n  </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created index.html with required title and empty navigation area for future growth.\"\n}\r\n\n---END FILE---\n\nReturn ONLY a JSON object in this exact shape:\n{\n  \"files\": [\n    { \"path\": \"relative/path/from/run/root\", \"content\": \"complete file content\" }\n  ],\n  \"notes\": \"short note\"\n}\n\nRules:\n- Include every new or modified file needed for this stage to pass.\n- Use only relative paths.\n- Do not include markdown fences outside the JSON.\n- Do not explain the answer outside the JSON."
+        }
+      ],
+      "output": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/page-2.html\",\n      \"content\": \"<!doctype html>\\n<html>\\n<head>\\n  <title>Entropy Page 2</title>\\n</head>\\n<body>\\n  <nav id=\\\"navigation\\\">\\n    <a href=\\\"index.html\\\">Back to Home</a>\\n  </nav>\\n  <main>\\n    <h1>Welcome to Entropy Page 2</h1>\\n    <p>This is page 2 in the Entropy benchmark chain.</p>\\n  </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created page-2.html with required title and backlink to index.html.\"\n}",
+        "additional_kwargs": {
+          "refusal": null
+        }
+      },
+      "metadata": {
+        "tags": [
+          "EB",
+          "plain",
+          "langchain",
+          "entropy-qwen80nextcoder",
+          "webpage-chain"
+        ],
+        "benchmark": "EB",
+        "target_set_id": "entropy-qwen80nextcoder",
+        "workload_id": "webpage-chain",
+        "stage_id": "web-002-backlink",
+        "stage_order": 2,
+        "harness_mode": "plain",
+        "completion_provider": "langchain",
+        "attempt_index": 0,
+        "attempt_reason": "initial",
+        "context_tokens": 131072,
+        "langfuse_session_id": "webpage-chain",
+        "langfuse_tags": [
+          "EB",
+          "plain",
+          "langchain",
+          "entropy-qwen80nextcoder",
+          "webpage-chain"
+        ],
+        "ls_provider": "openai",
+        "ls_model_name": "Qwen3-Coder-Next-Q4_K_M.gguf",
+        "ls_model_type": "chat",
+        "ls_temperature": 0,
+        "ls_max_tokens": 4096,
+        "is_langchain_root": true,
+        "resourceAttributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.41.0",
+          "service.name": "unknown_service"
+        },
+        "scope": {
+          "name": "langfuse-sdk",
+          "version": "3.15.0",
+          "attributes": {
+            "public_key": "pk-lf-eb-5c9a7383438865b8fba1b4fb663746471cd786db2cb1c450"
+          }
+        }
+      },
+      "model": "Qwen3-Coder-Next-Q4_K_M.gguf",
+      "modelParameters": {
+        "temperature": 0,
+        "max_completion_tokens": 4096
+      },
+      "completionStartTime": null,
+      "promptId": null,
+      "promptName": null,
+      "promptVersion": null,
+      "latency": 5.395,
+      "timeToFirstToken": null,
+      "usageDetails": {
+        "input": 1610,
+        "output": 159,
+        "total": 1769
+      },
+      "costDetails": {},
+      "usagePricingTierId": null,
+      "usagePricingTierName": null,
+      "inputPrice": 0,
+      "outputPrice": 0,
+      "totalPrice": 0,
+      "calculatedInputCost": null,
+      "calculatedOutputCost": null,
+      "calculatedTotalCost": 0,
+      "unit": "TOKENS",
+      "promptTokens": 1610,
+      "completionTokens": 159,
+      "totalTokens": 1769,
+      "modelId": null,
+      "usage": {
+        "unit": "TOKENS",
+        "input": 1610,
+        "output": 159,
+        "total": 1769
+      }
+    }
+  ],
+  "htmlPath": "/project/entropy-benchmark/traces/41a928c9cc7a1c55a5661cde33200006",
+  "totalCost": 0
+}

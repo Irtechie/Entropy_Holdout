@@ -1,0 +1,208 @@
+{
+  "id": "8ce2f3444e723c409ac20ac49356cb10",
+  "projectId": "entropy-benchmark",
+  "name": "EB entropy-granite-code-3b factory factory-001-layout",
+  "timestamp": "2026-05-25T16:55:28.645Z",
+  "environment": "default",
+  "tags": [
+    "EB",
+    "entropy-granite-code-3b",
+    "factory",
+    "langchain",
+    "plain"
+  ],
+  "bookmarked": false,
+  "release": null,
+  "version": null,
+  "userId": null,
+  "sessionId": "factory",
+  "public": false,
+  "input": [
+    {
+      "role": "system",
+      "content": "You are a code generator. Return only the requested JSON object. No prose."
+    },
+    {
+      "role": "user",
+      "content": "You are running an Entropy staged code-generation benchmark.\n\nWorkload: factory\nStage: factory-001-layout\nOrder: 1\n\nStage goal:\nCreate the factory project layout with component, station, product, and routing concepts.\n\nExpected artifacts:\n- factory-system (project)\n\nValidators that will run:\n- factory-layout-exists: failure_class=missing_artifact\n- factory-core-types-present: failure_class=api_contract\n\nExact validator contract:\nGenerate a PowerShell-runnable factory under factory-system/.\nRequired final files include factory-system/config/stations.json, factory-system/src/factory.ps1, and factory-system/dashboard/report.json.\nstations.json must contain exactly these stations:\n- id=intake, name=Intake, next=assembly\n- id=assembly, name=Assembly, next=quality\n- id=quality, name=Quality, next=shipping\n- id=shipping, name=Shipping, next=\nfactory.ps1 must accept -ConfigPath and -ProductId, print route intake->assembly->quality->shipping, and write dashboard/report.json.\ndashboard/report.json must contain product_id entropy-widget-001 and route intake->assembly->quality->shipping.\n\nExisting generated files:\nFILE: \n---BEGIN FILE---\n\n---END FILE---\n\nReturn ONLY a JSON object in this exact shape:\n{\n  \"files\": [\n    { \"path\": \"relative/path/from/run/root\", \"content\": \"complete file content\" }\n  ],\n  \"notes\": \"short note\"\n}\n\nRules:\n- Include every new or modified file needed for this stage to pass.\n- Use only relative paths.\n- Do not include markdown fences outside the JSON.\n- Do not explain the answer outside the JSON."
+    }
+  ],
+  "output": {
+    "role": "assistant",
+    "content": "1:1::1:1:1:1:1:1:\n1:\n111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
+    "additional_kwargs": {
+      "refusal": null
+    }
+  },
+  "metadata": {
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-granite-code-3b",
+      "factory"
+    ],
+    "benchmark": "EB",
+    "target_set_id": "entropy-granite-code-3b",
+    "workload_id": "factory",
+    "stage_id": "factory-001-layout",
+    "stage_order": 1,
+    "harness_mode": "plain",
+    "completion_provider": "langchain",
+    "attempt_index": 0,
+    "attempt_reason": "initial",
+    "context_tokens": 262144,
+    "langfuse_session_id": "factory",
+    "langfuse_tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-granite-code-3b",
+      "factory"
+    ],
+    "ls_provider": "openai",
+    "ls_model_name": "granite-3b-code-instruct.Q8_0.gguf",
+    "ls_model_type": "chat",
+    "ls_temperature": 0,
+    "ls_max_tokens": 4096,
+    "is_langchain_root": true,
+    "resourceAttributes": {
+      "telemetry.sdk.language": "python",
+      "telemetry.sdk.name": "opentelemetry",
+      "telemetry.sdk.version": "1.41.0",
+      "service.name": "unknown_service"
+    },
+    "scope": {
+      "name": "langfuse-sdk",
+      "version": "3.15.0",
+      "attributes": {
+        "public_key": "pk-lf-eb-5c9a7383438865b8fba1b4fb663746471cd786db2cb1c450"
+      }
+    }
+  },
+  "createdAt": "2026-05-25T16:56:02.192Z",
+  "updatedAt": "2026-05-25T16:56:02.212Z",
+  "externalId": null,
+  "scores": [],
+  "latency": 33.596,
+  "observations": [
+    {
+      "id": "99704ed42508cc5e",
+      "traceId": "8ce2f3444e723c409ac20ac49356cb10",
+      "startTime": "2026-05-25T16:55:28.645Z",
+      "endTime": "2026-05-25T16:56:02.241Z",
+      "projectId": "entropy-benchmark",
+      "parentObservationId": null,
+      "type": "GENERATION",
+      "environment": "default",
+      "name": "EB entropy-granite-code-3b factory factory-001-layout",
+      "level": "DEFAULT",
+      "statusMessage": null,
+      "version": null,
+      "createdAt": "2026-05-25T16:56:02.186Z",
+      "updatedAt": "2026-05-25T16:56:02.202Z",
+      "input": [
+        {
+          "role": "system",
+          "content": "You are a code generator. Return only the requested JSON object. No prose."
+        },
+        {
+          "role": "user",
+          "content": "You are running an Entropy staged code-generation benchmark.\n\nWorkload: factory\nStage: factory-001-layout\nOrder: 1\n\nStage goal:\nCreate the factory project layout with component, station, product, and routing concepts.\n\nExpected artifacts:\n- factory-system (project)\n\nValidators that will run:\n- factory-layout-exists: failure_class=missing_artifact\n- factory-core-types-present: failure_class=api_contract\n\nExact validator contract:\nGenerate a PowerShell-runnable factory under factory-system/.\nRequired final files include factory-system/config/stations.json, factory-system/src/factory.ps1, and factory-system/dashboard/report.json.\nstations.json must contain exactly these stations:\n- id=intake, name=Intake, next=assembly\n- id=assembly, name=Assembly, next=quality\n- id=quality, name=Quality, next=shipping\n- id=shipping, name=Shipping, next=\nfactory.ps1 must accept -ConfigPath and -ProductId, print route intake->assembly->quality->shipping, and write dashboard/report.json.\ndashboard/report.json must contain product_id entropy-widget-001 and route intake->assembly->quality->shipping.\n\nExisting generated files:\nFILE: \n---BEGIN FILE---\n\n---END FILE---\n\nReturn ONLY a JSON object in this exact shape:\n{\n  \"files\": [\n    { \"path\": \"relative/path/from/run/root\", \"content\": \"complete file content\" }\n  ],\n  \"notes\": \"short note\"\n}\n\nRules:\n- Include every new or modified file needed for this stage to pass.\n- Use only relative paths.\n- Do not include markdown fences outside the JSON.\n- Do not explain the answer outside the JSON."
+        }
+      ],
+      "output": {
+        "role": "assistant",
+        "content": "1:1::1:1:1:1:1:1:\n1:\n111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
+        "additional_kwargs": {
+          "refusal": null
+        }
+      },
+      "metadata": {
+        "tags": [
+          "EB",
+          "plain",
+          "langchain",
+          "entropy-granite-code-3b",
+          "factory"
+        ],
+        "benchmark": "EB",
+        "target_set_id": "entropy-granite-code-3b",
+        "workload_id": "factory",
+        "stage_id": "factory-001-layout",
+        "stage_order": 1,
+        "harness_mode": "plain",
+        "completion_provider": "langchain",
+        "attempt_index": 0,
+        "attempt_reason": "initial",
+        "context_tokens": 262144,
+        "langfuse_session_id": "factory",
+        "langfuse_tags": [
+          "EB",
+          "plain",
+          "langchain",
+          "entropy-granite-code-3b",
+          "factory"
+        ],
+        "ls_provider": "openai",
+        "ls_model_name": "granite-3b-code-instruct.Q8_0.gguf",
+        "ls_model_type": "chat",
+        "ls_temperature": 0,
+        "ls_max_tokens": 4096,
+        "is_langchain_root": true,
+        "resourceAttributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.41.0",
+          "service.name": "unknown_service"
+        },
+        "scope": {
+          "name": "langfuse-sdk",
+          "version": "3.15.0",
+          "attributes": {
+            "public_key": "pk-lf-eb-5c9a7383438865b8fba1b4fb663746471cd786db2cb1c450"
+          }
+        }
+      },
+      "model": "granite-3b-code-instruct.Q8_0.gguf",
+      "modelParameters": {
+        "temperature": 0,
+        "max_completion_tokens": 4096
+      },
+      "completionStartTime": null,
+      "promptId": null,
+      "promptName": null,
+      "promptVersion": null,
+      "latency": 33.596,
+      "timeToFirstToken": null,
+      "usageDetails": {
+        "input": 401,
+        "output": 1605,
+        "total": 2048,
+        "input_cache_read": 42
+      },
+      "costDetails": {},
+      "usagePricingTierId": null,
+      "usagePricingTierName": null,
+      "inputPrice": 0,
+      "outputPrice": 0,
+      "totalPrice": 0,
+      "calculatedInputCost": null,
+      "calculatedOutputCost": null,
+      "calculatedTotalCost": 0,
+      "unit": "TOKENS",
+      "promptTokens": 443,
+      "completionTokens": 1605,
+      "totalTokens": 2048,
+      "modelId": null,
+      "usage": {
+        "unit": "TOKENS",
+        "input": 443,
+        "output": 1605,
+        "total": 2048
+      }
+    }
+  ],
+  "htmlPath": "/project/entropy-benchmark/traces/8ce2f3444e723c409ac20ac49356cb10",
+  "totalCost": 0
+}

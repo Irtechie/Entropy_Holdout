@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "exported_at": "2026-05-25T15:43:35.2783647-04:00",
+  "langfuse_host": "http://192.168.1.203:3100",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529",
+  "results": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529\\results.jsonl",
+  "row_count": 7,
+  "trace_row_count": 6,
+  "exported_trace_count": 6,
+  "error_count": 0,
+  "errors": []
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "exported_at": "2026-05-25T15:43:28.3584071-04:00",
+  "langfuse_host": "http://192.168.1.203:3100",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-gemma431-20260525-133103",
+  "results": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-gemma431-20260525-133103\\results.jsonl",
+  "row_count": 7,
+  "trace_row_count": 7,
+  "exported_trace_count": 7,
+  "error_count": 0,
+  "errors": []
+}

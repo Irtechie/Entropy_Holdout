@@ -1,0 +1,178 @@
+[
+  {
+    "trace_id": "09795a683f809d52a360db371280ef82",
+    "target_set_id": "entropy-qwen80next",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-004-shared-nav",
+    "stage_order": 4,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-qwen80next webpage-chain web-004-shared-nav",
+    "langfuse_timestamp": "2026-05-25T18:11:22.494Z",
+    "langfuse_latency_s": 12.787,
+    "observation_count": 1,
+    "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+    "usage": {
+      "input": 8321,
+      "output": 197,
+      "total": 8518
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/09795a683f809d52a360db371280ef82",
+    "trace_file": "langfuse/traces/09795a683f809d52a360db371280ef82.json"
+  },
+  {
+    "trace_id": "213db5b6db3f32bc24e99647b2513c76",
+    "target_set_id": "entropy-qwen80next",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-005-nested-shared-table",
+    "stage_order": 5,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-qwen80next webpage-chain web-005-nested-shared-table",
+    "langfuse_timestamp": "2026-05-25T18:11:48.137Z",
+    "langfuse_latency_s": 23.965,
+    "observation_count": 1,
+    "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+    "usage": {
+      "input": 17586,
+      "output": 237,
+      "total": 17823
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/213db5b6db3f32bc24e99647b2513c76",
+    "trace_file": "langfuse/traces/213db5b6db3f32bc24e99647b2513c76.json"
+  },
+  {
+    "trace_id": "2937fd021d98b513951c7735acb1b002",
+    "target_set_id": "entropy-qwen80next",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-003-chain-link",
+    "stage_order": 3,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-qwen80next webpage-chain web-003-chain-link",
+    "langfuse_timestamp": "2026-05-25T18:11:06.061Z",
+    "langfuse_latency_s": 6.86,
+    "observation_count": 1,
+    "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+    "usage": {
+      "input": 3779,
+      "output": 136,
+      "total": 3915
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/2937fd021d98b513951c7735acb1b002",
+    "trace_file": "langfuse/traces/2937fd021d98b513951c7735acb1b002.json"
+  },
+  {
+    "trace_id": "3c0a4908b416426df5fb399505399355",
+    "target_set_id": "entropy-qwen80next",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-002-backlink",
+    "stage_order": 2,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-qwen80next webpage-chain web-002-backlink",
+    "langfuse_timestamp": "2026-05-25T18:10:51.501Z",
+    "langfuse_latency_s": 4.327,
+    "observation_count": 1,
+    "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+    "usage": {
+      "input": 1509,
+      "output": 126,
+      "total": 1635
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/3c0a4908b416426df5fb399505399355",
+    "trace_file": "langfuse/traces/3c0a4908b416426df5fb399505399355.json"
+  },
+  {
+    "trace_id": "4862ea8dd2df29e78a61b9d7adc3c331",
+    "target_set_id": "entropy-qwen80next",
+    "workload_id": "factory",
+    "stage_id": "factory-002-stations",
+    "stage_order": 2,
+    "status": "fail",
+    "failure_class": "generation",
+    "langfuse_name": "EB entropy-qwen80next factory factory-002-stations",
+    "langfuse_timestamp": "2026-05-25T18:13:05.155Z",
+    "langfuse_latency_s": 10.107,
+    "observation_count": 1,
+    "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+    "usage": {
+      "input": 2259,
+      "output": 368,
+      "total": 2627
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/4862ea8dd2df29e78a61b9d7adc3c331",
+    "trace_file": "langfuse/traces/4862ea8dd2df29e78a61b9d7adc3c331.json"
+  },
+  {
+    "trace_id": "66f2c9df9f7585cd1ec8b27d1fcd5b58",
+    "target_set_id": "entropy-qwen80next",
+    "workload_id": "webpage-chain",
+    "stage_id": "web-001-home",
+    "stage_order": 1,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-qwen80next webpage-chain web-001-home",
+    "langfuse_timestamp": "2026-05-25T18:10:28.059Z",
+    "langfuse_latency_s": 6.081,
+    "observation_count": 1,
+    "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+    "usage": {
+      "input": 426,
+      "output": 105,
+      "total": 531
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/66f2c9df9f7585cd1ec8b27d1fcd5b58",
+    "trace_file": "langfuse/traces/66f2c9df9f7585cd1ec8b27d1fcd5b58.json"
+  },
+  {
+    "trace_id": "944ff5121b2d668054dc4510a72a8dfe",
+    "target_set_id": "entropy-qwen80next",
+    "workload_id": "library-chain",
+    "stage_id": "lib-001-core",
+    "stage_order": 1,
+    "status": "fail",
+    "failure_class": "generation",
+    "langfuse_name": "EB entropy-qwen80next library-chain lib-001-core",
+    "langfuse_timestamp": "2026-05-25T18:12:20.958Z",
+    "langfuse_latency_s": 17.322,
+    "observation_count": 1,
+    "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+    "usage": {
+      "input": 370,
+      "output": 809,
+      "total": 1179
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/944ff5121b2d668054dc4510a72a8dfe",
+    "trace_file": "langfuse/traces/944ff5121b2d668054dc4510a72a8dfe.json"
+  },
+  {
+    "trace_id": "9e477f55ca693f7471d1042e71ddd802",
+    "target_set_id": "entropy-qwen80next",
+    "workload_id": "factory",
+    "stage_id": "factory-001-layout",
+    "stage_order": 1,
+    "status": "pass",
+    "failure_class": "none",
+    "langfuse_name": "EB entropy-qwen80next factory factory-001-layout",
+    "langfuse_timestamp": "2026-05-25T18:12:47.548Z",
+    "langfuse_latency_s": 8.096,
+    "observation_count": 1,
+    "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+    "usage": {
+      "input": 372,
+      "output": 369,
+      "total": 741
+    },
+    "total_cost": 0,
+    "html_path": "/project/entropy-benchmark/traces/9e477f55ca693f7471d1042e71ddd802",
+    "trace_file": "langfuse/traces/9e477f55ca693f7471d1042e71ddd802.json"
+  }
+]
