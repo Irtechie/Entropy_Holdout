@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!doctype html>\\n<html>\\n<head>\\n    <meta charset=\\\"utf-8\\\">\\n    <title>Entropy Page 1</title>\\n</head>\\n<body>\\n    <nav id=\\\"main-nav\\\">\\n        <a href=\\\"index.html\\\">Page 1</a>\\n        <a href=\\\"page-2.html\\\">Page 2</a>\\n        <a href=\\\"page-3.html\\\">Page 3</a>\\n        <a href=\\\"page-4.html\\\">Page 4</a>\\n    </nav>\\n    <main>\\n        <h1>Welcome to Entropy Page 1</h1>\\n        <p>This is the starting page of the webpage chain.</p>\\n        <table data-entropy-shared-table=\\\"factory-links\\\">\\n            <tr>\\n                <td>\\n                    <table border=\\\"1\\\">\\n                        <thead>\\n                            <tr><th>Factory</th><th>Status</th></tr>\\n                        </thead>\\n                        <tbody>\\n                            <tr><td>Alpha</td><td>Active</td></tr>\\n                            <tr><td>Beta</td><td>Inactive</td></tr>\\n                        </tbody>\\n                    </table>\\n                </td>\\n            </tr>\\n        </table>\\n    </main>\\n</body>\\n</html>\"\n    },\n    {\n      \"path\": \"site/page-2.html\",\n      \"content\": \"<!doctype html>\\n<html>\\n<head>\\n    <meta charset=\\\"utf-8\\\">\\n    <title>Entropy Page 2</title>\\n</head>\\n<body>\\n    <nav id=\\\"main-nav\\\">\\n        <a href=\\\"index.html\\\">Page 1</a>\\n        <a href=\\\"page-2.html\\\">Page 2</a>\\n        <a href=\\\"page-3.html\\\">Page 3</a>\\n        <a href=\\\"page-4.html\\\">Page 4</a>\\n    </nav>\\n    <main>\\n        <h1>Welcome to Entropy Page 2</h1>\\n        <p>This is the second page in the chain.</p>\\n        <table data-entropy-shared-table=\\\"factory-links\\\">\\n            <tr>\\n                <td>\\n                    <table border=\\\"1\\\">\\n                        <thead>\\n                            <tr><th>Factory</th><th>Status</th></tr>\\n                        </thead>\\n                        <tbody>\\n                            <tr><td>Alpha</td><td>Active</td></tr>\\n                            <tr><td>Beta</td><td>Inactive</td></tr>\\n                        </tbody>\\n                    </table>\\n                </td>\\n            </tr>\\n        </table>\\n        <a href=\\\"index.html\\\">Back to Entropy Page 1</a>\\n    </main>\\n</body>\\n</html>\"\n    },\n    {\n      \"path\": \"site/page-3.html\",\n      \"content\": \"<!doctype html>\\n<html>\\n<head>\\n    <meta charset=\\\"utf-8\\\">\\n    <title>Entropy Page 3</title>\\n</head>\\n<body>\\n    <nav id=\\\"main-nav\\\">\\n        <a href=\\\"index.html\\\">Page 1</a>\\n        <a href=\\\"page-2.html\\\">Page 2</a>\\n        <a href=\\\"page-3.html\\\">Page 3</a>\\n        <a href=\\\"page-4.html\\\">Page 4</a>\\n    </nav>\\n    <main>\\n        <h1>Welcome to Entropy Page 3</h1>\\n        <p>This is the third page in the chain.</p>\\n        <table data-entropy-shared-table=\\\"factory-links\\\">\\n            <tr>\\n                <td>\\n                    <table border=\\\"1\\\">\\n                        <thead>\\n",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 4096,
+      "prompt_tokens": 24847,
+      "total_tokens": 28943,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "gemma-4-31B-it-Q4_K_M.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-zzb0kh4DUyIhYk4JoMpQIrY51a7iM5Ez",
+    "service_tier": null,
+    "finish_reason": "length",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 24847,
+    "output_tokens": 4096,
+    "total_tokens": 28943,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "4aa26a1472a6668d4588f1b625000440",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-gemma431",
+      "webpage-chain"
+    ]
+  }
+}

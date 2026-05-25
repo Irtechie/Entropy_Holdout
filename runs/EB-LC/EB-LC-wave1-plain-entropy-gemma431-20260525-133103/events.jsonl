@@ -1,0 +1,8 @@
+{"ts":"2026-05-25T13:31:03.5599252-04:00","event":"experiment_start","experiment_id":"EB-LC-wave1-plain-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
+{"ts":"2026-05-25T13:31:03.5650013-04:00","event":"target_start","set_id":"entropy-gemma431","context_tokens":262144}
+{"ts":"2026-05-25T13:31:42.3283857-04:00","event":"target_ready","set_id":"entropy-gemma431","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"gemma-4-31B-it-Q4_K_M.gguf"}
+{"ts":"2026-05-25T13:51:46.7435395-04:00","event":"workload_failed","set_id":"entropy-gemma431","workload":"webpage-chain","error":"Conversion from JSON failed with error: Unexpected end when deserializing object. Path 'files[1]', line 10, position 5."}
+{"ts":"2026-05-25T13:55:15.6182453-04:00","event":"workload_failed","set_id":"entropy-gemma431","workload":"library-chain","error":"model did not generate expected artifact path: library-chain/core"}
+{"ts":"2026-05-25T14:02:33.7112781-04:00","event":"workload_failed","set_id":"entropy-gemma431","workload":"factory","error":"Conversion from JSON failed with error: Unexpected end when deserializing object. Path 'files[0]', line 6, position 5."}
+{"ts":"2026-05-25T14:02:33.7318891-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-gemma431-20260525-133103\\results.jsonl"}
+{"ts":"2026-05-25T14:02:33.7580839-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-gemma431-20260525-133103\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-gemma431-20260525-133103\\critique.json"}

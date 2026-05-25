@@ -1,0 +1,47 @@
+```json
+{
+  "files": [
+    {
+      "path": "Contracts/Contracts.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n</Project>"
+    },
+    {
+      "path": "Contracts/ContractProvider.cs",
+      "content": "namespace Contracts;\n\npublic static class ContractProvider\n{\n    public static string Get() => \"contract\";\n}"
+    },
+    {
+      "path": "CoreLib/CoreLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n</Project>"
+    },
+    {
+      "path": "CoreLib/CoreProvider.cs",
+      "content": "namespace CoreLib;\n\npublic static class CoreProvider\n{\n    public static string Get() => \"core\";\n}"
+    },
+    {
+      "path": "FeatureLib/FeatureLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"../CoreLib/CoreLib.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "FeatureLib/FeatureProvider.cs",
+      "content": "using CoreLib;\n\nnamespace FeatureLib;\n\npublic static class FeatureProvider\n{\n    public static string Get() => CoreProvider.Get() + \"->feature\";\n}"
+    },
+    {
+      "path": "PipelineLib/PipelineLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"../FeatureLib/FeatureLib.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "PipelineLib/PipelineProvider.cs",
+      "content": "using FeatureLib;\n\nnamespace PipelineLib;\n\npublic static class PipelineProvider\n{\n    public static string Get() => FeatureProvider.Get() + \"->pipeline\";\n}"
+    },
+    {
+      "path": "SampleApp/SampleApp.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <OutputType>Exe</OutputType>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"../PipelineLib/PipelineLib.csproj\" />\n    <ProjectReference Include=\"../Contracts/Contracts.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "SampleApp/Program.cs",
+      "content": "using PipelineLib;\nusing Contracts;\n\nConsole.WriteLine($\"{PipelineProvider.Get()}->{ContractProvider.Get()}\");"
+    }
+  ],
+  "notes": "Implemented a chain of libraries (CoreLib -> FeatureLib -> PipelineLib) and a separate Contracts library, all consumed by SampleApp to produce the required output string."
+}
+```

@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"factory-system/config/stations.json\",\n      \"content\": \"[\\n  { \\\"id\\\": \\\"intake\\\", \\\"name\\\": \\\"Intake\\\", \\\"next\\\": \\\"assembly\\\" },\\n  { \\\"id\\\": \\\"assembly\\\", \\\"name\\\": \\\"Assembly\\\", \\\"next\\\": \\\"quality\\\" },\\n  { \\\"id\\\": \\\"quality\\\", \\\"name\\\": \\\"Quality\\\", \\\"next\\\": \\\"shipping\\\" },\\n  { \\\"id\\\": \\\"shipping\\\", \\\"name\\\": \\\"Shipping\\\", \\\"next\\\": \\\"\\\" }\\n]\"\n    },\n    {\n      \"path\": \"factory-system/src/factory.ps1\",\n      \"content\": \"param (\\n    [Parameter(Mandatory=$true)] [string]$ConfigPath,\\n    [Parameter(Mandatory=$true)] [string]$ProductId\\n)\\n\\n$stations = Get-Content $ConfigPath | ConvertFrom-Json\\n$route = @()\\n$currentId = \\\"int",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 4096,
+      "prompt_tokens": 436,
+      "total_tokens": 4532,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "gemma-4-31B-it-Q4_K_M.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-F5aaT4r8FZzChHEyeFXLAzIdysObLz89",
+    "service_tier": null,
+    "finish_reason": "length",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 436,
+    "output_tokens": 4096,
+    "total_tokens": 4532,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "a45e5c1015b7fa74c8c370bb242ed3ce",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-gemma431",
+      "factory"
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"Contracts/Contracts.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"Contracts/ContractProvider.cs\",\n      \"content\": \"namespace Contracts;\\n\\npublic static class ContractProvider\\n{\\n    public static string Get() => \\\"contract\\\";\\n}\"\n    },\n    {\n      \"path\": \"CoreLib/CoreLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"CoreLib/CoreProvider.cs\",\n      \"content\": \"namespace CoreLib;\\n\\npublic static class CoreProvider\\n{\\n    public static string Get() => \\\"core\\\";\\n}\"\n    },\n    {\n      \"path\": \"FeatureLib/FeatureLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"../CoreLib/CoreLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"FeatureLib/FeatureProvider.cs\",\n      \"content\": \"using CoreLib;\\n\\nnamespace FeatureLib;\\n\\npublic static class FeatureProvider\\n{\\n    public static string Get() => CoreProvider.Get() + \\\"->feature\\\";\\n}\"\n    },\n    {\n      \"path\": \"PipelineLib/PipelineLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"../FeatureLib/FeatureLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"PipelineLib/PipelineProvider.cs\",\n      \"content\": \"using FeatureLib;\\n\\nnamespace PipelineLib;\\n\\npublic static class PipelineProvider\\n{\\n    public static string Get() => FeatureProvider.Get() + \\\"->pipeline\\\";\\n}\"\n    },\n    {\n      \"path\": \"SampleApp/SampleApp.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <OutputType>Exe</OutputType>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"../PipelineLib/PipelineLib.csproj\\\" />\\n    <ProjectReference Include=\\\"../Contracts/Contracts.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"SampleApp/Program.cs\",\n      \"content\": \"using PipelineLib;\\nusing Contracts;\\n\\nConsole.WriteLine($\\\"{PipelineProvider.Get()}->{ContractProvider.Get()}\\\");\"\n    }\n  ],\n  \"notes\": \"Implemented a chain of libraries (CoreLib -> FeatureLib -> PipelineLib) and a separate Contracts library, all consumed by SampleApp to produce the required output string.\"\n}\n```",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 1879,
+      "prompt_tokens": 413,
+      "total_tokens": 2292,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "gemma-4-31B-it-Q4_K_M.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-9MyiFHbSaH6BE2h3TmiHzVggh1gAgEua",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 413,
+    "output_tokens": 1879,
+    "total_tokens": 2292,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "2b8a98efd8280c154d1ed083bf0cfc00",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-gemma431",
+      "library-chain"
+    ]
+  }
+}
