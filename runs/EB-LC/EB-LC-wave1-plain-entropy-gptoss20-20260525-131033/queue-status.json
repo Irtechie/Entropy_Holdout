@@ -1,0 +1,17 @@
+{
+  "queue_id": "EB-LC-wave1-plain-singlebox",
+  "target_set_id": "entropy-gptoss20",
+  "slice_id": "lc-wave1-007",
+  "classification": "completed-data-run",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-gptoss20-20260525-131033",
+  "started_at": "2026-05-25T13:10:33.6983246-04:00",
+  "finished_at": "2026-05-25T13:15:43.3668360-04:00",
+  "elapsed_s": 309.7,
+  "runner_exit_code": 0,
+  "results": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-gptoss20-20260525-131033\\results.jsonl",
+  "critique": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-gptoss20-20260525-131033\\critique.md",
+  "critique_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-gptoss20-20260525-131033\\critique.json",
+  "report_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-gptoss20-20260525-131033\\report.json",
+  "wedge_risk": false,
+  "wedge_detail": null
+}

@@ -1,0 +1,8 @@
+{"ts":"2026-05-25T13:10:33.9780334-04:00","event":"experiment_start","experiment_id":"EB-LC-wave1-plain-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
+{"ts":"2026-05-25T13:10:33.9812646-04:00","event":"target_start","set_id":"entropy-gptoss20","context_tokens":131072}
+{"ts":"2026-05-25T13:11:01.2444329-04:00","event":"target_ready","set_id":"entropy-gptoss20","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"gpt-oss-20b-Q4_K_M.gguf"}
+{"ts":"2026-05-25T13:13:35.6423396-04:00","event":"workload_done","set_id":"entropy-gptoss20","workload":"webpage-chain"}
+{"ts":"2026-05-25T13:14:52.8671180-04:00","event":"workload_failed","set_id":"entropy-gptoss20","workload":"library-chain","error":"Conversion from JSON failed with error: Invalid JavaScript property identifier character: }. Path '', line 1, position 5."}
+{"ts":"2026-05-25T13:15:43.3245856-04:00","event":"workload_failed","set_id":"entropy-gptoss20","workload":"factory","error":"model did not generate expected artifact path: factory-system/stations"}
+{"ts":"2026-05-25T13:15:43.3261739-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-gptoss20-20260525-131033\\results.jsonl"}
+{"ts":"2026-05-25T13:15:43.3533031-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-gptoss20-20260525-131033\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-gptoss20-20260525-131033\\critique.json"}

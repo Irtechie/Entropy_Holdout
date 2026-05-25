@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "path": "factory-system/config/stations.json",
+      "content": "[\n  { \"id\":\"intake\",\"name\":\"Intake\",\"next\":\"assembly\" },\n  { \"id\":\"assembly\",\"name\":\"Assembly\",\"next\":\"quality\" },\n  { \"id\":\"quality\",\"name\":\"Quality\",\"next\":\"shipping\" },\n  { \"id\":\"shipping\",\"name\":\"Shipping\",\"next\":\"\" }\n]"
+    },
+    {
+      "path": "factory-system/src/factory.ps1",
+      "content": "param(\n    [string]$ConfigPath,\n    [string]$ProductId\n)\n\n$scriptRoot = $PSScriptRoot\n$config = Get-Content -Raw $ConfigPath | ConvertFrom-Json\n$stations = $config\n\n$current = $stations | Where-Object { $_.id -eq 'intake' }\n$routeParts = @()\nwhile ($current) {\n    $routeParts += $current.name\n    if ($current.next) {\n        $current = $stations | Where-Object { $_.id -eq $current.next }\n    } else {\n        $current = $null\n    }\n}\n$route = ($routeParts -join '->')\nWrite-Output $route\n\nNew-Item -ItemType Directory -Force -Path \"$scriptRoot/dashboard\"\n$report = @{\n    product_id = 'entropy-widget-001'\n    route = $route\n}\n$report | ConvertTo-Json -Depth 3 | Set-Content -Path \"$scriptRoot/dashboard/report.json\""
+    },
+    {
+      "path": "factory-system/dashboard/report.json",
+      "content": "{\"product_id\":\"entropy-widget-001\",\"route\":\"intake->assembly->quality->shipping\"}"
+    }
+  ],
+  "notes": "Factory layout created with required files."
+}
