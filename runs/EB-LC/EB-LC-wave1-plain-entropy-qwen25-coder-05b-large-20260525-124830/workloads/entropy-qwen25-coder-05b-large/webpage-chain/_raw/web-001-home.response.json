@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    { \"path\": \"site/index.html\", \"content\": \"Complete file content\" }\n  ],\n  \"notes\": \"Generate files under site/ only.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 41,
+      "prompt_tokens": 426,
+      "total_tokens": 467,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "qwen2.5-coder-0.5b-instruct-q4_k_m.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-z3VjthPK4tCwV2jlGrMrz3mPTDK5zhQh",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 426,
+    "output_tokens": 41,
+    "total_tokens": 467,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "4802a151e776f210d4f4373f131965c2",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-qwen25-coder-05b-large",
+      "webpage-chain"
+    ]
+  }
+}

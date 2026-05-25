@@ -1,0 +1,6 @@
+{
+  "files": [
+    { "path": "site/index.html", "content": "Complete file content" }
+  ],
+  "notes": "Generate files under site/ only."
+}

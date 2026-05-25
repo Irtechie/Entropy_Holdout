@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    { \"path\": \"factory-system/config/stations.json\", \"content\": \"station configuration\" },\n    { \"path\": \"factory-system/src/factory.ps1\", \"content\": \"factory script\" },\n    { \"path\": \"factory-system/dashboard/report.json\", \"content\": \"dashboard report\" }\n  ],\n  \"notes\": \"Factory project layout with component, station, product, and routing concepts.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 92,
+      "prompt_tokens": 372,
+      "total_tokens": 464,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 38
+      }
+    },
+    "model_name": "qwen2.5-coder-0.5b-instruct-q4_k_m.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-gCLawV0IhLXAjQ7YvVjyIAllqXr84Lrf",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 372,
+    "output_tokens": 92,
+    "total_tokens": 464,
+    "input_token_details": {
+      "cache_read": 38
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "667c44a9ac38f2a0b98138f92ed0229c",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-qwen25-coder-05b-large",
+      "factory"
+    ]
+  }
+}

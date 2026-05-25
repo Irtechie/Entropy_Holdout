@@ -1,0 +1,8 @@
+{
+  "files": [
+    { "path": "factory-system/config/stations.json", "content": "station configuration" },
+    { "path": "factory-system/src/factory.ps1", "content": "factory script" },
+    { "path": "factory-system/dashboard/report.json", "content": "dashboard report" }
+  ],
+  "notes": "Factory project layout with component, station, product, and routing concepts."
+}

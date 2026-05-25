@@ -1,0 +1,35 @@
+[
+  {
+    "target_set_id": "entropy-qwen25-coder-05b-large",
+    "model_id": "qwen2.5-coder-0.5b-instruct-q4_k_m.gguf",
+    "context_tokens": 262144,
+    "harness_mode": "plain",
+    "workload_id": "factory",
+    "stages_seen": 2,
+    "max_pass_stage": 1,
+    "first_fail_stage": "factory-002-stations",
+    "first_failure_class": "generation"
+  },
+  {
+    "target_set_id": "entropy-qwen25-coder-05b-large",
+    "model_id": "qwen2.5-coder-0.5b-instruct-q4_k_m.gguf",
+    "context_tokens": 262144,
+    "harness_mode": "plain",
+    "workload_id": "library-chain",
+    "stages_seen": 1,
+    "max_pass_stage": 0,
+    "first_fail_stage": "lib-001-core",
+    "first_failure_class": "generation"
+  },
+  {
+    "target_set_id": "entropy-qwen25-coder-05b-large",
+    "model_id": "qwen2.5-coder-0.5b-instruct-q4_k_m.gguf",
+    "context_tokens": 262144,
+    "harness_mode": "plain",
+    "workload_id": "webpage-chain",
+    "stages_seen": 1,
+    "max_pass_stage": 0,
+    "first_fail_stage": "web-001-home",
+    "first_failure_class": "generation"
+  }
+]

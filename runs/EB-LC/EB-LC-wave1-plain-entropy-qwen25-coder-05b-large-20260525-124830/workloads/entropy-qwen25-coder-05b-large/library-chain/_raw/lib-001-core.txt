@@ -1,0 +1,6 @@
+{
+  "files": [
+    { "path": "library-chain/core/core.csproj", "content": "complete file content" }
+  ],
+  "notes": "This is the first library with one public function and a tiny sample caller. It includes the necessary project files and a sample app. The sample app builds and runs correctly."
+}
