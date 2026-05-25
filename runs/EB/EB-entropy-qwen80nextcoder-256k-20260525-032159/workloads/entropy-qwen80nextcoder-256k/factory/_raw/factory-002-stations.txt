@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "path": "factory-system/src/main/java/com/example/factory/StationGraph.java",
+      "content": "package com.example.factory;\n\nimport java.util.HashMap;\nimport java.util.Map;\nimport java.util.Set;\n\npublic class StationGraph {\n    private Map<String, Station> stations = new HashMap<>();\n    private Map<String, Set<String>> transitions = new HashMap<>();\n\n    public void addStation(Station station) {\n        stations.put(station.getId(), station);\n    }\n\n    public void addTransition(String fromId, String toId) {\n        transitions.computeIfAbsent(fromId, k -> java.util.Collections.emptySet());\n    }\n\n    public Station getStation(String id) {\n        return stations.get(id);\n    }\n\n    public Set<String> getTransitions(String id) {\n        return transitions.getOrDefault(id, java.util.Collections.emptySet());\n    }\n\n    public boolean hasStation(String id) {\n        return stations.containsKey(id);\n    }\n}\n"
+    },
+    {
+      "path": "factory-system/src/main/java/com/example/factory/RouteEngine.java",
+      "content": "package com.example.factory;\n\nimport java.util.List;\n\npublic class RouteEngine {\n    private StationGraph stationGraph;\n\n    public RouteEngine(StationGraph stationGraph) {\n        this.stationGraph = stationGraph;\n    }\n\n    public boolean canRoute(Product product, Routing routing) {\n        List<String> stations = routing.getStationSequence();\n        for (String stationId : stations) {\n            if (!stationGraph.hasStation(stationId)) {\n                return false;\n            }\n        }\n        return true;\n    }\n\n    public void executeRoute(Product product, Routing routing) {\n        if (!canRoute(product, routing)) {\n            throw new IllegalArgumentException(\"Cannot route product: missing stations\");\n        }\n        // Simulate product moving through stations\n        for (String stationId : routing.getStationSequence()) {\n            Station station = stationGraph.getStation(stationId);\n            processAtStation(product, station);\n        }\n    }\n\n    private void processAtStation(Product product, Station station) {\n        // Placeholder for processing logic\n    }\n}\n"
+    },
+    {
+      "path": "factory-system/src/main/java/com/example/factory/Factory.java",
+      "content": "package com.example.factory;\n\nimport java.util.ArrayList;\nimport java.util.List;\n\npublic class Factory {\n    private StationGraph stationGraph = new StationGraph();\n    private List<Routing> routings = new ArrayList<>();\n\n    public void addStation(Station station) {\n        stationGraph.addStation(station);\n    }\n\n    public void addRouting(Routing routing) {\n        routings.add(routing);\n    }\n\n    public void processProduct(Product product, String routingId) {\n        Routing routing = routings.stream()\n                .filter(r -> r.getId().equals(routingId))\n                .findFirst()\n                .orElseThrow(() -> new IllegalArgumentException(\"Routing not found: \" + routingId));\n\n        RouteEngine engine = new RouteEngine(stationGraph);\n        engine.executeRoute(product, routing);\n    }\n\n    public StationGraph getStationGraph() {\n        return stationGraph;\n    }\n}\n"
+    }
+  ],
+  "notes": "Added StationGraph for station relationships, RouteEngine for routing validation and execution, and Factory as the orchestrator integrating stations and routings."
+}

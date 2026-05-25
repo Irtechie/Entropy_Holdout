@@ -1,0 +1,25 @@
+{
+  "files": [
+    {
+      "path": "factory-system/src/main/java/com/example/factory/Component.java",
+      "content": "package com.example.factory;\n\npublic class Component {\n    private String id;\n    private String name;\n\n    public Component(String id, String name) {\n        this.id = id;\n        this.name = name;\n    }\n\n    public String getId() { return id; }\n    public String getName() { return name; }\n}\n"
+    },
+    {
+      "path": "factory-system/src/main/java/com/example/factory/Station.java",
+      "content": "package com.example.factory;\n\nimport java.util.List;\n\npublic class Station {\n    private String id;\n    private String name;\n    private List<String> supportedComponents;\n\n    public Station(String id, String name, List<String> supportedComponents) {\n        this.id = id;\n        this.name = name;\n        this.supportedComponents = supportedComponents;\n    }\n\n    public String getId() { return id; }\n    public String getName() { return name; }\n    public List<String> getSupportedComponents() { return supportedComponents; }\n}\n"
+    },
+    {
+      "path": "factory-system/src/main/java/com/example/factory/Product.java",
+      "content": "package com.example.factory;\n\nimport java.util.List;\n\npublic class Product {\n    private String id;\n    private String name;\n    private List<Component> components;\n\n    public Product(String id, String name, List<Component> components) {\n        this.id = id;\n        this.name = name;\n        this.components = components;\n    }\n\n    public String getId() { return id; }\n    public String getName() { return name; }\n    public List<Component> getComponents() { return components; }\n}\n"
+    },
+    {
+      "path": "factory-system/src/main/java/com/example/factory/Routing.java",
+      "content": "package com.example.factory;\n\nimport java.util.List;\n\npublic class Routing {\n    private String id;\n    private String productId;\n    private List<String> stationSequence;\n\n    public Routing(String id, String productId, List<String> stationSequence) {\n        this.id = id;\n        this.productId = productId;\n        this.stationSequence = stationSequence;\n    }\n\n    public String getId() { return id; }\n    public String getProductId() { return productId; }\n    public List<String> getStationSequence() { return stationSequence; }\n}\n"
+    },
+    {
+      "path": "factory-system/pom.xml",
+      "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>com.example</groupId>\n    <artifactId>factory-system</artifactId>\n    <version>1.0.0</version>\n    <packaging>jar</packaging>\n\n    <properties>\n        <maven.compiler.source>17</maven.compiler.source>\n        <maven.compiler.target>17</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n    </dependencies>\n</project>\n"
+    }
+  ],
+  "notes": "Created factory project layout with core domain types: Component, Station, Product, and Routing."
+}

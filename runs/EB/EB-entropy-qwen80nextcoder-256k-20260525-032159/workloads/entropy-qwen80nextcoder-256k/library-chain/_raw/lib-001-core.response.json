@@ -1,0 +1,33 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/core/src/lib.rs\",\n      \"content\": \"pub fn core_function() -> &'static str {\\n    \\\"Hello from core!\\\"\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/src/main.rs\",\n      \"content\": \"use library_chain_core::core_function;\\n\\nfn main() {\\n    println!(\\\"{}\\\", core_function());\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"library-chain-core\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[lib]\\nname = \\\"library_chain_core\\\"\\npath = \\\"src/lib.rs\\\"\\n\\n[[bin]]\\nname = \\\"library-chain-core-sample\\\"\\npath = \\\"src/main.rs\\\"\\n\"\n    }\n  ],\n  \"notes\": \"Created core library with public function and sample caller binary.\"\n}"
+      }
+    }
+  ],
+  "created": 1779693808,
+  "model": "Qwen3-Coder-Next-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 216,
+    "prompt_tokens": 219,
+    "total_tokens": 435
+  },
+  "id": "chatcmpl-ubCG6Kia2C0Mzrk59P23XoB1OO0T1tXu",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 219,
+    "prompt_ms": 320.468,
+    "prompt_per_token_ms": 1.4633242009132421,
+    "prompt_per_second": 683.3755632387633,
+    "predicted_n": 216,
+    "predicted_ms": 4457.672,
+    "predicted_per_token_ms": 20.63737037037037,
+    "predicted_per_second": 48.455785890034086
+  }
+}

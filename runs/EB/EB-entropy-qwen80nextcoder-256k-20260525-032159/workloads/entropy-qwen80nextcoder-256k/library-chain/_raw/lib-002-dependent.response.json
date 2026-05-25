@@ -1,0 +1,33 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/feature/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"library-chain-feature\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[dependencies]\\nlibrary-chain-core = { path = \\\"../core\\\" }\\n\\n[lib]\\nname = \\\"library_chain_feature\\\"\\npath = \\\"src/lib.rs\\\"\\n\\n[[bin]]\\nname = \\\"library-chain-feature-sample\\\"\\npath = \\\"src/main.rs\\\"\\n\"\n    },\n    {\n      \"path\": \"library-chain/feature/src/lib.rs\",\n      \"content\": \"use library_chain_core::core_function;\\n\\npub fn feature_function() -> String {\\n    format!(\\\"{} - extended!\\\", core_function())\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/feature/src/main.rs\",\n      \"content\": \"use library_chain_feature::feature_function;\\n\\nfn main() {\\n    println!(\\\"{}\\\", feature_function());\\n}\\n\"\n    }\n  ],\n  \"notes\": \"Created feature library that depends on core library and calls its public function.\"\n}"
+      }
+    }
+  ],
+  "created": 1779693815,
+  "model": "Qwen3-Coder-Next-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 254,
+    "prompt_tokens": 1460,
+    "total_tokens": 1714
+  },
+  "id": "chatcmpl-m4x7U7reaYIr0WCHFHQ1LIpn8b72t1QW",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 1460,
+    "prompt_ms": 1535.776,
+    "prompt_per_token_ms": 1.0519013698630137,
+    "prompt_per_second": 950.6594711728793,
+    "predicted_n": 254,
+    "predicted_ms": 5279.764,
+    "predicted_per_token_ms": 20.786472440944884,
+    "predicted_per_second": 48.108210897305256
+  }
+}

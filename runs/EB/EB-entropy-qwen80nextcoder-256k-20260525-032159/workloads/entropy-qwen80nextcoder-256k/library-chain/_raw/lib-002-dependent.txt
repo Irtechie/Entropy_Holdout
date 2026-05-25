@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "path": "library-chain/feature/Cargo.toml",
+      "content": "[package]\nname = \"library-chain-feature\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[dependencies]\nlibrary-chain-core = { path = \"../core\" }\n\n[lib]\nname = \"library_chain_feature\"\npath = \"src/lib.rs\"\n\n[[bin]]\nname = \"library-chain-feature-sample\"\npath = \"src/main.rs\"\n"
+    },
+    {
+      "path": "library-chain/feature/src/lib.rs",
+      "content": "use library_chain_core::core_function;\n\npub fn feature_function() -> String {\n    format!(\"{} - extended!\", core_function())\n}\n"
+    },
+    {
+      "path": "library-chain/feature/src/main.rs",
+      "content": "use library_chain_feature::feature_function;\n\nfn main() {\n    println!(\"{}\", feature_function());\n}\n"
+    }
+  ],
+  "notes": "Created feature library that depends on core library and calls its public function."
+}
