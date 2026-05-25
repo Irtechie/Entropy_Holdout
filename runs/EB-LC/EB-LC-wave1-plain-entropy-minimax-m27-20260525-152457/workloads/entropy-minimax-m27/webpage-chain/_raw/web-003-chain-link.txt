@@ -1,0 +1,31 @@
+The user wants me to create webpage 3 (page-3.html) and link it back to page 2, while preserving the existing page 1 and page 2 links.
+
+Looking at the existing files:
+- site/index.html - exists with title "Entropy Page 1" and has data-entropy-shared-table="factory-links"
+- site/page-2.html - exists with title "Entropy Page 2" and links back to index.html
+
+For this stage (web-003-chain-link, Order: 3):
+- I need to create site/page-3.html
+- page-3.html must have title text including 'Entropy Page 3'
+- page-3.html backlink href must be 'page-2.html'
+
+The validators that will run:
+- page-3-links-page-2: failure_class=link_integrity
+- previous-links-preserved: failure_class=link_integrity
+
+So I need to:
+1. Create page-3.html with title "Entropy Page 3" and a backlink to page-2.html
+2. Make sure I don't break the existing links in index.html and page-2.html
+
+Let me create the page-3.html file:
+</think>
+
+{
+  "files": [
+    {
+      "path": "site/page-3.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Entropy Page 3</title>\n</head>\n<body>\n    <nav>\n        <a href=\"page-2.html\">Back to Entropy Page 2</a>\n    </nav>\n    <main>\n        <h1>Welcome to Entropy Page 3</h1>\n        <p>This is the third page in the chain.</p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created page-3.html with title containing 'Entropy Page 3' and backlink href pointing to 'page-2.html'."
+}

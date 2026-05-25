@@ -1,0 +1,121 @@
+Let me analyze the requirements:
+
+1. Create a factory project layout under `factory-system/`
+2. Required files:
+   - `factory-system/config/stations.json` - with specific stations
+   - `factory-system/src/factory.ps1` - PowerShell script
+   - `factory-system/dashboard/report.json` - output report
+
+3. stations.json must contain:
+   - intake: id=intake, name=Intake, next=assembly
+   - assembly: id=assembly, name=Assembly, next=quality
+   - quality: id=quality, name=Quality, next=shipping
+   - shipping: id=shipping, name=Shipping, next= (empty)
+
+4. factory.ps1 must:
+   - Accept -ConfigPath parameter
+   - Accept -ProductId parameter
+   - Print route: intake->assembly->quality->shipping
+   - Write dashboard/report.json
+
+5. report.json must contain:
+   - product_id: "entropy-widget-001"
+   - route: "intake->assembly->quality->shipping"
+
+Let me create these files:
+
+1. stations.json:
+```json
+{
+  "stations": [
+    {
+      "id": "intake",
+      "name": "Intake",
+      "next": "assembly"
+    },
+    {
+      "id": "assembly",
+      "name": "Assembly",
+      "next": "quality"
+    },
+    {
+      "id": "quality",
+      "name": "Quality",
+      "next": "shipping"
+    },
+    {
+      "id": "shipping",
+      "name": "Shipping",
+      "next": ""
+    }
+  ]
+}
+```
+
+2. factory.ps1:
+```powershell
+param(
+    [Parameter(Mandatory=$true)]
+    [string]$ConfigPath,
+    
+    [Parameter(Mandatory=$true)]
+    [string]$ProductId
+)
+
+# Read station configuration
+$config = Get-Content $ConfigPath | ConvertFrom-Json
+
+# Build the route by following the chain starting from intake
+$route = @()
+$currentStationId = "intake"
+
+while ($currentStationId) {
+    $station = $config.stations | Where-Object { $_.id -eq $currentStationId }
+    if ($station) {
+        $route += $station.id
+        $currentStationId = $station.next
+    } else {
+        break
+    }
+}
+
+# Print the route
+Write-Output "Route: $($route -join '->')"
+
+# Write report
+$report = @{
+    product_id = $ProductId
+    route = $route -join '->'
+}
+
+$report | ConvertTo-Json | Set-Content "dashboard/report.json"
+```
+
+3. report.json (initial state):
+```json
+{
+  "product_id": "entropy-widget-001",
+  "route": "intake->assembly->quality->shipping"
+}
+```
+
+The PowerShell script reads the station configuration, traces the complete route from intake through each station's next reference, outputs the path, and generates a JSON report with the product ID and computed route.
+</think>
+
+{
+  "files": [
+    {
+      "path": "factory-system/config/stations.json",
+      "content": "{\n  \"stations\": [\n    {\n      \"id\": \"intake\",\n      \"name\": \"Intake\",\n      \"next\": \"assembly\"\n    },\n    {\n      \"id\": \"assembly\",\n      \"name\": \"Assembly\",\n      \"next\": \"quality\"\n    },\n    {\n      \"id\": \"quality\",\n      \"name\": \"Quality\",\n      \"next\": \"shipping\"\n    },\n    {\n      \"id\": \"shipping\",\n      \"name\": \"Shipping\",\n      \"next\": \"\"\n    }\n  ]\n}"
+    },
+    {
+      "path": "factory-system/src/factory.ps1",
+      "content": "param(\n    [Parameter(Mandatory=$true)]\n    [string]$ConfigPath,\n    \n    [Parameter(Mandatory=$true)]\n    [string]$ProductId\n)\n\n# Read station configuration\n$config = Get-Content $ConfigPath | ConvertFrom-Json\n\n# Build the route by following the chain starting from intake\n$route = @()\n$currentStationId = \"intake\"\n\nwhile ($currentStationId -and $currentStationId -ne \"\") {\n    $station = $config.stations | Where-Object { $_.id -eq $currentStationId }\n    if ($station) {\n        $route += $station.id\n        $currentStationId = $station.next\n    } else {\n        break\n    }\n}\n\n# Print the route\nWrite-Output \"Route: $($route -join '->')\"\n\n# Ensure dashboard directory exists\n$dashboardDir = Join-Path $PSScriptRoot \"..\\dashboard\"\nif (-not (Test-Path $dashboardDir)) {\n    New-Item -ItemType Directory -Path $dashboardDir -Force | Out-Null\n}\n\n# Write report\n$report = @{\n    product_id = $ProductId\n    route = $route -join '->'\n}\n\n$reportPath = Join-Path $dashboardDir \"report.json\"\n$report | ConvertTo-Json | Set-Content $reportPath"
+    },
+    {
+      "path": "factory-system/dashboard/report.json",
+      "content": "{\n  \"product_id\": \"entropy-widget-001\",\n  \"route\": \"intake->assembly->quality->shipping\"\n}"
+    }
+  ],
+  "notes": "Created factory-system project with stations.json config, factory.ps1 script accepting -ConfigPath and -ProductId parameters, and initial dashboard/report.json with entropy-widget-001 route."
+}

@@ -1,0 +1,16 @@
+Let me analyze the task:
+
+1. This is stage web-004-shared-nav (Order: 4)
+2. The goal is to create webpage 4 and add shared navigation across all pages that includes pages 1 through 4
+3. I need to create site/page-4.html
+4. The validators that will run:
+   - shared-nav-all-pages: failure_class=shared_state
+   - page-4-links-page-3: failure_class=link_integrity
+
+Looking at the requirements:
+- page-4.html: title text must include 'Entropy Page 4'; backlink href must be 'page-3.html'
+- From page order 4, every page must link to index.html, page-2.html, page-3.html, and page-4.html
+
+So I need to:
+1. Create page-4.html with title "Entropy Page 4" and backlink to page-3.html
+2. Add shared navigation to ALL pages

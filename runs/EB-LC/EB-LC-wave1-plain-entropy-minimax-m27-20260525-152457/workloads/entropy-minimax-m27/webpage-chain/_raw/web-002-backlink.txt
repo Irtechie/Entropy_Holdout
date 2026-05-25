@@ -1,0 +1,39 @@
+Let me analyze the task:
+
+1. This is stage web-002-backlink (Order: 2)
+2. The goal is to create webpage 2 and link it back to page 1 without breaking page 1
+3. I need to create site/page-2.html
+4. The validators are:
+   - page-2-links-index: failure_class=link_integrity
+   - all-html-parse: failure_class=syntax
+
+Looking at the requirements:
+- page-2.html: title text must include 'Entropy Page 2'; backlink href must be 'index.html'
+
+So I need to create page-2.html that:
+1. Has a title with 'Entropy Page 2'
+2. Has a link back to index.html (the backlink)
+
+The existing index.html already exists and has:
+- Title: Entropy Page 1
+- data-entropy-shared-table="factory-links" on the nav
+
+I should NOT modify index.html (the task says "without breaking page 1").
+
+I just need to create page-2.html with:
+- <!doctype html>
+- Title containing 'Entropy Page 2'
+- A backlink to index.html
+
+Let me create the page-2.html file:
+</think>
+
+{
+  "files": [
+    {
+      "path": "site/page-2.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Entropy Page 2</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Back to Entropy Page 1</a>\n    </nav>\n    <main>\n        <h1>Welcome to Entropy Page 2</h1>\n        <p>This is the second page in the chain.</p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created page-2.html with title containing 'Entropy Page 2' and backlink href pointing to 'index.html'."
+}

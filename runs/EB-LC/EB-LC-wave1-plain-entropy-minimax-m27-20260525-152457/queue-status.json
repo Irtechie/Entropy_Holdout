@@ -1,0 +1,17 @@
+{
+  "queue_id": "EB-LC-wave1-plain-singlebox",
+  "target_set_id": "entropy-minimax-m27",
+  "slice_id": "lc-wave1-019",
+  "classification": "completed-data-run",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-152457",
+  "started_at": "2026-05-25T15:24:57.5573180-04:00",
+  "finished_at": "2026-05-25T15:33:53.8732340-04:00",
+  "elapsed_s": 536.3,
+  "runner_exit_code": 0,
+  "results": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-152457\\results.jsonl",
+  "critique": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-152457\\critique.md",
+  "critique_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-152457\\critique.json",
+  "report_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-152457\\report.json",
+  "wedge_risk": false,
+  "wedge_detail": null
+}
