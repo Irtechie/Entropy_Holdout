@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/page-3.html\",\n      \"content\": \"<!doctype html>\\n<html>\\n<head>\\n<title>Entropy Page 3</title>\\n</head>\\n<body>\\n<nav><!-- Navigation area --></nav>\\n<main>\\n<h1>Entropy Page 3</h1>\\n<p>Main content.</p>\\n<a href=\\\"page-2.html\\\">Back to Page 2</a>\\n</main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Stage 3: Created page-3.html with backlink to page-2.html.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 367,
+      "prompt_tokens": 4330,
+      "total_tokens": 4697,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "Qwen3.5-122B-A10B-Q4_K_M-00001-of-00003.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-UEIOVDy2Ij7ngCyv4YmwtooGDuxpJRQr",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 4330,
+    "output_tokens": 367,
+    "total_tokens": 4697,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "7501562f03b61b2f3c72a0573455d3bd",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-qwen35-122b",
+      "webpage-chain"
+    ]
+  }
+}

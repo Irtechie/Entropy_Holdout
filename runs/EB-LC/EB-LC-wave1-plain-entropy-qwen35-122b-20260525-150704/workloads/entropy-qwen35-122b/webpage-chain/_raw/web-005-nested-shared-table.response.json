@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/page-5.html\",\n      \"content\": \"<!doctype html>\\n<html data-entropy-shared-table=\\\"factory-links\\\">\\n<head>\\n<title>Entropy Page 5</title>\\n</head>\\n<body>\\n<nav><a href=\\\"index.html\\\">Home</a> | <a href=\\\"page-2.html\\\">Page 2</a> | <a href=\\\"page-3.html\\\">Page 3</a> | <a href=\\\"page-4.html\\\">Page 4</a></nav>\\n<main>\\n<h1>Entropy Page 5</h1>\\n<p>Main content.</p>\\n<a href=\\\"page-4.html\\\">Back to Page 4</a>\\n<table data-entropy-shared-table=\\\"factory-links\\\">\\n<tr><th>Page</th><th>Link</th></tr>\\n<tr><td>Page 1</td><td><a href=\\\"index.html\\\">index.html</a></td></tr>\\n<tr><td>Page 2</td><td><a href=\\\"page-2.html\\\">page-2.html</a></td></tr>\\n<tr><td>Page 3</td><td><a href=\\\"page-3.html\\\">page-3.html</a></td></tr>\\n<tr><td>Page 4</td><td><a href=\\\"page-4.html\\\">page-4.html</a></td></tr>\\n<tr><td>Page 5</td><td><a href=\\\"page-5.html\\\">page-5.html</a></td></tr>\\n</table>\\n</main>\\n</body>\\n</html>\"\n    },\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!doctype html>\\n<html data-entropy-shared-table=\\\"factory-links\\\">\\n<head>\\n<title>Entropy Page 1</title>\\n</head>\\n<body>\\n<nav><a href=\\\"index.html\\\">Home</a> | <a href=\\\"page-2.html\\\">Page 2</a> | <a href=\\\"page-3.html\\\">Page 3</a> | <a href=\\\"page-4.html\\\">Page 4</a></nav>\\n<main>\\n<h1>Entropy Page 1</h1>\\n<p>Main content.</p>\\n<table data-entropy-shared-table=\\\"factory-links\\\">\\n<tr><th>Page</th><th>Link</th></tr>\\n<tr><td>Page 1</td><td><a href=\\\"index.html\\\">index.html</a></td></tr>\\n<tr><td>Page 2</td><td><a href=\\\"page-2.html\\\">page-2.html</a></td></tr>\\n<tr><td>Page 3</td><td><a href=\\\"page-3.html\\\">page-3.html</a></td></tr>\\n<tr><td>Page 4</td><td><a href=\\\"page-4.html\\\">page-4.html</a></td></tr>\\n<tr><td>Page 5</td><td><a href=\\\"page-5.html\\\">page-5.html</a></td></tr>\\n</table>\\n</main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Stage 5: Created page-5.html with backlink to page-4.html, shared navigation, and shared table. Updated index.html with data-entropy-shared-table attribute and shared table.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 1144,
+      "prompt_tokens": 21397,
+      "total_tokens": 22541,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "Qwen3.5-122B-A10B-Q4_K_M-00001-of-00003.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-khfVCIcXKN6YHDJdYoNbs8s3kck5JsV3",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 21397,
+    "output_tokens": 1144,
+    "total_tokens": 22541,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "d13ca20e54ead6afcaf7714bca0903be",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-qwen35-122b",
+      "webpage-chain"
+    ]
+  }
+}

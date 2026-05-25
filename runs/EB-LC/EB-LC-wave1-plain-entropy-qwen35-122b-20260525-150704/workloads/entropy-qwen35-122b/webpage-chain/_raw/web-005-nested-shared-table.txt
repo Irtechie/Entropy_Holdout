@@ -1,0 +1,13 @@
+{
+  "files": [
+    {
+      "path": "site/page-5.html",
+      "content": "<!doctype html>\n<html data-entropy-shared-table=\"factory-links\">\n<head>\n<title>Entropy Page 5</title>\n</head>\n<body>\n<nav><a href=\"index.html\">Home</a> | <a href=\"page-2.html\">Page 2</a> | <a href=\"page-3.html\">Page 3</a> | <a href=\"page-4.html\">Page 4</a></nav>\n<main>\n<h1>Entropy Page 5</h1>\n<p>Main content.</p>\n<a href=\"page-4.html\">Back to Page 4</a>\n<table data-entropy-shared-table=\"factory-links\">\n<tr><th>Page</th><th>Link</th></tr>\n<tr><td>Page 1</td><td><a href=\"index.html\">index.html</a></td></tr>\n<tr><td>Page 2</td><td><a href=\"page-2.html\">page-2.html</a></td></tr>\n<tr><td>Page 3</td><td><a href=\"page-3.html\">page-3.html</a></td></tr>\n<tr><td>Page 4</td><td><a href=\"page-4.html\">page-4.html</a></td></tr>\n<tr><td>Page 5</td><td><a href=\"page-5.html\">page-5.html</a></td></tr>\n</table>\n</main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/index.html",
+      "content": "<!doctype html>\n<html data-entropy-shared-table=\"factory-links\">\n<head>\n<title>Entropy Page 1</title>\n</head>\n<body>\n<nav><a href=\"index.html\">Home</a> | <a href=\"page-2.html\">Page 2</a> | <a href=\"page-3.html\">Page 3</a> | <a href=\"page-4.html\">Page 4</a></nav>\n<main>\n<h1>Entropy Page 1</h1>\n<p>Main content.</p>\n<table data-entropy-shared-table=\"factory-links\">\n<tr><th>Page</th><th>Link</th></tr>\n<tr><td>Page 1</td><td><a href=\"index.html\">index.html</a></td></tr>\n<tr><td>Page 2</td><td><a href=\"page-2.html\">page-2.html</a></td></tr>\n<tr><td>Page 3</td><td><a href=\"page-3.html\">page-3.html</a></td></tr>\n<tr><td>Page 4</td><td><a href=\"page-4.html\">page-4.html</a></td></tr>\n<tr><td>Page 5</td><td><a href=\"page-5.html\">page-5.html</a></td></tr>\n</table>\n</main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Stage 5: Created page-5.html with backlink to page-4.html, shared navigation, and shared table. Updated index.html with data-entropy-shared-table attribute and shared table."
+}
