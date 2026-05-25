@@ -1,0 +1,33 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"factory-system/src/main/java/com/example/factory/StationGraph.java\",\n      \"content\": \"package com.example.factory;\\n\\nimport java.util.HashMap;\\nimport java.util.HashSet;\\nimport java.util.Map;\\nimport java.util.Set;\\n\\npublic class StationGraph {\\n    private Map<String, Station> stations = new HashMap<>();\\n    private Map<String, Set<String>> transitions = new HashMap<>();\\n\\n    public void addStation(Station station) {\\n        stations.put(station.getId(), station);\\n    }\\n\\n    public Station getStation(String id) {\\n        return stations.get(id);\\n    }\\n\\n    public void addTransition(String fromId, String toId) {\\n        transitions.computeIfAbsent(fromId, k -> new HashSet<>()).add(toId);\\n    }\\n\\n    public Set<String> getTransitions(String id) {\\n        return transitions.getOrDefault(id, new HashSet<>());\\n    }\\n\\n    public boolean hasStation(String id) {\\n        return stations.containsKey(id);\\n    }\\n}\\n\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/example/factory/RouteEngine.java\",\n      \"content\": \"package com.example.factory;\\n\\nimport java.util.List;\\n\\npublic class RouteEngine {\\n    private StationGraph stationGraph;\\n\\n    public RouteEngine(StationGraph stationGraph) {\\n        this.stationGraph = stationGraph;\\n    }\\n\\n    public boolean canExecute(Product product, Routing routing) {\\n        for (String stationId : routing.getStationSequence()) {\\n            if (!stationGraph.hasStation(stationId)) {\\n                return false;\\n            }\\n        }\\n        return true;\\n    }\\n\\n    public void execute(Product product, Routing routing) {\\n        if (!canExecute(product, routing)) {\\n            throw new IllegalStateException(\\\"Routing cannot be executed with current station graph\\\");\\n        }\\n        // Simulate product moving through stations\\n        for (String stationId : routing.getStationSequence()) {\\n            // In a real implementation, this would trigger processing at each station\\n        }\\n    }\\n}\\n\"\n    }\n  ],\n  \"notes\": \"Fixed StationGraph to properly add transitions and added required station management and routing execution capabilities.\"\n}"
+      }
+    }
+  ],
+  "created": 1779712492,
+  "model": "Qwen3-Coder-Next-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 497,
+    "prompt_tokens": 19740,
+    "total_tokens": 20237
+  },
+  "id": "chatcmpl-9bvBRVtNBOuxjrDwYy5l0dxHoPbIdA1f",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 19740,
+    "prompt_ms": 20498.607,
+    "prompt_per_token_ms": 1.0384299392097265,
+    "prompt_per_second": 962.9922657671324,
+    "predicted_n": 497,
+    "predicted_ms": 11660.234,
+    "predicted_per_token_ms": 23.46123541247485,
+    "predicted_per_second": 42.623501380847074
+  }
+}

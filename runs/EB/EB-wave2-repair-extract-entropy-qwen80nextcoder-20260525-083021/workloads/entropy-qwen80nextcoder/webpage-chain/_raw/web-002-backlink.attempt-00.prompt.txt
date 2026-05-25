@@ -1,0 +1,142 @@
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-002-backlink
+Order: 2
+
+Stage goal:
+Create webpage 2 and link it back to page 1 without breaking page 1.
+
+Expected artifacts:
+- site/page-2.html (html)
+
+Validators that will run:
+- page-2-links-index: failure_class=link_integrity
+- all-html-parse: failure_class=syntax
+
+Existing generated files:
+FILE: site/index.html
+---BEGIN FILE---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home Page</title>
+</head>
+<body>
+  <nav></nav>
+  <main>
+    <h1>Welcome to the Website</h1>
+    <p>This is the main content area.</p>
+  </main>
+</body>
+</html>
+
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-001-home
+Order: 1
+
+Stage goal:
+Create webpage 1 as index.html with a title, main content, and an empty navigation area that can grow later.
+
+Expected artifacts:
+- site/index.html (html)
+
+Validators that will run:
+- file-exists: failure_class=missing_artifact
+- html-parse: failure_class=syntax
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n  <meta charset=\\\"UTF-8\\\">\\n  <title>Home Page</title>\\n</head>\\n<body>\\n  <nav></nav>\\n  <main>\\n    <h1>Welcome to the Website</h1>\\n    <p>This is the main content area.</p>\\n  </main>\\n</body>\\n</html>\\n\"\n    }\n  ],\n  \"notes\": \"Created index.html with title, main content, and empty navigation area.\"\n}"
+      }
+    }
+  ],
+  "created": 1779712281,
+  "model": "Qwen3-Coder-Next-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 140,
+    "prompt_tokens": 228,
+    "total_tokens": 368
+  },
+  "id": "chatcmpl-4TFo2OK6bUt3jU2u3DPCBsTEaW2UZHuI",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 228,
+    "prompt_ms": 498.019,
+    "prompt_per_token_ms": 2.184293859649123,
+    "prompt_per_second": 457.8138585074064,
+    "predicted_n": 140,
+    "predicted_ms": 2890.228,
+    "predicted_per_token_ms": 20.644485714285715,
+    "predicted_per_second": 48.43908508256096
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Home Page</title>\n</head>\n<body>\n  <nav></nav>\n  <main>\n    <h1>Welcome to the Website</h1>\n    <p>This is the main content area.</p>\n  </main>\n</body>\n</html>\n"
+    }
+  ],
+  "notes": "Created index.html with title, main content, and empty navigation area."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
