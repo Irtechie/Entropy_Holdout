@@ -1,0 +1,46 @@
+You are running an Entropy staged code-generation benchmark.
+
+Workload: factory
+Stage: factory-001-layout
+Order: 1
+
+Stage goal:
+Create the factory project layout with component, station, product, and routing concepts.
+
+Expected artifacts:
+- factory-system (project)
+
+Validators that will run:
+- factory-layout-exists: failure_class=missing_artifact
+- factory-core-types-present: failure_class=api_contract
+
+Exact validator contract:
+Generate a PowerShell-runnable factory under factory-system/.
+Required final files include factory-system/config/stations.json, factory-system/src/factory.ps1, and factory-system/dashboard/report.json.
+stations.json must contain exactly these stations:
+- id=intake, name=Intake, next=assembly
+- id=assembly, name=Assembly, next=quality
+- id=quality, name=Quality, next=shipping
+- id=shipping, name=Shipping, next=
+factory.ps1 must accept -ConfigPath and -ProductId, print route intake->assembly->quality->shipping, and write dashboard/report.json.
+dashboard/report.json must contain product_id entropy-widget-001 and route intake->assembly->quality->shipping.
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.

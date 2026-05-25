@@ -1,0 +1,45 @@
+{
+  "files": [
+    {
+      "path": "CoreLib/CoreLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n</Project>"
+    },
+    {
+      "path": "CoreLib/CoreLib.cs",
+      "content": "namespace CoreLib;\n\npublic class CoreService\n{\n    public string ExecuteCore()\n    {\n        return \"core\";\n    }\n}"
+    },
+    {
+      "path": "FeatureLib/FeatureLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"../CoreLib/CoreLib.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "FeatureLib/FeatureLib.cs",
+      "content": "using CoreLib;\n\nnamespace FeatureLib;\n\npublic class FeatureService\n{\n    private readonly CoreService _coreService;\n\n    public FeatureService(CoreService coreService)\n    {\n        _coreService = coreService;\n    }\n\n    public string ExecuteFeature()\n    {\n        return $"{_coreService.ExecuteCore()}->feature";\n    }\n}"
+    },
+    {
+      "path": "Contracts/Contracts.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n</Project>"
+    },
+    {
+      "path": "Contracts/IContract.cs",
+      "content": "namespace Contracts;\n\npublic interface IContract\n{\n    string ExecuteContract();\n}"
+    },
+    {
+      "path": "PipelineLib/PipelineLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"../FeatureLib/FeatureLib.csproj\" />\n    <ProjectReference Include=\"../Contracts/Contracts.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "PipelineLib/PipelineLib.cs",
+      "content": "using FeatureLib;\nusing Contracts;\n\nnamespace PipelineLib;\n\npublic class PipelineService\n{\n    private readonly FeatureService _featureService;\n\n    public PipelineService(FeatureService featureService)\n    {\n        _featureService = featureService;\n    }\n\n    public string ExecutePipeline(IContract contract)\n    {\n        return $"{_featureService.ExecuteFeature()}->pipeline->{contract.ExecuteContract()}";\n    }\n}"
+    },
+    {
+      "path": "SampleApp/SampleApp.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <OutputType>Exe</OutputType>\n    <TargetFramework>net10.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"../PipelineLib/PipelineLib.csproj\" />\n    <ProjectReference Include=\"../Contracts/Contracts.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "SampleApp/Program.cs",
+      "content": "using CoreLib;\nusing FeatureLib;\nusing PipelineLib;\nusing Contracts;\n\n// Concrete implementation of the contract for the sample app\npublic class SampleContract : IContract\n{\n    public string ExecuteContract()\n    {\n        return \"contract\";\n    }\n}\n\n// Setup the chain\nvar coreService = new CoreService();\nvar featureService = new FeatureService(coreService);\nvar pipelineService = new PipelineService(featureService);\nvar contract = new SampleContract();\n\n// Execute the chain\nvar result = pipelineService.ExecutePipeline(contract);\n\n// Print the final result\nConsole.WriteLine(result);\n"
+    }
+  ],
+  "notes": "Created the library chain (CoreLib -> FeatureLib -> PipelineLib) and the sample application (SampleApp) to execute the full pipeline and print the required string."
+}

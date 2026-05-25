@@ -1,0 +1,8 @@
+{"ts":"2026-05-25T12:58:51.7113612-04:00","event":"experiment_start","experiment_id":"EB-LC-wave1-plain-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
+{"ts":"2026-05-25T12:58:51.7158664-04:00","event":"target_start","set_id":"entropy-gemma4-e4b","context_tokens":262144}
+{"ts":"2026-05-25T12:59:12.3486492-04:00","event":"target_ready","set_id":"entropy-gemma4-e4b","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"gemma-4-E4B-it-Q4_K_M.gguf"}
+{"ts":"2026-05-25T13:03:58.0653989-04:00","event":"workload_done","set_id":"entropy-gemma4-e4b","workload":"webpage-chain"}
+{"ts":"2026-05-25T13:04:53.6457784-04:00","event":"workload_failed","set_id":"entropy-gemma4-e4b","workload":"library-chain","error":"Conversion from JSON failed with error: After parsing a value an unexpected character was encountered: {. Path 'files[3].content', line 17, position 308."}
+{"ts":"2026-05-25T13:06:03.9570669-04:00","event":"workload_failed","set_id":"entropy-gemma4-e4b","workload":"factory","error":"model did not generate expected artifact path: factory-system/stations"}
+{"ts":"2026-05-25T13:06:03.9597672-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-gemma4-e4b-20260525-125851\\results.jsonl"}
+{"ts":"2026-05-25T13:06:03.9888106-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-gemma4-e4b-20260525-125851\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-gemma4-e4b-20260525-125851\\critique.json"}

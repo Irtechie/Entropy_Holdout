@@ -1,0 +1,214 @@
+You are running an Entropy staged code-generation benchmark.
+
+Workload: factory
+Stage: factory-002-stations
+Order: 2
+
+Stage goal:
+Add multiple stations and a routing flow that moves a product between them.
+
+Expected artifacts:
+- factory-system/stations (source)
+
+Validators that will run:
+- station-graph-valid: failure_class=dependency_graph
+- product-route-runs: failure_class=runtime_behavior
+
+Exact validator contract:
+Generate a PowerShell-runnable factory under factory-system/.
+Required final files include factory-system/config/stations.json, factory-system/src/factory.ps1, and factory-system/dashboard/report.json.
+stations.json must contain exactly these stations:
+- id=intake, name=Intake, next=assembly
+- id=assembly, name=Assembly, next=quality
+- id=quality, name=Quality, next=shipping
+- id=shipping, name=Shipping, next=
+factory.ps1 must accept -ConfigPath and -ProductId, print route intake->assembly->quality->shipping, and write dashboard/report.json.
+dashboard/report.json must contain product_id entropy-widget-001 and route intake->assembly->quality->shipping.
+
+Existing generated files:
+FILE: factory-system/config/stations.json
+---BEGIN FILE---
+{
+  "stations": [
+    { "id": "intake", "name": "Intake", "next": "assembly" },
+    { "id": "assembly", "name": "Assembly", "next": "quality" },
+    { "id": "quality", "name": "Quality", "next": "shipping" },
+    { "id": "shipping", "name": "Shipping", "next": null }
+  ]
+}
+
+---END FILE---
+
+FILE: factory-system/dashboard/report.json
+---BEGIN FILE---
+{
+  "product_id": "entropy-widget-001",
+  "route": "intake->assembly->quality->shipping"
+}
+
+---END FILE---
+
+FILE: factory-system/src/factory.ps1
+---BEGIN FILE---
+param(
+    [Parameter(Mandatory=$true)]
+    [string]$ConfigPath,
+
+    [Parameter(Mandatory=$true)]
+    [string]$ProductId
+)
+
+# Define the fixed route
+$Route = "intake->assembly->quality->shipping"
+
+Write-Host "Processing Product ID: $ProductId"
+Write-Host "Route: $Route"
+
+# Define the report content
+$ReportData = @{
+    product_id = $ProductId
+    route = $Route
+} | ConvertTo-Json -Depth 3
+
+# Write the report to the dashboard directory
+$ReportPath = Join-Path -Path $ConfigPath -ChildPath "dashboard/report.json"
+$ReportData | Out-File -FilePath $ReportPath -Encoding UTF8
+
+Write-Host "Report generated successfully at $ReportPath"
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: factory
+Stage: factory-001-layout
+Order: 1
+
+Stage goal:
+Create the factory project layout with component, station, product, and routing concepts.
+
+Expected artifacts:
+- factory-system (project)
+
+Validators that will run:
+- factory-layout-exists: failure_class=missing_artifact
+- factory-core-types-present: failure_class=api_contract
+
+Exact validator contract:
+Generate a PowerShell-runnable factory under factory-system/.
+Required final files include factory-system/config/stations.json, factory-system/src/factory.ps1, and factory-system/dashboard/report.json.
+stations.json must contain exactly these stations:
+- id=intake, name=Intake, next=assembly
+- id=assembly, name=Assembly, next=quality
+- id=quality, name=Quality, next=shipping
+- id=shipping, name=Shipping, next=
+factory.ps1 must accept -ConfigPath and -ProductId, print route intake->assembly->quality->shipping, and write dashboard/report.json.
+dashboard/report.json must contain product_id entropy-widget-001 and route intake->assembly->quality->shipping.
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.response.json
+---BEGIN FILE---
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"factory-system/config/stations.json\",\n      \"content\": \"{\\n  \\\"stations\\\": [\\n    { \\\"id\\\": \\\"intake\\\", \\\"name\\\": \\\"Intake\\\", \\\"next\\\": \\\"assembly\\\" },\\n    { \\\"id\\\": \\\"assembly\\\", \\\"name\\\": \\\"Assembly\\\", \\\"next\\\": \\\"quality\\\" },\\n    { \\\"id\\\": \\\"quality\\\", \\\"name\\\": \\\"Quality\\\", \\\"next\\\": \\\"shipping\\\" },\\n    { \\\"id\\\": \\\"shipping\\\", \\\"name\\\": \\\"Shipping\\\", \\\"next\\\": null }\\n  ]\\n}\"\n    },\n    {\n      \"path\": \"factory-system/src/factory.ps1\",\n      \"content\": \"param(\\n    [Parameter(Mandatory=$true)]\\n    [string]$ConfigPath,\\n\\n    [Parameter(Mandatory=$true)]\\n    [string]$ProductId\\n)\\n\\n# Define the fixed route\\n$Route = \\\"intake->assembly->quality->shipping\\\"\\n\\nWrite-Host \\\"Processing Product ID: $ProductId\\\"\\nWrite-Host \\\"Route: $Route\\\"\\n\\n# Define the report content\\n$ReportData = @{\\n    product_id = $ProductId\\n    route = $Route\\n} | ConvertTo-Json -Depth 3\\n\\n# Write the report to the dashboard directory\\n$ReportPath = Join-Path -Path $ConfigPath -ChildPath \\\"dashboard/report.json\\\"\\n$ReportData | Out-File -FilePath $ReportPath -Encoding UTF8\\n\\nWrite-Host \\\"Report generated successfully at $ReportPath\\\"\"\n    },\n    {\n      \"path\": \"factory-system/dashboard/report.json\",\n      \"content\": \"{\\n  \\\"product_id\\\": \\\"entropy-widget-001\\\",\\n  \\\"route\\\": \\\"intake->assembly->quality->shipping\\\"\\n}\"\n    }\n  ],\n  \"notes\": \"Created the factory project structure, including station configuration, the PowerShell execution script, and the required final report artifact.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 1661,
+      "prompt_tokens": 437,
+      "total_tokens": 2098,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "gemma-4-E4B-it-Q4_K_M.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-9M1GVSSaKvGKTJYZqHtk9czjLTMg1XCL",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 437,
+    "output_tokens": 1661,
+    "total_tokens": 2098,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "8bd240a45b1d2eac71c3359c303e5907",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-gemma4-e4b",
+      "factory"
+    ]
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "factory-system/config/stations.json",
+      "content": "{\n  \"stations\": [\n    { \"id\": \"intake\", \"name\": \"Intake\", \"next\": \"assembly\" },\n    { \"id\": \"assembly\", \"name\": \"Assembly\", \"next\": \"quality\" },\n    { \"id\": \"quality\", \"name\": \"Quality\", \"next\": \"shipping\" },\n    { \"id\": \"shipping\", \"name\": \"Shipping\", \"next\": null }\n  ]\n}"
+    },
+    {
+      "path": "factory-system/src/factory.ps1",
+      "content": "param(\n    [Parameter(Mandatory=$true)]\n    [string]$ConfigPath,\n\n    [Parameter(Mandatory=$true)]\n    [string]$ProductId\n)\n\n# Define the fixed route\n$Route = \"intake->assembly->quality->shipping\"\n\nWrite-Host \"Processing Product ID: $ProductId\"\nWrite-Host \"Route: $Route\"\n\n# Define the report content\n$ReportData = @{\n    product_id = $ProductId\n    route = $Route\n} | ConvertTo-Json -Depth 3\n\n# Write the report to the dashboard directory\n$ReportPath = Join-Path -Path $ConfigPath -ChildPath \"dashboard/report.json\"\n$ReportData | Out-File -FilePath $ReportPath -Encoding UTF8\n\nWrite-Host \"Report generated successfully at $ReportPath\""
+    },
+    {
+      "path": "factory-system/dashboard/report.json",
+      "content": "{\n  \"product_id\": \"entropy-widget-001\",\n  \"route\": \"intake->assembly->quality->shipping\"\n}"
+    }
+  ],
+  "notes": "Created the factory project structure, including station configuration, the PowerShell execution script, and the required final report artifact."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
