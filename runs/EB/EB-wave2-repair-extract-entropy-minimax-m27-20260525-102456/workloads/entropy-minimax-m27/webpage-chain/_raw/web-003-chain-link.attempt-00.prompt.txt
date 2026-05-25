@@ -1,0 +1,423 @@
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-003-chain-link
+Order: 3
+
+Stage goal:
+Create webpage 3 and link it back to page 2 while preserving the existing page 1 and page 2 links.
+
+Expected artifacts:
+- site/page-3.html (html)
+
+Validators that will run:
+- page-3-links-page-2: failure_class=link_integrity
+- previous-links-preserved: failure_class=link_integrity
+
+Existing generated files:
+FILE: site/index.html
+---BEGIN FILE---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+</head>
+<body>
+    <nav>
+        <a href="page-2.html">Page 2</a>
+    </nav>
+    <main>
+        <h1>Welcome</h1>
+        <p>This is the main content of the page.</p>
+    </main>
+</body>
+</html>
+
+---END FILE---
+
+FILE: site/page-2.html
+---BEGIN FILE---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 2</title>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+    </nav>
+    <main>
+        <h1>Page 2</h1>
+        <p>This is the second page.</p>
+    </main>
+</body>
+</html>
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-001-home
+Order: 1
+
+Stage goal:
+Create webpage 1 as index.html with a title, main content, and an empty navigation area that can grow later.
+
+Expected artifacts:
+- site/index.html (html)
+
+Validators that will run:
+- file-exists: failure_class=missing_artifact
+- html-parse: failure_class=syntax
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The user wants me to create a simple HTML webpage (index.html) with:\n1. A title\n2. Main content\n3. An empty navigation area that can grow later\n\nThe file should be placed at \"site/index.html\" based on the expected artifacts.\n\nLet me create a valid HTML5 document with these elements.\n</think>\n\n{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>My Website</title>\\n</head>\\n<body>\\n    <nav></nav>\\n    <main>\\n        <h1>Welcome</h1>\\n        <p>This is the main content of the page.</p>\\n    </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created index.html with title, empty nav element, and main content section.\"\n}"
+      }
+    }
+  ],
+  "created": 1779719301,
+  "model": "MiniMax-M2.7-UD-IQ4_XS-00001-of-00004.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 231,
+    "prompt_tokens": 231,
+    "total_tokens": 462,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-lUSn0iWDHUUBLMpKKpbBuxGIbqj1l4er",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 231,
+    "prompt_ms": 1344.91,
+    "prompt_per_token_ms": 5.822121212121212,
+    "prompt_per_second": 171.75870504346014,
+    "predicted_n": 231,
+    "predicted_ms": 9607.543,
+    "predicted_per_token_ms": 41.591095238095235,
+    "predicted_per_second": 24.043608235737274
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.txt
+---BEGIN FILE---
+The user wants me to create a simple HTML webpage (index.html) with:
+1. A title
+2. Main content
+3. An empty navigation area that can grow later
+
+The file should be placed at "site/index.html" based on the expected artifacts.
+
+Let me create a valid HTML5 document with these elements.
+</think>
+
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>My Website</title>\n</head>\n<body>\n    <nav></nav>\n    <main>\n        <h1>Welcome</h1>\n        <p>This is the main content of the page.</p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created index.html with title, empty nav element, and main content section."
+}
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-002-backlink
+Order: 2
+
+Stage goal:
+Create webpage 2 and link it back to page 1 without breaking page 1.
+
+Expected artifacts:
+- site/page-2.html (html)
+
+Validators that will run:
+- page-2-links-index: failure_class=link_integrity
+- all-html-parse: failure_class=syntax
+
+Existing generated files:
+FILE: site/index.html
+---BEGIN FILE---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+</head>
+<body>
+    <nav></nav>
+    <main>
+        <h1>Welcome</h1>
+        <p>This is the main content of the page.</p>
+    </main>
+</body>
+</html>
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-001-home
+Order: 1
+
+Stage goal:
+Create webpage 1 as index.html with a title, main content, and an empty navigation area that can grow later.
+
+Expected artifacts:
+- site/index.html (html)
+
+Validators that will run:
+- file-exists: failure_class=missing_artifact
+- html-parse: failure_class=syntax
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The user wants me to create a simple HTML webpage (index.html) with:\n1. A title\n2. Main content\n3. An empty navigation area that can grow later\n\nThe file should be placed at \"site/index.html\" based on the expected artifacts.\n\nLet me create a valid HTML5 document with these elements.\n</think>\n\n{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>My Website</title>\\n</head>\\n<body>\\n    <nav></nav>\\n    <main>\\n        <h1>Welcome</h1>\\n        <p>This is the main content of the page.</p>\\n    </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created index.html with title, empty nav element, and main content section.\"\n}"
+      }
+    }
+  ],
+  "created": 1779719301,
+  "model": "MiniMax-M2.7-UD-IQ4_XS-00001-of-00004.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 231,
+    "prompt_tokens": 231,
+    "total_tokens": 462,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-lUSn0iWDHUUBLMpKKpbBuxGIbqj1l4er",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 231,
+    "prompt_ms": 1344.91,
+    "prompt_per_token_ms": 5.822121212121212,
+    "prompt_per_second": 171.75870504346014,
+    "predicted_n": 231,
+    "predicted_ms": 9607.543,
+    "predicted_per_token_ms": 41.591095238095235,
+    "predicted_per_second": 24.043608235737274
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.txt
+---BEGIN FILE---
+The user wants me to create a simple HTML webpage (index.html) with:
+1. A title
+2. Main content
+3. An empty navigation area that can grow later
+
+The file should be placed at "site/index.html" based on the expected artifacts.
+
+Let me create a valid HTML5 document with these elements.
+</think>
+
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>My Website</title>\n</head>\n<body>\n    <nav></nav>\n    <main>\n        <h1>Welcome</h1>\n        <p>This is the main content of the page.</p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created index.html with title, empty nav element, and main content section."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The user wants me to create webpage 2 (site/page-2.html) and link it back to page 1 (site/index.html) without breaking page 1.\n\nLooking at the existing files:\n- site/index.html exists with a nav element that's currently empty\n\nFor this stage (web-002-backlink), I need to:\n1. Create site/page-2.html\n2. Add a link from page-2.html back to index.html\n3. Possibly update index.html to include a link to page-2.html (to make it a proper chain)\n\nThe validators that will run:\n- page-2-links-index: failure_class=link_integrity - This means page-2 must link to index\n- all-html-parse: failure_class=syntax - Both HTML files must be valid\n\nLet me create page-2.html with a link back to index.html, and I should also update index.html to link to page-2.html to create a proper chain.\n\nActually, looking at the stage name \"backlink\", it seems like the main goal is to link back TO page 1 FROM page 2. But to not break page 1, I should also add a link from page 1 to page 2 so users can navigate both ways.\n\nLet me create:\n1. site/page-2.html - with content and a link back to index.html\n2. Update site/index.html - add a link to page-2.html in the nav\n\nBoth files need to be valid HTML.\n</think>\n\n{\n  \"files\": [\n    {\n      \"path\": \"site/page-2.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Page 2</title>\\n</head>\\n<body>\\n    <nav>\\n        <a href=\\\"index.html\\\">Home</a>\\n    </nav>\\n    <main>\\n        <h1>Page 2</h1>\\n        <p>This is the second page.</p>\\n    </main>\\n</body>\\n</html>\"\n    },\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>My Website</title>\\n</head>\\n<body>\\n    <nav>\\n        <a href=\\\"page-2.html\\\">Page 2</a>\\n    </nav>\\n    <main>\\n        <h1>Welcome</h1>\\n        <p>This is the main content of the page.</p>\\n    </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created page-2.html with link back to index.html, and updated index.html nav to link to page-2.\"\n}"
+      }
+    }
+  ],
+  "created": 1779719332,
+  "model": "MiniMax-M2.7-UD-IQ4_XS-00001-of-00004.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 651,
+    "prompt_tokens": 1427,
+    "total_tokens": 2078,
+    "prompt_tokens_details": {
+      "cached_tokens": 46
+    }
+  },
+  "id": "chatcmpl-yKLGwclUmB0eMc1tDb5SfNbNE5hD6WGY",
+  "timings": {
+    "cache_n": 46,
+    "prompt_n": 1381,
+    "prompt_ms": 2941.853,
+    "prompt_per_token_ms": 2.130233888486604,
+    "prompt_per_second": 469.43202124647286,
+    "predicted_n": 651,
+    "predicted_ms": 27837.767,
+    "predicted_per_token_ms": 42.761546850998464,
+    "predicted_per_second": 23.385496401345694
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.attempt-00.txt
+---BEGIN FILE---
+The user wants me to create webpage 2 (site/page-2.html) and link it back to page 1 (site/index.html) without breaking page 1.
+
+Looking at the existing files:
+- site/index.html exists with a nav element that's currently empty
+
+For this stage (web-002-backlink), I need to:
+1. Create site/page-2.html
+2. Add a link from page-2.html back to index.html
+3. Possibly update index.html to include a link to page-2.html (to make it a proper chain)
+
+The validators that will run:
+- page-2-links-index: failure_class=link_integrity - This means page-2 must link to index
+- all-html-parse: failure_class=syntax - Both HTML files must be valid
+
+Let me create page-2.html with a link back to index.html, and I should also update index.html to link to page-2.html to create a proper chain.
+
+Actually, looking at the stage name "backlink", it seems like the main goal is to link back TO page 1 FROM page 2. But to not break page 1, I should also add a link from page 1 to page 2 so users can navigate both ways.
+
+Let me create:
+1. site/page-2.html - with content and a link back to index.html
+2. Update site/index.html - add a link to page-2.html in the nav
+
+Both files need to be valid HTML.
+</think>
+
+{
+  "files": [
+    {
+      "path": "site/page-2.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 2</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Home</a>\n    </nav>\n    <main>\n        <h1>Page 2</h1>\n        <p>This is the second page.</p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>My Website</title>\n</head>\n<body>\n    <nav>\n        <a href=\"page-2.html\">Page 2</a>\n    </nav>\n    <main>\n        <h1>Welcome</h1>\n        <p>This is the main content of the page.</p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created page-2.html with link back to index.html, and updated index.html nav to link to page-2."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.

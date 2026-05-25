@@ -1,0 +1,38 @@
+The user wants me to create webpage 2 (site/page-2.html) and link it back to page 1 (site/index.html) without breaking page 1.
+
+Looking at the existing files:
+- site/index.html exists with a nav element that's currently empty
+
+For this stage (web-002-backlink), I need to:
+1. Create site/page-2.html
+2. Add a link from page-2.html back to index.html
+3. Possibly update index.html to include a link to page-2.html (to make it a proper chain)
+
+The validators that will run:
+- page-2-links-index: failure_class=link_integrity - This means page-2 must link to index
+- all-html-parse: failure_class=syntax - Both HTML files must be valid
+
+Let me create page-2.html with a link back to index.html, and I should also update index.html to link to page-2.html to create a proper chain.
+
+Actually, looking at the stage name "backlink", it seems like the main goal is to link back TO page 1 FROM page 2. But to not break page 1, I should also add a link from page 1 to page 2 so users can navigate both ways.
+
+Let me create:
+1. site/page-2.html - with content and a link back to index.html
+2. Update site/index.html - add a link to page-2.html in the nav
+
+Both files need to be valid HTML.
+</think>
+
+{
+  "files": [
+    {
+      "path": "site/page-2.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 2</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Home</a>\n    </nav>\n    <main>\n        <h1>Page 2</h1>\n        <p>This is the second page.</p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>My Website</title>\n</head>\n<body>\n    <nav>\n        <a href=\"page-2.html\">Page 2</a>\n    </nav>\n    <main>\n        <h1>Welcome</h1>\n        <p>This is the main content of the page.</p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created page-2.html with link back to index.html, and updated index.html nav to link to page-2."
+}

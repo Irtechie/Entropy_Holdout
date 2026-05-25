@@ -1,0 +1,32 @@
+The user wants me to create a second library called "feature" that depends on the first library "core" and calls its public function `get_greeting`.
+
+I need to create:
+1. `library-chain/feature/__init__.py` - the feature library that imports and uses `get_greeting` from core
+2. `library-chain/feature/pyproject.toml` - build configuration that declares dependency on core
+3. Maybe a sample caller or some way to demonstrate the dependency
+
+Let me create these files:
+
+1. `library-chain/feature/pyproject.toml` - needs to depend on core
+2. `library-chain/feature/__init__.py` - calls core's get_greeting function
+
+The validators are:
+- feature-references-core: failure_class=api_contract - checks that feature references core properly
+- feature-builds: failure_class=build - checks that feature builds
+
+Let me create the files.
+</think>
+
+{
+  "files": [
+    {
+      "path": "library-chain/feature/pyproject.toml",
+      "content": "[build-system]\nrequires = [\"setuptools>=61.0\"]\nbuild-backend = \"setuptools.build_meta\"\n\n[project]\nname = \"feature\"\nversion = \"0.1.0\"\ndescription = \"Feature library that depends on core\"\nrequires-python = \">=3.8\"\ndependencies = [\n    \"core\"\n]\n"
+    },
+    {
+      "path": "library-chain/feature/__init__.py",
+      "content": "\"\"\"Feature library that depends on core.\"\"\"\n\nfrom core import get_greeting\n\ndef get_featured_greeting(name: str) -> str:\n    \"\"\"Return a featured greeting message for the given name.\n    \n    Args:\n        name: The name to greet.\n        \n    Returns:\n        A featured greeting string.\n    \"\"\"\n    base_greeting = get_greeting(name)\n    return f\"{base_greeting} Welcome to the feature!\"\n"
+    }
+  ],
+  "notes": "Created library-chain/feature that depends on core and calls its get_greeting function."
+}

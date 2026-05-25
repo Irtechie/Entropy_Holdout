@@ -1,0 +1,229 @@
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-002-dependent
+Order: 2
+
+Stage goal:
+Create a second library that depends on the first library and calls its public function.
+
+Expected artifacts:
+- library-chain/feature (project)
+
+Validators that will run:
+- feature-references-core: failure_class=api_contract
+- feature-builds: failure_class=build
+
+Existing generated files:
+FILE: library-chain/core/__init__.py
+---BEGIN FILE---
+"""Core library with one public function."""
+
+def get_greeting(name: str) -> str:
+    """Return a greeting message for the given name.
+    
+    Args:
+        name: The name to greet.
+        
+    Returns:
+        A greeting string.
+    """
+    return f"Hello, {name}!"
+
+
+---END FILE---
+
+FILE: library-chain/core/pyproject.toml
+---BEGIN FILE---
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "core"
+version = "0.1.0"
+description = "Core library"
+requires-python = ">=3.8"
+
+
+---END FILE---
+
+FILE: library-chain/core/sample_caller.py
+---BEGIN FILE---
+"""Sample caller for the core library."""
+
+from core import get_greeting
+
+if __name__ == "__main__":
+    result = get_greeting("World")
+    print(result)
+
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-001-core
+Order: 1
+
+Stage goal:
+Create the first library with one public function and a tiny sample caller.
+
+Expected artifacts:
+- library-chain/core (project)
+
+Validators that will run:
+- core-builds: failure_class=build
+- core-sample-runs: failure_class=runtime_behavior
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The user wants me to create a library project called \"library-chain/core\" with one public function and a tiny sample caller. This is for an Entropy staged code-generation benchmark.\n\nLet me create:\n1. A library project structure\n2. One public function\n3. A sample caller\n\nI'll use a simple language like Python or JavaScript/TypeScript. Let me go with Python as it's straightforward for a \"core\" library.\n\nStructure:\n- library-chain/core/\n  - src/ or directly in core/\n  - __init__.py or similar\n  - One public function\n  - sample_caller.py or similar\n\nLet me create a simple Python project:\n\n```\nlibrary-chain/core/\n├── __init__.py\n├── core.py (or core_function.py)\n└── sample_caller.py\n```\n\nOr maybe better:\n```\nlibrary-chain/core/\n├── src/\n│   └── __init__.py\n├── sample_caller.py\n└── pyproject.toml or setup.py\n```\n\nActually, for simplicity and to make it work with validators, let me create:\n\n1. `library-chain/core/__init__.py` - with one public function\n2. `library-chain/core/sample_caller.py` - tiny sample caller\n3. `library-chain/core/pyproject.toml` - for build system\n\nLet me define a simple public function like `greet(name)` that returns a greeting string.\n\nFiles needed:\n1. `library-chain/core/__init__.py` - contains the public function\n2. `library-chain/core/sample_caller.py` - calls the public function\n3. `library-chain/core/pyproject.toml` - build configuration\n\nLet me write these files.\n</think>\n\n{\n  \"files\": [\n    {\n      \"path\": \"library-chain/core/pyproject.toml\",\n      \"content\": \"[build-system]\\nrequires = [\\\"setuptools>=61.0\\\"]\\nbuild-backend = \\\"setuptools.build_meta\\\"\\n\\n[project]\\nname = \\\"core\\\"\\nversion = \\\"0.1.0\\\"\\ndescription = \\\"Core library\\\"\\nrequires-python = \\\">=3.8\\\"\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/__init__.py\",\n      \"content\": \"\\\"\\\"\\\"Core library with one public function.\\\"\\\"\\\"\\n\\ndef get_greeting(name: str) -> str:\\n    \\\"\\\"\\\"Return a greeting message for the given name.\\n    \\n    Args:\\n        name: The name to greet.\\n        \\n    Returns:\\n        A greeting string.\\n    \\\"\\\"\\\"\\n    return f\\\"Hello, {name}!\\\"\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/sample_caller.py\",\n      \"content\": \"\\\"\\\"\\\"Sample caller for the core library.\\\"\\\"\\\"\\n\\nfrom core import get_greeting\\n\\nif __name__ == \\\"__main__\\\":\\n    result = get_greeting(\\\"World\\\")\\n    print(result)\\n\"\n    }\n  ],\n  \"notes\": \"Created library-chain/core with one public function get_greeting() and a sample caller.\"\n}"
+      }
+    }
+  ],
+  "created": 1779719502,
+  "model": "MiniMax-M2.7-UD-IQ4_XS-00001-of-00004.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 647,
+    "prompt_tokens": 222,
+    "total_tokens": 869,
+    "prompt_tokens_details": {
+      "cached_tokens": 39
+    }
+  },
+  "id": "chatcmpl-F2FltjT0uGPDCbFKi6KXYxcy6HNzo9H7",
+  "timings": {
+    "cache_n": 39,
+    "prompt_n": 183,
+    "prompt_ms": 687.441,
+    "prompt_per_token_ms": 3.756508196721312,
+    "prompt_per_second": 266.2046633820211,
+    "predicted_n": 647,
+    "predicted_ms": 26921.613,
+    "predicted_per_token_ms": 41.609911901081915,
+    "predicted_per_second": 24.032735334246134
+  }
+}
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.txt
+---BEGIN FILE---
+The user wants me to create a library project called "library-chain/core" with one public function and a tiny sample caller. This is for an Entropy staged code-generation benchmark.
+
+Let me create:
+1. A library project structure
+2. One public function
+3. A sample caller
+
+I'll use a simple language like Python or JavaScript/TypeScript. Let me go with Python as it's straightforward for a "core" library.
+
+Structure:
+- library-chain/core/
+  - src/ or directly in core/
+  - __init__.py or similar
+  - One public function
+  - sample_caller.py or similar
+
+Let me create a simple Python project:
+
+```
+library-chain/core/
+├── __init__.py
+├── core.py (or core_function.py)
+└── sample_caller.py
+```
+
+Or maybe better:
+```
+library-chain/core/
+├── src/
+│   └── __init__.py
+├── sample_caller.py
+└── pyproject.toml or setup.py
+```
+
+Actually, for simplicity and to make it work with validators, let me create:
+
+1. `library-chain/core/__init__.py` - with one public function
+2. `library-chain/core/sample_caller.py` - tiny sample caller
+3. `library-chain/core/pyproject.toml` - for build system
+
+Let me define a simple public function like `greet(name)` that returns a greeting string.
+
+Files needed:
+1. `library-chain/core/__init__.py` - contains the public function
+2. `library-chain/core/sample_caller.py` - calls the public function
+3. `library-chain/core/pyproject.toml` - build configuration
+
+Let me write these files.
+</think>
+
+{
+  "files": [
+    {
+      "path": "library-chain/core/pyproject.toml",
+      "content": "[build-system]\nrequires = [\"setuptools>=61.0\"]\nbuild-backend = \"setuptools.build_meta\"\n\n[project]\nname = \"core\"\nversion = \"0.1.0\"\ndescription = \"Core library\"\nrequires-python = \">=3.8\"\n"
+    },
+    {
+      "path": "library-chain/core/__init__.py",
+      "content": "\"\"\"Core library with one public function.\"\"\"\n\ndef get_greeting(name: str) -> str:\n    \"\"\"Return a greeting message for the given name.\n    \n    Args:\n        name: The name to greet.\n        \n    Returns:\n        A greeting string.\n    \"\"\"\n    return f\"Hello, {name}!\"\n"
+    },
+    {
+      "path": "library-chain/core/sample_caller.py",
+      "content": "\"\"\"Sample caller for the core library.\"\"\"\n\nfrom core import get_greeting\n\nif __name__ == \"__main__\":\n    result = get_greeting(\"World\")\n    print(result)\n"
+    }
+  ],
+  "notes": "Created library-chain/core with one public function get_greeting() and a sample caller."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.

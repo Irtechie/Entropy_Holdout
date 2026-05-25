@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "benchmark": "EB",
+  "generated_at": "2026-05-25T10:41:48.1537011-04:00",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456",
+  "results_path": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\results.jsonl",
+  "rubric": {
+    "scale": "0-5",
+    "score_meaning": {
+      "0": "No valid stage output or strict output contract failure before code evaluation.",
+      "1": "Only first-stage or minimal artifact progress.",
+      "2": "Some local continuity, but breaks before deeper dependency pressure.",
+      "3": "Meaningful cross-stage progress, but breaks before completing workload invariants.",
+      "4": "All planned generation stages completed, but final validator failed.",
+      "5": "All planned generation stages and final validation passed."
+    },
+    "dimensions": [
+      "output_contract",
+      "artifact_continuity",
+      "dependency_retention",
+      "validator_readiness",
+      "entropy_pressure"
+    ]
+  },
+  "totals": {
+    "target_workload_count": 3,
+    "fully_validated_count": 0,
+    "prompt_tokens": 54072,
+    "completion_tokens": 13307,
+    "total_tokens": 67379
+  },
+  "critiques": [
+    {
+      "target_set_id": "entropy-minimax-m27",
+      "model_id": "MiniMax-M2.7-UD-IQ4_XS-00001-of-00004.gguf",
+      "context_tokens": 16384,
+      "harness_mode": "repair-extract",
+      "workload_id": "factory",
+      "planned_stage_count": 4,
+      "stages_seen": 2,
+      "max_pass_stage": 1,
+      "entropy_right_shift": {
+        "passed_stages": 1,
+        "possible_stages": 4,
+        "normalized": 0.25,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "factory-002-stations",
+      "first_failure_class": "harness",
+      "first_error": "HTTP 400 posting http://192.168.1.203:8000/v1/completions body={\"error\":{\"code\":400,\"message\":\"request (31108 tokens) exceeds the available context size (16384 tokens), try increasing it\",\"type\":\"exceed_context_size_error\",\"n_prompt_tokens\":31108,\"n_ctx\":16384}}",
+      "likely_entropy_cause": "The harness or validator surfaced an unexpected failure outside the workload contract.",
+      "eb_score": 1,
+      "dimension_scores": {
+        "output_contract": 1,
+        "artifact_continuity": 1,
+        "dependency_retention": 1,
+        "validator_readiness": 1,
+        "entropy_pressure": 1
+      },
+      "token_usage": {
+        "prompt_tokens": 12490,
+        "completion_tokens": 7038,
+        "total_tokens": 19528
+      },
+      "breakpoint_metric": "highest ordered stage with valid component graph, configuration, and end-to-end factory behavior",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\factory\\_raw\\factory-001-layout.attempt-01-repair.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\factory\\_raw\\factory-001-layout.attempt-01-repair.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\factory\\_raw\\factory-001-layout.attempt-01-repair.prompt.txt"
+      ],
+      "generated_file_count": 8,
+      "generated_files": [
+        "factory-system/package.json",
+        "factory-system/tsconfig.json",
+        "factory-system/src/types/index.ts",
+        "factory-system/src/models/component.ts",
+        "factory-system/src/models/station.ts",
+        "factory-system/src/models/product.ts",
+        "factory-system/src/models/routing.ts",
+        "factory-system/src/index.ts"
+      ]
+    },
+    {
+      "target_set_id": "entropy-minimax-m27",
+      "model_id": "MiniMax-M2.7-UD-IQ4_XS-00001-of-00004.gguf",
+      "context_tokens": 16384,
+      "harness_mode": "repair-extract",
+      "workload_id": "library-chain",
+      "planned_stage_count": 4,
+      "stages_seen": 4,
+      "max_pass_stage": 3,
+      "entropy_right_shift": {
+        "passed_stages": 3,
+        "possible_stages": 4,
+        "normalized": 0.75,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "lib-004-shared-interface",
+      "first_failure_class": "harness",
+      "first_error": "HTTP 400 posting http://192.168.1.203:8000/v1/completions body={\"error\":{\"code\":400,\"message\":\"request (35367 tokens) exceeds the available context size (16384 tokens), try increasing it\",\"type\":\"exceed_context_size_error\",\"n_prompt_tokens\":35367,\"n_ctx\":16384}}",
+      "likely_entropy_cause": "The harness or validator surfaced an unexpected failure outside the workload contract.",
+      "eb_score": 3,
+      "dimension_scores": {
+        "output_contract": 3,
+        "artifact_continuity": 3,
+        "dependency_retention": 3,
+        "validator_readiness": 2,
+        "entropy_pressure": 4
+      },
+      "token_usage": {
+        "prompt_tokens": 23572,
+        "completion_tokens": 3466,
+        "total_tokens": 27038
+      },
+      "breakpoint_metric": "highest ordered stage with valid dependency references, build output, and sample call",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\library-chain\\_raw\\lib-001-core.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\library-chain\\_raw\\lib-001-core.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\library-chain\\_raw\\lib-002-dependent.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\library-chain\\_raw\\lib-002-dependent.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\library-chain\\_raw\\lib-003-chain.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\library-chain\\_raw\\lib-003-chain.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\library-chain\\_raw\\lib-004-shared-interface.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\library-chain\\_raw\\lib-004-shared-interface.attempt-00.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\library-chain\\_raw\\lib-001-core.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\library-chain\\_raw\\lib-002-dependent.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\library-chain\\_raw\\lib-003-chain.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\library-chain\\_raw\\lib-004-shared-interface.attempt-00.prompt.txt"
+      ],
+      "generated_file_count": 8,
+      "generated_files": [
+        "library-chain/core/pyproject.toml",
+        "library-chain/core/__init__.py",
+        "library-chain/core/sample_caller.py",
+        "library-chain/feature/pyproject.toml",
+        "library-chain/feature/__init__.py",
+        "library-chain/pipeline/pyproject.toml",
+        "library-chain/pipeline/__init__.py",
+        "library-chain/pipeline/sample_caller.py"
+      ]
+    },
+    {
+      "target_set_id": "entropy-minimax-m27",
+      "model_id": "MiniMax-M2.7-UD-IQ4_XS-00001-of-00004.gguf",
+      "context_tokens": 16384,
+      "harness_mode": "repair-extract",
+      "workload_id": "webpage-chain",
+      "planned_stage_count": 5,
+      "stages_seen": 5,
+      "max_pass_stage": 4,
+      "entropy_right_shift": {
+        "passed_stages": 4,
+        "possible_stages": 5,
+        "normalized": 0.8,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "web-005-nested-shared-table",
+      "first_failure_class": "harness",
+      "first_error": "HTTP 400 posting http://192.168.1.203:8000/v1/completions body={\"error\":{\"code\":400,\"message\":\"request (26450 tokens) exceeds the available context size (16384 tokens), try increasing it\",\"type\":\"exceed_context_size_error\",\"n_prompt_tokens\":26450,\"n_ctx\":16384}}",
+      "likely_entropy_cause": "The harness or validator surfaced an unexpected failure outside the workload contract.",
+      "eb_score": 3,
+      "dimension_scores": {
+        "output_contract": 3,
+        "artifact_continuity": 3,
+        "dependency_retention": 3,
+        "validator_readiness": 2,
+        "entropy_pressure": 4
+      },
+      "token_usage": {
+        "prompt_tokens": 18010,
+        "completion_tokens": 2803,
+        "total_tokens": 20813
+      },
+      "breakpoint_metric": "highest ordered stage with valid pages, backlinks, and shared structure",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-001-home.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-001-home.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-002-backlink.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-002-backlink.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-003-chain-link.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-003-chain-link.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-004-shared-nav.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-004-shared-nav.attempt-00.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-001-home.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-002-backlink.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-003-chain-link.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-minimax-m27-20260525-102456\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-004-shared-nav.attempt-00.prompt.txt"
+      ],
+      "generated_file_count": 4,
+      "generated_files": [
+        "site/index.html",
+        "site/page-2.html",
+        "site/page-3.html",
+        "site/page-4.html"
+      ]
+    }
+  ]
+}

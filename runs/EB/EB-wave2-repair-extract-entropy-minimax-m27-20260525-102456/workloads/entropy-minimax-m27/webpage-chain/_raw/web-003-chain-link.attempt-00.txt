@@ -1,0 +1,54 @@
+Let me analyze the task:
+
+1. I need to create webpage 3 (site/page-3.html)
+2. Link it back to page 2
+3. Preserve existing page 1 and page 2 links
+
+Looking at the existing files:
+- site/index.html has a link to page-2.html
+- site/page-2.html has a link to index.html (Home)
+
+So the current chain is:
+- index.html -> page-2.html
+- page-2.html -> index.html
+
+For stage 3, I need to:
+1. Create site/page-3.html
+2. Add a link from page-3.html back to page-2.html
+3. Possibly update page-2.html to link to page-3.html (to create a proper chain)
+4. Keep the existing links intact
+
+The validators:
+- page-3-links-page-2: failure_class=link_integrity - page-3 must link to page-2
+- previous-links-preserved: failure_class=link_integrity - existing links must be preserved
+
+So I need to:
+1. Create site/page-3.html with a link back to page-2.html
+2. Update site/page-2.html to also link to page-3.html (so users can navigate from page 2 to page 3)
+3. Keep all existing links working
+
+Let me create the files:
+
+page-3.html:
+- Should have a nav with link to page-2.html
+- Should have main content
+
+page-2.html update:
+- Add a link to page-3.html in the nav
+
+Let me construct the JSON response.
+</think>
+
+{
+  "files": [
+    {
+      "path": "site/page-3.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 3</title>\n</head>\n<body>\n    <nav>\n        <a href=\"page-2.html\">Page 2</a>\n    </nav>\n    <main>\n        <h1>Page 3</h1>\n        <p>This is the third page.</p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-2.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 2</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Home</a>\n        <a href=\"page-3.html\">Page 3</a>\n    </nav>\n    <main>\n        <h1>Page 2</h1>\n        <p>This is the second page.</p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created page-3.html with link to page-2.html, and updated page-2.html to link to page-3.html while preserving existing links."
+}
