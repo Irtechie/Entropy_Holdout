@@ -205,6 +205,99 @@ Rules:
 "@
 }
 
+function New-RepairPrompt($workloadId, $stage, $existingFiles, $failedResponse, $failureMessage) {
+  if (@($existingFiles).Count) {
+    $existingChunks = @($existingFiles | ForEach-Object {
+      "FILE: $($_.path)`n---BEGIN FILE---`n$($_.content)`n---END FILE---"
+    })
+    $existingText = $existingChunks -join ([Environment]::NewLine + [Environment]::NewLine)
+  } else {
+    $existingText = "No existing generated files."
+  }
+
+  $artifactText = (@($stage.expected_artifacts) | ForEach-Object { "- $($_.path) ($($_.kind))" }) -join "`n"
+
+  return @"
+You are repairing an Entropy staged code-generation benchmark response.
+
+Workload: $workloadId
+Stage: $($stage.id)
+Order: $($stage.order)
+
+Stage goal:
+$($stage.prompt_goal)
+
+Expected artifacts:
+$artifactText
+
+The previous response failed with:
+$failureMessage
+
+Previous response text:
+---BEGIN FAILED RESPONSE---
+$failedResponse
+---END FAILED RESPONSE---
+
+Current generated files:
+$existingText
+
+Return ONLY a corrected JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+- Do not copy placeholder path or content values from the schema.
+"@
+}
+
+function Add-TokenUsage($total, $usage) {
+  if (-not $total) {
+    $total = [ordered]@{
+      prompt_tokens = 0
+      completion_tokens = 0
+      total_tokens = 0
+    }
+  }
+
+  if ($usage) {
+    foreach ($name in @('prompt_tokens','completion_tokens','total_tokens')) {
+      $prop = $usage.PSObject.Properties[$name]
+      if ($prop -and $null -ne $prop.Value -and "$($prop.Value)" -match '^\d+$') {
+        $total[$name] = [int64]$total[$name] + [int64]$prop.Value
+      }
+    }
+  }
+
+  return $total
+}
+
+function Save-CompletionArtifacts($rawDir, $stageId, $label, $prompt, $completion) {
+  $prefix = if ($label) { "$stageId.$label" } else { $stageId }
+
+  $promptPath = Join-Path $rawDir "$prefix.prompt.txt"
+  Set-Content -LiteralPath $promptPath -Value $prompt -Encoding UTF8
+
+  $rawPath = Join-Path $rawDir "$prefix.txt"
+  Set-Content -LiteralPath $rawPath -Value $completion.text -Encoding UTF8
+
+  $rawJsonPath = Join-Path $rawDir "$prefix.response.json"
+  $completion.raw | ConvertTo-Json -Depth 64 | Set-Content -LiteralPath $rawJsonPath -Encoding UTF8
+
+  return [ordered]@{
+    prompt_path = (Resolve-Path -LiteralPath $promptPath).Path
+    raw_response_path = (Resolve-Path -LiteralPath $rawPath).Path
+    raw_response_json_path = (Resolve-Path -LiteralPath $rawJsonPath).Path
+  }
+}
+
 function Get-WorkloadStages($workloadId) {
   $spec = Get-Content -Raw -LiteralPath (Join-Path $repoRoot 'benchmarks/entropy_workloads/workloads.json') | ConvertFrom-Json -Depth 64
   $workload = @($spec.workloads | Where-Object { $_.id -eq $workloadId } | Select-Object -First 1)
@@ -282,6 +375,8 @@ function New-ApiWorkload($runRoot) {
       raw_response_json_path = $null
       prompt_path = $null
       token_usage = $null
+      repair_count = 0
+      repair_history = @()
       elapsed_s = $null
       error = $null
     }
@@ -291,25 +386,65 @@ function New-ApiWorkload($runRoot) {
       $prompt = New-StagePrompt $Workload $stage $existing
       $rawDir = Join-Path $runRoot '_raw'
       New-Item -ItemType Directory -Force -Path $rawDir | Out-Null
-      $promptPath = Join-Path $rawDir "$($stage.id).prompt.txt"
-      Set-Content -LiteralPath $promptPath -Value $prompt -Encoding UTF8
-      $row.prompt_path = (Resolve-Path -LiteralPath $promptPath).Path
+      $maxRepairs = if ($HarnessMode -eq 'repair-extract') { 2 } else { 0 }
+      $attemptIndex = 0
+      $attemptPrompt = $prompt
+      $attemptReason = 'initial'
+      $repairHistory = @()
+      $tokenUsage = $null
 
-      $completion = Invoke-ModelCompletion $prompt
-      $text = $completion.text
-      $rawPath = Join-Path $rawDir "$($stage.id).txt"
-      Set-Content -LiteralPath $rawPath -Value $text -Encoding UTF8
-      $row.raw_response_path = (Resolve-Path -LiteralPath $rawPath).Path
-      $rawJsonPath = Join-Path $rawDir "$($stage.id).response.json"
-      $completion.raw | ConvertTo-Json -Depth 64 | Set-Content -LiteralPath $rawJsonPath -Encoding UTF8
-      $row.raw_response_json_path = (Resolve-Path -LiteralPath $rawJsonPath).Path
-      $row.token_usage = $completion.usage
-      $parsed = ConvertFrom-JsonObjectText $text
-      $written = Write-GeneratedFiles $runRoot $parsed.files
-      Assert-StageArtifactsWritten $stage $written
-      $row.generated_files = @($written)
-      $row.status = 'pass'
-      $row.failure_class = 'none'
+      while ($true) {
+        $label = if ($HarnessMode -eq 'repair-extract') {
+          if ($attemptIndex -eq 0) { 'attempt-00' } else { "attempt-$('{0:d2}' -f $attemptIndex)-repair" }
+        } else {
+          ''
+        }
+
+        $completion = Invoke-ModelCompletion $attemptPrompt
+        $paths = Save-CompletionArtifacts $rawDir $stage.id $label $attemptPrompt $completion
+        $row.prompt_path = $paths.prompt_path
+        $row.raw_response_path = $paths.raw_response_path
+        $row.raw_response_json_path = $paths.raw_response_json_path
+        $tokenUsage = Add-TokenUsage $tokenUsage $completion.usage
+        $row.token_usage = [pscustomobject]$tokenUsage
+        $text = $completion.text
+
+        try {
+          $parsed = ConvertFrom-JsonObjectText $text
+          $written = Write-GeneratedFiles $runRoot $parsed.files
+          Assert-StageArtifactsWritten $stage $written
+          $row.generated_files = @($written)
+          $row.status = 'pass'
+          $row.failure_class = 'none'
+          $row.repair_count = $attemptIndex
+          $row.repair_history = @($repairHistory)
+          break
+        } catch {
+          $attemptError = $_.Exception.Message
+          $attemptFailureClass = Get-FailureClass $attemptError
+          $repairHistory += [ordered]@{
+            attempt_index = $attemptIndex
+            reason = $attemptReason
+            status = 'fail'
+            failure_class = $attemptFailureClass
+            error = $attemptError
+            prompt_path = $paths.prompt_path
+            raw_response_path = $paths.raw_response_path
+            raw_response_json_path = $paths.raw_response_json_path
+            token_usage = $completion.usage
+          }
+
+          if ($attemptIndex -ge $maxRepairs) {
+            $row.repair_count = $attemptIndex
+            $row.repair_history = @($repairHistory)
+            throw $attemptError
+          }
+
+          $attemptIndex += 1
+          $attemptReason = $attemptFailureClass
+          $attemptPrompt = New-RepairPrompt $Workload $stage (Get-RelativeFiles $runRoot) $text $attemptError
+        }
+      }
     } catch {
       $row.error = $_.Exception.Message
       $row.failure_class = Get-FailureClass $row.error

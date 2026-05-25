@@ -2,6 +2,7 @@
   "id": "EB-wave1-small-individual",
   "description": "Individual top-level Wave 1 plain EB folders for the small targets that were first covered by the grouped EB-local-small run.",
   "harness_mode": "plain",
+  "run_prefix": "EB",
   "targets": [
     {
       "set_id": "entropy-qwen25-coder-05b-large",

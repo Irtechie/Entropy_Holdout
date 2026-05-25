@@ -14,7 +14,7 @@ Build and run Entropy staged code-generation benchmark workloads to measure how 
 
 ## Current Focus
 
-Wave 1 plain EB baseline is complete for all single-box targets. Results are saved under `runs/EB/`.
+Wave 2 repair-extract EB is being prepared for the same single-box targets. Wave 1 plain baseline is complete under `runs/EB/`.
 
 ## Current Truth
 
@@ -32,11 +32,14 @@ Wave 1 plain EB baseline is complete for all single-box targets. Results are sav
 
 ## Active Work
 
-No active KB manifest is currently running.
+Run Wave 2 repair-extract EB queue after harness verification:
+
+```powershell
+pwsh .\tools\run_eb_target_queue.ps1 -QueuePath .\benchmarks\entropy_workloads\wave2.repair-extract.targets.json -ExperimentPath .\benchmarks\entropy_workloads\experiment.wave2-repair-extract-singlebox.json -CommitEach -PushEach -SkipCompleted
+```
 
 ## Queued Improvements
 
-- Plan Wave 2: add a separate repair/extract harness mode that can recover malformed JSON/output without overwriting Wave 1 `plain` results.
 - Compare Wave 2 against Wave 1 by target/workload using right-shift deltas.
 - Add harness modes beyond `mock`/`plain`: likely `repair-extract`, `file-carry`, and `entropy`.
 - Decide whether later large generated artifacts should be retained per real run or compacted after validation. Current EB default is retain.

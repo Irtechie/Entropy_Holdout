@@ -1,0 +1,13 @@
+{
+  "id": "EB-wave2-repair-extract-singlebox",
+  "description": "Wave 2 single-box EB run using model-driven repair-extract retries after output-contract failures.",
+  "base_url": "http://192.168.1.203:4000",
+  "harness_mode": "repair-extract",
+  "include_dual_box": false,
+  "targets": "all-singlebox",
+  "workloads": [
+    "webpage-chain",
+    "library-chain",
+    "factory"
+  ]
+}

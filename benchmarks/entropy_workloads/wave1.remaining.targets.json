@@ -2,6 +2,7 @@
   "id": "EB-wave1-remaining-singlebox",
   "description": "Remaining Wave 1 plain EB single-box targets after EB-local-small plus the 4B tranche.",
   "harness_mode": "plain",
+  "run_prefix": "EB",
   "targets": [
     {
       "set_id": "entropy-gptoss20",

@@ -2,6 +2,7 @@ param(
   [string]$QueuePath = (Join-Path (Resolve-Path (Join-Path $PSScriptRoot '..')).Path 'benchmarks/entropy_workloads/wave1.remaining.targets.json'),
   [string]$ExperimentPath = (Join-Path (Resolve-Path (Join-Path $PSScriptRoot '..')).Path 'benchmarks/entropy_workloads/experiment.local-full-singlebox.json'),
   [string]$ResultRootBase = (Join-Path (Resolve-Path (Join-Path $PSScriptRoot '..')).Path 'runs/EB'),
+  [string]$RunPrefix = '',
   [string]$Remote = 'origin',
   [string]$Branch = '',
   [switch]$CommitEach,
@@ -17,6 +18,15 @@ $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $queue = Get-Content -Raw -LiteralPath $QueuePath | ConvertFrom-Json -Depth 32
 $experiment = Get-Content -Raw -LiteralPath $ExperimentPath | ConvertFrom-Json -Depth 32
 $baseUrl = if ($experiment.base_url) { [string]$experiment.base_url } else { 'http://192.168.1.203:4000' }
+if (-not $RunPrefix) {
+  if ($queue.run_prefix) {
+    $RunPrefix = [string]$queue.run_prefix
+  } elseif ($experiment.harness_mode -and [string]$experiment.harness_mode -ne 'plain') {
+    $RunPrefix = "EB-$($experiment.harness_mode)"
+  } else {
+    $RunPrefix = 'EB'
+  }
+}
 if (-not $Branch) {
   $Branch = (git -C $repoRoot rev-parse --abbrev-ref HEAD).Trim()
 }
@@ -27,7 +37,7 @@ function Write-JsonFile($path, $obj) {
 }
 
 function Test-CompletedTargetRun($targetSetId) {
-  $pattern = "EB-$targetSetId-*"
+  $pattern = "$RunPrefix-$targetSetId-*"
   $matches = @(Get-ChildItem -LiteralPath $ResultRootBase -Directory -Filter $pattern -ErrorAction SilentlyContinue | Where-Object {
     (Test-Path -LiteralPath (Join-Path $_.FullName 'results.jsonl')) -and
     (Test-Path -LiteralPath (Join-Path $_.FullName 'critique.md')) -and
@@ -86,6 +96,7 @@ function Invoke-GitCommitAndPush($targetSetId, $runRoot) {
 $targets = @($queue.targets | Where-Object { $_.enabled -ne $false })
 Write-Host "EB target queue: $($queue.id)"
 Write-Host "Targets: $($targets.Count)"
+Write-Host "RunPrefix=$RunPrefix"
 Write-Host "CommitEach=$($CommitEach.IsPresent) PushEach=$($PushEach.IsPresent) SkipCompleted=$($SkipCompleted.IsPresent)"
 
 foreach ($target in $targets) {
@@ -96,7 +107,7 @@ foreach ($target in $targets) {
   }
 
   $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-  $runRoot = Join-Path $ResultRootBase "EB-$setId-$stamp"
+  $runRoot = Join-Path $ResultRootBase "$RunPrefix-$setId-$stamp"
   Write-Host "=== EB target $setId ==="
   Write-Host "Run root: $runRoot"
 

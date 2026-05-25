@@ -1,0 +1,104 @@
+{
+  "id": "EB-wave2-repair-extract-singlebox",
+  "description": "Wave 2 repair-extract EB queue over the same individual single-box targets used for Wave 1.",
+  "harness_mode": "repair-extract",
+  "run_prefix": "EB-wave2-repair-extract",
+  "targets": [
+    {
+      "set_id": "entropy-qwen25-coder-05b-large",
+      "slice_id": "wave2-repair-001",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-gemma4-e2b",
+      "slice_id": "wave2-repair-002",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-granite-code-3b",
+      "slice_id": "wave2-repair-003",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-smollm3-3b",
+      "slice_id": "wave2-repair-004",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-gemma4-e4b",
+      "slice_id": "wave2-repair-005",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-qwen35-4b",
+      "slice_id": "wave2-repair-006",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-gptoss20",
+      "slice_id": "wave2-repair-007",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-devstral-small2",
+      "slice_id": "wave2-repair-008",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-nemotron-cascade-30b",
+      "slice_id": "wave2-repair-009",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-gemma431",
+      "slice_id": "wave2-repair-010",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-qwen36",
+      "slice_id": "wave2-repair-011",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-qwen80next",
+      "slice_id": "wave2-repair-012",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-qwen80nextcoder",
+      "slice_id": "wave2-repair-013",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-qwen80nextcoder-256k",
+      "slice_id": "wave2-repair-014",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-gptoss120",
+      "slice_id": "wave2-repair-015",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-nemotron120",
+      "slice_id": "wave2-repair-016",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-nemotron3-super-120b",
+      "slice_id": "wave2-repair-017",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-qwen35-122b",
+      "slice_id": "wave2-repair-018",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-minimax-m27",
+      "slice_id": "wave2-repair-019",
+      "enabled": true,
+      "wedge_caution": "Earlier full-context MiniMax attempts could stress the DGX lane. Stop on wedge-risk infrastructure failure."
+    }
+  ]
+}
