@@ -1,0 +1,17 @@
+{
+  "queue_id": "EB-wave2-repair-extract-singlebox",
+  "target_set_id": "entropy-nemotron-cascade-30b",
+  "slice_id": "wave2-repair-009",
+  "classification": "completed-data-run",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-nemotron-cascade-30b-20260525-061907",
+  "started_at": "2026-05-25T06:19:07.6012346-04:00",
+  "finished_at": "2026-05-25T06:23:36.6253132-04:00",
+  "elapsed_s": 269.0,
+  "runner_exit_code": 0,
+  "results": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-nemotron-cascade-30b-20260525-061907\\results.jsonl",
+  "critique": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-nemotron-cascade-30b-20260525-061907\\critique.md",
+  "critique_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-nemotron-cascade-30b-20260525-061907\\critique.json",
+  "report_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-nemotron-cascade-30b-20260525-061907\\report.json",
+  "wedge_risk": false,
+  "wedge_detail": null
+}

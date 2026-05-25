@@ -1,0 +1,18 @@
+{
+  "project": "factory-system",
+  "components": [
+    { "id": "C1", "name": "Chassis" },
+    { "id": "C2", "name": "Engine" }
+  ],
+  "stations": [
+    { "id": "S1", "name": "Assembly", "location": "Line1" },
+    { "id": "S2", "name": "Testing", "location": "Lab" }
+  ],
+  "products": [
+    { "id": "P1", "name": "CarModelX", "type": "Vehicle" },
+    { "id": "P2", "name": "BikeModelY", "type": "Bicycle" }
+  ],
+  "routings": [
+    { "id": "R1", "from": "S1", "to": "S2", "productId": "P1" }
+  ]
+}
