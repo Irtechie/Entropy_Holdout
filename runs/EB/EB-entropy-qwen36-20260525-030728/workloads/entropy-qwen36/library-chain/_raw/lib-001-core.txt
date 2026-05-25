@@ -1,0 +1,21 @@
+{
+  "files": [
+    {
+      "path": "library-chain/core/src/core_lib.h",
+      "content": "#ifndef CORE_LIB_H\n#define CORE_LIB_H\n\nint core_add(int a, int b);\n\n#endif\n"
+    },
+    {
+      "path": "library-chain/core/src/core_lib.c",
+      "content": "#include \"core_lib.h\"\n\nint core_add(int a, int b) {\n    return a + b;\n}\n"
+    },
+    {
+      "path": "library-chain/core/main.c",
+      "content": "#include <stdio.h>\n#include \"src/core_lib.h\"\n\nint main() {\n    int result = core_add(2, 3);\n    printf(\"Result: %d\\n\", result);\n    return 0;\n}\n"
+    },
+    {
+      "path": "library-chain/core/Makefile",
+      "content": "CC = gcc\nCFLAGS = -Wall -Wextra -I.\nTARGET = core_sample\n\nall: $(TARGET)\n\n$(TARGET): main.c src/core_lib.c\n\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/core_lib.c\n\nclean:\n\trm -f $(TARGET)\n"
+    }
+  ],
+  "notes": "C library with core_add function and sample caller. Builds with Makefile and prints 'Result: 5'."
+}

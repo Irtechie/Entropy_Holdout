@@ -1,0 +1,21 @@
+{
+  "files": [
+    {
+      "path": "library-chain/feature/src/feature_lib.h",
+      "content": "#ifndef FEATURE_LIB_H\n#define FEATURE_LIB_H\n\nint feature_add(int a, int b);\n\n#endif\n"
+    },
+    {
+      "path": "library-chain/feature/src/feature_lib.c",
+      "content": "#include \"feature_lib.h\"\n#include \"../core/src/core_lib.h\"\n\nint feature_add(int a, int b) {\n    return core_add(a, b);\n}\n"
+    },
+    {
+      "path": "library-chain/feature/main.c",
+      "content": "#include <stdio.h>\n#include \"src/feature_lib.h\"\n\nint main() {\n    int result = feature_add(2, 3);\n    printf(\"Feature Result: %d\\n\", result);\n    return 0;\n}\n"
+    },
+    {
+      "path": "library-chain/feature/Makefile",
+      "content": "CC = gcc\nCFLAGS = -Wall -Wextra -I.\nTARGET = feature_sample\n\nall: $(TARGET)\n\n$(TARGET): main.c src/feature_lib.c ../core/src/core_lib.c\n\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/feature_lib.c ../core/src/core_lib.c\n\nclean:\n\trm -f $(TARGET)\n"
+    }
+  ],
+  "notes": "Feature library depending on core library. Wraps core_add and builds by compiling core_lib.c alongside feature_lib.c."
+}

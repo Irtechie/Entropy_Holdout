@@ -1,0 +1,17 @@
+{
+  "queue_id": "EB-wave1-remaining-singlebox",
+  "target_set_id": "entropy-qwen36",
+  "slice_id": "slice-007",
+  "classification": "completed-data-run",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-qwen36-20260525-030728",
+  "started_at": "2026-05-25T03:07:28.5896615-04:00",
+  "finished_at": "2026-05-25T03:15:35.3751716-04:00",
+  "elapsed_s": 486.8,
+  "runner_exit_code": 0,
+  "results": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-qwen36-20260525-030728\\results.jsonl",
+  "critique": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-qwen36-20260525-030728\\critique.md",
+  "critique_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-qwen36-20260525-030728\\critique.json",
+  "report_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-qwen36-20260525-030728\\report.json",
+  "wedge_risk": false,
+  "wedge_detail": null
+}
