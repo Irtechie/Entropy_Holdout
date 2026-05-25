@@ -1,0 +1,55 @@
+Let me analyze this task:
+
+1. This is stage web-004-shared-nav (Order 4)
+2. The stage goal is: "Create webpage 4 and add shared navigation across all pages that includes pages 1 through 4."
+3. The expected artifact is: site/page-4.html (html)
+
+Looking at the validators:
+- shared-nav-all-pages: failure_class=shared_state
+- page-4-links-page-3: failure_class=link_integrity
+
+The validator contract says:
+- From page order 4, every page must link to index.html, page-2.html, page-3.html, and page-4.html.
+
+So I need to:
+1. Create page-4.html with title containing 'Entropy Page 4' and backlink href pointing to 'page-3.html'
+2. Add shared navigation to ALL pages (index.html, page-2.html, page-3.html, and page-4.html) that includes links to all four pages
+
+Existing pages:
+- index.html: has empty nav
+- page-2.html: has nav with link to index.html
+- page-3.html: has nav with link to page-2.html
+
+I need to update all these pages to include shared navigation that links to index.html, page-2.html, page-3.html, and page-4.html.
+
+Let me create the files:
+
+1. site/page-4.html - new file with shared nav and backlink to page-3.html
+2. site/index.html - update to add shared nav
+3. site/page-2.html - update to add shared nav
+4. site/page-3.html - update to add shared nav
+
+The shared navigation should include links to all 4 pages.
+</think>
+
+{
+  "files": [
+    {
+      "path": "site/page-4.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Entropy Page 4</title>\n</head>\n<body>\n    <nav>\n        <a href=\"page-3.html\">Back to Entropy Page 3</a>\n        <a href=\"index.html\">Page 1</a>\n        <a href=\"page-2.html\">Page 2</a>\n        <a href=\"page-3.html\">Page 3</a>\n        <a href=\"page-4.html\">Page 4</a>\n    </nav>\n    <main>\n        <h1>Welcome to Entropy Page 4</h1>\n        <p>This is the main content area for the fourth page.</p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/index.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Entropy Page 1</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Page 1</a>\n        <a href=\"page-2.html\">Page 2</a>\n        <a href=\"page-3.html\">Page 3</a>\n        <a href=\"page-4.html\">Page 4</a>\n    </nav>\n    <main>\n        <h1>Welcome to Entropy Page 1</h1>\n        <p>This is the main content area for the first page.</p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-2.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Entropy Page 2</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Page 1</a>\n        <a href=\"page-2.html\">Page 2</a>\n        <a href=\"page-3.html\">Page 3</a>\n        <a href=\"page-4.html\">Page 4</a>\n    </nav>\n    <main>\n        <h1>Welcome to Entropy Page 2</h1>\n        <p>This is the main content area for the second page.</p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-3.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Entropy Page 3</title>\n</head>\n<body>\n    <nav>\n        <a href=\"page-2.html\">Back to Entropy Page 2</a>\n        <a href=\"index.html\">Page 1</a>\n        <a href=\"page-2.html\">Page 2</a>\n        <a href=\"page-3.html\">Page 3</a>\n        <a href=\"page-4.html\">Page 4</a>\n    </nav>\n    <main>\n        <h1>Welcome to Entropy Page 3</h1>\n        <p>This is the main content area for the third page.</p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created page-4.html and added shared navigation to all pages linking to index.html, page-2.html, page-3.html, and page-4.html."
+}

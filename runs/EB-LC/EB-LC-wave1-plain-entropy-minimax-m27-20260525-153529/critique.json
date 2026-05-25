@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "benchmark": "EB",
+  "generated_at": "2026-05-25T15:42:23.3590482-04:00",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529",
+  "results_path": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529\\results.jsonl",
+  "rubric": {
+    "scale": "0-5",
+    "score_meaning": {
+      "0": "No valid stage output or strict output contract failure before code evaluation.",
+      "1": "Only first-stage or minimal artifact progress.",
+      "2": "Some local continuity, but breaks before deeper dependency pressure.",
+      "3": "Meaningful cross-stage progress, but breaks before completing workload invariants.",
+      "4": "All planned generation stages completed, but final validator failed.",
+      "5": "All planned generation stages and final validation passed."
+    },
+    "dimensions": [
+      "output_contract",
+      "artifact_continuity",
+      "dependency_retention",
+      "validator_readiness",
+      "entropy_pressure"
+    ]
+  },
+  "totals": {
+    "target_workload_count": 3,
+    "fully_validated_count": 0,
+    "prompt_tokens": 25522,
+    "completion_tokens": 5875,
+    "total_tokens": 31397
+  },
+  "critiques": [
+    {
+      "target_set_id": "entropy-minimax-m27",
+      "model_id": "MiniMax-M2.7-UD-IQ4_XS-00001-of-00004.gguf",
+      "context_tokens": 16384,
+      "harness_mode": "plain",
+      "workload_id": "factory",
+      "planned_stage_count": 4,
+      "stages_seen": 1,
+      "max_pass_stage": 0,
+      "entropy_right_shift": {
+        "passed_stages": 0,
+        "possible_stages": 4,
+        "normalized": 0.0,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "factory-001-layout",
+      "first_failure_class": "generation",
+      "first_error": "Conversion from JSON failed with error: Additional text encountered after finished reading JSON content: `. Path '', line 25, position 0.",
+      "likely_entropy_cause": "The model lost the strict JSON response contract before code could be evaluated.",
+      "eb_score": 0,
+      "dimension_scores": {
+        "output_contract": 0,
+        "artifact_continuity": 0,
+        "dependency_retention": 0,
+        "validator_readiness": 0,
+        "entropy_pressure": 0
+      },
+      "token_usage": {
+        "prompt_tokens": 376,
+        "completion_tokens": 1241,
+        "total_tokens": 1617
+      },
+      "breakpoint_metric": "highest ordered stage with valid component graph, configuration, and end-to-end factory behavior",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529\\workloads\\entropy-minimax-m27\\factory\\_raw\\factory-001-layout.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529\\workloads\\entropy-minimax-m27\\factory\\_raw\\factory-001-layout.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529\\workloads\\entropy-minimax-m27\\factory\\_raw\\factory-001-layout.prompt.txt"
+      ],
+      "generated_file_count": 0,
+      "generated_files": []
+    },
+    {
+      "target_set_id": "entropy-minimax-m27",
+      "model_id": "MiniMax-M2.7-UD-IQ4_XS-00001-of-00004.gguf",
+      "context_tokens": 16384,
+      "harness_mode": "plain",
+      "workload_id": "library-chain",
+      "planned_stage_count": 4,
+      "stages_seen": 1,
+      "max_pass_stage": 0,
+      "entropy_right_shift": {
+        "passed_stages": 0,
+        "possible_stages": 4,
+        "normalized": 0.0,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "lib-001-core",
+      "first_failure_class": "generation",
+      "first_error": "Conversion from JSON failed with error: Invalid character after parsing property name. Expected ':' but got: s. Path '', line 2, position 11.",
+      "likely_entropy_cause": "The model lost the strict JSON response contract before code could be evaluated.",
+      "eb_score": 0,
+      "dimension_scores": {
+        "output_contract": 0,
+        "artifact_continuity": 0,
+        "dependency_retention": 0,
+        "validator_readiness": 0,
+        "entropy_pressure": 0
+      },
+      "token_usage": {
+        "prompt_tokens": 372,
+        "completion_tokens": 2016,
+        "total_tokens": 2388
+      },
+      "breakpoint_metric": "highest ordered stage with valid dependency references, build output, and sample call",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529\\workloads\\entropy-minimax-m27\\library-chain\\_raw\\lib-001-core.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529\\workloads\\entropy-minimax-m27\\library-chain\\_raw\\lib-001-core.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529\\workloads\\entropy-minimax-m27\\library-chain\\_raw\\lib-001-core.prompt.txt"
+      ],
+      "generated_file_count": 0,
+      "generated_files": []
+    },
+    {
+      "target_set_id": "entropy-minimax-m27",
+      "model_id": "MiniMax-M2.7-UD-IQ4_XS-00001-of-00004.gguf",
+      "context_tokens": 16384,
+      "harness_mode": "plain",
+      "workload_id": "webpage-chain",
+      "planned_stage_count": 5,
+      "stages_seen": 5,
+      "max_pass_stage": 4,
+      "entropy_right_shift": {
+        "passed_stages": 4,
+        "possible_stages": 5,
+        "normalized": 0.8,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "web-005-nested-shared-table",
+      "first_failure_class": "generation",
+      "first_error": "langchain adapter exited 1: Traceback (most recent call last):\r\n  File \"E:\\Dev\\AI\\remote\\Entropy\\tools\\langchain_completion.py\", line 184, in <module>\r\n    raise SystemExit(main())\r\n                     ^^^^^^\r\n  File \"E:\\Dev\\AI\\remote\\Entropy\\tools\\langchain_completion.py\", line 178, in main\r\n    response = invoke(request)\r\n               ^^^^^^^^^^^^^^^\r\n  File \"E:\\Dev\\AI\\remote\\Entropy\\tools\\langchain_completion.py\", line 154, in invoke\r\n    message = completion.invoke(str(request[\"prompt\"]), config=config)\r\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\marowe\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\langchain_core\\language_models\\llms.py\", line 392, in invoke\r\n    self.generate_prompt(\r\n  File \"C:\\Users\\marowe\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\langchain_core\\language_models\\llms.py\", line 791, in generate_prompt\r\n    return self.generate(prompt_strings, stop=stop, callbacks=callbacks, **kwargs)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\marowe\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\langchain_core\\language_models\\llms.py\", line 1002, in generate\r\n    return self._generate_helper(\r\n           ^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\marowe\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\langchain_core\\language_models\\llms.py\", line 817, in _generate_helper\r\n    self._generate(\r\n  File \"C:\\Users\\marowe\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\langchain_openai\\llms\\base.py\", line 453, in _generate\r\n    response = self.client.create(prompt=_prompts, **params)\r\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\marowe\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\openai\\_utils\\_utils.py\", line 286, in wrapper\r\n    return func(*args, **kwargs)\r\n           ^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\marowe\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\openai\\resources\\completions.py\", line 554, in create\r\n    return self._post(\r\n           ^^^^^^^^^^^\r\n  File \"C:\\Users\\marowe\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\openai\\_base_client.py\", line 1314, in post\r\n    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))\r\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\marowe\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\openai\\_base_client.py\", line 1087, in request\r\n    raise self._make_status_error_from_response(err.response) from None\r\nopenai.BadRequestError: Error code: 400 - {'error': {'code': 400, 'message': 'request (33200 tokens) exceeds the available context size (16384 tokens), try increasing it', 'type': 'exceed_context_size_error', 'n_prompt_tokens': 33200, 'n_ctx': 16384}}",
+      "likely_entropy_cause": "The model failed the code-generation output contract before validation could complete.",
+      "eb_score": 3,
+      "dimension_scores": {
+        "output_contract": 1,
+        "artifact_continuity": 3,
+        "dependency_retention": 3,
+        "validator_readiness": 2,
+        "entropy_pressure": 4
+      },
+      "token_usage": {
+        "prompt_tokens": 24774,
+        "completion_tokens": 2618,
+        "total_tokens": 27392
+      },
+      "breakpoint_metric": "highest ordered stage with valid pages, backlinks, and shared structure",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-001-home.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-001-home.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-002-backlink.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-002-backlink.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-003-chain-link.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-003-chain-link.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-004-shared-nav.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-004-shared-nav.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-001-home.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-002-backlink.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-003-chain-link.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529\\workloads\\entropy-minimax-m27\\webpage-chain\\_raw\\web-004-shared-nav.prompt.txt"
+      ],
+      "generated_file_count": 4,
+      "generated_files": [
+        "site/index.html",
+        "site/page-2.html",
+        "site/page-3.html",
+        "site/page-4.html"
+      ]
+    }
+  ]
+}
