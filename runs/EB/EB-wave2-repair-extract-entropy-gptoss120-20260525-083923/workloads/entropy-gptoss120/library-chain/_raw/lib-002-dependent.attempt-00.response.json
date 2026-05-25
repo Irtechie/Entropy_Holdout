@@ -1,0 +1,37 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/feature/go.mod\",\n      \"content\": \"module example.com/feature\\n\\ngo 1.22\\n\\nrequire example.com/core v0.0.0\\n\\nreplace example.com/core => ../core\"\n    },\n    {\n      \"path\": \"library-chain/feature/feature.go\",\n      \"content\": \"package feature\\n\\nimport \\\"example.com/core\\\"\\n\\nfunc Greet(name string) string {\\n    return core.Hello(name)\\n}\"\n    },\n    {\n      \"path\": \"library-chain/feature/main.go\",\n      \"content\": \"package main\\n\\nimport (\\n    \\\"fmt\\\"\\n    \\\"example.com/feature\\\"\\n)\\n\\nfunc main() {\\n    fmt.Println(feature.Greet(\\\"World\\\"))\\n}\"\n    }\n  ],\n  \"notes\": \"Added feature library that depends on core and calls its Hello function.\"\n}",
+        "reasoning_content": "We need to create second library that depends on first library and calls its public function.\n\nCurrent repository structure:\n\nlibrary-chain/core/... (core library)\n\nNow we need to add library-chain/feature (project) that depends on core library.\n\nWe need to create go.mod for feature module, maybe module example.com/feature, and a file that imports example.com/core and calls core.Hello.\n\nAlso maybe a main.go to run.\n\nThe validators:\n\n- feature-references-core: failure_class=api_contract\n- feature-builds: failure_class=build\n\nThus we need to ensure that feature module imports core correctly and builds.\n\nWe need to include go.mod for feature, and a source file (maybe feature.go) that calls core.Hello.\n\nProbably also a main.go to run.\n\nBut the validator \"feature-references-core\" likely checks that the feature library references core's API correctly (i.e., imports core and uses Hello). So we need to have a public function in feature that calls core.Hello.\n\nThus create library-chain/feature/feature.go with package feature, function Greet(name string) string that returns core.Hello(name). Also maybe a main.go to demonstrate.\n\nAlso need go.mod for feature: module example.com/feature, require example.com/core v0.0.0 (or replace). Since core is local, we can use replace directive.\n\nIn Go modules, to refer to local module, we can add replace example.com/core => ../core (relative path). So go.mod:\n\nmodule example.com/feature\n\ngo 1.22\n\nrequire example.com/core v0.0.0\n\nreplace example.com/core => ./../core\n\nBut relative path from feature directory to core: \"../core\". So replace example.com/core => ../core\n\nThus feature can import \"example.com/core\".\n\nNow feature.go:\n\npackage feature\n\nimport \"example.com/core\"\n\nfunc Greet(name string) string {\n    return core.Hello(name)\n}\n\nOptionally add a main.go to call feature.Greet.\n\nBut not required for validator; but could be helpful.\n\nBetter include main.go:\n\npackage main\n\nimport (\n    \"fmt\"\n    \"example.com/feature\"\n)\n\nfunc main() {\n    fmt.Println(feature.Greet(\"World\"))\n}\n\nBut need to import feature module; we need go.mod for feature includes module example.com/feature, and replace for core.\n\nThus we need to add files:\n\nlibrary-chain/feature/go.mod\nlibrary-chain/feature/feature.go\nlibrary-chain/feature/main.go (optional)\n\nThe validator \"feature-builds\" will try to build the feature module; maybe they run \"go build ./...\" in feature directory. So having a main.go ensures building a binary; but they might just run \"go test\" or \"go build\". Having a package with no main may still build (go build will build packages). But to be safe, include a main.go.\n\nThus output JSON with these three files.\n\nNow ensure content formatting.\n\ngo.mod content:\n\nmodule example.com/feature\n\ngo 1.22\n\nrequire example.com/core v0.0.0\n\nreplace example.com/core => ../core\n\nMake sure newline at end.\n\nfeature.go content:\n\npackage feature\n\nimport \"example.com/core\"\n\nfunc Greet(name string) string {\n    return core.Hello(name)\n}\n\nmain.go content:\n\npackage main\n\nimport (\n    \"fmt\"\n    \"example.com/feature\"\n)\n\nfunc main() {\n    fmt.Println(feature.Greet(\"World\"))\n}\n\nNow produce JSON.\n\n"
+      }
+    }
+  ],
+  "created": 1779713115,
+  "model": "gpt-oss-120b-Q4_K_M-00001-of-00002.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 915,
+    "prompt_tokens": 1781,
+    "total_tokens": 2696,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-kBnZrRQixRdrVK358YH3c5gdv5XAX96E",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 1781,
+    "prompt_ms": 1424.014,
+    "prompt_per_token_ms": 0.7995586749017405,
+    "prompt_per_second": 1250.6899510819417,
+    "predicted_n": 915,
+    "predicted_ms": 15568.032,
+    "predicted_per_token_ms": 17.014242622950817,
+    "predicted_per_second": 58.77428823373437
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta http-equiv=\\\"X-UA-Compatible\\\" content=\\\"IE=edge\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Home Page</title>\\n</head>\\n<body>\\n    <nav>\\n        <!-- Navigation links will be added here later -->\\n    </nav>\\n    <main>\\n        <h1>Welcome to the Home Page</h1>\\n        <p>This is the main content area of the website.</p>\\n    </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created initial index.html with title, main content, and empty navigation placeholder.\"\n}",
+        "reasoning_content": "We need to output JSON with files array containing index.html at site/index.html with title, main content, empty navigation area. Provide simple HTML skeleton. Ensure valid HTML syntax. Provide notes.\n\nReturn only JSON."
+      }
+    }
+  ],
+  "created": 1779712845,
+  "model": "gpt-oss-120b-Q4_K_M-00001-of-00002.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 247,
+    "prompt_tokens": 288,
+    "total_tokens": 535,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-vOwLgJjSNQoZ7n2HNt1ioeCkdiiWKDkx",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 288,
+    "prompt_ms": 1130.216,
+    "prompt_per_token_ms": 3.9243611111111107,
+    "prompt_per_second": 254.81854795897425,
+    "predicted_n": 247,
+    "predicted_ms": 4184.083,
+    "predicted_per_token_ms": 16.93960728744939,
+    "predicted_per_second": 59.033245755402085
+  }
+}

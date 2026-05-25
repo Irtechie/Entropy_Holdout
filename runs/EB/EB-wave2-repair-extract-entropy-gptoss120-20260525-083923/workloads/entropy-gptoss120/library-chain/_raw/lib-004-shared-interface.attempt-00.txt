@@ -1,0 +1,37 @@
+{
+  "files": [
+    {
+      "path": "library-chain/contracts/go.mod",
+      "content": "module example.com/contracts\n\ngo 1.22"
+    },
+    {
+      "path": "library-chain/contracts/contracts.go",
+      "content": "package contracts\n\ntype Greeter interface {\n    Greet(name string) string\n}\n"
+    },
+    {
+      "path": "library-chain/core/greeter.go",
+      "content": "package core\n\nimport \"example.com/contracts\"\n\ntype coreGreeter struct{}\n\nfunc (c coreGreeter) Greet(name string) string {\n    return Hello(name)\n}\n\n// NewGreeter returns a Greeter implementation.\nfunc NewGreeter() contracts.Greeter {\n    return coreGreeter{}\n}\n"
+    },
+    {
+      "path": "library-chain/core/go.mod",
+      "content": "module example.com/core\n\ngo 1.22\n\nrequire example.com/contracts v0.0.0\n\nreplace example.com/contracts => ../contracts"
+    },
+    {
+      "path": "library-chain/feature/go.mod",
+      "content": "module example.com/feature\n\ngo 1.22\n\nrequire (\n    example.com/core v0.0.0\n    example.com/contracts v0.0.0\n)\n\nreplace (\n    example.com/core => ../core\n    example.com/contracts => ../contracts\n)"
+    },
+    {
+      "path": "library-chain/feature/feature.go",
+      "content": "package feature\n\nimport (\n    \"example.com/core\"\n    \"example.com/contracts\"\n)\n\nfunc Greet(name string) string {\n    greeter := core.NewGreeter()\n    return greeter.Greet(name)\n}\n\n// NewGreeter returns a Greeter implementation from core.\nfunc NewGreeter() contracts.Greeter {\n    return core.NewGreeter()\n}\n"
+    },
+    {
+      "path": "library-chain/pipeline/go.mod",
+      "content": "module example.com/pipeline\n\ngo 1.22\n\nrequire (\n    example.com/feature v0.0.0\n    example.com/contracts v0.0.0\n)\n\nreplace (\n    example.com/feature => ../feature\n    example.com/contracts => ../contracts\n)"
+    },
+    {
+      "path": "library-chain/pipeline/pipeline.go",
+      "content": "package pipeline\n\nimport \"example.com/feature\"\n\nfunc Chain(name string) string {\n    greeter := feature.NewGreeter()\n    return greeter.Greet(name)\n}\n"
+    }
+  ],
+  "notes": "Added shared contracts library and updated core, feature, and pipeline to use the Greeter interface without breaking the sample."
+}

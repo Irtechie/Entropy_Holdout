@@ -1,0 +1,13 @@
+{
+  "files": [
+    {
+      "path": "factory-system/src/index.ts",
+      "content": "export * from \"./component\";\nexport * from \"./station\";\nexport * from \"./product\";\nexport * from \"./routing\";\nexport * from \"./seed\";\n"
+    },
+    {
+      "path": "factory-system/src/seed.ts",
+      "content": "import { Station } from \"./station\";\nimport { Product } from \"./product\";\nimport { Routing } from \"./routing\";\n\nexport const stations: Station[] = [\n  { id: \"s1\", name: \"Station 1\", location: \"A\" },\n  { id: \"s2\", name: \"Station 2\", location: \"B\" },\n  { id: \"s3\", name: \"Station 3\", location: \"C\" }\n];\n\nexport const products: Product[] = [\n  { id: \"p1\", name: \"Product 1\", sku: \"SKU1\" }\n];\n\nexport const routings: Routing[] = [\n  { id: \"r1\", fromStationId: \"s1\", toStationId: \"s2\", productId: \"p1\" },\n  { id: \"r2\", fromStationId: \"s2\", toStationId: \"s3\", productId: \"p1\" }\n];\n"
+    }
+  ],
+  "notes": "Added multiple stations and routing flow for a product."
+}

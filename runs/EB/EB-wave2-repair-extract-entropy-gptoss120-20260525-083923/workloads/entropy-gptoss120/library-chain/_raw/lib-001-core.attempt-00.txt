@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "path": "library-chain/core/go.mod",
+      "content": "module example.com/core\n\ngo 1.22"
+    },
+    {
+      "path": "library-chain/core/core.go",
+      "content": "package core\n\n// Hello returns a greeting for the given name.\nfunc Hello(name string) string {\n    return \"Hello, \" + name\n}\n"
+    },
+    {
+      "path": "library-chain/core/main.go",
+      "content": "package main\n\nimport (\n    \"fmt\"\n    \"example.com/core\"\n)\n\nfunc main() {\n    msg := core.Hello(\"World\")\n    fmt.Println(msg)\n}\n"
+    }
+  ],
+  "notes": "Created core library with Hello function and a tiny sample caller."
+}
