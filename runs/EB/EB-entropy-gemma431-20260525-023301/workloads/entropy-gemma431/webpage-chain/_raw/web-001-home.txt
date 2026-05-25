@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Home Page</title>\n</head>\n<body>\n    <nav id=\"main-nav\">\n        <!-- Navigation area to be populated in future stages -->\n    </nav>\n    <main>\n        <h1>Welcome to the Home Page</h1>\n        <p>This is the main content area of the website.</p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created the initial index.html with a title, main content, and an empty navigation placeholder."
+}

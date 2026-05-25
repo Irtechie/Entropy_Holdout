@@ -1,0 +1,8 @@
+{"ts":"2026-05-25T02:33:02.0260978-04:00","event":"experiment_start","experiment_id":"EB-local-full-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
+{"ts":"2026-05-25T02:33:02.0291069-04:00","event":"target_start","set_id":"entropy-gemma431","context_tokens":262144}
+{"ts":"2026-05-25T02:33:42.9274734-04:00","event":"target_ready","set_id":"entropy-gemma431","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"gemma-4-31B-it-Q4_K_M.gguf"}
+{"ts":"2026-05-25T02:50:07.6760995-04:00","event":"workload_failed","set_id":"entropy-gemma431","workload":"webpage-chain","error":"Conversion from JSON failed with error: Invalid property identifier character: \\. Path 'files', line 23, position 4."}
+{"ts":"2026-05-25T02:58:32.4991938-04:00","event":"workload_failed","set_id":"entropy-gemma431","workload":"library-chain","error":"model response did not include choices text"}
+{"ts":"2026-05-25T03:07:25.7123216-04:00","event":"workload_failed","set_id":"entropy-gemma431","workload":"factory","error":"model response did not include choices text"}
+{"ts":"2026-05-25T03:07:25.7135576-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma431-20260525-023301\\results.jsonl"}
+{"ts":"2026-05-25T03:07:25.7639564-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma431-20260525-023301\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma431-20260525-023301\\critique.json"}

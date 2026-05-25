@@ -1,0 +1,21 @@
+{
+  "files": [
+    {
+      "path": "factory-system/package.json",
+      "content": "{\n  \"name\": \"factory-system\",\n  \"version\": \"1.0.0\",\n  \"description\": \"Factory system core layout\",\n  \"main\": \"dist/index.js\",\n  \"types\": \"dist/index.d.ts\",\n  \"scripts\": {\n    \"build\": \"tsc\"\n  },\n  \"devDependencies\": {\n    \"typescript\": \"^5.0.0\"\n  }\n}"
+    },
+    {
+      "path": "factory-system/tsconfig.json",
+      "content": "{\n  \"compilerOptions\": {\n    \"target\": \"ES2020\",\n    \"module\": \"CommonJS\",\n    \"outDir\": \"./dist\",\n    \"rootDir\": \"./src\",\n    \"strict\": true,\n    \"esModuleInterop\": true,\n    \"skipLibCheck\": true\n  },\n  \"include\": [\"src/**/*\"]\n}"
+    },
+    {
+      "path": "factory-system/src/types.ts",
+      "content": "export interface Component {\n  id: string;\n  name: string;\n  type: string;\n  properties: Record<string, any>;\n}\n\nexport interface Station {\n  id: string;\n  name: string;\n  capabilities: string[];\n  status: 'idle' | 'busy' | 'offline';\n  currentProductId?: string;\n}\n\nexport interface Product {\n  id: string;\n  sku: string;\n  name: string;\n  requiredComponents: string[];\n}\n\nexport interface Routing {\n  productId: string;\n  steps: { \n    stationId: string; \n    operation: string; \n    sequence: number; \n  }[];\n}\n"
+    },
+    {
+      "path": "factory-system/src/index.ts",
+      "content": "export * from './types';\n"
+    }
+  ],
+  "notes": "Created factory-system project layout with core types for Component, Station, Product, and Routing to satisfy layout and API contract validators."
+}
