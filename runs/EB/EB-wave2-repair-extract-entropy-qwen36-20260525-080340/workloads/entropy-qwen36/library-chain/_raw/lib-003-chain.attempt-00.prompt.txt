@@ -1,0 +1,512 @@
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-003-chain
+Order: 3
+
+Stage goal:
+Create a third library that depends on the second library, preserving the full call chain.
+
+Expected artifacts:
+- library-chain/pipeline (project)
+
+Validators that will run:
+- pipeline-references-feature: failure_class=api_contract
+- chain-sample-runs: failure_class=runtime_behavior
+
+Existing generated files:
+FILE: library-chain/core/main.c
+---BEGIN FILE---
+#include <stdio.h>
+#include "src/core_lib.h"
+
+int main() {
+    int result = core_add(2, 3);
+    printf("Result: %d\n", result);
+    return 0;
+}
+
+
+---END FILE---
+
+FILE: library-chain/core/Makefile
+---BEGIN FILE---
+CC = gcc
+CFLAGS = -Wall -Wextra -I.
+TARGET = core_sample
+
+all: $(TARGET)
+
+$(TARGET): main.c src/core_lib.c
+	$(CC) $(CFLAGS) -o $(TARGET) main.c src/core_lib.c
+
+clean:
+	rm -f $(TARGET)
+
+
+---END FILE---
+
+FILE: library-chain/core/src/core_lib.c
+---BEGIN FILE---
+#include "core_lib.h"
+
+int core_add(int a, int b) {
+    return a + b;
+}
+
+
+---END FILE---
+
+FILE: library-chain/core/src/core_lib.h
+---BEGIN FILE---
+#ifndef CORE_LIB_H
+#define CORE_LIB_H
+
+int core_add(int a, int b);
+
+#endif
+
+
+---END FILE---
+
+FILE: library-chain/feature/main.c
+---BEGIN FILE---
+#include <stdio.h>
+#include "src/feature_lib.h"
+
+int main() {
+    int result = feature_add_extra(2, 3);
+    printf("Feature Result: %d\n", result);
+    return 0;
+}
+
+
+---END FILE---
+
+FILE: library-chain/feature/Makefile
+---BEGIN FILE---
+CC = gcc
+CFLAGS = -Wall -Wextra -I.
+TARGET = feature_sample
+
+all: $(TARGET)
+
+$(TARGET): main.c src/feature_lib.c ../core/src/core_lib.c
+	$(CC) $(CFLAGS) -o $(TARGET) main.c src/feature_lib.c ../core/src/core_lib.c
+
+clean:
+	rm -f $(TARGET)
+
+
+---END FILE---
+
+FILE: library-chain/feature/src/feature_lib.c
+---BEGIN FILE---
+#include "feature_lib.h"
+#include "../core/src/core_lib.h"
+
+int feature_add_extra(int a, int b) {
+    return core_add(a, b) + 10;
+}
+
+
+---END FILE---
+
+FILE: library-chain/feature/src/feature_lib.h
+---BEGIN FILE---
+#ifndef FEATURE_LIB_H
+#define FEATURE_LIB_H
+
+int feature_add_extra(int a, int b);
+
+#endif
+
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-001-core
+Order: 1
+
+Stage goal:
+Create the first library with one public function and a tiny sample caller.
+
+Expected artifacts:
+- library-chain/core (project)
+
+Validators that will run:
+- core-builds: failure_class=build
+- core-sample-runs: failure_class=runtime_behavior
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/core/src/core_lib.h\",\n      \"content\": \"#ifndef CORE_LIB_H\\n#define CORE_LIB_H\\n\\nint core_add(int a, int b);\\n\\n#endif\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/src/core_lib.c\",\n      \"content\": \"#include \\\"core_lib.h\\\"\\n\\nint core_add(int a, int b) {\\n    return a + b;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/main.c\",\n      \"content\": \"#include <stdio.h>\\n#include \\\"src/core_lib.h\\\"\\n\\nint main() {\\n    int result = core_add(2, 3);\\n    printf(\\\"Result: %d\\\\n\\\", result);\\n    return 0;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/Makefile\",\n      \"content\": \"CC = gcc\\nCFLAGS = -Wall -Wextra -I.\\nTARGET = core_sample\\n\\nall: $(TARGET)\\n\\n$(TARGET): main.c src/core_lib.c\\n\\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/core_lib.c\\n\\nclean:\\n\\trm -f $(TARGET)\\n\"\n    }\n  ],\n  \"notes\": \"C library with core_add function and sample caller. Builds with Makefile and prints 'Result: 5'.\"\n}",
+        "reasoning_content": "The user wants to generate a library-chain benchmark stage.\nStage: lib-001-core\nGoal: Create the first library with one public function and a tiny sample caller.\nProject: library-chain/core\nValidators: core-builds, core-sample-runs.\n\nI need to create a simple library project.\nSince the language isn't specified, I'll choose a common one like C or Python. Let's go with C for a \"library\" feel, or maybe Python for simplicity. Actually, C is often used in these benchmarks for build/runtime checks. Let's do a simple C library.\nProject structure:\nlibrary-chain/core/\n  src/\n    core_lib.c\n    core_lib.h\n  main.c (sample caller)\n  Makefile\n\nWait, the prompt says \"library-chain/core (project)\". So the root is library-chain/core.\nI'll create:\nlibrary-chain/core/src/core_lib.h\nlibrary-chain/core/src/core_lib.c\nlibrary-chain/core/main.c\nlibrary-chain/core/Makefile\n\nLet's define a simple public function: `int core_add(int a, int b);`\nSample caller: calls `core_add(2, 3)` and prints result.\nBuilds with Makefile.\nRuns and checks output.\n\nLet's draft the files.\n\n`library-chain/core/src/core_lib.h`:\n```c\n#ifndef CORE_LIB_H\n#define CORE_LIB_H\n\nint core_add(int a, int b);\n\n#endif\n```\n\n`library-chain/core/src/core_lib.c`:\n```c\n#include \"core_lib.h\"\n\nint core_add(int a, int b) {\n    return a + b;\n}\n```\n\n`library-chain/core/main.c`:\n```c\n#include <stdio.h>\n#include \"src/core_lib.h\"\n\nint main() {\n    int result = core_add(2, 3);\n    printf(\"Result: %d\\n\", result);\n    return 0;\n}\n```\n\n`library-chain/core/Makefile`:\n```makefile\nCC = gcc\nCFLAGS = -Wall -Wextra -I.\nTARGET = core_sample\n\nall: $(TARGET)\n\n$(TARGET): main.c src/core_lib.c\n\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/core_lib.c\n\nclean:\n\trm -f $(TARGET)\n```\n\nWait, the validator `core-sample-runs` will likely run the built binary and check its output. It should print \"Result: 5\".\nLet's make sure the paths are correct relative to `library-chain/core`.\nThe prompt says \"relative/path/from/run/root\". So paths should be like `library-chain/core/src/core_lib.h`, etc.\n\nLet's verify the structure.\n```json\n{\n  \"files\": [\n    { \"path\": \"library-chain/core/src/core_lib.h\", \"content\": \"...\" },\n    { \"path\": \"library-chain/core/src/core_lib.c\", \"content\": \"...\" },\n    { \"path\": \"library-chain/core/main.c\", \"content\": \"...\" },\n    { \"path\": \"library-chain/core/Makefile\", \"content\": \"...\" }\n  ],\n  \"notes\": \"Simple C library with add function and sample caller.\"\n}\n```\n\nCheck Makefile tabs: Makefiles require tabs for indentation. I will ensure the content has tabs.\nIn JSON, I'll represent tabs as `\\t`.\n\nLet's construct the JSON carefully.\n\n`library-chain/core/src/core_lib.h`:\n```c\n#ifndef CORE_LIB_H\n#define CORE_LIB_H\n\nint core_add(int a, int b);\n\n#endif\n```\n\n`library-chain/core/src/core_lib.c`:\n```c\n#include \"core_lib.h\"\n\nint core_add(int a, int b) {\n    return a + b;\n}\n```\n\n`library-chain/core/main.c`:\n```c\n#include <stdio.h>\n#include \"src/core_lib.h\"\n\nint main() {\n    int result = core_add(2, 3);\n    printf(\"Result: %d\\n\", result);\n    return 0;\n}\n```\n\n`library-chain/core/Makefile`:\n```makefile\nCC = gcc\nCFLAGS = -Wall -Wextra -I.\nTARGET = core_sample\n\nall: $(TARGET)\n\n$(TARGET): main.c src/core_lib.c\n\\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/core_lib.c\n\nclean:\n\\trm -f $(TARGET)\n```\n\nWait, `$(CC)` and `$(CFLAGS)` in Makefile might need escaping in JSON? No, just standard string.\nI'll use `\\t` for tabs.\n\nLet's double check the `main.c` include path. `#include \"src/core_lib.h\"` works if compiled from the project root with `-I.`. The Makefile has `-I.`. So it's fine.\n\nOne minor thing: `core-sample-runs` validator might expect a specific output format or just check exit code. I'll stick to `Result: 5`.\n\nIs there any specific language requirement? Not stated. C is fine.\nI will generate the JSON now.\nMake sure to escape newlines properly in JSON strings.\nI'll format the content strings carefully.\n\nLet's assemble.\n```json\n{\n  \"files\": [\n    {\n      \"path\": \"library-chain/core/src/core_lib.h\",\n      \"content\": \"#ifndef CORE_LIB_H\\n#define CORE_LIB_H\\n\\nint core_add(int a, int b);\\n\\n#endif\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/src/core_lib.c\",\n      \"content\": \"#include \\\"core_lib.h\\\"\\n\\nint core_add(int a, int b) {\\n    return a + b;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/main.c\",\n      \"content\": \"#include <stdio.h>\\n#include \\\"src/core_lib.h\\\"\\n\\nint main() {\\n    int result = core_add(2, 3);\\n    printf(\\\"Result: %d\\\\n\\\", result);\\n    return 0;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/Makefile\",\n      \"content\": \"CC = gcc\\nCFLAGS = -Wall -Wextra -I.\\nTARGET = core_sample\\n\\nall: $(TARGET)\\n\\n$(TARGET): main.c src/core_lib.c\\n\\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/core_lib.c\\n\\nclean:\\n\\trm -f $(TARGET)\\n\"\n    }\n  ],\n  \"notes\": \"C library with core_add function and sample caller. Builds with Makefile and prints 'Result: 5'.\"\n}\n```\n\nWait, `$(TARGET)` in Makefile content might be interpreted by JSON parser? No, it's just a string. But to be safe, I'll keep it as is.\nCheck tabs: `\\t$(CC)` and `\\trm` are correct.\nCheck newlines: `\\n` at end of each line.\nEverything looks solid.\nI will output only the JSON.\nOne detail: `core-sample-runs` might run `make && ./core_sample`. The output will be `Result: 5`. That's fine.\nI'll produce the JSON now. \nSelf-Correction/Verification during thought:\nShould I use Python instead? C is fine. The prompt doesn't specify.\nThe paths are relative to run root. `library-chain/core/...` is correct.\nI'll make sure the JSON is strictly valid.\nAll good.\nProceed. \nOutput matches the requested format.\nNo extra text.\nDone. \nLet's generate. \n[Output Generation] -> JSON string. \nNote: I will ensure proper escaping for quotes and newlines.\n`\"content\": \"#ifndef CORE_LIB_H\\n#define CORE_LIB_H\\n\\nint core_add(int a, int b);\\n\\n#endif\\n\"`\n`\"content\": \"#include \\\"core_lib.h\\\"\\n\\nint core_add(int a, int b) {\\n    return a + b;\\n}\\n\"`\n`\"content\": \"#include <stdio.h>\\n#include \\\"src/core_lib.h\\\"\\n\\nint main() {\\n    int result = core_add(2, 3);\\n    printf(\\\"Result: %d\\\\n\\\", result);\\n    return 0;\\n}\\n\"`\n`\"content\": \"CC = gcc\\nCFLAGS = -Wall -Wextra -I.\\nTARGET = core_sample\\n\\nall: $(TARGET)\\n\\n$(TARGET): main.c src/core_lib.c\\n\\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/core_lib.c\\n\\nclean:\\n\\trm -f $(TARGET)\\n\"`\n\nAll correct.\nProceeds. \nOutput matches exactly. \nDone. \n[Final Check]\n- Project: library-chain/core\n- Files: src/core_lib.h, src/core_lib.c, main.c, Makefile\n- Public function: core_add\n- Sample caller: main.c\n- Validators: builds, runs\n- JSON shape: correct\n- No markdown fences: correct\n- Only JSON: correct\nReady. \nOutput Generation. \n(Self-Correction/Refinement during thought)\nWait, `$(TARGET)` in Makefile might cause issues if the benchmark runner uses a template engine, but it's standard Make syntax. I'll keep it.\nI'll make sure the JSON is perfectly formatted.\nAll good. \nProceeds. \n[Output] -> JSON. \n(Note: I will use `\\t` for tabs in Makefile as required by Make syntax, and `\\n` for newlines.)\nDone. \n```json\n{\n  \"files\": [\n    {\n      \"path\": \"library-chain/core/src/core_lib.h\",\n      \"content\": \"#ifndef CORE_LIB_H\\n#define CORE_LIB_H\\n\\nint core_add(int a, int b);\\n\\n#endif\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/src/core_lib.c\",\n      \"content\": \"#include \\\"core_lib.h\\\"\\n\\nint core_add(int a, int b) {\\n    return a + b;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/main.c\",\n      \"content\": \"#include <stdio.h>\\n#include \\\"src/core_lib.h\\\"\\n\\nint main() {\\n    int result = core_add(2, 3);\\n    printf(\\\"Result: %d\\\\n\\\", result);\\n    return 0;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/Makefile\",\n      \"content\": \"CC = gcc\\nCFLAGS = -Wall -Wextra -I.\\nTARGET = core_sample\\n\\nall: $(TARGET)\\n\\n$(TARGET): main.c src/core_lib.c\\n\\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/core_lib.c\\n\\nclean:\\n\\trm -f $(TARGET)\\n\"\n    }\n  ],\n  \"notes\": \"C library with core_add function and sample caller. Builds with Makefile and prints 'Result: 5'.\"\n}\n```\nMatches requirements. Outputting. \n[Final Output Generation] (matches the refined JSON)\nDone. \n(Self-Correction/Note during generation prep)\nI should verify that `$(TARGET)` doesn't get interpreted as a variable by the JSON parser or the runner. It's just a string, so it's fine.\nThe prompt says \"Do not include markdown fences outside the JSON.\" I will output raw JSON.\nAll set. \nProceeds. \n[Output Generation] -> *Proceeds*\n"
+      }
+    }
+  ],
+  "created": 1779710988,
+  "model": "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 2861,
+    "prompt_tokens": 241,
+    "total_tokens": 3102,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-ODDzFNWMphYDxAwBm7uf6QTjwhC0Lu6a",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 241,
+    "prompt_ms": 266.894,
+    "prompt_per_token_ms": 1.1074439834024896,
+    "prompt_per_second": 902.9802093715108,
+    "predicted_n": 2861,
+    "predicted_ms": 49429.819,
+    "predicted_per_token_ms": 17.27711254806012,
+    "predicted_per_second": 57.88004200460455
+  }
+}
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "library-chain/core/src/core_lib.h",
+      "content": "#ifndef CORE_LIB_H\n#define CORE_LIB_H\n\nint core_add(int a, int b);\n\n#endif\n"
+    },
+    {
+      "path": "library-chain/core/src/core_lib.c",
+      "content": "#include \"core_lib.h\"\n\nint core_add(int a, int b) {\n    return a + b;\n}\n"
+    },
+    {
+      "path": "library-chain/core/main.c",
+      "content": "#include <stdio.h>\n#include \"src/core_lib.h\"\n\nint main() {\n    int result = core_add(2, 3);\n    printf(\"Result: %d\\n\", result);\n    return 0;\n}\n"
+    },
+    {
+      "path": "library-chain/core/Makefile",
+      "content": "CC = gcc\nCFLAGS = -Wall -Wextra -I.\nTARGET = core_sample\n\nall: $(TARGET)\n\n$(TARGET): main.c src/core_lib.c\n\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/core_lib.c\n\nclean:\n\trm -f $(TARGET)\n"
+    }
+  ],
+  "notes": "C library with core_add function and sample caller. Builds with Makefile and prints 'Result: 5'."
+}
+
+---END FILE---
+
+FILE: _raw/lib-002-dependent.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-002-dependent
+Order: 2
+
+Stage goal:
+Create a second library that depends on the first library and calls its public function.
+
+Expected artifacts:
+- library-chain/feature (project)
+
+Validators that will run:
+- feature-references-core: failure_class=api_contract
+- feature-builds: failure_class=build
+
+Existing generated files:
+FILE: library-chain/core/main.c
+---BEGIN FILE---
+#include <stdio.h>
+#include "src/core_lib.h"
+
+int main() {
+    int result = core_add(2, 3);
+    printf("Result: %d\n", result);
+    return 0;
+}
+
+
+---END FILE---
+
+FILE: library-chain/core/Makefile
+---BEGIN FILE---
+CC = gcc
+CFLAGS = -Wall -Wextra -I.
+TARGET = core_sample
+
+all: $(TARGET)
+
+$(TARGET): main.c src/core_lib.c
+	$(CC) $(CFLAGS) -o $(TARGET) main.c src/core_lib.c
+
+clean:
+	rm -f $(TARGET)
+
+
+---END FILE---
+
+FILE: library-chain/core/src/core_lib.c
+---BEGIN FILE---
+#include "core_lib.h"
+
+int core_add(int a, int b) {
+    return a + b;
+}
+
+
+---END FILE---
+
+FILE: library-chain/core/src/core_lib.h
+---BEGIN FILE---
+#ifndef CORE_LIB_H
+#define CORE_LIB_H
+
+int core_add(int a, int b);
+
+#endif
+
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-001-core
+Order: 1
+
+Stage goal:
+Create the first library with one public function and a tiny sample caller.
+
+Expected artifacts:
+- library-chain/core (project)
+
+Validators that will run:
+- core-builds: failure_class=build
+- core-sample-runs: failure_class=runtime_behavior
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/core/src/core_lib.h\",\n      \"content\": \"#ifndef CORE_LIB_H\\n#define CORE_LIB_H\\n\\nint core_add(int a, int b);\\n\\n#endif\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/src/core_lib.c\",\n      \"content\": \"#include \\\"core_lib.h\\\"\\n\\nint core_add(int a, int b) {\\n    return a + b;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/main.c\",\n      \"content\": \"#include <stdio.h>\\n#include \\\"src/core_lib.h\\\"\\n\\nint main() {\\n    int result = core_add(2, 3);\\n    printf(\\\"Result: %d\\\\n\\\", result);\\n    return 0;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/Makefile\",\n      \"content\": \"CC = gcc\\nCFLAGS = -Wall -Wextra -I.\\nTARGET = core_sample\\n\\nall: $(TARGET)\\n\\n$(TARGET): main.c src/core_lib.c\\n\\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/core_lib.c\\n\\nclean:\\n\\trm -f $(TARGET)\\n\"\n    }\n  ],\n  \"notes\": \"C library with core_add function and sample caller. Builds with Makefile and prints 'Result: 5'.\"\n}",
+        "reasoning_content": "The user wants to generate a library-chain benchmark stage.\nStage: lib-001-core\nGoal: Create the first library with one public function and a tiny sample caller.\nProject: library-chain/core\nValidators: core-builds, core-sample-runs.\n\nI need to create a simple library project.\nSince the language isn't specified, I'll choose a common one like C or Python. Let's go with C for a \"library\" feel, or maybe Python for simplicity. Actually, C is often used in these benchmarks for build/runtime checks. Let's do a simple C library.\nProject structure:\nlibrary-chain/core/\n  src/\n    core_lib.c\n    core_lib.h\n  main.c (sample caller)\n  Makefile\n\nWait, the prompt says \"library-chain/core (project)\". So the root is library-chain/core.\nI'll create:\nlibrary-chain/core/src/core_lib.h\nlibrary-chain/core/src/core_lib.c\nlibrary-chain/core/main.c\nlibrary-chain/core/Makefile\n\nLet's define a simple public function: `int core_add(int a, int b);`\nSample caller: calls `core_add(2, 3)` and prints result.\nBuilds with Makefile.\nRuns and checks output.\n\nLet's draft the files.\n\n`library-chain/core/src/core_lib.h`:\n```c\n#ifndef CORE_LIB_H\n#define CORE_LIB_H\n\nint core_add(int a, int b);\n\n#endif\n```\n\n`library-chain/core/src/core_lib.c`:\n```c\n#include \"core_lib.h\"\n\nint core_add(int a, int b) {\n    return a + b;\n}\n```\n\n`library-chain/core/main.c`:\n```c\n#include <stdio.h>\n#include \"src/core_lib.h\"\n\nint main() {\n    int result = core_add(2, 3);\n    printf(\"Result: %d\\n\", result);\n    return 0;\n}\n```\n\n`library-chain/core/Makefile`:\n```makefile\nCC = gcc\nCFLAGS = -Wall -Wextra -I.\nTARGET = core_sample\n\nall: $(TARGET)\n\n$(TARGET): main.c src/core_lib.c\n\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/core_lib.c\n\nclean:\n\trm -f $(TARGET)\n```\n\nWait, the validator `core-sample-runs` will likely run the built binary and check its output. It should print \"Result: 5\".\nLet's make sure the paths are correct relative to `library-chain/core`.\nThe prompt says \"relative/path/from/run/root\". So paths should be like `library-chain/core/src/core_lib.h`, etc.\n\nLet's verify the structure.\n```json\n{\n  \"files\": [\n    { \"path\": \"library-chain/core/src/core_lib.h\", \"content\": \"...\" },\n    { \"path\": \"library-chain/core/src/core_lib.c\", \"content\": \"...\" },\n    { \"path\": \"library-chain/core/main.c\", \"content\": \"...\" },\n    { \"path\": \"library-chain/core/Makefile\", \"content\": \"...\" }\n  ],\n  \"notes\": \"Simple C library with add function and sample caller.\"\n}\n```\n\nCheck Makefile tabs: Makefiles require tabs for indentation. I will ensure the content has tabs.\nIn JSON, I'll represent tabs as `\\t`.\n\nLet's construct the JSON carefully.\n\n`library-chain/core/src/core_lib.h`:\n```c\n#ifndef CORE_LIB_H\n#define CORE_LIB_H\n\nint core_add(int a, int b);\n\n#endif\n```\n\n`library-chain/core/src/core_lib.c`:\n```c\n#include \"core_lib.h\"\n\nint core_add(int a, int b) {\n    return a + b;\n}\n```\n\n`library-chain/core/main.c`:\n```c\n#include <stdio.h>\n#include \"src/core_lib.h\"\n\nint main() {\n    int result = core_add(2, 3);\n    printf(\"Result: %d\\n\", result);\n    return 0;\n}\n```\n\n`library-chain/core/Makefile`:\n```makefile\nCC = gcc\nCFLAGS = -Wall -Wextra -I.\nTARGET = core_sample\n\nall: $(TARGET)\n\n$(TARGET): main.c src/core_lib.c\n\\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/core_lib.c\n\nclean:\n\\trm -f $(TARGET)\n```\n\nWait, `$(CC)` and `$(CFLAGS)` in Makefile might need escaping in JSON? No, just standard string.\nI'll use `\\t` for tabs.\n\nLet's double check the `main.c` include path. `#include \"src/core_lib.h\"` works if compiled from the project root with `-I.`. The Makefile has `-I.`. So it's fine.\n\nOne minor thing: `core-sample-runs` validator might expect a specific output format or just check exit code. I'll stick to `Result: 5`.\n\nIs there any specific language requirement? Not stated. C is fine.\nI will generate the JSON now.\nMake sure to escape newlines properly in JSON strings.\nI'll format the content strings carefully.\n\nLet's assemble.\n```json\n{\n  \"files\": [\n    {\n      \"path\": \"library-chain/core/src/core_lib.h\",\n      \"content\": \"#ifndef CORE_LIB_H\\n#define CORE_LIB_H\\n\\nint core_add(int a, int b);\\n\\n#endif\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/src/core_lib.c\",\n      \"content\": \"#include \\\"core_lib.h\\\"\\n\\nint core_add(int a, int b) {\\n    return a + b;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/main.c\",\n      \"content\": \"#include <stdio.h>\\n#include \\\"src/core_lib.h\\\"\\n\\nint main() {\\n    int result = core_add(2, 3);\\n    printf(\\\"Result: %d\\\\n\\\", result);\\n    return 0;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/Makefile\",\n      \"content\": \"CC = gcc\\nCFLAGS = -Wall -Wextra -I.\\nTARGET = core_sample\\n\\nall: $(TARGET)\\n\\n$(TARGET): main.c src/core_lib.c\\n\\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/core_lib.c\\n\\nclean:\\n\\trm -f $(TARGET)\\n\"\n    }\n  ],\n  \"notes\": \"C library with core_add function and sample caller. Builds with Makefile and prints 'Result: 5'.\"\n}\n```\n\nWait, `$(TARGET)` in Makefile content might be interpreted by JSON parser? No, it's just a string. But to be safe, I'll keep it as is.\nCheck tabs: `\\t$(CC)` and `\\trm` are correct.\nCheck newlines: `\\n` at end of each line.\nEverything looks solid.\nI will output only the JSON.\nOne detail: `core-sample-runs` might run `make && ./core_sample`. The output will be `Result: 5`. That's fine.\nI'll produce the JSON now. \nSelf-Correction/Verification during thought:\nShould I use Python instead? C is fine. The prompt doesn't specify.\nThe paths are relative to run root. `library-chain/core/...` is correct.\nI'll make sure the JSON is strictly valid.\nAll good.\nProceed. \nOutput matches the requested format.\nNo extra text.\nDone. \nLet's generate. \n[Output Generation] -> JSON string. \nNote: I will ensure proper escaping for quotes and newlines.\n`\"content\": \"#ifndef CORE_LIB_H\\n#define CORE_LIB_H\\n\\nint core_add(int a, int b);\\n\\n#endif\\n\"`\n`\"content\": \"#include \\\"core_lib.h\\\"\\n\\nint core_add(int a, int b) {\\n    return a + b;\\n}\\n\"`\n`\"content\": \"#include <stdio.h>\\n#include \\\"src/core_lib.h\\\"\\n\\nint main() {\\n    int result = core_add(2, 3);\\n    printf(\\\"Result: %d\\\\n\\\", result);\\n    return 0;\\n}\\n\"`\n`\"content\": \"CC = gcc\\nCFLAGS = -Wall -Wextra -I.\\nTARGET = core_sample\\n\\nall: $(TARGET)\\n\\n$(TARGET): main.c src/core_lib.c\\n\\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/core_lib.c\\n\\nclean:\\n\\trm -f $(TARGET)\\n\"`\n\nAll correct.\nProceeds. \nOutput matches exactly. \nDone. \n[Final Check]\n- Project: library-chain/core\n- Files: src/core_lib.h, src/core_lib.c, main.c, Makefile\n- Public function: core_add\n- Sample caller: main.c\n- Validators: builds, runs\n- JSON shape: correct\n- No markdown fences: correct\n- Only JSON: correct\nReady. \nOutput Generation. \n(Self-Correction/Refinement during thought)\nWait, `$(TARGET)` in Makefile might cause issues if the benchmark runner uses a template engine, but it's standard Make syntax. I'll keep it.\nI'll make sure the JSON is perfectly formatted.\nAll good. \nProceeds. \n[Output] -> JSON. \n(Note: I will use `\\t` for tabs in Makefile as required by Make syntax, and `\\n` for newlines.)\nDone. \n```json\n{\n  \"files\": [\n    {\n      \"path\": \"library-chain/core/src/core_lib.h\",\n      \"content\": \"#ifndef CORE_LIB_H\\n#define CORE_LIB_H\\n\\nint core_add(int a, int b);\\n\\n#endif\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/src/core_lib.c\",\n      \"content\": \"#include \\\"core_lib.h\\\"\\n\\nint core_add(int a, int b) {\\n    return a + b;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/main.c\",\n      \"content\": \"#include <stdio.h>\\n#include \\\"src/core_lib.h\\\"\\n\\nint main() {\\n    int result = core_add(2, 3);\\n    printf(\\\"Result: %d\\\\n\\\", result);\\n    return 0;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/Makefile\",\n      \"content\": \"CC = gcc\\nCFLAGS = -Wall -Wextra -I.\\nTARGET = core_sample\\n\\nall: $(TARGET)\\n\\n$(TARGET): main.c src/core_lib.c\\n\\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/core_lib.c\\n\\nclean:\\n\\trm -f $(TARGET)\\n\"\n    }\n  ],\n  \"notes\": \"C library with core_add function and sample caller. Builds with Makefile and prints 'Result: 5'.\"\n}\n```\nMatches requirements. Outputting. \n[Final Output Generation] (matches the refined JSON)\nDone. \n(Self-Correction/Note during generation prep)\nI should verify that `$(TARGET)` doesn't get interpreted as a variable by the JSON parser or the runner. It's just a string, so it's fine.\nThe prompt says \"Do not include markdown fences outside the JSON.\" I will output raw JSON.\nAll set. \nProceeds. \n[Output Generation] -> *Proceeds*\n"
+      }
+    }
+  ],
+  "created": 1779710988,
+  "model": "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 2861,
+    "prompt_tokens": 241,
+    "total_tokens": 3102,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-ODDzFNWMphYDxAwBm7uf6QTjwhC0Lu6a",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 241,
+    "prompt_ms": 266.894,
+    "prompt_per_token_ms": 1.1074439834024896,
+    "prompt_per_second": 902.9802093715108,
+    "predicted_n": 2861,
+    "predicted_ms": 49429.819,
+    "predicted_per_token_ms": 17.27711254806012,
+    "predicted_per_second": 57.88004200460455
+  }
+}
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "library-chain/core/src/core_lib.h",
+      "content": "#ifndef CORE_LIB_H\n#define CORE_LIB_H\n\nint core_add(int a, int b);\n\n#endif\n"
+    },
+    {
+      "path": "library-chain/core/src/core_lib.c",
+      "content": "#include \"core_lib.h\"\n\nint core_add(int a, int b) {\n    return a + b;\n}\n"
+    },
+    {
+      "path": "library-chain/core/main.c",
+      "content": "#include <stdio.h>\n#include \"src/core_lib.h\"\n\nint main() {\n    int result = core_add(2, 3);\n    printf(\"Result: %d\\n\", result);\n    return 0;\n}\n"
+    },
+    {
+      "path": "library-chain/core/Makefile",
+      "content": "CC = gcc\nCFLAGS = -Wall -Wextra -I.\nTARGET = core_sample\n\nall: $(TARGET)\n\n$(TARGET): main.c src/core_lib.c\n\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/core_lib.c\n\nclean:\n\trm -f $(TARGET)\n"
+    }
+  ],
+  "notes": "C library with core_add function and sample caller. Builds with Makefile and prints 'Result: 5'."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/lib-002-dependent.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/feature/src/feature_lib.h\",\n      \"content\": \"#ifndef FEATURE_LIB_H\\n#define FEATURE_LIB_H\\n\\nint feature_add_extra(int a, int b);\\n\\n#endif\\n\"\n    },\n    {\n      \"path\": \"library-chain/feature/src/feature_lib.c\",\n      \"content\": \"#include \\\"feature_lib.h\\\"\\n#include \\\"../core/src/core_lib.h\\\"\\n\\nint feature_add_extra(int a, int b) {\\n    return core_add(a, b) + 10;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/feature/main.c\",\n      \"content\": \"#include <stdio.h>\\n#include \\\"src/feature_lib.h\\\"\\n\\nint main() {\\n    int result = feature_add_extra(2, 3);\\n    printf(\\\"Feature Result: %d\\\\n\\\", result);\\n    return 0;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/feature/Makefile\",\n      \"content\": \"CC = gcc\\nCFLAGS = -Wall -Wextra -I.\\nTARGET = feature_sample\\n\\nall: $(TARGET)\\n\\n$(TARGET): main.c src/feature_lib.c ../core/src/core_lib.c\\n\\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/feature_lib.c ../core/src/core_lib.c\\n\\nclean:\\n\\trm -f $(TARGET)\\n\"\n    }\n  ],\n  \"notes\": \"C library depending on core library, calls core_add, builds with Makefile.\"\n}",
+        "reasoning_content": "The user wants to generate the second stage of a library-chain benchmark.\nStage: lib-002-dependent\nGoal: Create a second library that depends on the first library and calls its public function.\nExpected artifacts: library-chain/feature (project)\nValidators: feature-references-core (failure_class=api_contract), feature-builds (failure_class=build)\n\nExisting files:\nlibrary-chain/core/src/core_lib.h\nlibrary-chain/core/src/core_lib.c\nlibrary-chain/core/main.c\nlibrary-chain/core/Makefile\n\nI need to create a new project `library-chain/feature` that depends on `library-chain/core`.\nIt should call `core_add` from `core_lib.h`.\nI'll create a simple C project for `library-chain/feature`.\nStructure:\nlibrary-chain/feature/\n  src/\n    feature_lib.c\n    feature_lib.h\n  main.c\n  Makefile\n\n`feature_lib.h`:\n```c\n#ifndef FEATURE_LIB_H\n#define FEATURE_LIB_H\n\nint feature_add_extra(int a, int b);\n\n#endif\n```\n\n`feature_lib.c`:\n```c\n#include \"feature_lib.h\"\n#include \"../core/src/core_lib.h\"\n\nint feature_add_extra(int a, int b) {\n    return core_add(a, b) + 10;\n}\n```\n\n`main.c`:\n```c\n#include <stdio.h>\n#include \"src/feature_lib.h\"\n\nint main() {\n    int result = feature_add_extra(2, 3);\n    printf(\"Feature Result: %d\\n\", result);\n    return 0;\n}\n```\n\n`Makefile`:\n```makefile\nCC = gcc\nCFLAGS = -Wall -Wextra -I.\nTARGET = feature_sample\n\nall: $(TARGET)\n\n$(TARGET): main.c src/feature_lib.c ../core/src/core_lib.c\n\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/feature_lib.c ../core/src/core_lib.c\n\nclean:\n\trm -f $(TARGET)\n```\n\nWait, the validator `feature-references-core` will check if it correctly references the core library's API.\nThe validator `feature-builds` will check if it builds.\nThe paths should be relative to the run root.\nSo `library-chain/feature/src/feature_lib.h`, etc.\n\nLet's verify the Makefile compilation command. It needs to include `../core/src/core_lib.c` and link it.\n`$(CC) $(CFLAGS) -o $(TARGET) main.c src/feature_lib.c ../core/src/core_lib.c`\nThis should work.\n\nLet's format the JSON carefully.\nPaths:\n- library-chain/feature/src/feature_lib.h\n- library-chain/feature/src/feature_lib.c\n- library-chain/feature/main.c\n- library-chain/feature/Makefile\n\nContent escaping:\nNewlines as `\\n`, tabs as `\\t`, quotes as `\\\"`.\n\nCheck `feature_lib.c`:\n```c\n#include \"feature_lib.h\"\n#include \"../core/src/core_lib.h\"\n\nint feature_add_extra(int a, int b) {\n    return core_add(a, b) + 10;\n}\n```\n\nCheck `main.c`:\n```c\n#include <stdio.h>\n#include \"src/feature_lib.h\"\n\nint main() {\n    int result = feature_add_extra(2, 3);\n    printf(\"Feature Result: %d\\n\", result);\n    return 0;\n}\n```\n\nCheck `Makefile`:\n```makefile\nCC = gcc\nCFLAGS = -Wall -Wextra -I.\nTARGET = feature_sample\n\nall: $(TARGET)\n\n$(TARGET): main.c src/feature_lib.c ../core/src/core_lib.c\n\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/feature_lib.c ../core/src/core_lib.c\n\nclean:\n\trm -f $(TARGET)\n```\n\nAll looks good. I will construct the JSON.\nOne detail: `$(TARGET)` in Makefile might be interpreted by some template engines, but it's standard Make. I'll keep it.\nI'll make sure the JSON is valid.\nLet's assemble.\n```json\n{\n  \"files\": [\n    {\n      \"path\": \"library-chain/feature/src/feature_lib.h\",\n      \"content\": \"#ifndef FEATURE_LIB_H\\n#define FEATURE_LIB_H\\n\\nint feature_add_extra(int a, int b);\\n\\n#endif\\n\"\n    },\n    {\n      \"path\": \"library-chain/feature/src/feature_lib.c\",\n      \"content\": \"#include \\\"feature_lib.h\\\"\\n#include \\\"../core/src/core_lib.h\\\"\\n\\nint feature_add_extra(int a, int b) {\\n    return core_add(a, b) + 10;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/feature/main.c\",\n      \"content\": \"#include <stdio.h>\\n#include \\\"src/feature_lib.h\\\"\\n\\nint main() {\\n    int result = feature_add_extra(2, 3);\\n    printf(\\\"Feature Result: %d\\\\n\\\", result);\\n    return 0;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/feature/Makefile\",\n      \"content\": \"CC = gcc\\nCFLAGS = -Wall -Wextra -I.\\nTARGET = feature_sample\\n\\nall: $(TARGET)\\n\\n$(TARGET): main.c src/feature_lib.c ../core/src/core_lib.c\\n\\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/feature_lib.c ../core/src/core_lib.c\\n\\nclean:\\n\\trm -f $(TARGET)\\n\"\n    }\n  ],\n  \"notes\": \"C library depending on core library, calls core_add, builds with Makefile.\"\n}\n```\nCheck escaping: `../core/src/core_lib.h` -> `\\\"../core/src/core_lib.h\\\"`\n`printf(\\\"Feature Result: %d\\\\n\\\", result);` -> `printf(\\\\\\\"Feature Result: %d\\\\\\\\n\\\\\\\", result);`\nWait, in JSON, `\\n` is newline. `\\\\n` is literal backslash-n.\nIn C code, `printf(\"Result: %d\\n\", result);` needs `\\n` to be a newline in the C string, so in JSON it should be `\\\\n`.\nLet's verify: `printf(\\\"Feature Result: %d\\\\n\\\", result);` -> correct.\nMakefile tabs: `\\t$(CC)` -> correct.\nAll good.\nI will output the JSON.\nOne minor point: `$(TARGET)` in Makefile might be fine.\nI'll produce the exact JSON.\nDone. \nLet's double check the prompt: \"feature-references-core: failure_class=api_contract\" -> checks if it uses core_add.\n\"feature-builds: failure_class=build\" -> checks if it compiles.\nThe code does exactly that.\nReady. \nOutput matches requested format.\nProceeds. \n[Output Generation] -> JSON string.\n(Self-Correction/Verification during thought)\nWait, should I include `library-chain/feature/Makefile` with `../core/src/core_lib.c`? Yes.\nIs there any chance the benchmark runner expects a different structure? Usually, relative paths from run root are fine.\nI'll stick to this.\nAll good.\nOutput matches.\nProceeds. \n[Final Output Generation]\n```json\n{\n  \"files\": [\n    {\n      \"path\": \"library-chain/feature/src/feature_lib.h\",\n      \"content\": \"#ifndef FEATURE_LIB_H\\n#define FEATURE_LIB_H\\n\\nint feature_add_extra(int a, int b);\\n\\n#endif\\n\"\n    },\n    {\n      \"path\": \"library-chain/feature/src/feature_lib.c\",\n      \"content\": \"#include \\\"feature_lib.h\\\"\\n#include \\\"../core/src/core_lib.h\\\"\\n\\nint feature_add_extra(int a, int b) {\\n    return core_add(a, b) + 10;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/feature/main.c\",\n      \"content\": \"#include <stdio.h>\\n#include \\\"src/feature_lib.h\\\"\\n\\nint main() {\\n    int result = feature_add_extra(2, 3);\\n    printf(\\\"Feature Result: %d\\\\n\\\", result);\\n    return 0;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/feature/Makefile\",\n      \"content\": \"CC = gcc\\nCFLAGS = -Wall -Wextra -I.\\nTARGET = feature_sample\\n\\nall: $(TARGET)\\n\\n$(TARGET): main.c src/feature_lib.c ../core/src/core_lib.c\\n\\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/feature_lib.c ../core/src/core_lib.c\\n\\nclean:\\n\\trm -f $(TARGET)\\n\"\n    }\n  ],\n  \"notes\": \"C library depending on core library, calls core_add, builds with Makefile.\"\n}\n```\nLooks solid. Outputting. \n(Self-Correction/Note during generation prep)\nI will ensure no markdown fences are included.\nThe prompt says \"Do not include markdown fences outside the JSON.\"\nI will just output the raw JSON.\nDone. \nProceeds. \n[Output Generation] -> *Proceeds*\n"
+      }
+    }
+  ],
+  "created": 1779711034,
+  "model": "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 2416,
+    "prompt_tokens": 4637,
+    "total_tokens": 7053,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-i8sJOdeh52vMSqe1dJyl99ZoD3mOyft2",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 4637,
+    "prompt_ms": 2441.094,
+    "prompt_per_token_ms": 0.5264382143627345,
+    "prompt_per_second": 1899.5581489283081,
+    "predicted_n": 2416,
+    "predicted_ms": 42745.107,
+    "predicted_per_token_ms": 17.69251117549669,
+    "predicted_per_second": 56.52108906874417
+  }
+}
+
+---END FILE---
+
+FILE: _raw/lib-002-dependent.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "library-chain/feature/src/feature_lib.h",
+      "content": "#ifndef FEATURE_LIB_H\n#define FEATURE_LIB_H\n\nint feature_add_extra(int a, int b);\n\n#endif\n"
+    },
+    {
+      "path": "library-chain/feature/src/feature_lib.c",
+      "content": "#include \"feature_lib.h\"\n#include \"../core/src/core_lib.h\"\n\nint feature_add_extra(int a, int b) {\n    return core_add(a, b) + 10;\n}\n"
+    },
+    {
+      "path": "library-chain/feature/main.c",
+      "content": "#include <stdio.h>\n#include \"src/feature_lib.h\"\n\nint main() {\n    int result = feature_add_extra(2, 3);\n    printf(\"Feature Result: %d\\n\", result);\n    return 0;\n}\n"
+    },
+    {
+      "path": "library-chain/feature/Makefile",
+      "content": "CC = gcc\nCFLAGS = -Wall -Wextra -I.\nTARGET = feature_sample\n\nall: $(TARGET)\n\n$(TARGET): main.c src/feature_lib.c ../core/src/core_lib.c\n\t$(CC) $(CFLAGS) -o $(TARGET) main.c src/feature_lib.c ../core/src/core_lib.c\n\nclean:\n\trm -f $(TARGET)\n"
+    }
+  ],
+  "notes": "C library depending on core library, calls core_add, builds with Makefile."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.

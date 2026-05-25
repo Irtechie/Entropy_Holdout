@@ -1,0 +1,13 @@
+{
+  "files": [
+    {
+      "path": "factory-system/src/stations/index.ts",
+      "content": "import { Station, Product, Routing } from '../types';\n\nexport const stationGraph: Station[] = [\n  { id: 'station-1', name: 'Station 1', components: ['comp-a'], capacity: 10, state: 'running' },\n  { id: 'station-2', name: 'Station 2', components: ['comp-b'], capacity: 10, state: 'running' },\n  { id: 'station-3', name: 'Station 3', components: ['comp-c'], capacity: 10, state: 'running' }\n];\n\nexport const routingFlow: Routing = {\n  id: 'route-1',\n  name: 'Main Flow',\n  sequence: ['station-1', 'station-2', 'station-3'],\n  conditions: {}\n};\n\nexport function executeRoute(product: Product, stations: Station[], route: Routing): Product {\n  let result = { ...product, status: 'in_progress' as const };\n  for (const step of route.sequence) {\n    const station = stations.find(s => s.id === step);\n    if (station) {\n      result = { ...result, status: 'in_progress' };\n    }\n  }\n  result.status = 'completed';\n  return result;\n}"
+    },
+    {
+      "path": "factory-system/src/index.ts",
+      "content": "export * from './types';\nexport * from './core/factory';\nexport * from './stations';"
+    }
+  ],
+  "notes": "Added stations module defining a multi-station graph and a routing flow function that transitions a product through stations. Updated main index to export the new module."
+}

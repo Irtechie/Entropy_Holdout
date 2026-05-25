@@ -1,0 +1,8 @@
+{
+  "name": "factory-system",
+  "version": "1.0.0",
+  "description": "Factory project layout with component, station, product, and routing concepts",
+  "main": "dist/index.js",
+  "scripts": { "build": "tsc" },
+  "devDependencies": { "typescript": "^5.0.0" }
+}

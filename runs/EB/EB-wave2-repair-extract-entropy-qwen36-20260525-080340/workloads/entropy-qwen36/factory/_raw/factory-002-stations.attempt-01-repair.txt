@@ -1,0 +1,5 @@
+{
+  "files": [
+    {
+      "path": "factory-system/stations/index.ts",
+      "content": "import { Station, Product, Routing } from '../src/types';\n
