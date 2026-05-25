@@ -1,0 +1,23 @@
+```json
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Home Page</title>\n</head>\n<body>\n    <nav id=\"main-nav\">\n        <a href=\"index.html\">Home</a> | \n        <a href=\"page-2.html\">Page 2</a> | \n        <a href=\"page-3.html\">Page 3</a> | \n        <a href=\"page-4.html\">Page 4</a>\n    </nav>\n    <main>\n        <h1>Welcome to the Home Page</h1>\n        <p>This is the main content area of the website.</p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-2.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 2</title>\n</head>\n<body>\n    <nav id=\"main-nav\">\n        <a href=\"index.html\">Home</a> | \n        <a href=\"page-2.html\">Page 2</a> | \n        <a href=\"page-3.html\">Page 3</a> | \n        <a href=\"page-4.html\">Page 4</a>\n    </nav>\n    <main>\n        <h1>Welcome to Page 2</h1>\n        <p>This is the second page of the website.</p>\n        <p><a href=\"index.html\">Back to Home Page</a></p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-3.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 3</title>\n</head>\n<body>\n    <nav id=\"main-nav\">\n        <a href=\"index.html\">Home</a> | \n        <a href=\"page-2.html\">Page 2</a> | \n        <a href=\"page-3.html\">Page 3</a> | \n        <a href=\"page-4.html\">Page 4</a>\n    </nav>\n    <main>\n        <h1>Welcome to Page 3</h1>\n        <p>This is the third page of the website.</p>\n        <p><a href=\"page-2.html\">Back to Page 2</a></p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-4.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 4</title>\n</head>\n<body>\n    <nav id=\"main-nav\">\n        <a href=\"index.html\">Home</a> | \n        <a href=\"page-2.html\">Page 2</a> | \n        <a href=\"page-3.html\">Page 3</a> | \n        <a href=\"page-4.html\">Page 4</a>\n    </nav>\n    <main>\n        <h1>Welcome to Page 4</h1>\n        <p>This is the fourth page of the website.</p>\n        <p><a href=\"page-3.html\">Back to Page 3</a></p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created page-4.html and implemented a shared navigation menu across all four pages (index, page-2, page-3, page-4)."
+}
+```

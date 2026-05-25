@@ -1,0 +1,13 @@
+{
+  "files": [
+    {
+      "path": "library-chain/core/core.py",
+      "content": "def add(a, b):\n    \"\"\"Adds two numbers together.\"\"\"\n    return a + b\n"
+    },
+    {
+      "path": "library-chain/core/main.py",
+      "content": "from core import add\n\nif __name__ == \"__main__\":\n    result = add(2, 3)\n    print(f\"Result: {result}\")\n"
+    }
+  ],
+  "notes": "Created a basic core library with a single public function 'add' and a sample caller in main.py."
+}

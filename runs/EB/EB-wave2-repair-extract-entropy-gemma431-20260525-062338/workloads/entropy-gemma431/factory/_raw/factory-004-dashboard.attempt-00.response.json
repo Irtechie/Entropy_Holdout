@@ -1,0 +1,34 @@
+{
+  "choices": [
+    {
+      "text": "\n\n---END FILE---\n```json\n{\n  \"files\": [\n    {\n      \"path\": \"factory-system/config/index.ts\",\n      \"content\": \"import { Station, Product, Routing } from '../src/types';\\n\\nexport const factoryConfig = {\\n  stations: [\\n    { id: 'st-1', name: 'Assembly Station', capabilities: ['assemble'], status: 'idle' },\\n    { id: 'st-2', name: 'Testing Station', capabilities: ['test'], status: 'idle' },\\n    { id: 'st-3', name: 'Packaging Station', capabilities: ['package'], status: 'idle' },\\n  ],\\n  sampleProduct: {\\n    id: 'prod-101',\\n    sku: 'WIDGET-X1',\\n    name: 'Industrial Widget',\\n    requiredComponents: ['comp-a', 'comp-b'],\\n  },\\n  sampleRouting: {\\n    productId: 'prod-101',\\n    steps: [\\n      { stationId: 'st-1', operation: 'assemble', sequence: 1 },\\n      { stationId: 'st-2', operation: 'test', sequence: 2 },\\n      { stationId: 'st-3', operation: 'package', sequence: 3 },\\n    ],\\n  },\\n};\"\n    },\n    {\n      \"path\": \"factory-system/stations/registry.ts\",\n      \"content\": \"import { factoryConfig } from '../config';\\n\\nexport const stations = factoryConfig.stations;\\nexport const sampleProduct = factoryConfig.sampleProduct;\\nexport const sampleRouting = factoryConfig.sampleRouting;\"\n    },\n    {\n      \"path\": \"factory-system/tsconfig.json\",\n      \"content\": \"{\\n  \\\"compilerOptions\\\": {\\n    \\\"target\\\": \\\"ES2020\\\",\\n    \\\"module\\\": \\\"CommonJS\\\",\\n    \\\"outDir\\\": \\\"./dist\\\",\\n    \\\"rootDir\\\": \\\"./\\\",\\n    \\\"strict\\\": true,\\n    \\\"esModuleInterop\\\": true,\\n    \\\"skipLibCheck\\\": true\\n  },\\n  \\\"include\\\": [\\\"src/**/*\\\", \\\"stations/**/*\\\", \\\"//config/**/*\\\"]\\n}\"\n    }\n  ],\n  \"notes\": \"Moved station definitions and product routing into a new configuration directory (factory-system/config) and updated the registry and tsconfig.json to reference this configuration, preserving end-to-end behavior.\"\n}\n```",
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "created": 1779709417,
+  "model": "gemma-4-31B-it-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "text_completion",
+  "usage": {
+    "completion_tokens": 566,
+    "prompt_tokens": 63105,
+    "total_tokens": 63671,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-Q14RdQibohCk4STBirbRXhBtY2oJcVlQ",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 63105,
+    "prompt_ms": 133773.348,
+    "prompt_per_token_ms": 2.1198533872117897,
+    "prompt_per_second": 471.73073667857966,
+    "predicted_n": 566,
+    "predicted_ms": 73648.038,
+    "predicted_per_token_ms": 130.12020848056537,
+    "predicted_per_second": 7.685201335573936
+  }
+}

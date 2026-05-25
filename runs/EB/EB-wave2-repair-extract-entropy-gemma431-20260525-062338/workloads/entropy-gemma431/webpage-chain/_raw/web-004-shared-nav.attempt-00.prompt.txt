@@ -1,0 +1,844 @@
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-004-shared-nav
+Order: 4
+
+Stage goal:
+Create webpage 4 and add shared navigation across all pages that includes pages 1 through 4.
+
+Expected artifacts:
+- site/page-4.html (html)
+
+Validators that will run:
+- shared-nav-all-pages: failure_class=shared_state
+- page-4-links-page-3: failure_class=link_integrity
+
+Existing generated files:
+FILE: site/index.html
+---BEGIN FILE---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <nav id="main-nav">
+        <!-- Navigation area to be populated in future stages -->
+    </nav>
+    <main>
+        <h1>Welcome to the Home Page</h1>
+        <p>This is the main content area of the website.</p>
+    </main>
+</body>
+</html>
+
+---END FILE---
+
+FILE: site/page-2.html
+---BEGIN FILE---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 2</title>
+</head>
+<body>
+    <nav id="main-nav">
+        <!-- Navigation area -->
+    </nav>
+    <main>
+        <h1>Welcome to Page 2</h1>
+        <p>This is the second page of the website.</p>
+        <p><a href="index.html">Back to Home Page</a></p>
+    </main>
+</body>
+</html>
+
+---END FILE---
+
+FILE: site/page-3.html
+---BEGIN FILE---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 3</title>
+</head>
+<body>
+    <nav id="main-nav">
+        <!-- Navigation area -->
+    </nav>
+    <main>
+        <h1>Welcome to Page 3</h1>
+        <p>This is the third page of the website.</p>
+        <p><a href="page-2.html">Back to Page 2</a></p>
+    </main>
+</body>
+</html>
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-001-home
+Order: 1
+
+Stage goal:
+Create webpage 1 as index.html with a title, main content, and an empty navigation area that can grow later.
+
+Expected artifacts:
+- site/index.html (html)
+
+Validators that will run:
+- file-exists: failure_class=missing_artifact
+- html-parse: failure_class=syntax
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Home Page</title>\\n</head>\\n<body>\\n    <nav id=\\\"main-nav\\\">\\n        <!-- Navigation area to be populated in future stages -->\\n    </nav>\\n    <main>\\n        <h1>Welcome to the Home Page</h1>\\n        <p>This is the main content area of the website.</p>\\n    </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created the initial index.html with a title, main content, and an empty navigation placeholder.\"\n}",
+        "reasoning_content": "*   Workload: `webpage-chain`\n    *   Stage: `web-001-home`\n    *   Goal: Create `site/index.html` with a title, main content, and an empty navigation area.\n    *   Expected Artifacts: `site/index.html`.\n    *   Validators: `file-exists`, `html-parse`.\n\n    *   `site/index.html`\n    *   Needs:\n        *   `<!DOCTYPE html>`\n        *   `<html>`\n        *   `<head>` with `<title>`\n        *   `<body>`\n        *   Navigation area (empty/placeholder)\n        *   Main content area.\n\n    ```html\n    <!DOCTYPE html>\n    <html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n        <title>Home Page</title>\n    </head>\n    <body>\n        <nav id=\"navigation\">\n            <!-- Navigation will grow later -->\n        </nav>\n        <main>\n            <h1>Welcome to the Home Page</h1>\n            <p>This is the main content of the home page.</p>\n        </main>\n    </body>\n    </html>\n    ```\n\n    *   Path: `site/index.html`\n    *   Content: The HTML above."
+      }
+    }
+  ],
+  "created": 1779704714,
+  "model": "gemma-4-31B-it-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 521,
+    "prompt_tokens": 263,
+    "total_tokens": 784,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-B7dqXK1T0IRwaA93RrcLEW5aWrhHTt30",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 263,
+    "prompt_ms": 602.007,
+    "prompt_per_token_ms": 2.2889999999999997,
+    "prompt_per_second": 436.8719965050241,
+    "predicted_n": 521,
+    "predicted_ms": 51976.604,
+    "predicted_per_token_ms": 99.76315547024952,
+    "predicted_per_second": 10.023740681480461
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Home Page</title>\n</head>\n<body>\n    <nav id=\"main-nav\">\n        <!-- Navigation area to be populated in future stages -->\n    </nav>\n    <main>\n        <h1>Welcome to the Home Page</h1>\n        <p>This is the main content area of the website.</p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created the initial index.html with a title, main content, and an empty navigation placeholder."
+}
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-002-backlink
+Order: 2
+
+Stage goal:
+Create webpage 2 and link it back to page 1 without breaking page 1.
+
+Expected artifacts:
+- site/page-2.html (html)
+
+Validators that will run:
+- page-2-links-index: failure_class=link_integrity
+- all-html-parse: failure_class=syntax
+
+Existing generated files:
+FILE: site/index.html
+---BEGIN FILE---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <nav id="main-nav">
+        <!-- Navigation area to be populated in future stages -->
+    </nav>
+    <main>
+        <h1>Welcome to the Home Page</h1>
+        <p>This is the main content area of the website.</p>
+    </main>
+</body>
+</html>
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-001-home
+Order: 1
+
+Stage goal:
+Create webpage 1 as index.html with a title, main content, and an empty navigation area that can grow later.
+
+Expected artifacts:
+- site/index.html (html)
+
+Validators that will run:
+- file-exists: failure_class=missing_artifact
+- html-parse: failure_class=syntax
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Home Page</title>\\n</head>\\n<body>\\n    <nav id=\\\"main-nav\\\">\\n        <!-- Navigation area to be populated in future stages -->\\n    </nav>\\n    <main>\\n        <h1>Welcome to the Home Page</h1>\\n        <p>This is the main content area of the website.</p>\\n    </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created the initial index.html with a title, main content, and an empty navigation placeholder.\"\n}",
+        "reasoning_content": "*   Workload: `webpage-chain`\n    *   Stage: `web-001-home`\n    *   Goal: Create `site/index.html` with a title, main content, and an empty navigation area.\n    *   Expected Artifacts: `site/index.html`.\n    *   Validators: `file-exists`, `html-parse`.\n\n    *   `site/index.html`\n    *   Needs:\n        *   `<!DOCTYPE html>`\n        *   `<html>`\n        *   `<head>` with `<title>`\n        *   `<body>`\n        *   Navigation area (empty/placeholder)\n        *   Main content area.\n\n    ```html\n    <!DOCTYPE html>\n    <html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n        <title>Home Page</title>\n    </head>\n    <body>\n        <nav id=\"navigation\">\n            <!-- Navigation will grow later -->\n        </nav>\n        <main>\n            <h1>Welcome to the Home Page</h1>\n            <p>This is the main content of the home page.</p>\n        </main>\n    </body>\n    </html>\n    ```\n\n    *   Path: `site/index.html`\n    *   Content: The HTML above."
+      }
+    }
+  ],
+  "created": 1779704714,
+  "model": "gemma-4-31B-it-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 521,
+    "prompt_tokens": 263,
+    "total_tokens": 784,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-B7dqXK1T0IRwaA93RrcLEW5aWrhHTt30",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 263,
+    "prompt_ms": 602.007,
+    "prompt_per_token_ms": 2.2889999999999997,
+    "prompt_per_second": 436.8719965050241,
+    "predicted_n": 521,
+    "predicted_ms": 51976.604,
+    "predicted_per_token_ms": 99.76315547024952,
+    "predicted_per_second": 10.023740681480461
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Home Page</title>\n</head>\n<body>\n    <nav id=\"main-nav\">\n        <!-- Navigation area to be populated in future stages -->\n    </nav>\n    <main>\n        <h1>Welcome to the Home Page</h1>\n        <p>This is the main content area of the website.</p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created the initial index.html with a title, main content, and an empty navigation placeholder."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/page-2.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Page 2</title>\\n</head>\\n<body>\\n    <nav id=\\\"main-nav\\\">\\n        <!-- Navigation area -->\\n    </nav>\\n    <main>\\n        <h1>Welcome to Page 2</h1>\\n        <p>This is the second page of the website.</p>\\n        <p><a href=\\\"index.html\\\">Back to Home Page</a></p>\\n    </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created site/page-2.html with a backlink to site/index.html.\"\n}",
+        "reasoning_content": "*   Workload: `webpage-chain`\n    *   Stage: `web-002-backlink`\n    *   Order: 2\n    *   Goal: Create `site/page-2.html` and link it back to `site/index.html` without breaking `site/index.html`.\n    *   Expected Artifacts: `site/page-2.html`.\n    *   Validators: `page-2-links-index` (link integrity), `all-html-parse` (syntax).\n\n    *   `site/index.html` exists.\n    *   It has a basic structure: `<!DOCTYPE html>`, `<html>`, `<head>`, `<body>`, `<nav id=\"main-nav\">`, `<main>`.\n\n    *   Create `site/page-2.html`.\n    *   Include a link to `index.html`.\n    *   Ensure the HTML is valid.\n\n    *   Path: `site/page-2.html`\n    *   Content:\n        ```html\n        <!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n            <meta charset=\"UTF-8\">\n            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n            <title>Page 2</title>\n        </head>\n        <body>\n            <nav id=\"main-nav\">\n                <!-- Navigation area -->\n            </nav>\n            <main>\n                <h1>Welcome to Page 2</h1>\n                <p>This is the second page of the website.</p>\n                <a href=\"index.html\">Back to Home Page</a>\n            </main>\n        </body>\n        </html>\n        ```\n\n    *   `page-2-links-index`: The link `<a href=\"index.html\">` correctly points to the home page.\n    *   `all-html-parse`: The HTML is standard and valid.\n    *   \"without breaking page 1\": I am not modifying `site/index.html`, so it remains intact.\n\n    *   `files`: Array containing the object for `site/page-2.html`.\n    *   `notes`: Short description."
+      }
+    }
+  ],
+  "created": 1779704792,
+  "model": "gemma-4-31B-it-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 708,
+    "prompt_tokens": 1972,
+    "total_tokens": 2680,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-dq9DaieeZIcgnrdd2OY0SLfJaL6x0Je4",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 1972,
+    "prompt_ms": 3689.778,
+    "prompt_per_token_ms": 1.8710841784989858,
+    "prompt_per_second": 534.4494980456819,
+    "predicted_n": 708,
+    "predicted_ms": 73335.806,
+    "predicted_per_token_ms": 103.58164689265536,
+    "predicted_per_second": 9.654219931802482
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "site/page-2.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 2</title>\n</head>\n<body>\n    <nav id=\"main-nav\">\n        <!-- Navigation area -->\n    </nav>\n    <main>\n        <h1>Welcome to Page 2</h1>\n        <p>This is the second page of the website.</p>\n        <p><a href=\"index.html\">Back to Home Page</a></p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created site/page-2.html with a backlink to site/index.html."
+}
+
+---END FILE---
+
+FILE: _raw/web-003-chain-link.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-003-chain-link
+Order: 3
+
+Stage goal:
+Create webpage 3 and link it back to page 2 while preserving the existing page 1 and page 2 links.
+
+Expected artifacts:
+- site/page-3.html (html)
+
+Validators that will run:
+- page-3-links-page-2: failure_class=link_integrity
+- previous-links-preserved: failure_class=link_integrity
+
+Existing generated files:
+FILE: site/index.html
+---BEGIN FILE---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <nav id="main-nav">
+        <!-- Navigation area to be populated in future stages -->
+    </nav>
+    <main>
+        <h1>Welcome to the Home Page</h1>
+        <p>This is the main content area of the website.</p>
+    </main>
+</body>
+</html>
+
+---END FILE---
+
+FILE: site/page-2.html
+---BEGIN FILE---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 2</title>
+</head>
+<body>
+    <nav id="main-nav">
+        <!-- Navigation area -->
+    </nav>
+    <main>
+        <h1>Welcome to Page 2</h1>
+        <p>This is the second page of the website.</p>
+        <p><a href="index.html">Back to Home Page</a></p>
+    </main>
+</body>
+</html>
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-001-home
+Order: 1
+
+Stage goal:
+Create webpage 1 as index.html with a title, main content, and an empty navigation area that can grow later.
+
+Expected artifacts:
+- site/index.html (html)
+
+Validators that will run:
+- file-exists: failure_class=missing_artifact
+- html-parse: failure_class=syntax
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Home Page</title>\\n</head>\\n<body>\\n    <nav id=\\\"main-nav\\\">\\n        <!-- Navigation area to be populated in future stages -->\\n    </nav>\\n    <main>\\n        <h1>Welcome to the Home Page</h1>\\n        <p>This is the main content area of the website.</p>\\n    </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created the initial index.html with a title, main content, and an empty navigation placeholder.\"\n}",
+        "reasoning_content": "*   Workload: `webpage-chain`\n    *   Stage: `web-001-home`\n    *   Goal: Create `site/index.html` with a title, main content, and an empty navigation area.\n    *   Expected Artifacts: `site/index.html`.\n    *   Validators: `file-exists`, `html-parse`.\n\n    *   `site/index.html`\n    *   Needs:\n        *   `<!DOCTYPE html>`\n        *   `<html>`\n        *   `<head>` with `<title>`\n        *   `<body>`\n        *   Navigation area (empty/placeholder)\n        *   Main content area.\n\n    ```html\n    <!DOCTYPE html>\n    <html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n        <title>Home Page</title>\n    </head>\n    <body>\n        <nav id=\"navigation\">\n            <!-- Navigation will grow later -->\n        </nav>\n        <main>\n            <h1>Welcome to the Home Page</h1>\n            <p>This is the main content of the home page.</p>\n        </main>\n    </body>\n    </html>\n    ```\n\n    *   Path: `site/index.html`\n    *   Content: The HTML above."
+      }
+    }
+  ],
+  "created": 1779704714,
+  "model": "gemma-4-31B-it-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 521,
+    "prompt_tokens": 263,
+    "total_tokens": 784,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-B7dqXK1T0IRwaA93RrcLEW5aWrhHTt30",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 263,
+    "prompt_ms": 602.007,
+    "prompt_per_token_ms": 2.2889999999999997,
+    "prompt_per_second": 436.8719965050241,
+    "predicted_n": 521,
+    "predicted_ms": 51976.604,
+    "predicted_per_token_ms": 99.76315547024952,
+    "predicted_per_second": 10.023740681480461
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Home Page</title>\n</head>\n<body>\n    <nav id=\"main-nav\">\n        <!-- Navigation area to be populated in future stages -->\n    </nav>\n    <main>\n        <h1>Welcome to the Home Page</h1>\n        <p>This is the main content area of the website.</p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created the initial index.html with a title, main content, and an empty navigation placeholder."
+}
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-002-backlink
+Order: 2
+
+Stage goal:
+Create webpage 2 and link it back to page 1 without breaking page 1.
+
+Expected artifacts:
+- site/page-2.html (html)
+
+Validators that will run:
+- page-2-links-index: failure_class=link_integrity
+- all-html-parse: failure_class=syntax
+
+Existing generated files:
+FILE: site/index.html
+---BEGIN FILE---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <nav id="main-nav">
+        <!-- Navigation area to be populated in future stages -->
+    </nav>
+    <main>
+        <h1>Welcome to the Home Page</h1>
+        <p>This is the main content area of the website.</p>
+    </main>
+</body>
+</html>
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: webpage-chain
+Stage: web-001-home
+Order: 1
+
+Stage goal:
+Create webpage 1 as index.html with a title, main content, and an empty navigation area that can grow later.
+
+Expected artifacts:
+- site/index.html (html)
+
+Validators that will run:
+- file-exists: failure_class=missing_artifact
+- html-parse: failure_class=syntax
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Home Page</title>\\n</head>\\n<body>\\n    <nav id=\\\"main-nav\\\">\\n        <!-- Navigation area to be populated in future stages -->\\n    </nav>\\n    <main>\\n        <h1>Welcome to the Home Page</h1>\\n        <p>This is the main content area of the website.</p>\\n    </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created the initial index.html with a title, main content, and an empty navigation placeholder.\"\n}",
+        "reasoning_content": "*   Workload: `webpage-chain`\n    *   Stage: `web-001-home`\n    *   Goal: Create `site/index.html` with a title, main content, and an empty navigation area.\n    *   Expected Artifacts: `site/index.html`.\n    *   Validators: `file-exists`, `html-parse`.\n\n    *   `site/index.html`\n    *   Needs:\n        *   `<!DOCTYPE html>`\n        *   `<html>`\n        *   `<head>` with `<title>`\n        *   `<body>`\n        *   Navigation area (empty/placeholder)\n        *   Main content area.\n\n    ```html\n    <!DOCTYPE html>\n    <html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n        <title>Home Page</title>\n    </head>\n    <body>\n        <nav id=\"navigation\">\n            <!-- Navigation will grow later -->\n        </nav>\n        <main>\n            <h1>Welcome to the Home Page</h1>\n            <p>This is the main content of the home page.</p>\n        </main>\n    </body>\n    </html>\n    ```\n\n    *   Path: `site/index.html`\n    *   Content: The HTML above."
+      }
+    }
+  ],
+  "created": 1779704714,
+  "model": "gemma-4-31B-it-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 521,
+    "prompt_tokens": 263,
+    "total_tokens": 784,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-B7dqXK1T0IRwaA93RrcLEW5aWrhHTt30",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 263,
+    "prompt_ms": 602.007,
+    "prompt_per_token_ms": 2.2889999999999997,
+    "prompt_per_second": 436.8719965050241,
+    "predicted_n": 521,
+    "predicted_ms": 51976.604,
+    "predicted_per_token_ms": 99.76315547024952,
+    "predicted_per_second": 10.023740681480461
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-001-home.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Home Page</title>\n</head>\n<body>\n    <nav id=\"main-nav\">\n        <!-- Navigation area to be populated in future stages -->\n    </nav>\n    <main>\n        <h1>Welcome to the Home Page</h1>\n        <p>This is the main content area of the website.</p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created the initial index.html with a title, main content, and an empty navigation placeholder."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/page-2.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Page 2</title>\\n</head>\\n<body>\\n    <nav id=\\\"main-nav\\\">\\n        <!-- Navigation area -->\\n    </nav>\\n    <main>\\n        <h1>Welcome to Page 2</h1>\\n        <p>This is the second page of the website.</p>\\n        <p><a href=\\\"index.html\\\">Back to Home Page</a></p>\\n    </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created site/page-2.html with a backlink to site/index.html.\"\n}",
+        "reasoning_content": "*   Workload: `webpage-chain`\n    *   Stage: `web-002-backlink`\n    *   Order: 2\n    *   Goal: Create `site/page-2.html` and link it back to `site/index.html` without breaking `site/index.html`.\n    *   Expected Artifacts: `site/page-2.html`.\n    *   Validators: `page-2-links-index` (link integrity), `all-html-parse` (syntax).\n\n    *   `site/index.html` exists.\n    *   It has a basic structure: `<!DOCTYPE html>`, `<html>`, `<head>`, `<body>`, `<nav id=\"main-nav\">`, `<main>`.\n\n    *   Create `site/page-2.html`.\n    *   Include a link to `index.html`.\n    *   Ensure the HTML is valid.\n\n    *   Path: `site/page-2.html`\n    *   Content:\n        ```html\n        <!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n            <meta charset=\"UTF-8\">\n            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n            <title>Page 2</title>\n        </head>\n        <body>\n            <nav id=\"main-nav\">\n                <!-- Navigation area -->\n            </nav>\n            <main>\n                <h1>Welcome to Page 2</h1>\n                <p>This is the second page of the website.</p>\n                <a href=\"index.html\">Back to Home Page</a>\n            </main>\n        </body>\n        </html>\n        ```\n\n    *   `page-2-links-index`: The link `<a href=\"index.html\">` correctly points to the home page.\n    *   `all-html-parse`: The HTML is standard and valid.\n    *   \"without breaking page 1\": I am not modifying `site/index.html`, so it remains intact.\n\n    *   `files`: Array containing the object for `site/page-2.html`.\n    *   `notes`: Short description."
+      }
+    }
+  ],
+  "created": 1779704792,
+  "model": "gemma-4-31B-it-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 708,
+    "prompt_tokens": 1972,
+    "total_tokens": 2680,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-dq9DaieeZIcgnrdd2OY0SLfJaL6x0Je4",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 1972,
+    "prompt_ms": 3689.778,
+    "prompt_per_token_ms": 1.8710841784989858,
+    "prompt_per_second": 534.4494980456819,
+    "predicted_n": 708,
+    "predicted_ms": 73335.806,
+    "predicted_per_token_ms": 103.58164689265536,
+    "predicted_per_second": 9.654219931802482
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-002-backlink.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "site/page-2.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 2</title>\n</head>\n<body>\n    <nav id=\"main-nav\">\n        <!-- Navigation area -->\n    </nav>\n    <main>\n        <h1>Welcome to Page 2</h1>\n        <p>This is the second page of the website.</p>\n        <p><a href=\"index.html\">Back to Home Page</a></p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created site/page-2.html with a backlink to site/index.html."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/web-003-chain-link.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/page-3.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Page 3</title>\\n</head>\\n<body>\\n    <nav id=\\\"main-nav\\\">\\n        <!-- Navigation area -->\\n    </nav>\\n    <main>\\n        <h1>Welcome to Page 3</h1>\\n        <p>This is the third page of the website.</p>\\n        <p><a href=\\\"page-2.html\\\">Back to Page 2</a></p>\\n    </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created site/page-3.html with a link back to site/page-2.html, preserving the existing chain.\"\n}",
+        "reasoning_content": "*   Workload: `webpage-chain`\n    *   Stage: `web-003-chain-link`\n    *   Order: 3\n    *   Goal: Create `site/page-3.html` and link it back to `site/page-2.html` while preserving existing links (page 2 -> page 1).\n    *   Expected Artifacts: `site/page-3.html`.\n    *   Validators: `page-3-links-page-2`, `previous-links-preserved`.\n\n    *   `site/index.html`: Home page.\n    *   `site/page-2.html`: Links to `index.html`.\n\n    *   Create `site/page-3.html`.\n    *   Add a link from `site/page-3.html` to `site/page-2.html`.\n    *   Ensure `site/page-2.html` still links to `site/index.html` (since I'm not modifying `page-2.html`, this should be preserved automatically).\n\n    *   Path: `site/page-3.html`\n    *   Content:\n        ```html\n        <!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n            <meta charset=\"UTF-8\">\n            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n            <title>Page 3</title>\n        </head>\n        <body>\n            <nav id=\"main-nav\">\n                <!-- Navigation area -->\n            </nav>\n            <main>\n                <h1>Welcome to Page 3</h1>\n                <p>This is the third page of the website.</p>\n                <p><a href=\"page-2.html\">Back to Page 2</a></p>\n            </main>\n        </body>\n        </html>\n        ```\n\n    *   `page-3-links-page-2`: The link `<a href=\"page-2.html\">` exists in `site/page-3.html`.\n    *   `previous-links-preserved`: `site/page-2.html` still exists and contains the link to `index.html`. Since I am not modifying `site/page-2.html` or `site/index.html`, the existing links are preserved.\n\n    *   Return only the JSON object.\n    *   No prose.\n    *   Relative paths."
+      }
+    }
+  ],
+  "created": 1779704887,
+  "model": "gemma-4-31B-it-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 787,
+    "prompt_tokens": 5649,
+    "total_tokens": 6436,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-eB9T6g9D4eOEzHjZBW7jsq1SRKdpCDTp",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 5649,
+    "prompt_ms": 9848.471,
+    "prompt_per_token_ms": 1.74340077889892,
+    "prompt_per_second": 573.5915757887697,
+    "predicted_n": 787,
+    "predicted_ms": 82776.734,
+    "predicted_per_token_ms": 105.18009402795425,
+    "predicted_per_second": 9.507502434198479
+  }
+}
+
+---END FILE---
+
+FILE: _raw/web-003-chain-link.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "site/page-3.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 3</title>\n</head>\n<body>\n    <nav id=\"main-nav\">\n        <!-- Navigation area -->\n    </nav>\n    <main>\n        <h1>Welcome to Page 3</h1>\n        <p>This is the third page of the website.</p>\n        <p><a href=\"page-2.html\">Back to Page 2</a></p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created site/page-3.html with a link back to site/page-2.html, preserving the existing chain."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.

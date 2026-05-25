@@ -1,0 +1,19 @@
+```json
+{
+  "files": [
+    {
+      "path": "factory-system/config/index.ts",
+      "content": "import { Station, Product, Routing } from '../src/types';\n\nexport const factoryConfig = {\n  stations: [\n    { id: 'st-1', name: 'Assembly Station', capabilities: ['assemble'], status: 'idle' },\n    { id: 'st-2', name: 'Testing Station', capabilities: ['test'], status: 'idle' },\n    { id: 'st-3', name: 'Packaging Station', capabilities: ['package'], status: 'idle' },\n  ],\n  sampleProduct: {\n    id: 'prod-101',\n    sku: 'WIDGET-X1',\n    name: 'Industrial Widget',\n    requiredComponents: ['comp-a', 'comp-b'],\n  },\n  sampleRouting: {\n    productId: 'prod-101',\n    steps: [\n      { stationId: 'st-1', operation: 'assemble', sequence: 1 },\n      { stationId: 'st-2', operation: 'test', sequence: 2 },\n      { stationId: 'st-3', operation: 'package', sequence: 3 },\n    ],\n  },\n};"
+    },
+    {
+      "path": "factory-system/stations/registry.ts",
+      "content": "import { factoryConfig } from '../config';\n\nexport const stations = factoryConfig.stations;\nexport const sampleProduct = factoryConfig.sampleProduct;\nexport const sampleRouting = factoryConfig.sampleRouting;"
+    },
+    {
+      "path": "factory-system/tsconfig.json",
+      "content": "{\n  \"compilerOptions\": {\n    \"target\": \"ES2020\",\n    \"module\": \"CommonJS\",\n    \"outDir\": \"./dist\",\n    \"rootDir\": \"./\",\n    \"strict\": true,\n    \"esModuleInterop\": true,\n    \"skipLibCheck\": true\n  },\n  \"include\": [\"src/**/*\", \"stations/**/*\", \"config/**/*\"]\n}"
+    }
+  ],
+  "notes": "Moved station definitions and product routing into a new configuration directory (factory-system/config) and updated the registry and tsconfig.json to reference this configuration, preserving end-to-end behavior."
+}
+```
