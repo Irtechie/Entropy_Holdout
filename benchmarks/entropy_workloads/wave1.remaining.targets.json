@@ -1,0 +1,73 @@
+{
+  "id": "EB-wave1-remaining-singlebox",
+  "description": "Remaining Wave 1 plain EB single-box targets after EB-local-small plus the 4B tranche.",
+  "harness_mode": "plain",
+  "targets": [
+    {
+      "set_id": "entropy-gptoss20",
+      "slice_id": "slice-003",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-devstral-small2",
+      "slice_id": "slice-004",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-nemotron-cascade-30b",
+      "slice_id": "slice-005",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-gemma431",
+      "slice_id": "slice-006",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-qwen36",
+      "slice_id": "slice-007",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-qwen80next",
+      "slice_id": "slice-008",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-qwen80nextcoder",
+      "slice_id": "slice-009",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-qwen80nextcoder-256k",
+      "slice_id": "slice-010",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-gptoss120",
+      "slice_id": "slice-011",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-nemotron120",
+      "slice_id": "slice-012",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-nemotron3-super-120b",
+      "slice_id": "slice-013",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-qwen35-122b",
+      "slice_id": "slice-014",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-minimax-m27",
+      "slice_id": "slice-015",
+      "enabled": true,
+      "wedge_caution": "Earlier full-context MiniMax attempts could stress the DGX lane. Stop on wedge-risk infrastructure failure."
+    }
+  ]
+}

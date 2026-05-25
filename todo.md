@@ -39,6 +39,12 @@ Manifest: `docs/plans/2026-05-25-000-kb-eb-remaining-singlebox-runs-manifest.md`
 
 Wave 1 baseline rule: run `plain` EB per target, one folder per target, commit/push after each. Repair LLMCommune/model-serving issues when safe; do not repair generated model output inside Wave 1.
 
+Overnight runner:
+
+```powershell
+pwsh .\tools\run_eb_target_queue.ps1 -QueuePath .\benchmarks\entropy_workloads\wave1.remaining.targets.json -CommitEach -PushEach -SkipCompleted
+```
+
 | # | Slice | Blocked By | Verification | Status |
 |---|-------|------------|--------------|--------|
 | 1 | entropy-gemma4-e4b | - | functional-cli | ✅ done |
