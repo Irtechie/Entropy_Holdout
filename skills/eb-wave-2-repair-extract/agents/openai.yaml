@@ -1,0 +1,4 @@
+interface:
+  display_name: "EB Wave 2 Repair Extract"
+  short_description: "Run EB Wave 2 with model-driven repair-extract retries."
+  default_prompt: "Run EB Wave 2 repair-extract with full repair evidence and failure-origin classification."

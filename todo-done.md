@@ -47,6 +47,18 @@ First-pass origin counts:
 
 The audits make completed data runs distinct from clean benchmark datapoints.
 
+## 2026-05-25 - EB Wave Skills Versioned
+
+Created global Codex skills and versioned copies in the repo:
+
+```text
+skills/eb-wave-runner/
+skills/eb-wave-1-plain/
+skills/eb-wave-2-repair-extract/
+```
+
+The skills encode first-principles failure-origin discipline, Wave 1 plain rules, Wave 2 repair-extract rules, and the requirement that LangChain/Langfuse remain pass-through instrumentation unless a later wave explicitly measures them as harness behavior.
+
 ## 2026-05-25 - EB Wave 1 Plain Single-Box Baseline Complete
 
 Completed the full Wave 1 `plain` EB baseline for every single-box target in `llmcommune-entropy-targets.json`.

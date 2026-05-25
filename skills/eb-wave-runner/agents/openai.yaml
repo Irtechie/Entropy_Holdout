@@ -1,0 +1,4 @@
+interface:
+  display_name: "EB Wave Runner"
+  short_description: "Run EB waves with failure-origin discipline."
+  default_prompt: "Run this EB benchmark wave with first-principles failure classification and reproducible evidence."

@@ -14,7 +14,7 @@ Build and run Entropy staged code-generation benchmark workloads to measure how 
 
 ## Current Focus
 
-Wave 2 repair-extract EB is complete for all single-box targets. Wave 1 and Wave 2 results are saved under `runs/EB/`.
+Wave 1 and Wave 2 are complete as first-pass data. The next focus is a clean reproducible rerun with versioned EB skills and pass-through LangChain/Langfuse instrumentation.
 
 ## Current Truth
 
@@ -32,11 +32,19 @@ Wave 2 repair-extract EB is complete for all single-box targets. Wave 1 and Wave
 
 ## Active Work
 
-No active KB manifest is currently running.
+Prepare the clean EB rerun harness:
+
+- Preserve current GitHub history and run evidence; do not delete current Wave 1/Wave 2 data as part of cleanup.
+- Version the exact EB skills used for the run under `skills/`.
+- Add LangChain as behavior-pass-through workflow structure only: same prompts, same model endpoint/options, same call count, same raw responses.
+- Add Langfuse capture for traces, timings, token metrics, prompt/response evidence, and per-run sections.
+- Rerun Wave 1 and Wave 2 into new run prefixes after the instrumented harness is committed.
 
 ## Queued Improvements
 
 - Compare Wave 2 against Wave 1 by target/workload using right-shift deltas.
+- Add pass-through LangChain/Langfuse instrumentation without changing benchmark behavior.
+- Package each wave harness so a third party can clone the repo, replace the model-serving backend or harness under test, and rerun the same wave.
 - Add harness modes beyond `mock`/`plain`: likely `repair-extract`, `file-carry`, and `entropy`.
 - Decide whether later large generated artifacts should be retained per real run or compacted after validation. Current EB default is retain.
 

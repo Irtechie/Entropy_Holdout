@@ -1,0 +1,4 @@
+interface:
+  display_name: "EB Wave 1 Plain"
+  short_description: "Run EB Wave 1 plain baseline without output repair."
+  default_prompt: "Run EB Wave 1 plain baseline with strict failure-origin classification."
