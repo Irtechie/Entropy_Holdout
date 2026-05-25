@@ -1,0 +1,12 @@
+[package]
+name = "library-chain-feature"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "library_chain_feature"
+path = "src/lib.rs"
+
+[dependencies]
+library-chain-core = { path = "../core" }
+library-chain-contracts = { path = "../contracts" }

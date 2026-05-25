@@ -1,0 +1,33 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/contracts/mod.rs\",\n      \"content\": \"pub trait SharedContract {\\n    fn shared_function(&self) -> String;\\n}\"\n    },\n    {\n      \"path\": \"library-chain/contracts/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"library-chain-contracts\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[lib]\\nname = \\\"library_chain_contracts\\\"\\npath = \\\"src/lib.rs\\\"\\n\\n[dependencies]\"\n    },\n    {\n      \"path\": \"library-chain/core/src/lib.rs\",\n      \"content\": \"use library_chain_contracts::SharedContract;\\n\\npub struct CoreImpl;\\n\\nimpl SharedContract for CoreImpl {\\n    fn shared_function(&self) -> String {\\n        \\\"Hello from core\\\".to_string()\\n    }\\n}\\n\\npub fn core_function() -> String {\\n    CoreImpl {}.shared_function()\\n}\"\n    },\n    {\n      \"path\": \"library-chain/feature/src/lib.rs\",\n      \"content\": \"use library_chain_contracts::SharedContract;\\nuse library_chain_core::CoreImpl;\\n\\npub struct FeatureImpl;\\n\\nimpl SharedContract for FeatureImpl {\\n    fn shared_function(&self) -> String {\\n        let core = CoreImpl {};\\n        format!(\\\"{} and feature\\\", core.shared_function())\\n    }\\n}\\n\\npub fn feature_function() -> String {\\n    FeatureImpl {}.shared_function()\\n}\"\n    },\n    {\n      \"path\": \"library-chain/pipeline/src/lib.rs\",\n      \"content\": \"use library_chain_contracts::SharedContract;\\nuse library_chain_feature::FeatureImpl;\\n\\npub struct PipelineImpl;\\n\\nimpl SharedContract for PipelineImpl {\\n    fn shared_function(&self) -> String {\\n        let feature = FeatureImpl {};\\n        format!(\\\"{} and pipeline\\\", feature.shared_function())\\n    }\\n}\\n\\npub fn pipeline_function() -> String {\\n    PipelineImpl {}.shared_function()\\n}\"\n    },\n    {\n      \"path\": \"library-chain/core/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"library-chain-core\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[lib]\\nname = \\\"library_chain_core\\\"\\npath = \\\"src/lib.rs\\\"\\n\\n[[bin]]\\nname = \\\"core-sample\\\"\\npath = \\\"src/main.rs\\\"\\n\\n[dependencies]\\nlibrary-chain-contracts = { path = \\\"../contracts\\\" }\"\n    },\n    {\n      \"path\": \"library-chain/feature/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"library-chain-feature\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[lib]\\nname = \\\"library_chain_feature\\\"\\npath = \\\"src/lib.rs\\\"\\n\\n[dependencies]\\nlibrary-chain-core = { path = \\\"../core\\\" }\\nlibrary-chain-contracts = { path = \\\"../contracts\\\" }\"\n    },\n    {\n      \"path\": \"library-chain/pipeline/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"library-chain-pipeline\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[lib]\\nname = \\\"library_chain_pipeline\\\"\\npath = \\\"src/lib.rs\\\"\\n\\n[dependencies]\\nlibrary-chain-feature = { path = \\\"../feature\\\" }\\nlibrary-chain-contracts = { path = \\\"../contracts\\\" }\"\n    }\n  ],\n  \"notes\": \"Introduced shared interface contract in library-chain/contracts; updated all three libraries to implement and use it, preserving functionality and dependency chain.\"\n}"
+      }
+    }
+  ],
+  "created": 1779693500,
+  "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 809,
+    "prompt_tokens": 8687,
+    "total_tokens": 9496
+  },
+  "id": "chatcmpl-S5az8X5fGoB1tyZ0tjZdnTT0bArJfqyf",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 8687,
+    "prompt_ms": 8301.721,
+    "prompt_per_token_ms": 0.9556487855416138,
+    "prompt_per_second": 1046.4095336376638,
+    "predicted_n": 809,
+    "predicted_ms": 17703.751,
+    "predicted_per_token_ms": 21.88349938195303,
+    "predicted_per_second": 45.696530639184886
+  }
+}

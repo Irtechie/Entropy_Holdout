@@ -1,0 +1,10 @@
+[package]
+name = "library-chain-contracts"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "library_chain_contracts"
+path = "src/lib.rs"
+
+[dependencies]

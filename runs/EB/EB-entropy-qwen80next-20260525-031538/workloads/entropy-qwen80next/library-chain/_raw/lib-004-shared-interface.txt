@@ -1,0 +1,37 @@
+{
+  "files": [
+    {
+      "path": "library-chain/contracts/mod.rs",
+      "content": "pub trait SharedContract {\n    fn shared_function(&self) -> String;\n}"
+    },
+    {
+      "path": "library-chain/contracts/Cargo.toml",
+      "content": "[package]\nname = \"library-chain-contracts\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\nname = \"library_chain_contracts\"\npath = \"src/lib.rs\"\n\n[dependencies]"
+    },
+    {
+      "path": "library-chain/core/src/lib.rs",
+      "content": "use library_chain_contracts::SharedContract;\n\npub struct CoreImpl;\n\nimpl SharedContract for CoreImpl {\n    fn shared_function(&self) -> String {\n        \"Hello from core\".to_string()\n    }\n}\n\npub fn core_function() -> String {\n    CoreImpl {}.shared_function()\n}"
+    },
+    {
+      "path": "library-chain/feature/src/lib.rs",
+      "content": "use library_chain_contracts::SharedContract;\nuse library_chain_core::CoreImpl;\n\npub struct FeatureImpl;\n\nimpl SharedContract for FeatureImpl {\n    fn shared_function(&self) -> String {\n        let core = CoreImpl {};\n        format!(\"{} and feature\", core.shared_function())\n    }\n}\n\npub fn feature_function() -> String {\n    FeatureImpl {}.shared_function()\n}"
+    },
+    {
+      "path": "library-chain/pipeline/src/lib.rs",
+      "content": "use library_chain_contracts::SharedContract;\nuse library_chain_feature::FeatureImpl;\n\npub struct PipelineImpl;\n\nimpl SharedContract for PipelineImpl {\n    fn shared_function(&self) -> String {\n        let feature = FeatureImpl {};\n        format!(\"{} and pipeline\", feature.shared_function())\n    }\n}\n\npub fn pipeline_function() -> String {\n    PipelineImpl {}.shared_function()\n}"
+    },
+    {
+      "path": "library-chain/core/Cargo.toml",
+      "content": "[package]\nname = \"library-chain-core\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\nname = \"library_chain_core\"\npath = \"src/lib.rs\"\n\n[[bin]]\nname = \"core-sample\"\npath = \"src/main.rs\"\n\n[dependencies]\nlibrary-chain-contracts = { path = \"../contracts\" }"
+    },
+    {
+      "path": "library-chain/feature/Cargo.toml",
+      "content": "[package]\nname = \"library-chain-feature\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\nname = \"library_chain_feature\"\npath = \"src/lib.rs\"\n\n[dependencies]\nlibrary-chain-core = { path = \"../core\" }\nlibrary-chain-contracts = { path = \"../contracts\" }"
+    },
+    {
+      "path": "library-chain/pipeline/Cargo.toml",
+      "content": "[package]\nname = \"library-chain-pipeline\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\nname = \"library_chain_pipeline\"\npath = \"src/lib.rs\"\n\n[dependencies]\nlibrary-chain-feature = { path = \"../feature\" }\nlibrary-chain-contracts = { path = \"../contracts\" }"
+    }
+  ],
+  "notes": "Introduced shared interface contract in library-chain/contracts; updated all three libraries to implement and use it, preserving functionality and dependency chain."
+}

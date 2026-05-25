@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "site/page-4.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 4</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Home</a>\n        <a href=\"page-2.html\">Page 2</a>\n        <a href=\"page-3.html\">Page 3</a>\n    </nav>\n    <main>\n        <h1>Welcome to Page 4</h1>\n        <p>This is the content of page 4, linked back to page 3.</p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created page-4.html with shared navigation linking to all previous pages (1-3), maintaining consistency across the site."
+}

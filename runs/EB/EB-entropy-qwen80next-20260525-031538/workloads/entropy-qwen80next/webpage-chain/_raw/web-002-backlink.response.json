@@ -1,0 +1,33 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/page-2.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Page 2</title>\\n</head>\\n<body>\\n    <nav>\\n        <a href=\\\"index.html\\\">Home</a>\\n    </nav>\\n    <main>\\n        <h1>Welcome to Page 2</h1>\\n        <p>This is the content of page 2, linked back to the home page.</p>\\n    </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created page-2.html with a link back to index.html without modifying page 1.\"\n}"
+      }
+    }
+  ],
+  "created": 1779693406,
+  "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 192,
+    "prompt_tokens": 1312,
+    "total_tokens": 1504
+  },
+  "id": "chatcmpl-1AwgRilhhbv1BixrRn2jNqjmAn2NEWD9",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 1312,
+    "prompt_ms": 1322.004,
+    "prompt_per_token_ms": 1.007625,
+    "prompt_per_second": 992.4327006574867,
+    "predicted_n": 192,
+    "predicted_ms": 3917.957,
+    "predicted_per_token_ms": 20.406026041666667,
+    "predicted_per_second": 49.00513201140288
+  }
+}

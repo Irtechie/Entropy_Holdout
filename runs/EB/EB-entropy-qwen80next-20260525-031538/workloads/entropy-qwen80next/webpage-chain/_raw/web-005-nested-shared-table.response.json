@@ -1,0 +1,33 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/page-5.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Page 5</title>\\n</head>\\n<body>\\n    <nav>\\n        <a href=\\\"index.html\\\">Home</a>\\n        <a href=\\\"page-2.html\\\">Page 2</a>\\n        <a href=\\\"page-3.html\\\">Page 3</a>\\n        <a href=\\\"page-4.html\\\">Page 4</a>\\n    </nav>\\n    <main>\\n        <h1>Welcome to Page 5</h1>\\n        <p>This is the content of page 5, linked back to page 4.</p>\\n        <section id=\\\"shared-data-table\\\">\\n            <h2>Shared Data Table</h2>\\n            <table border=\\\"1\\\">\\n                <thead>\\n                    <tr>\\n                        <th>Item</th>\\n                        <th>Value</th>\\n                        <th>Status</th>\\n                    </tr>\\n                </thead>\\n                <tbody>\\n                    <tr>\\n                        <td>Alpha</td>\\n                        <td>100</td>\\n                        <td>Active</td>\\n                    </tr>\\n                    <tr>\\n                        <td>Beta</td>\\n                        <td>200</td>\\n                        <td>Active</td>\\n                    </tr>\\n                    <tr>\\n                        <td>Gamma</td>\\n                        <td>300</td>\\n                        <td>Inactive</td>\\n                    </tr>\\n                </tbody>\\n            </table>\\n        </section>\\n    </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created page-5.html with shared navigation consistent across all pages and a shared nested table for consistent data display across the site.\"\n}"
+      }
+    }
+  ],
+  "created": 1779693455,
+  "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 464,
+    "prompt_tokens": 17486,
+    "total_tokens": 17950
+  },
+  "id": "chatcmpl-ryrW8zcllhZo4bZPoyhwDjSrQWT0y8Or",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 17486,
+    "prompt_ms": 16709.213,
+    "prompt_per_token_ms": 0.9555766327347592,
+    "prompt_per_second": 1046.488544972166,
+    "predicted_n": 464,
+    "predicted_ms": 10674.811,
+    "predicted_per_token_ms": 23.00605818965517,
+    "predicted_per_second": 43.46681173090559
+  }
+}
