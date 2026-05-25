@@ -32,7 +32,30 @@ Mock/local EB harness is complete. Serial real-model experiment pattern is in pl
 
 ## Active Work
 
-No active KB manifest is currently running.
+### EB Remaining Single-Box Runs (kb-2026-05-25-eb-remaining-singlebox-runs)
+
+Source: `todo.md`
+Manifest: `docs/plans/2026-05-25-000-kb-eb-remaining-singlebox-runs-manifest.md`
+
+Wave 2 baseline rule: run `plain` EB per target, one folder per target, commit/push after each. Repair LLMCommune/model-serving issues when safe; do not repair generated model output inside Wave 2.
+
+| # | Slice | Blocked By | Verification | Status |
+|---|-------|------------|--------------|--------|
+| 1 | entropy-gemma4-e4b | - | functional-cli | ⬜ pending |
+| 2 | entropy-qwen35-4b | - | functional-cli | ⬜ pending |
+| 3 | entropy-gptoss20 | - | functional-cli | ⬜ pending |
+| 4 | entropy-devstral-small2 | - | functional-cli | ⬜ pending |
+| 5 | entropy-nemotron-cascade-30b | - | functional-cli | ⬜ pending |
+| 6 | entropy-gemma431 | - | functional-cli | ⬜ pending |
+| 7 | entropy-qwen36 | - | functional-cli | ⬜ pending |
+| 8 | entropy-qwen80next | - | functional-cli | ⬜ pending |
+| 9 | entropy-qwen80nextcoder | - | functional-cli | ⬜ pending |
+| 10 | entropy-qwen80nextcoder-256k | - | functional-cli | ⬜ pending |
+| 11 | entropy-gptoss120 | - | functional-cli | ⬜ pending |
+| 12 | entropy-nemotron120 | - | functional-cli | ⬜ pending |
+| 13 | entropy-nemotron3-super-120b | - | functional-cli | ⬜ pending |
+| 14 | entropy-qwen35-122b | - | functional-cli | ⬜ pending |
+| 15 | entropy-minimax-m27 | - | functional-cli | ⬜ pending |
 
 ## Queued Improvements
 
