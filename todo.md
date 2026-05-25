@@ -32,6 +32,7 @@ Wave 1 EB-LC has completed as the clean reproducible LangChain/Langfuse baseline
 - Each EB run folder keeps `run.json`, `events.jsonl`, `results.jsonl`, `critique.md`, `critique.json`, prompts, raw model responses, raw API response JSON, token usage, and generated files.
 - EB-LC Langfuse exports live under each run folder at `langfuse/` and were exported with zero trace-export errors for the completed Wave 1 folders.
 - `entropy-minimax-m27` has two EB-LC Wave 1 folders. Treat `runs/EB-LC/EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529/` as the cleaner rerun after fixing Windows console JSON escaping in `tools/langchain_completion.py`; keep the earlier `20260525-152457` folder as contamination evidence.
+- EB-LC Wave 1 outcome judgment is documented at `docs/reports/2026-05-25-eb-lc-wave1-outcome-judgment.md`.
 - The archived Wave 1 plain baseline showed the harness working and most model failures were benchmark-output failures, not LLMCommune wedges.
 
 ## Active Work
@@ -87,3 +88,4 @@ pwsh .\tools\run_eb_target_queue.ps1 -QueuePath .\benchmarks\entropy_workloads\w
 - 2026-05-25: Wave 1 EB-LC queue completed and pushed through `entropy-minimax-m27`. `entropy-qwen35-122b` passed webpage-chain 5/5 and failed library/factory on non-JSON output.
 - 2026-05-25: Fixed `tools/langchain_completion.py` to ASCII-escape adapter JSON on Windows, reran `entropy-minimax-m27`, and pushed the cleaner rerun. MiniMax passed webpage stages 1-4, then failed stage 5 on 16K context overflow; library/factory failed on malformed JSON.
 - 2026-05-25: Exported Langfuse traces for 20 EB-LC run folders with zero export errors and committed the export script plus `langfuse/` payloads.
+- 2026-05-25: Judged EB-LC Wave 1 outcomes. Plain EB-LC is usable signal for webpage-chain, but library-chain and factory mostly measure output-contract or harness failure under plain mode.
