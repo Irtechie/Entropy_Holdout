@@ -69,8 +69,9 @@ function Get-ControllerWedgeState {
 function Invoke-GitCommitAndPush($targetSetId, $runRoot) {
   if (-not $CommitEach) { return }
 
-  git -C $repoRoot add -- $runRoot
-  $status = (git -C $repoRoot status --short -- $runRoot)
+  $relativeRunRoot = [System.IO.Path]::GetRelativePath($repoRoot, (Resolve-Path -LiteralPath $runRoot).Path).Replace('\','/')
+  git -C $repoRoot add -- $relativeRunRoot
+  $status = (git -C $repoRoot status --short -- $relativeRunRoot)
   if (-not $status) {
     Write-Host "No staged changes for $targetSetId"
     return
