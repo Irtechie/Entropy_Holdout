@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "exported_at": "2026-05-25T17:37:36.3911663-04:00",
+  "langfuse_host": "http://192.168.1.203:3100",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-rerun2-entropy-qwen80nextcoder-256k-20260525-173146",
+  "results": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-rerun2-entropy-qwen80nextcoder-256k-20260525-173146\\results.jsonl",
+  "row_count": 14,
+  "trace_row_count": 13,
+  "exported_trace_count": 13,
+  "error_count": 0,
+  "errors": []
+}

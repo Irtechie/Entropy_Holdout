@@ -101,7 +101,10 @@ This repo currently has no application source tree. It contains:
 - Active epic: `docs/context/epics/final-eb-test-waves.md`
 - Active manifest: `docs/plans/2026-05-25-000-kb-final-eb-test-waves-manifest.md`
 - Wave 0 model-repair canary judgment: `docs/reports/2026-05-25-eb-lc-wave0-model-repair-canary-judgment.md`
-- Next work: diagnose or quarantine the two Qwen Coder harness-null rows before pilot expansion.
+- Close-failure audit: `docs/reports/2026-05-25-eb-lc-close-failure-audit.md`
+- Local coding model roster research: `docs/context/research/local-coding-model-roster.md`
+- Corrected Qwen Coder rerun: `runs/EB-LC/EB-LC-wave0-model-repair-rerun2-entropy-qwen80nextcoder-256k-20260525-173146/`
+- Next work: freeze a curated final roster and decide whether to add an Unsloth Studio / GLM/Qwen3.6 backend lane before pilot expansion.
 
 ## Known Sharp Edges
 

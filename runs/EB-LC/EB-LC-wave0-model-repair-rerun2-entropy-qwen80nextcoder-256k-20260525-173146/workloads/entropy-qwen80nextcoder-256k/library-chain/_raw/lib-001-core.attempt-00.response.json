@@ -1,0 +1,38 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/CoreLib/CoreLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/CoreLib/CoreLib.cs\",\n      \"content\": \"namespace LibraryChain;\\n\\npublic static class CoreLib\\n{\\n    public static string Process() => \\\"core\\\";\\n}\"\n    },\n    {\n      \"path\": \"library-chain/FeatureLib/FeatureLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"../CoreLib/CoreLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/FeatureLib/FeatureLib.cs\",\n      \"content\": \"namespace LibraryChain;\\n\\npublic static class FeatureLib\\n{\\n    public static string Process() => \\\"feature\\\";\\n}\"\n    },\n    {\n      \"path\": \"library-chain/PipelineLib/PipelineLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"../FeatureLib/FeatureLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/PipelineLib/PipelineLib.cs\",\n      \"content\": \"namespace LibraryChain;\\n\\npublic static class PipelineLib\\n{\\n    public static string Process() => \\\"pipeline\\\";\\n}\"\n    },\n    {\n      \"path\": \"library-chain/Contracts/Contracts.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/Contracts/Contracts.cs\",\n      \"content\": \"namespace LibraryChain;\\n\\npublic static class Contract\\n{\\n    public static string Name => \\\"contract\\\";\\n}\"\n    },\n    {\n      \"path\": \"library-chain/SampleApp/SampleApp.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <OutputType>Exe</OutputType>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"../PipelineLib/PipelineLib.csproj\\\" />\\n    <ProjectReference Include=\\\"../Contracts/Contracts.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/SampleApp/Program.cs\",\n      \"content\": \"using LibraryChain;\\n\\nConsole.WriteLine($\\\"{CoreLib.Process()}->{FeatureLib.Process()}->{PipelineLib.Process()}->{Contract.Name}\\\");\"\n    }\n  ],\n  \"notes\": \"Created CoreLib and supporting libraries for the library-chain benchmark. CoreLib defines the initial 'core' function. SampleApp prints the required output.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 835,
+      "prompt_tokens": 375,
+      "total_tokens": 1210,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    },
+    "model_name": "Qwen3-Coder-Next-Q4_K_M.gguf",
+    "system_fingerprint": "b1-983559d",
+    "id": "chatcmpl-tMi4Vjgf6YZs2WvKmU6kHdEvxW9vsmA4",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 375,
+    "output_tokens": 835,
+    "total_tokens": 1210,
+    "input_token_details": {},
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "de3fbea38972db4017aa863a354cc191",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "model-repair",
+      "langchain",
+      "entropy-qwen80nextcoder-256k",
+      "library-chain"
+    ]
+  }
+}

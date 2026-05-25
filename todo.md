@@ -14,7 +14,7 @@ Build and run Entropy staged code-generation benchmark workloads to measure how 
 
 ## Current Focus
 
-Judge and repair the final EB Wave 0 canary before expanding to a pilot. Wave 1 EB-LC has completed as the clean reproducible LangChain/Langfuse baseline. Wave 1 and Wave 2 direct-run data are archived as historical evidence, not canonical paper evidence.
+Curate the final EB model roster and pilot gate after repairing close Wave 0 canary false negatives. Wave 1 EB-LC has completed as the clean reproducible LangChain/Langfuse baseline. Wave 1 and Wave 2 direct-run data are archived as historical evidence, not canonical paper evidence.
 
 Active epic: `docs/context/epics/final-eb-test-waves.md`
 Active manifest: `docs/plans/2026-05-25-000-kb-final-eb-test-waves-manifest.md`
@@ -50,7 +50,10 @@ Finalize and gate the completed clean EB-LC rerun harness:
 - Do not launch a full Wave 2/final queue until the protocol-freeze manifest reaches the Wave 0 canary slice.
 - Wave 0 model-repair canary completed for `entropy-gptoss20`, `entropy-devstral-small2`, and `entropy-qwen80nextcoder-256k`.
 - Wave 0 judgment: `docs/reports/2026-05-25-eb-lc-wave0-model-repair-canary-judgment.md`
-- Expansion is blocked until the two Qwen Coder harness-null failures are diagnosed or explicitly quarantined.
+- Close-failure audit: `docs/reports/2026-05-25-eb-lc-close-failure-audit.md`
+- Corrected Qwen Coder rerun: `runs/EB-LC/EB-LC-wave0-model-repair-rerun2-entropy-qwen80nextcoder-256k-20260525-173146/`
+- Under the corrected harness/validators, Qwen Coder passes `library-chain` and `factory`; webpage still fails final validation on shared navigation.
+- Next decision: freeze a curated final roster around plausible coding agents plus 1-2 lower-bound small models.
 - Previous full queue command is retained for provenance only, not as the next action:
 
 ```powershell

@@ -1,0 +1,8 @@
+{"ts":"2026-05-25T17:31:47.1496228-04:00","event":"experiment_start","experiment_id":"EB-LC-wave0-model-repair-canary","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
+{"ts":"2026-05-25T17:31:47.1734841-04:00","event":"target_start","set_id":"entropy-qwen80nextcoder-256k","context_tokens":262144}
+{"ts":"2026-05-25T17:31:47.7364313-04:00","event":"target_ready","set_id":"entropy-qwen80nextcoder-256k","activation_status":"skipped","lane_base_url":"http://192.168.1.203:8000","served_model_id":"Qwen3-Coder-Next-Q4_K_M.gguf"}
+{"ts":"2026-05-25T17:33:46.7808752-04:00","event":"workload_failed","set_id":"entropy-qwen80nextcoder-256k","workload":"webpage-chain","error":"webpage-chain validation failed: page page-4.html shared nav is missing page-4.html"}
+{"ts":"2026-05-25T17:35:25.6039460-04:00","event":"workload_done","set_id":"entropy-qwen80nextcoder-256k","workload":"library-chain"}
+{"ts":"2026-05-25T17:36:56.4635706-04:00","event":"workload_done","set_id":"entropy-qwen80nextcoder-256k","workload":"factory"}
+{"ts":"2026-05-25T17:36:56.4648459-04:00","event":"experiment_done","results":".\\runs\\EB-LC\\EB-LC-wave0-model-repair-rerun2-entropy-qwen80nextcoder-256k-20260525-173146\\results.jsonl"}
+{"ts":"2026-05-25T17:36:56.8033171-04:00","event":"critique_written","markdown":".\\runs\\EB-LC\\EB-LC-wave0-model-repair-rerun2-entropy-qwen80nextcoder-256k-20260525-173146\\critique.md","json":".\\runs\\EB-LC\\EB-LC-wave0-model-repair-rerun2-entropy-qwen80nextcoder-256k-20260525-173146\\critique.json"}

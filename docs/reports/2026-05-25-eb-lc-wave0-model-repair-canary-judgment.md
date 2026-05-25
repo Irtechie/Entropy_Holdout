@@ -83,3 +83,16 @@ Before the pilot:
 2. Re-run only the contaminated Qwen Coder canary rows if the fix changes harness behavior.
 3. Keep `entropy-devstral-small2` as the current proof that the benchmark can pass.
 4. Prefer a curated target set over every available model. Drop models that are too small to be plausible coding agents unless the claim explicitly needs the lower bound.
+
+## Follow-Up Correction
+
+Follow-up audit: `docs/reports/2026-05-25-eb-lc-close-failure-audit.md`
+
+After fixing no-op artifact handling and equivalent validator shapes, the corrected Qwen Coder rerun is:
+
+- Run: `runs/EB-LC/EB-LC-wave0-model-repair-rerun2-entropy-qwen80nextcoder-256k-20260525-173146/`
+- `library-chain`: pass.
+- `factory`: pass.
+- `webpage-chain`: final validation fail on a missing `page-4.html` shared-nav self-link.
+
+This supersedes the earlier Qwen Coder harness-null interpretation.
