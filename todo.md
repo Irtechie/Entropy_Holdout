@@ -14,7 +14,7 @@ Build and run Entropy staged code-generation benchmark workloads to measure how 
 
 ## Current Focus
 
-Wave 1 and Wave 2 direct-run data are archived as historical evidence. The next focus is a clean reproducible rerun with versioned EB skills and pass-through LangChain/Langfuse instrumentation.
+Wave 1 EB-LC has completed as the clean reproducible LangChain/Langfuse baseline. Wave 1 and Wave 2 direct-run data are archived as historical evidence, not canonical paper evidence. Next focus is analysis/reporting over the completed EB-LC run folders.
 
 ## Current Truth
 
@@ -28,18 +28,22 @@ Wave 1 and Wave 2 direct-run data are archived as historical evidence. The next 
 - Real model execution pattern is implemented via `tools/run_entropy_serial_experiment.ps1`.
 - Historical direct-run EB folders were removed from active `main` and preserved at git tag `archive/pre-langchain-eb-evidence`.
 - Canonical EB-LC run folders live under `runs/EB-LC/`.
+- Queue logs under `runs/EB-LC/_queue-logs/` are local process logs and should not be committed.
 - Each EB run folder keeps `run.json`, `events.jsonl`, `results.jsonl`, `critique.md`, `critique.json`, prompts, raw model responses, raw API response JSON, token usage, and generated files.
+- EB-LC Langfuse exports live under each run folder at `langfuse/` and were exported with zero trace-export errors for the completed Wave 1 folders.
+- `entropy-minimax-m27` has two EB-LC Wave 1 folders. Treat `runs/EB-LC/EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529/` as the cleaner rerun after fixing Windows console JSON escaping in `tools/langchain_completion.py`; keep the earlier `20260525-152457` folder as contamination evidence.
 - The archived Wave 1 plain baseline showed the harness working and most model failures were benchmark-output failures, not LLMCommune wedges.
 
 ## Active Work
 
-Prepare and run the clean EB-LC rerun harness:
+Analyze the completed clean EB-LC rerun harness:
 
 - LangChain/Langfuse pass-through harness is staged in code.
 - Canonical clean runs must use `runs/EB-LC/`.
 - Preflight command: `pwsh .\tools\check_langchain_langfuse.ps1`.
-- Current blocker: set `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, and `LANGFUSE_HOST` in the shell before launching Wave 1.
-- Wave 1 launch command after preflight passes:
+- Langfuse is configured against the DGX-hosted instance and preflight passes locally.
+- Langfuse traces for completed EB-LC runs are exported with `pwsh .\tools\export_eb_langfuse_traces.ps1`.
+- Re-run command if evidence must be regenerated:
 
 ```powershell
 pwsh .\tools\run_eb_target_queue.ps1 -QueuePath .\benchmarks\entropy_workloads\wave1.langchain.targets.json -ExperimentPath .\benchmarks\entropy_workloads\experiment.langchain-wave1-plain-singlebox.json -ResultRootBase .\runs\EB-LC -CommitEach -PushEach -SkipCompleted
@@ -48,7 +52,6 @@ pwsh .\tools\run_eb_target_queue.ps1 -QueuePath .\benchmarks\entropy_workloads\w
 ## Queued Improvements
 
 - Compare Wave 2 against Wave 1 by target/workload using right-shift deltas.
-- Add pass-through LangChain/Langfuse instrumentation without changing benchmark behavior.
 - Package each wave harness so a third party can clone the repo, replace the model-serving backend or harness under test, and rerun the same wave.
 - Add harness modes beyond `mock`/`plain`: likely `repair-extract`, `file-carry`, and `entropy`.
 - Decide whether later large generated artifacts should be retained per real run or compacted after validation. Current EB default is retain.
@@ -77,5 +80,10 @@ pwsh .\tools\run_eb_target_queue.ps1 -QueuePath .\benchmarks\entropy_workloads\w
 - 2026-05-24: Slice 005 done. Default mock matrix passed: webpage 5/5, library 4/4, factory 4/4.
 - 2026-05-25: First EB small serial experiment completed at `runs/EB/EB-local-small-20260525-012128/`. All 4 small targets failed under `plain` mode; best depth was Gemma E2B reaching webpage stage 4/5 and library stage 3/4 before strict artifact-path failures.
 - 2026-05-25: Wave 2 repair-extract EB completed for all 19 single-box targets. Run folders use prefix `runs/EB/EB-wave2-repair-extract-*`.
-- 2026-05-25: EB-LC LangChain/Langfuse harness added. Preflight is blocked until Langfuse env vars are set.
+- 2026-05-25: EB-LC LangChain/Langfuse harness added. DGX Langfuse keys are loaded from ignored `.env`; `pwsh .\tools\check_langchain_langfuse.ps1` passes.
 - 2026-05-25: Historical direct-run EB evidence and derived reports were archived at tag `archive/pre-langchain-eb-evidence` and removed from active `main` to keep the canonical branch clean.
+- 2026-05-25: Wave 1 EB-LC queue launched with per-target commit/push enabled. Cleanup of old root smoke outputs is ready but should not be staged while the queue is still committing target runs.
+- 2026-05-25: Added EB Langfuse export path to the wave runner skill and exported trace payloads for all completed EB-LC run folders available at the time.
+- 2026-05-25: Wave 1 EB-LC queue completed and pushed through `entropy-minimax-m27`. `entropy-qwen35-122b` passed webpage-chain 5/5 and failed library/factory on non-JSON output.
+- 2026-05-25: Fixed `tools/langchain_completion.py` to ASCII-escape adapter JSON on Windows, reran `entropy-minimax-m27`, and pushed the cleaner rerun. MiniMax passed webpage stages 1-4, then failed stage 5 on 16K context overflow; library/factory failed on malformed JSON.
+- 2026-05-25: Exported Langfuse traces for 20 EB-LC run folders with zero export errors and committed the export script plus `langfuse/` payloads.

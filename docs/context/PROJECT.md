@@ -37,10 +37,11 @@ Serial real-model experiment pattern:
 pwsh .\tools\run_entropy_serial_experiment.ps1 -ExperimentPath .\benchmarks\entropy_workloads\experiment.local-small.json
 ```
 
-Start smaller while proving real generation:
+Canonical EB-LC queue pattern:
 
 ```powershell
-pwsh .\tools\run_entropy_serial_experiment.ps1 -OnlySet entropy-qwen25-coder-05b-large -OnlyWorkload webpage-chain
+pwsh .\tools\run_eb_target_queue.ps1 -QueuePath .\benchmarks\entropy_workloads\wave1.langchain.targets.json -ExperimentPath .\benchmarks\entropy_workloads\experiment.langchain-wave1-plain-singlebox.json -ResultRootBase .\runs\EB-LC -CommitEach -PushEach -SkipCompleted
+pwsh .\tools\export_eb_langfuse_traces.ps1
 ```
 
 ## How To Test
@@ -76,6 +77,8 @@ This repo currently has no application source tree. It contains:
 - `tools/run_entropy_matrix.ps1`: matrix orchestrator.
 - `tools/run_entropy_serial_experiment.ps1`: one-target-at-a-time real experiment runner.
 - `tools/report_entropy_results.ps1`: break-point report summarizer.
+- `tools/langchain_completion.py`: pass-through LangChain/Langfuse completion adapter for EB-LC.
+- `tools/export_eb_langfuse_traces.ps1`: exports Langfuse trace payloads into completed EB-LC run folders.
 - `tools/validators/`: workload validators.
 
 ## Subsystem Index
@@ -84,6 +87,7 @@ This repo currently has no application source tree. It contains:
 |---|---|---|---|
 | Activation smoke runner | `docs/context/operations/testing.md` | Checking existing model readiness proof | verified |
 | Workload benchmark plan | `docs/context/architecture/entropy-workloads.md` | Building the staged generation harness | mixed |
+| EB-LC LangChain/Langfuse harness | `docs/operations/langchain-langfuse-eb.md` | Running/exporting canonical EB-LC evidence | verified |
 | Existing target state | `llmcommune-entropy-smoke-summary.md` | Choosing model/context targets | verified |
 
 ## Current Work Pointers
@@ -91,7 +95,8 @@ This repo currently has no application source tree. It contains:
 - Board: `todo.md`
 - Completed mock harness manifest: `docs/plans/2026-05-24-000-kb-entropy-workload-harness-manifest.md`
 - Completed handoff archive: `docs/handoffs/done/2026-05-24-entropy-workload-harness.md`
-- Next likely work: run the first real serial experiment on `entropy-qwen25-coder-05b-large`.
+- Current canonical data: completed EB-LC Wave 1 run folders under `runs/EB-LC/`, with Langfuse exports under each run's `langfuse/` folder.
+- Next likely work: analyze EB-LC Wave 1 against archived direct-run Wave 1/Wave 2 evidence and produce right-shift deltas.
 
 ## Known Sharp Edges
 
@@ -100,7 +105,8 @@ This repo currently has no application source tree. It contains:
 - Qwen235 128K is not smoke-proven.
 - The factory workload seed/spec may be missing from this checkout.
 - `run_entropy_serial_experiment.ps1` can activate Entropy targets and run workloads in `api` mode one by one.
-- Real API mode is intentionally conservative and should be proven on one small target/workload before broad runs.
+- `run_eb_target_queue.ps1` can run target queues one at a time, commit each completed target folder, and push after each commit.
+- MiniMax EB-LC has two Wave 1 folders. Prefer `runs/EB-LC/EB-LC-wave1-plain-entropy-minimax-m27-20260525-153529/` for analysis because it was rerun after fixing Windows console JSON escaping in `tools/langchain_completion.py`.
 
 ## Research Index
 
