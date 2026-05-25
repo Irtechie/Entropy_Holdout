@@ -1,0 +1,8 @@
+{"ts":"2026-05-25T13:24:10.9932783-04:00","event":"experiment_start","experiment_id":"EB-LC-wave1-plain-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
+{"ts":"2026-05-25T13:24:10.9979609-04:00","event":"target_start","set_id":"entropy-nemotron-cascade-30b","context_tokens":131072}
+{"ts":"2026-05-25T13:24:46.0457442-04:00","event":"target_ready","set_id":"entropy-nemotron-cascade-30b","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"nvidia_Nemotron-Cascade-2-30B-A3B-Q4_K_M.gguf"}
+{"ts":"2026-05-25T13:28:38.4711625-04:00","event":"workload_failed","set_id":"entropy-nemotron-cascade-30b","workload":"webpage-chain","error":"model did not return a JSON object"}
+{"ts":"2026-05-25T13:29:49.7709623-04:00","event":"workload_failed","set_id":"entropy-nemotron-cascade-30b","workload":"library-chain","error":"model did not return a JSON object"}
+{"ts":"2026-05-25T13:31:01.2578052-04:00","event":"workload_failed","set_id":"entropy-nemotron-cascade-30b","workload":"factory","error":"model did not return a JSON object"}
+{"ts":"2026-05-25T13:31:01.2787161-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\results.jsonl"}
+{"ts":"2026-05-25T13:31:01.3113491-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\critique.json"}

@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "benchmark": "EB",
+  "generated_at": "2026-05-25T13:31:01.3048163-04:00",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410",
+  "results_path": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\results.jsonl",
+  "rubric": {
+    "scale": "0-5",
+    "score_meaning": {
+      "0": "No valid stage output or strict output contract failure before code evaluation.",
+      "1": "Only first-stage or minimal artifact progress.",
+      "2": "Some local continuity, but breaks before deeper dependency pressure.",
+      "3": "Meaningful cross-stage progress, but breaks before completing workload invariants.",
+      "4": "All planned generation stages completed, but final validator failed.",
+      "5": "All planned generation stages and final validation passed."
+    },
+    "dimensions": [
+      "output_contract",
+      "artifact_continuity",
+      "dependency_retention",
+      "validator_readiness",
+      "entropy_pressure"
+    ]
+  },
+  "totals": {
+    "target_workload_count": 3,
+    "fully_validated_count": 0,
+    "prompt_tokens": 18043,
+    "completion_tokens": 20207,
+    "total_tokens": 38250
+  },
+  "critiques": [
+    {
+      "target_set_id": "entropy-nemotron-cascade-30b",
+      "model_id": "nvidia_Nemotron-Cascade-2-30B-A3B-Q4_K_M.gguf",
+      "context_tokens": 131072,
+      "harness_mode": "plain",
+      "workload_id": "factory",
+      "planned_stage_count": 4,
+      "stages_seen": 1,
+      "max_pass_stage": 0,
+      "entropy_right_shift": {
+        "passed_stages": 0,
+        "possible_stages": 4,
+        "normalized": 0.0,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "factory-001-layout",
+      "first_failure_class": "generation",
+      "first_error": "model did not return a JSON object",
+      "likely_entropy_cause": "The model lost the strict JSON response contract before code could be evaluated.",
+      "eb_score": 0,
+      "dimension_scores": {
+        "output_contract": 0,
+        "artifact_continuity": 0,
+        "dependency_retention": 0,
+        "validator_readiness": 0,
+        "entropy_pressure": 0
+      },
+      "token_usage": {
+        "prompt_tokens": 389,
+        "completion_tokens": 4096,
+        "total_tokens": 4485
+      },
+      "breakpoint_metric": "highest ordered stage with valid component graph, configuration, and end-to-end factory behavior",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\workloads\\entropy-nemotron-cascade-30b\\factory\\_raw\\factory-001-layout.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\workloads\\entropy-nemotron-cascade-30b\\factory\\_raw\\factory-001-layout.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\workloads\\entropy-nemotron-cascade-30b\\factory\\_raw\\factory-001-layout.prompt.txt"
+      ],
+      "generated_file_count": 0,
+      "generated_files": []
+    },
+    {
+      "target_set_id": "entropy-nemotron-cascade-30b",
+      "model_id": "nvidia_Nemotron-Cascade-2-30B-A3B-Q4_K_M.gguf",
+      "context_tokens": 131072,
+      "harness_mode": "plain",
+      "workload_id": "library-chain",
+      "planned_stage_count": 4,
+      "stages_seen": 1,
+      "max_pass_stage": 0,
+      "entropy_right_shift": {
+        "passed_stages": 0,
+        "possible_stages": 4,
+        "normalized": 0.0,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "lib-001-core",
+      "first_failure_class": "generation",
+      "first_error": "model did not return a JSON object",
+      "likely_entropy_cause": "The model lost the strict JSON response contract before code could be evaluated.",
+      "eb_score": 0,
+      "dimension_scores": {
+        "output_contract": 0,
+        "artifact_continuity": 0,
+        "dependency_retention": 0,
+        "validator_readiness": 0,
+        "entropy_pressure": 0
+      },
+      "token_usage": {
+        "prompt_tokens": 382,
+        "completion_tokens": 4096,
+        "total_tokens": 4478
+      },
+      "breakpoint_metric": "highest ordered stage with valid dependency references, build output, and sample call",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\workloads\\entropy-nemotron-cascade-30b\\library-chain\\_raw\\lib-001-core.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\workloads\\entropy-nemotron-cascade-30b\\library-chain\\_raw\\lib-001-core.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\workloads\\entropy-nemotron-cascade-30b\\library-chain\\_raw\\lib-001-core.prompt.txt"
+      ],
+      "generated_file_count": 0,
+      "generated_files": []
+    },
+    {
+      "target_set_id": "entropy-nemotron-cascade-30b",
+      "model_id": "nvidia_Nemotron-Cascade-2-30B-A3B-Q4_K_M.gguf",
+      "context_tokens": 131072,
+      "harness_mode": "plain",
+      "workload_id": "webpage-chain",
+      "planned_stage_count": 5,
+      "stages_seen": 4,
+      "max_pass_stage": 3,
+      "entropy_right_shift": {
+        "passed_stages": 3,
+        "possible_stages": 5,
+        "normalized": 0.6,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "web-004-shared-nav",
+      "first_failure_class": "generation",
+      "first_error": "model did not return a JSON object",
+      "likely_entropy_cause": "The model lost the strict JSON response contract before code could be evaluated.",
+      "eb_score": 2,
+      "dimension_scores": {
+        "output_contract": 0,
+        "artifact_continuity": 2,
+        "dependency_retention": 2,
+        "validator_readiness": 2,
+        "entropy_pressure": 3
+      },
+      "token_usage": {
+        "prompt_tokens": 17272,
+        "completion_tokens": 12015,
+        "total_tokens": 29287
+      },
+      "breakpoint_metric": "highest ordered stage with valid pages, backlinks, and shared structure",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\workloads\\entropy-nemotron-cascade-30b\\webpage-chain\\_raw\\web-001-home.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\workloads\\entropy-nemotron-cascade-30b\\webpage-chain\\_raw\\web-001-home.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\workloads\\entropy-nemotron-cascade-30b\\webpage-chain\\_raw\\web-002-backlink.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\workloads\\entropy-nemotron-cascade-30b\\webpage-chain\\_raw\\web-002-backlink.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\workloads\\entropy-nemotron-cascade-30b\\webpage-chain\\_raw\\web-003-chain-link.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\workloads\\entropy-nemotron-cascade-30b\\webpage-chain\\_raw\\web-003-chain-link.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\workloads\\entropy-nemotron-cascade-30b\\webpage-chain\\_raw\\web-004-shared-nav.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\workloads\\entropy-nemotron-cascade-30b\\webpage-chain\\_raw\\web-004-shared-nav.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\workloads\\entropy-nemotron-cascade-30b\\webpage-chain\\_raw\\web-001-home.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\workloads\\entropy-nemotron-cascade-30b\\webpage-chain\\_raw\\web-002-backlink.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\workloads\\entropy-nemotron-cascade-30b\\webpage-chain\\_raw\\web-003-chain-link.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-nemotron-cascade-30b-20260525-132410\\workloads\\entropy-nemotron-cascade-30b\\webpage-chain\\_raw\\web-004-shared-nav.prompt.txt"
+      ],
+      "generated_file_count": 3,
+      "generated_files": [
+        "site/index.html",
+        "site/page-2.html",
+        "site/page-3.html"
+      ]
+    }
+  ]
+}

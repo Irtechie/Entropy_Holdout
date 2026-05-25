@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/page-2.html\",\n      \"content\": \"<!doctype html>\\\\n<html lang=\\\\\\\"en\\\\\\\">\\\\n<head>\\\\n  <meta charset=\\\\\\\"utf-8\\\\\\\">\\\\n  <title>Entropy Page 2</title>\\\\n</head>\\\\n<body>\\\\n  <h1>Entropy Page 2</h1>\\\\n  <p>Main content for page 2.</p>\\\\n  <nav>\\\\n    <a href=\\\\\\\"index.html\\\\\\\">Back to page 1</a>\\\\n  </nav>\\\\n</body>\\\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created page-2.html with required title and backlink to index.html.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 3084,
+      "prompt_tokens": 1799,
+      "total_tokens": 4883,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "nvidia_Nemotron-Cascade-2-30B-A3B-Q4_K_M.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-CuOxn6B1eoJc8xlXgKT6KzYOilJbL2yJ",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 1799,
+    "output_tokens": 3084,
+    "total_tokens": 4883,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "1c09a12f216f85f6520b12d42a1b9b59",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-nemotron-cascade-30b",
+      "webpage-chain"
+    ]
+  }
+}
