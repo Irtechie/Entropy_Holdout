@@ -1,0 +1,17 @@
+{
+  "queue_id": "EB-wave1-small-individual",
+  "target_set_id": "entropy-gemma4-e2b",
+  "slice_id": "wave1-small-002",
+  "classification": "completed-data-run",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356",
+  "started_at": "2026-05-25T05:13:56.8511005-04:00",
+  "finished_at": "2026-05-25T05:18:28.7118087-04:00",
+  "elapsed_s": 271.9,
+  "runner_exit_code": 0,
+  "results": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\results.jsonl",
+  "critique": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\critique.md",
+  "critique_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\critique.json",
+  "report_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\report.json",
+  "wedge_risk": false,
+  "wedge_detail": null
+}

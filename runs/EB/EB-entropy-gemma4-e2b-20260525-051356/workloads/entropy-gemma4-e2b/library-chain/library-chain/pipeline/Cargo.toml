@@ -1,0 +1,9 @@
+[package]
+name = "library_chain_pipeline"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+library_chain_feature = { path = "../feature" }
+library_chain_contracts = { path = "../contracts" }
+

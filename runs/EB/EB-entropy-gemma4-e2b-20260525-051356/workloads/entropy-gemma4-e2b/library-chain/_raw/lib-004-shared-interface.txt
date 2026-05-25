@@ -1,0 +1,37 @@
+{
+  "files": [
+    {
+      "path": "library-chain/contracts/Cargo.toml",
+      "content": "[package]\nname = \"library_chain_contracts\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\npath = \"src/lib.rs\"\n"
+    },
+    {
+      "path": "library-chain/contracts/src/lib.rs",
+      "content": "pub trait Adder {\n    fn add(&self, a: i32, b: i32) -> i32;\n}\n"
+    },
+    {
+      "path": "library-chain/core/Cargo.toml",
+      "content": "[package]\nname = \"library_chain_core\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\npath = \"src/lib.rs\"\n\n[dependencies]\nlibrary_chain_contracts = { path = \"../contracts\" }\n"
+    },
+    {
+      "path": "library-chain/core/src/lib.rs",
+      "content": "use library_chain_contracts::Adder;\n\npub struct CoreAdder;\n\nimpl Adder for CoreAdder {\n    fn add(&self, a: i32, b: i32) -> i32 {\n        a + b\n    }\n}\n"
+    },
+    {
+      "path": "library-chain/feature/Cargo.toml",
+      "content": "[package]\nname = \"library_chain_feature\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[dependencies]\nlibrary_chain_core = { path = \"../core\" }\nlibrary_chain_contracts = { path = \"../contracts\" }\n"
+    },
+    {
+      "path": "library-chain/feature/src/lib.rs",
+      "content": "use library_chain_contracts::Adder;\nuse library_chain_core::CoreAdder;\n\n/// Calculates the sum of two numbers by utilizing the core library's add function.\npub fn calculate_sum(a: i32, b: i32) -> i32 {\n    let adder = CoreAdder;\n    adder.add(a, b)\n}\n"
+    },
+    {
+      "path": "library-chain/pipeline/Cargo.toml",
+      "content": "[package]\nname = \"library_chain_pipeline\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[dependencies]\nlibrary_chain_feature = { path = \"../feature\" }\nlibrary_chain_contracts = { path = \"../contracts\" }\n"
+    },
+    {
+      "path": "library-chain/pipeline/src/lib.rs",
+      "content": "use library_chain_contracts::Adder;\nuse library_chain_feature::calculate_sum;\n\n/// Calculates the final result by utilizing the feature library's sum function.\npub fn process_pipeline(a: i32, b: i32) -> i32 {\n    calculate_sum(a, b)\n}\n"
+    }
+  ],
+  "notes": "Introduced a shared interface (Adder trait in library-chain/contracts) and updated all three libraries (core, feature, pipeline) to depend on and implement/use this contract, establishing a shared interface."
+}

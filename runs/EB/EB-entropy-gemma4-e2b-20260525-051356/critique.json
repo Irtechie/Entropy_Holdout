@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "benchmark": "EB",
+  "generated_at": "2026-05-25T05:18:28.6880803-04:00",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356",
+  "results_path": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\results.jsonl",
+  "rubric": {
+    "scale": "0-5",
+    "score_meaning": {
+      "0": "No valid stage output or strict output contract failure before code evaluation.",
+      "1": "Only first-stage or minimal artifact progress.",
+      "2": "Some local continuity, but breaks before deeper dependency pressure.",
+      "3": "Meaningful cross-stage progress, but breaks before completing workload invariants.",
+      "4": "All planned generation stages completed, but final validator failed.",
+      "5": "All planned generation stages and final validation passed."
+    },
+    "dimensions": [
+      "output_contract",
+      "artifact_continuity",
+      "dependency_retention",
+      "validator_readiness",
+      "entropy_pressure"
+    ]
+  },
+  "totals": {
+    "target_workload_count": 3,
+    "fully_validated_count": 0,
+    "prompt_tokens": 86525,
+    "completion_tokens": 14329,
+    "total_tokens": 100854
+  },
+  "critiques": [
+    {
+      "target_set_id": "entropy-gemma4-e2b",
+      "model_id": "gemma-4-E2B-it-Q8_0.gguf",
+      "context_tokens": 262144,
+      "harness_mode": "plain",
+      "workload_id": "factory",
+      "planned_stage_count": 4,
+      "stages_seen": 2,
+      "max_pass_stage": 1,
+      "entropy_right_shift": {
+        "passed_stages": 1,
+        "possible_stages": 4,
+        "normalized": 0.25,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "factory-002-stations",
+      "first_failure_class": "generation",
+      "first_error": "model did not generate expected artifact path: factory-system/stations",
+      "likely_entropy_cause": "The model produced files, but not at the paths required by the stage contract.",
+      "eb_score": 1,
+      "dimension_scores": {
+        "output_contract": 1,
+        "artifact_continuity": 1,
+        "dependency_retention": 1,
+        "validator_readiness": 1,
+        "entropy_pressure": 1
+      },
+      "token_usage": {
+        "prompt_tokens": 5155,
+        "completion_tokens": 3665,
+        "total_tokens": 8820
+      },
+      "breakpoint_metric": "highest ordered stage with valid component graph, configuration, and end-to-end factory behavior",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\factory\\_raw\\factory-001-layout.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\factory\\_raw\\factory-001-layout.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\factory\\_raw\\factory-002-stations.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\factory\\_raw\\factory-002-stations.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\factory\\_raw\\factory-001-layout.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\factory\\_raw\\factory-002-stations.prompt.txt"
+      ],
+      "generated_file_count": 2,
+      "generated_files": [
+        "factory-system/types.py",
+        "factory-system/layout.py"
+      ]
+    },
+    {
+      "target_set_id": "entropy-gemma4-e2b",
+      "model_id": "gemma-4-E2B-it-Q8_0.gguf",
+      "context_tokens": 262144,
+      "harness_mode": "plain",
+      "workload_id": "library-chain",
+      "planned_stage_count": 4,
+      "stages_seen": 5,
+      "max_pass_stage": 4,
+      "entropy_right_shift": {
+        "passed_stages": 4,
+        "possible_stages": 4,
+        "normalized": 1.0,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "final-validation",
+      "first_failure_class": "missing_artifact",
+      "first_error": "library-chain validation failed: missing project: CoreLib/CoreLib.csproj",
+      "likely_entropy_cause": "The generated tree did not preserve or create a required artifact.",
+      "eb_score": 4,
+      "dimension_scores": {
+        "output_contract": 4,
+        "artifact_continuity": 3,
+        "dependency_retention": 4,
+        "validator_readiness": 3,
+        "entropy_pressure": 5
+      },
+      "token_usage": {
+        "prompt_tokens": 26778,
+        "completion_tokens": 4745,
+        "total_tokens": 31523
+      },
+      "breakpoint_metric": "highest ordered stage with valid dependency references, build output, and sample call",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\library-chain\\_raw\\lib-001-core.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\library-chain\\_raw\\lib-001-core.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\library-chain\\_raw\\lib-002-dependent.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\library-chain\\_raw\\lib-002-dependent.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\library-chain\\_raw\\lib-003-chain.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\library-chain\\_raw\\lib-003-chain.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\library-chain\\_raw\\lib-004-shared-interface.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\library-chain\\_raw\\lib-004-shared-interface.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\library-chain\\_raw\\lib-001-core.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\library-chain\\_raw\\lib-002-dependent.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\library-chain\\_raw\\lib-003-chain.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\library-chain\\_raw\\lib-004-shared-interface.prompt.txt"
+      ],
+      "generated_file_count": 9,
+      "generated_files": [
+        "library-chain/core/Cargo.toml",
+        "library-chain/core/src/lib.rs",
+        "library-chain/core/src/main.rs",
+        "library-chain/feature/Cargo.toml",
+        "library-chain/feature/src/lib.rs",
+        "library-chain/pipeline/Cargo.toml",
+        "library-chain/pipeline/src/lib.rs",
+        "library-chain/contracts/Cargo.toml",
+        "library-chain/contracts/src/lib.rs"
+      ]
+    },
+    {
+      "target_set_id": "entropy-gemma4-e2b",
+      "model_id": "gemma-4-E2B-it-Q8_0.gguf",
+      "context_tokens": 262144,
+      "harness_mode": "plain",
+      "workload_id": "webpage-chain",
+      "planned_stage_count": 5,
+      "stages_seen": 5,
+      "max_pass_stage": 4,
+      "entropy_right_shift": {
+        "passed_stages": 4,
+        "possible_stages": 5,
+        "normalized": 0.8,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "web-005-nested-shared-table",
+      "first_failure_class": "generation",
+      "first_error": "model did not generate expected artifact path: site/page-5.html",
+      "likely_entropy_cause": "The model produced files, but not at the paths required by the stage contract.",
+      "eb_score": 3,
+      "dimension_scores": {
+        "output_contract": 1,
+        "artifact_continuity": 3,
+        "dependency_retention": 3,
+        "validator_readiness": 2,
+        "entropy_pressure": 4
+      },
+      "token_usage": {
+        "prompt_tokens": 54592,
+        "completion_tokens": 5919,
+        "total_tokens": 60511
+      },
+      "breakpoint_metric": "highest ordered stage with valid pages, backlinks, and shared structure",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\webpage-chain\\_raw\\web-001-home.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\webpage-chain\\_raw\\web-001-home.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\webpage-chain\\_raw\\web-002-backlink.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\webpage-chain\\_raw\\web-002-backlink.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\webpage-chain\\_raw\\web-003-chain-link.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\webpage-chain\\_raw\\web-003-chain-link.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\webpage-chain\\_raw\\web-004-shared-nav.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\webpage-chain\\_raw\\web-004-shared-nav.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\webpage-chain\\_raw\\web-005-nested-shared-table.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\webpage-chain\\_raw\\web-005-nested-shared-table.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\webpage-chain\\_raw\\web-001-home.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\webpage-chain\\_raw\\web-002-backlink.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\webpage-chain\\_raw\\web-003-chain-link.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\webpage-chain\\_raw\\web-004-shared-nav.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e2b-20260525-051356\\workloads\\entropy-gemma4-e2b\\webpage-chain\\_raw\\web-005-nested-shared-table.prompt.txt"
+      ],
+      "generated_file_count": 4,
+      "generated_files": [
+        "site/index.html",
+        "site/page-2.html",
+        "site/page-3.html",
+        "site/page-4.html"
+      ]
+    }
+  ]
+}
