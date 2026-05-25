@@ -1,0 +1,46 @@
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-001-core
+Order: 1
+
+Stage goal:
+Create the first library with one public function and a tiny sample caller.
+
+Expected artifacts:
+- library-chain/CoreLib/CoreLib.csproj (project)
+
+Validators that will run:
+- core-builds: failure_class=build
+- core-sample-runs: failure_class=runtime_behavior
+
+Exact validator contract:
+Generate a .NET project tree under library-chain/.
+Target framework must be net10.0.
+Required project files:
+- CoreLib: CoreLib/CoreLib.csproj
+- FeatureLib: FeatureLib/FeatureLib.csproj references: CoreLib/CoreLib.csproj
+- PipelineLib: PipelineLib/PipelineLib.csproj references: FeatureLib/FeatureLib.csproj
+- Contracts: Contracts/Contracts.csproj
+- SampleApp: SampleApp/SampleApp.csproj references: PipelineLib/PipelineLib.csproj, Contracts/Contracts.csproj
+SampleApp must build and dotnet run --project SampleApp/SampleApp.csproj --no-build --nologo must print exactly core->feature->pipeline->contract.
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.

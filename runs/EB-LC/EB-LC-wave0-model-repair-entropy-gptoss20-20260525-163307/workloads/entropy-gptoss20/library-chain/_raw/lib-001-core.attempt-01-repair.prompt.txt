@@ -1,0 +1,151 @@
+You are repairing an Entropy staged code-generation benchmark response.
+
+Workload: library-chain
+Stage: lib-001-core
+Order: 1
+
+Stage goal:
+Create the first library with one public function and a tiny sample caller.
+
+Expected artifacts:
+- library-chain/CoreLib/CoreLib.csproj (project)
+
+Exact validator contract:
+Generate a .NET project tree under library-chain/.
+Target framework must be net10.0.
+Required project files:
+- CoreLib: CoreLib/CoreLib.csproj
+- FeatureLib: FeatureLib/FeatureLib.csproj references: CoreLib/CoreLib.csproj
+- PipelineLib: PipelineLib/PipelineLib.csproj references: FeatureLib/FeatureLib.csproj
+- Contracts: Contracts/Contracts.csproj
+- SampleApp: SampleApp/SampleApp.csproj references: PipelineLib/PipelineLib.csproj, Contracts/Contracts.csproj
+SampleApp must build and dotnet run --project SampleApp/SampleApp.csproj --no-build --nologo must print exactly core->feature->pipeline->contract.
+
+The previous response failed with:
+model did not return a JSON object
+
+Previous response text:
+---BEGIN FAILED RESPONSE---
+
+---END FAILED RESPONSE---
+
+Current generated files:
+FILE: _raw/lib-001-core.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-001-core
+Order: 1
+
+Stage goal:
+Create the first library with one public function and a tiny sample caller.
+
+Expected artifacts:
+- library-chain/CoreLib/CoreLib.csproj (project)
+
+Validators that will run:
+- core-builds: failure_class=build
+- core-sample-runs: failure_class=runtime_behavior
+
+Exact validator contract:
+Generate a .NET project tree under library-chain/.
+Target framework must be net10.0.
+Required project files:
+- CoreLib: CoreLib/CoreLib.csproj
+- FeatureLib: FeatureLib/FeatureLib.csproj references: CoreLib/CoreLib.csproj
+- PipelineLib: PipelineLib/PipelineLib.csproj references: FeatureLib/FeatureLib.csproj
+- Contracts: Contracts/Contracts.csproj
+- SampleApp: SampleApp/SampleApp.csproj references: PipelineLib/PipelineLib.csproj, Contracts/Contracts.csproj
+SampleApp must build and dotnet run --project SampleApp/SampleApp.csproj --no-build --nologo must print exactly core->feature->pipeline->contract.
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.response.json
+---BEGIN FILE---
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 4096,
+      "prompt_tokens": 433,
+      "total_tokens": 4529,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "gpt-oss-20b-Q4_K_M.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-nkGwGL1rWoKIqZxtGjsY6Nt4h7PoRbZN",
+    "service_tier": null,
+    "finish_reason": "length",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 433,
+    "output_tokens": 4096,
+    "total_tokens": 4529,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "7dbc2eaa85f01499343be578bfbbc1f5",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "model-repair",
+      "langchain",
+      "entropy-gptoss20",
+      "library-chain"
+    ]
+  }
+}
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.txt
+---BEGIN FILE---
+
+
+---END FILE---
+
+Return ONLY a corrected JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+- Do not copy placeholder path or content values from the schema.

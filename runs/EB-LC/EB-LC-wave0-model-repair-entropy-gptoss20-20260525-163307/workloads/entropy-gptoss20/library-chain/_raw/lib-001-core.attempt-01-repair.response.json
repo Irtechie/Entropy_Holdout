@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"CoreLib/CoreLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"CoreLib/Core.cs\",\n      \"content\": \"namespace CoreLib;\\npublic class Core\\n{\\n    public static string Get() => \\\"core\\\";\\n}\\n\"\n    },\n    {\n      \"path\": \"FeatureLib/FeatureLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\CoreLib\\\\CoreLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"FeatureLib/Feature.cs\",\n      \"content\": \"using CoreLib;\\nnamespace FeatureLib;\\npublic class Feature\\n{\\n    public static string Get() => Core.Get() + \\\"->feature\\\";\\n}\\n\"\n    },\n    {\n      \"path\": \"PipelineLib/PipelineLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\FeatureLib\\\\FeatureLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"PipelineLib/Pipeline.cs\",\n      \"content\": \"using FeatureLib;\\nnamespace PipelineLib;\\npublic class Pipeline\\n{\\n    public static string Get() => Feature.Get() + \\\"->pipeline\\\";\\n}\\n\"\n    },\n   ",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 4096,
+      "prompt_tokens": 1183,
+      "total_tokens": 5279,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "gpt-oss-20b-Q4_K_M.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-GKz13IcZ5V52oqnrg3scnlgkeusaNteL",
+    "service_tier": null,
+    "finish_reason": "length",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 1183,
+    "output_tokens": 4096,
+    "total_tokens": 5279,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "507b1260c7797a591a98d608da6f578a",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "model-repair",
+      "langchain",
+      "entropy-gptoss20",
+      "library-chain"
+    ]
+  }
+}

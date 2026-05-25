@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "site/page-3.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>Entropy Page 3</title>\n</head>\n<body>\n  <nav>\n    <!-- Navigation links will be added here later -->\n  </nav>\n  <main>\n    <h1>Welcome to Entropy Page 3</h1>\n    <p>This is page 3 of the Entropy website.</p>\n  </main>\n  <footer>\n    <a href=\"page-2.html\">Back to Page 2</a>\n  </footer>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Stage 3: page-3.html created with backlink to page-2.html."
+}

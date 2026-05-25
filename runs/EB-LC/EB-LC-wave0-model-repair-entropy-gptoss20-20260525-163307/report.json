@@ -1,0 +1,35 @@
+[
+  {
+    "target_set_id": "entropy-gptoss20",
+    "model_id": "gpt-oss-20b-Q4_K_M.gguf",
+    "context_tokens": 131072,
+    "harness_mode": "model-repair",
+    "workload_id": "factory",
+    "stages_seen": 3,
+    "max_pass_stage": 2,
+    "first_fail_stage": "factory-003-configuration",
+    "first_failure_class": "generation"
+  },
+  {
+    "target_set_id": "entropy-gptoss20",
+    "model_id": "gpt-oss-20b-Q4_K_M.gguf",
+    "context_tokens": 131072,
+    "harness_mode": "model-repair",
+    "workload_id": "library-chain",
+    "stages_seen": 1,
+    "max_pass_stage": 0,
+    "first_fail_stage": "lib-001-core",
+    "first_failure_class": "generation"
+  },
+  {
+    "target_set_id": "entropy-gptoss20",
+    "model_id": "gpt-oss-20b-Q4_K_M.gguf",
+    "context_tokens": 131072,
+    "harness_mode": "model-repair",
+    "workload_id": "webpage-chain",
+    "stages_seen": 5,
+    "max_pass_stage": 4,
+    "first_fail_stage": "web-005-nested-shared-table",
+    "first_failure_class": "generation"
+  }
+]

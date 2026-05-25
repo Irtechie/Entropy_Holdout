@@ -1,0 +1,17 @@
+{
+  "queue_id": "EB-LC-wave0-model-repair-canary",
+  "target_set_id": "entropy-gptoss20",
+  "slice_id": "wave0-canary-001",
+  "classification": "completed-data-run",
+  "run_root": ".\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-gptoss20-20260525-163307",
+  "started_at": "2026-05-25T16:33:07.3172118-04:00",
+  "finished_at": "2026-05-25T16:49:42.2431883-04:00",
+  "elapsed_s": 994.9,
+  "runner_exit_code": 0,
+  "results": ".\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-gptoss20-20260525-163307\\results.jsonl",
+  "critique": ".\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-gptoss20-20260525-163307\\critique.md",
+  "critique_json": ".\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-gptoss20-20260525-163307\\critique.json",
+  "report_json": ".\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-gptoss20-20260525-163307\\report.json",
+  "wedge_risk": false,
+  "wedge_detail": null
+}

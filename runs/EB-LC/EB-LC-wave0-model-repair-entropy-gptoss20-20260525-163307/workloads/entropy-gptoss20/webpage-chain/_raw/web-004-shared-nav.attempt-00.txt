@@ -1,0 +1,13 @@
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>Entropy Page 1</title>\n</head>\n<body>\n  <nav>\n    <a href=\"index.html\">Page 1</a> |\n    <a href=\"page-2.html\">Page 2</a> |\n    <a href=\"page-3.html\">Page 3</a> |\n    <a href=\"page-4.html\">Page 4</a>\n  </nav>\n  <main>\n    <h1>Welcome to Entropy Page 1</h1>\n    <p>This is the home page of the Entropy website. Navigation will be added in future stages.</p>\n  </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-2.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>Entropy Page 2</title>\n</head>\n<body>\n  <nav>\n    <a href=\"index.html\">Page 1</a> |\n    <a href=\"page-2.html\">Page 2</a> |\n    <a href=\"page-3.html\">Page 3</a> |\n    <a href=\"page-4.html\">Page 4</a>\n  </nav>\n  <main>\n    <h1>Welcome to Entropy Page 2</h1>\n    <p>This is page 2 of the Entropy website.</p>\n  </main>\n  <footer>\n    <a href=\"index.html\">Back to Page 1</a>\n  </footer>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-3.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>Entropy Page 3</title>\n</head>\n<body>\n  <nav>\n    <a href=\"index.html\">Page 1</a> |\n    <a href=\"page-2.html\">Page 2</a> |\n    <a href=\"page-3.html\">Page 3</a> |\n    <a href=\"
