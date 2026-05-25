@@ -21,6 +21,9 @@ function Get-Origin($error, $failureClass) {
   if ($message -match 'exceeds the available context size') {
     return 'context_budget'
   }
+  if ($message -match 'serving_token_budget|observability_token_usage_missing|max_completion_tokens|completion_tokens') {
+    return 'infra_or_serving'
+  }
   if ($message -match 'curl exited|model response did not include choices text|HTTP 5\d\d|connection|timeout|timed out|controller|reconcile_needed') {
     return 'infra_or_serving'
   }

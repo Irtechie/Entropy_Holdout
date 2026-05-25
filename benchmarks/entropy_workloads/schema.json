@@ -56,6 +56,8 @@
       "configuration",
       "runtime_behavior",
       "timeout",
+      "context_budget",
+      "serving_token_budget",
       "harness"
     ]
   }

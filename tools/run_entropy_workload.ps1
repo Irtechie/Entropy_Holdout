@@ -12,7 +12,10 @@ param(
   [string]$HarnessMode = '',
   [ValidateSet('direct','langchain')]
   [string]$CompletionProvider = 'direct',
-  [bool]$RequireLangfuse = $false
+  [bool]$RequireLangfuse = $false,
+  [int]$MaxCompletionTokens = 4096,
+  [int]$MinCompletionTokens = 128,
+  [int]$MinCompletionChars = 512
 )
 
 $ErrorActionPreference = 'Stop'
@@ -29,6 +32,9 @@ if (-not $ResultPath) {
 }
 if (-not $HarnessMode) {
   $HarnessMode = $Mode
+}
+if ($Mode -eq 'api' -and $MaxCompletionTokens -lt $MinCompletionTokens) {
+  throw "invalid serving token budget: max_completion_tokens=$MaxCompletionTokens is below min_completion_tokens=$MinCompletionTokens"
 }
 
 function Write-Result($row) {
@@ -71,14 +77,14 @@ function Invoke-DirectModelCompletion($prompt) {
         @{ role = 'system'; content = 'You are a code generator. Return only the requested JSON object. No prose.' },
         @{ role = 'user'; content = $prompt }
       )
-      max_tokens = 4096
+      max_tokens = $MaxCompletionTokens
       temperature = 0
     } 600
   } catch {
     $resp = Invoke-JsonPost "$ApiBaseUrl/v1/completions" @{
       model = $Model
       prompt = $prompt
-      max_tokens = 4096
+      max_tokens = $MaxCompletionTokens
       temperature = 0
     } 600
   }
@@ -111,7 +117,7 @@ function Invoke-LangChainCompletion($prompt, $stage, $attemptIndex, $attemptReas
       model = $Model
       system = 'You are a code generator. Return only the requested JSON object. No prose.'
       prompt = $prompt
-      max_tokens = 4096
+      max_tokens = $MaxCompletionTokens
       temperature = 0
       timeout_s = 600
       require_langfuse = $RequireLangfuse
@@ -130,6 +136,9 @@ function Invoke-LangChainCompletion($prompt, $stage, $attemptIndex, $attemptReas
         attempt_index = $attemptIndex
         attempt_reason = $attemptReason
         context_tokens = $ContextTokens
+        max_completion_tokens = $MaxCompletionTokens
+        min_completion_tokens = $MinCompletionTokens
+        min_completion_chars = $MinCompletionChars
       }
     } | ConvertTo-Json -Depth 32 | Set-Content -LiteralPath $requestFile.FullName -Encoding UTF8
 
@@ -407,6 +416,65 @@ function Add-TokenUsage($total, $usage) {
   return $total
 }
 
+function Get-ObjectProperty($obj, $name) {
+  if ($null -eq $obj) { return $null }
+  if ($obj -is [System.Collections.IDictionary] -and $obj.Contains($name)) { return $obj[$name] }
+  $prop = $obj.PSObject.Properties[$name]
+  if ($prop) { return $prop.Value }
+  return $null
+}
+
+function Get-NestedProperty($obj, [string[]]$path) {
+  $current = $obj
+  foreach ($name in $path) {
+    $current = Get-ObjectProperty $current $name
+    if ($null -eq $current) { return $null }
+  }
+  return $current
+}
+
+function Get-CompletionTokenCount($completion) {
+  $value = Get-NestedProperty $completion @('usage','completion_tokens')
+  if ($null -ne $value -and "$value" -match '^\d+$') { return [int]$value }
+  return $null
+}
+
+function Get-CompletionFinishReason($completion) {
+  $choice = $null
+  $choices = Get-NestedProperty $completion @('raw','choices')
+  if ($choices -and @($choices).Count -gt 0) { $choice = @($choices)[0] }
+  foreach ($path in @(
+      @('raw','response_metadata','finish_reason'),
+      @('raw','response_metadata','done_reason'),
+      @('raw','response_metadata','stop_reason')
+    )) {
+    $value = Get-NestedProperty $completion $path
+    if (-not [string]::IsNullOrWhiteSpace([string]$value)) { return [string]$value }
+  }
+  if ($choice) {
+    $value = Get-ObjectProperty $choice 'finish_reason'
+    if (-not [string]::IsNullOrWhiteSpace([string]$value)) { return [string]$value }
+  }
+  return ''
+}
+
+function Get-CompletionBudgetFailure($completion, [bool]$IncludeTinyResponse = $true) {
+  $text = [string]$completion.text
+  $finishReason = Get-CompletionFinishReason $completion
+  $completionTokens = Get-CompletionTokenCount $completion
+
+  if (($CompletionProvider -eq 'langchain' -or $RequireLangfuse) -and $null -eq $completionTokens) {
+    return "observability_token_usage_missing: canonical EB run did not receive completion token usage from the serving path"
+  }
+  if ($finishReason -match 'length|max_tokens|token') {
+    return "serving_token_budget: completion stopped by finish_reason=$finishReason with requested max_completion_tokens=$MaxCompletionTokens"
+  }
+  if ($IncludeTinyResponse -and $null -ne $completionTokens -and $completionTokens -le $MinCompletionTokens -and $text.Length -lt $MinCompletionChars) {
+    return "serving_token_budget: completion_tokens=$completionTokens and response_chars=$($text.Length) are below canonical minimums min_completion_tokens=$MinCompletionTokens min_completion_chars=$MinCompletionChars"
+  }
+  return $null
+}
+
 function Save-CompletionArtifacts($rawDir, $stageId, $label, $prompt, $completion) {
   $prefix = if ($label) { "$stageId.$label" } else { $stageId }
 
@@ -442,6 +510,8 @@ function Invoke-WorkloadValidator($workloadId, $runRoot) {
 }
 
 function Get-FailureClass($message) {
+  if ($message -match 'serving_token_budget|observability_token_usage_missing|token budget|max_completion_tokens|completion_tokens') { return 'serving_token_budget' }
+  if ($message -match 'exceeds the available context size') { return 'context_budget' }
   if ($message -match 'missing|not found') { return 'missing_artifact' }
   if ($message -match 'build') { return 'build' }
   if ($message -match 'link|href') { return 'link_integrity' }
@@ -544,6 +614,10 @@ function New-ApiWorkload($runRoot) {
         $text = $completion.text
 
         try {
+          $hardBudgetFailure = Get-CompletionBudgetFailure $completion $false
+          if ($hardBudgetFailure) {
+            throw $hardBudgetFailure
+          }
           $parsed = ConvertFrom-JsonObjectText $text
           $written = Write-GeneratedFiles $runRoot $parsed.files
           Assert-StageArtifactsWritten $runRoot $stage $written
@@ -555,6 +629,10 @@ function New-ApiWorkload($runRoot) {
           break
         } catch {
           $attemptError = $_.Exception.Message
+          $budgetFailure = Get-CompletionBudgetFailure $completion
+          if ($budgetFailure) {
+            $attemptError = $budgetFailure
+          }
           $attemptFailureClass = Get-FailureClass $attemptError
           $repairHistory += [ordered]@{
             attempt_index = $attemptIndex
@@ -570,6 +648,12 @@ function New-ApiWorkload($runRoot) {
           }
 
           if ($attemptIndex -ge $maxRepairs) {
+            $row.repair_count = $attemptIndex
+            $row.repair_history = @($repairHistory)
+            throw $attemptError
+          }
+
+          if ($attemptFailureClass -in @('serving_token_budget','context_budget')) {
             $row.repair_count = $attemptIndex
             $row.repair_history = @($repairHistory)
             throw $attemptError

@@ -161,6 +161,30 @@ if ($workloads.Count -eq 0) {
 $harnessMode = if ($experiment.harness_mode) { [string]$experiment.harness_mode } else { 'plain' }
 $completionProvider = if ($experiment.completion_provider) { [string]$experiment.completion_provider } else { 'direct' }
 $requireLangfuse = $experiment.require_langfuse -eq $true
+
+function Get-ExperimentInt($name, $defaultValue) {
+  $prop = $experiment.PSObject.Properties[$name]
+  if ($prop -and $null -ne $prop.Value -and "$($prop.Value)" -match '^\d+$') {
+    return [int]$prop.Value
+  }
+  return [int]$defaultValue
+}
+
+$maxCompletionTokens = Get-ExperimentInt 'max_completion_tokens' 4096
+$minCompletionTokens = Get-ExperimentInt 'min_completion_tokens' 128
+$minCompletionChars = Get-ExperimentInt 'min_completion_chars' 512
+$minContextTokens = Get-ExperimentInt 'min_context_tokens' 0
+
+if ($maxCompletionTokens -lt $minCompletionTokens) {
+  throw "invalid experiment token budget: max_completion_tokens=$maxCompletionTokens is below min_completion_tokens=$minCompletionTokens"
+}
+if ($minContextTokens -gt 0) {
+  $badContextTargets = @($targets | Where-Object { [int]$_.context_tokens -lt $minContextTokens })
+  if ($badContextTargets.Count -gt 0) {
+    $badList = (@($badContextTargets | ForEach-Object { "$($_.set_id)=$($_.context_tokens)" }) -join ', ')
+    throw "invalid experiment context budget: min_context_tokens=$minContextTokens but selected targets are below it: $badList"
+  }
+}
 $gitHead = ''
 try {
   $gitHead = (git -C $repoRoot rev-parse HEAD).Trim()
@@ -245,6 +269,12 @@ Write-Event ([ordered]@{
   harness_mode = $harnessMode
   completion_provider = $completionProvider
   require_langfuse = $requireLangfuse
+  quality_gates = [ordered]@{
+    max_completion_tokens = $maxCompletionTokens
+    min_completion_tokens = $minCompletionTokens
+    min_completion_chars = $minCompletionChars
+    min_context_tokens = $minContextTokens
+  }
 } | ConvertTo-Json -Depth 16 | Set-Content -LiteralPath (Join-Path $ResultRoot 'run.json') -Encoding UTF8
 
 foreach ($target in $targets) {
@@ -286,6 +316,9 @@ foreach ($target in $targets) {
           -HarnessMode $harnessMode `
           -CompletionProvider $completionProvider `
           -RequireLangfuse $requireLangfuse `
+          -MaxCompletionTokens $maxCompletionTokens `
+          -MinCompletionTokens $minCompletionTokens `
+          -MinCompletionChars $minCompletionChars `
           -OutputRoot $workloadRoot `
           -ResultPath $workloadResults | Out-Host
 

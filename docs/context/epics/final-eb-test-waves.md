@@ -23,6 +23,7 @@ Current judgment: a new full EB-LC Wave 2 is blocked. The existing `repair-extra
 - Every wave has a written hypothesis, included targets, included workloads, harness mode, stop conditions, and expected evidence paths before execution.
 - Every completed wave gets an outcome judgment before the next wave is designed.
 - Any `harness`, `prompt_spec_or_validator`, missing Langfuse export, or ambiguous failure-origin row blocks expansion until resolved or explicitly quarantined.
+- Any failed row with length-capped or tiny completion output is serving/token-budget contamination unless the artifacts prove the stage already passed from valid existing files.
 - Claims distinguish model behavior, harness behavior, prompt/spec failure, context-budget failure, and infrastructure failure.
 - The final report is good enough to publish or share even if some rows fail, because failures are categorized instead of silently repaired away.
 
@@ -99,6 +100,7 @@ Pass requirements:
 - `workloads.json` expected artifacts match workload specs and validators.
 - Factory null-method failure has a reproducer or fix.
 - Harness modes in experiment configs are listed and mechanically accurate.
+- Canonical experiment configs declare `max_completion_tokens`, `min_completion_tokens`, `min_completion_chars`, and `min_context_tokens`; the selected targets satisfy the context floor.
 - Langfuse preflight passes.
 - Failure-origin audit can classify known contaminated rows.
 
@@ -107,6 +109,7 @@ Stop conditions:
 - Any mismatch between expected artifacts and validators.
 - Any uncaught PowerShell harness exception in mock/golden mode.
 - Any final validator failure on a known-good fixture.
+- Any selected canonical target below the declared context floor, any configured completion cap below the declared minimum, or any failed completion stopped by a length/token cap.
 
 ### Gate B: Wave 0 Canary
 
@@ -132,6 +135,7 @@ Stop conditions:
 
 - Missing `results.jsonl`, `critique.json`, `critique.md`, `run.json`, raw prompts/responses, or Langfuse export.
 - Any `harness` or `prompt_spec_or_validator` origin not already quarantined.
+- Missing token usage on canonical LangChain/Langfuse model-call rows, or a failed response with 32-token-style completion usage.
 - Any result that cannot be independently explained from artifacts.
 - Zero clean workload passes across all three targets after Gate A. That means the frozen benchmark is not currently producing a usable pass/fail capability signal and must be stopped, narrowed, or redesigned instead of expanded.
 - No library/factory progress beyond stage 1 if the selected harness mode is specifically intended to improve output-contract behavior.
