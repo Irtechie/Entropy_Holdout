@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "path": "factory-system/config/stations.json",
+      "content": "{\n  \"stations\": [\n    {\n      \"id\": \"station-1\",\n      \"name\": \"Assembly Station\",\n      \"capacity\": 100\n    },\n    {\n      \"id\": \"station-2\",\n      \"name\": \"Quality Check Station\",\n      \"capacity\": 50\n    },\n    {\n      \"id\": \"station-3\",\n      \"name\": \"Packaging Station\",\n      \"capacity\": 75\n    }\n  ],\n  \"dependencies\": {\n    \"station-1\": [],\n    \"station-2\": [\"station-1\"],\n    \"station-3\": [\"station-2\"]\n  }\n}"
+    },
+    {
+      "path": "factory-system/config/routing.json",
+      "content": "{\n  \"routes\": [\n    {\n      \"source\": \"station-1\",\n      \"destination\": \"station-3\",\n      \"path\": [\"station-1\", \"station-2\", \"station-3\"]\n    }\n  ]\n}"
+    },
+    {
+      "path": "factory-system/config/config.ts",
+      "content": "import { Station } from '../src/stations/station';\n\nexport interface StationConfig {\n  id: string;\n  name: string;\n  capacity: number;\n}\n\nexport interface DependenciesConfig {\n  [key: string]: string[];\n}\n\nexport interface StationsConfig {\n  stations: StationConfig[];\n  dependencies: DependenciesConfig;\n}\n\nexport interface RouteConfig {\n  source: string;\n  destination: string;\n  path: string[];\n}\n\nexport interface RoutingConfig {\n  routes: RouteConfig[];\n}\n\nexport interface Config {\n  stations: StationsConfig;\n  routing: RoutingConfig;\n}\n\nexport class ConfigLoader {\n  private stations: StationsConfig;\n  private routing: RoutingConfig;\n\n  constructor(stations: StationsConfig, routing: RoutingConfig) {\n    this.stations = stations;\n    this.routing = routing;\n  }\n\n  getStations(): StationsConfig {\n    return this.stations;\n  }\n\n  getRouting(): RoutingConfig {\n    return this.routing;\n  }\n\n  getStation(id: string): Station | undefined {\n    const station = this.stations.stations.find(s => s.id === id);\n    if (!station) return undefined;\n    return new Station(station.id, station.name, station.capacity);\n  }\n\n  getRoute(source: string, destination: string): RouteConfig | undefined {\n    return this.routing.routes.find(r => r.source === source && r.destination === destination);\n  }\n}\n"
+    }
+  ],
+  "notes": "Moved station definitions and routing configuration into factory-system/config directory with JSON and TypeScript loader."
+}

@@ -1,0 +1,8 @@
+{"ts":"2026-05-25T05:47:57.7823637-04:00","event":"experiment_start","experiment_id":"EB-wave2-repair-extract-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
+{"ts":"2026-05-25T05:47:57.7857790-04:00","event":"target_start","set_id":"entropy-qwen35-4b","context_tokens":262144}
+{"ts":"2026-05-25T05:48:18.7761208-04:00","event":"target_ready","set_id":"entropy-qwen35-4b","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"Qwen3.5-4B-Q4_K_M.gguf"}
+{"ts":"2026-05-25T05:50:53.7960688-04:00","event":"workload_failed","set_id":"entropy-qwen35-4b","workload":"webpage-chain","error":"webpage-chain validation failed: page index.html is missing title text"}
+{"ts":"2026-05-25T05:53:11.2092915-04:00","event":"workload_failed","set_id":"entropy-qwen35-4b","workload":"library-chain","error":"model response did not include choices text"}
+{"ts":"2026-05-25T06:01:05.4698920-04:00","event":"workload_failed","set_id":"entropy-qwen35-4b","workload":"factory","error":"factory validation failed: station count mismatch"}
+{"ts":"2026-05-25T06:01:05.4721638-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen35-4b-20260525-054757\\results.jsonl"}
+{"ts":"2026-05-25T06:01:05.5233727-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen35-4b-20260525-054757\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen35-4b-20260525-054757\\critique.json"}
