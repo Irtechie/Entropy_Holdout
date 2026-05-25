@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "site/page-3.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 3 - Webpage Chain</title>\n</head>\n<body>\n    <main id=\"main-content\">\n        <h1>Welcome to Page 3</h1>\n        <p>This is the third page in the webpage chain (web-003-chain-link).</p>\n        <p>You can navigate back to the previous page:</p>\n        <p><a href=\"page-2.html\">Go back to Page 2</a></p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created site/page-3.html and linked it back to site/page-2.html, preserving existing links."
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "benchmark": "EB",
+  "created_at": "2026-05-25T01:50:25.6257903-04:00",
+  "experiment_path": "E:\\Dev\\AI\\remote\\Entropy\\benchmarks\\entropy_workloads\\experiment.local-full-singlebox.json",
+  "targets_path": "E:\\Dev\\AI\\remote\\Entropy\\llmcommune-entropy-targets.json",
+  "controller": "http://192.168.1.203:4000",
+  "git_head": "d49520ef3b946fcc29105401519fb045fdbedf98",
+  "command": "pwsh \"E:\\Dev\\AI\\remote\\Entropy\\tools\\run_entropy_serial_experiment.ps1\" -ExperimentPath \"E:\\Dev\\AI\\remote\\Entropy\\benchmarks\\entropy_workloads\\experiment.local-full-singlebox.json\" -TargetsPath \"E:\\Dev\\AI\\remote\\Entropy\\llmcommune-entropy-targets.json\" -Base \"http://192.168.1.203:4000\" -ResultRoot \"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e4b-20260525-015024\" -OnlySet \"entropy-gemma4-e4b\"",
+  "result_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gemma4-e4b-20260525-015024",
+  "aggregate_results": ".\\runs\\EB\\EB-entropy-gemma4-e4b-20260525-015024\\results.jsonl",
+  "events": ".\\runs\\EB\\EB-entropy-gemma4-e4b-20260525-015024\\events.jsonl",
+  "critique": ".\\runs\\EB\\EB-entropy-gemma4-e4b-20260525-015024\\critique.md",
+  "critique_json": ".\\runs\\EB\\EB-entropy-gemma4-e4b-20260525-015024\\critique.json",
+  "keep_run_outputs": true,
+  "targets": [
+    {
+      "set_id": "entropy-gemma4-e4b",
+      "profile_id": "entropy_gguf_gemma4_e4b_large",
+      "parameter_count_b": 4,
+      "context_tokens": 262144,
+      "runtime_family": "llama.cpp",
+      "requires_gx10": false
+    }
+  ],
+  "workloads": [
+    "webpage-chain",
+    "library-chain",
+    "factory"
+  ]
+}

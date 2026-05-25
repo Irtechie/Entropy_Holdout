@@ -41,7 +41,7 @@ Wave 2 baseline rule: run `plain` EB per target, one folder per target, commit/p
 
 | # | Slice | Blocked By | Verification | Status |
 |---|-------|------------|--------------|--------|
-| 1 | entropy-gemma4-e4b | - | functional-cli | ⬜ pending |
+| 1 | entropy-gemma4-e4b | - | functional-cli | ✅ done |
 | 2 | entropy-qwen35-4b | - | functional-cli | ⬜ pending |
 | 3 | entropy-gptoss20 | - | functional-cli | ⬜ pending |
 | 4 | entropy-devstral-small2 | - | functional-cli | ⬜ pending |

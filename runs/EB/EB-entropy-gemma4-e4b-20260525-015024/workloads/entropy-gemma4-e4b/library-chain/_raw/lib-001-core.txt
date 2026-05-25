@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "path": "library-chain/core/core.py",
+      "content": "def greet(name: str) -> str:\n    \"\"\"Returns a greeting message.\"\"\"\n    return f\"Hello, {name} from Core!\""
+    },
+    {
+      "path": "library-chain/core/__init__.py",
+      "content": "from .core import greet"
+    },
+    {
+      "path": "library-chain/sample_caller.py",
+      "content": "from core import greet\n\ndef main():\n    message = greet(\"Entropy User\")\n    print(message)\n\nif __name__ == \"__main__\":\n    main()"
+    }
+  ],
+  "notes": "Created the core library with one public function (greet) and a minimal sample caller."
+}

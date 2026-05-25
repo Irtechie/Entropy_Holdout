@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "path": "library-chain/my_lib/my_lib.py",
+      "content": "from core import greet\n\ndef process_greeting(name: str) -> str:\n    \"\"\"Processes a greeting by calling the core library.\"\"\"\n    greeting = greet(name)\n    return f\"Processed: {greeting.upper()}\""
+    },
+    {
+      "path": "library-chain/my_lib/__init__.py",
+      "content": "from .my_lib import process_greeting"
+    },
+    {
+      "path": "library-chain/sample_caller.py",
+      "content": "from my_lib import process_greeting\n\ndef main():\n    message = process_greeting(\"Entropy User\")\n    print(message)\n\nif __name__ == \"__main__\":\n    main()"
+    }
+  ],
+  "notes": "Created the second library (my_lib) which depends on core and calls its public function. Updated sample_caller to demonstrate the full dependency chain."
+}

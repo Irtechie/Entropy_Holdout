@@ -13,14 +13,14 @@ slices:
     test_level: functional-cli
     functional_risk: narrow
     hitl: false
-    status: pending
+    status: done
     owner: agent
     blocked_reason: ""
     resume_when: ""
-    next_agent_action: "Run one-target EB, verify critique, commit and push the run folder."
+    next_agent_action: "Done. Continue with slice-002."
     human_action: ""
     can_continue_other_slices: true
-    notes: ""
+    notes: "run=runs/EB/EB-entropy-gemma4-e4b-20260525-015024; report: webpage 5/5 then final-validation missing_artifact, library 1/4 generation, factory 0/4 generation; proof=critique.md and report_entropy_results -Json"
   - id: slice-002
     title: "Run EB target entropy-qwen35-4b"
     path: docs/plans/2026-05-25-002-verification-eb-target-entropy-qwen35-4b-plan.md
@@ -316,7 +316,7 @@ Wave 3 should add a separate named harness mode, such as `repair-extract`, that 
 
 | # | Slice | Blocked By | Verification | HITL | Status |
 |---|-------|------------|--------------|------|--------|
-| 1 | Run EB target entropy-gemma4-e4b | - | functional-cli | no | pending |
+| 1 | Run EB target entropy-gemma4-e4b | - | functional-cli | no | done |
 | 2 | Run EB target entropy-qwen35-4b | - | functional-cli | no | pending |
 | 3 | Run EB target entropy-gptoss20 | - | functional-cli | no | pending |
 | 4 | Run EB target entropy-devstral-small2 | - | functional-cli | no | pending |

@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "site/page-2.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 2 - Webpage Chain</title>\n</head>\n<body>\n    <main id=\"main-content\">\n        <h1>Welcome to Page 2</h1>\n        <p>This is the second page in the webpage chain (web-002-backlink).</p>\n        <p>You can navigate back to the home page:</p>\n        <p><a href=\"index.html\">Go back to Home Page (Page 1)</a></p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created site/page-2.html and included a link back to site/index.html to satisfy the backlink requirement."
+}

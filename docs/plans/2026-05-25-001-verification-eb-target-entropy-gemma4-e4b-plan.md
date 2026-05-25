@@ -21,13 +21,15 @@ expected_files:
   - path: todo.md
     op: edit
     scope: "Sync live board status for this slice."
-status: pending
+status: done
 owner: agent
 blocked_reason: ""
 resume_when: ""
-next_agent_action: "Run EB for entropy-gemma4-e4b, report, commit, push."
+next_agent_action: "Done. Continue with slice-002."
 human_action: ""
 can_continue_other_slices: true
+run_folder: runs/EB/EB-entropy-gemma4-e4b-20260525-015024
+verification_proof: "pwsh .\\tools\\report_entropy_results.ps1 -ResultsPath .\\runs\\EB\\EB-entropy-gemma4-e4b-20260525-015024\\results.jsonl -Json"
 ---
 
 # Run EB Target Entropy Gemma4 E4B
@@ -54,4 +56,16 @@ pwsh .\tools\report_entropy_results.ps1 -ResultsPath "$run\results.jsonl" -Json
 ## Scope Boundary
 
 Do not repair generated model output in this slice. LLMCommune/model-serving recovery is allowed when the target has not wedged the lane. Output repair belongs to Wave 3.
+
+## Result
+
+Run folder: `runs/EB/EB-entropy-gemma4-e4b-20260525-015024/`
+
+Summary:
+
+- `webpage-chain`: 5/5 generation stages passed, then final validation failed because `index.html` was missing title text.
+- `library-chain`: reached 1/4, failed at `lib-002-dependent` due missing expected artifact path `library-chain/feature`.
+- `factory`: failed at 0/4 due malformed JSON content.
+
+This is a valid Wave 2 data point, not an LLMCommune wedge.
 
