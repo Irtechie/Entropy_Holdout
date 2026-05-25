@@ -55,22 +55,42 @@ function Invoke-JsonPost($url, $body, $timeoutSec) {
   }
 }
 
-function Invoke-ModelText($prompt) {
+function Invoke-ModelCompletion($prompt) {
   if (-not $ApiBaseUrl) { throw "-ApiBaseUrl is required for api mode" }
   if (-not $Model) { throw "-Model is required for api mode" }
 
-  $resp = Invoke-JsonPost "$ApiBaseUrl/v1/completions" @{
-    model = $Model
-    prompt = $prompt
-    max_tokens = 4096
-    temperature = 0
-  } 600
-
-  if ($resp.choices -and $resp.choices[0].text) {
-    return [string]$resp.choices[0].text
+  $resp = $null
+  try {
+    $resp = Invoke-JsonPost "$ApiBaseUrl/v1/chat/completions" @{
+      model = $Model
+      messages = @(
+        @{ role = 'system'; content = 'You are a code generator. Return only the requested JSON object. No prose.' },
+        @{ role = 'user'; content = $prompt }
+      )
+      max_tokens = 4096
+      temperature = 0
+    } 600
+  } catch {
+    $resp = Invoke-JsonPost "$ApiBaseUrl/v1/completions" @{
+      model = $Model
+      prompt = $prompt
+      max_tokens = 4096
+      temperature = 0
+    } 600
   }
-  if ($resp.choices -and $resp.choices[0].message -and $resp.choices[0].message.content) {
-    return [string]$resp.choices[0].message.content
+
+  $text = $null
+  if ($resp.choices -and $resp.choices[0].text) {
+    $text = [string]$resp.choices[0].text
+  } elseif ($resp.choices -and $resp.choices[0].message -and $resp.choices[0].message.content) {
+    $text = [string]$resp.choices[0].message.content
+  }
+  if ($null -ne $text) {
+    return [pscustomobject]@{
+      text = $text
+      raw = $resp
+      usage = $resp.usage
+    }
   }
   throw "model response did not include choices text"
 }
@@ -105,6 +125,12 @@ function Write-GeneratedFiles($runRoot, $files) {
     if (-not $file.path -or $null -eq $file.content) {
       throw "generated file entry must include path and content"
     }
+    if ([string]$file.path -eq 'relative/path/from/run/root') {
+      throw "model copied placeholder path instead of generating a real file path"
+    }
+    if ([string]$file.content -eq 'complete file content') {
+      throw "model copied placeholder content instead of generating real file content"
+    }
     $relative = ([string]$file.path).Replace('/', [System.IO.Path]::DirectorySeparatorChar)
     if ([System.IO.Path]::IsPathRooted($relative) -or $relative -like '*..*') {
       throw "refusing unsafe generated path: $($file.path)"
@@ -114,6 +140,21 @@ function Write-GeneratedFiles($runRoot, $files) {
     $written += ([string]$file.path).Replace('\','/')
   }
   return $written
+}
+
+function Assert-StageArtifactsWritten($stage, $written) {
+  if (@($written).Count -eq 0) {
+    throw "model did not generate any files"
+  }
+  foreach ($artifact in @($stage.expected_artifacts)) {
+    $expected = ([string]$artifact.path).Replace('\','/')
+    $matched = @($written | Where-Object {
+      $_ -eq $expected -or $_.StartsWith("$expected/")
+    })
+    if ($matched.Count -eq 0) {
+      throw "model did not generate expected artifact path: $expected"
+    }
+  }
 }
 
 function New-StagePrompt($workloadId, $stage, $existingFiles) {
@@ -179,6 +220,47 @@ function Invoke-WorkloadValidator($workloadId, $runRoot) {
   }
 }
 
+function Get-FailureClass($message) {
+  if ($message -match 'missing|not found') { return 'missing_artifact' }
+  if ($message -match 'build') { return 'build' }
+  if ($message -match 'link|href') { return 'link_integrity' }
+  if ($message -match 'json|JSON|placeholder|generate') { return 'generation' }
+  if ($message -match 'config') { return 'configuration' }
+  if ($message -match 'route|run|output|behavior') { return 'runtime_behavior' }
+  return 'harness'
+}
+
+function Complete-ApiWorkloadValidation($runRoot) {
+  $lastStage = @(Get-WorkloadStages $Workload | Sort-Object order | Select-Object -Last 1)[0]
+  try {
+    $validation = Invoke-WorkloadValidator $Workload $runRoot
+    Write-Host $validation
+  } catch {
+    $message = $_.Exception.Message
+    Write-Result ([ordered]@{
+      run_id = Split-Path -Leaf $runRoot
+      target_set_id = $TargetSetId
+      model_id = $Model
+      context_tokens = $ContextTokens
+      harness_mode = $HarnessMode
+      workload_id = $Workload
+      stage_id = 'final-validation'
+      stage_order = ([int]$lastStage.order + 1)
+      status = 'fail'
+      failure_class = Get-FailureClass $message
+      generated_files = @()
+      validator_results = @()
+      raw_response_path = $null
+      raw_response_json_path = $null
+      prompt_path = $null
+      token_usage = $null
+      elapsed_s = 0
+      error = $message
+    })
+    throw
+  }
+}
+
 function New-ApiWorkload($runRoot) {
   $stages = Get-WorkloadStages $Workload
   foreach ($stage in $stages) {
@@ -196,6 +278,10 @@ function New-ApiWorkload($runRoot) {
       failure_class = 'generation'
       generated_files = @()
       validator_results = @()
+      raw_response_path = $null
+      raw_response_json_path = $null
+      prompt_path = $null
+      token_usage = $null
       elapsed_s = $null
       error = $null
     }
@@ -203,25 +289,36 @@ function New-ApiWorkload($runRoot) {
     try {
       $existing = Get-RelativeFiles $runRoot
       $prompt = New-StagePrompt $Workload $stage $existing
-      $text = Invoke-ModelText $prompt
+      $rawDir = Join-Path $runRoot '_raw'
+      New-Item -ItemType Directory -Force -Path $rawDir | Out-Null
+      $promptPath = Join-Path $rawDir "$($stage.id).prompt.txt"
+      Set-Content -LiteralPath $promptPath -Value $prompt -Encoding UTF8
+      $row.prompt_path = (Resolve-Path -LiteralPath $promptPath).Path
+
+      $completion = Invoke-ModelCompletion $prompt
+      $text = $completion.text
+      $rawPath = Join-Path $rawDir "$($stage.id).txt"
+      Set-Content -LiteralPath $rawPath -Value $text -Encoding UTF8
+      $row.raw_response_path = (Resolve-Path -LiteralPath $rawPath).Path
+      $rawJsonPath = Join-Path $rawDir "$($stage.id).response.json"
+      $completion.raw | ConvertTo-Json -Depth 64 | Set-Content -LiteralPath $rawJsonPath -Encoding UTF8
+      $row.raw_response_json_path = (Resolve-Path -LiteralPath $rawJsonPath).Path
+      $row.token_usage = $completion.usage
       $parsed = ConvertFrom-JsonObjectText $text
       $written = Write-GeneratedFiles $runRoot $parsed.files
+      Assert-StageArtifactsWritten $stage $written
       $row.generated_files = @($written)
       $row.status = 'pass'
       $row.failure_class = 'none'
     } catch {
       $row.error = $_.Exception.Message
-      if ($row.error -match 'missing|not found') { $row.failure_class = 'missing_artifact' }
-      elseif ($row.error -match 'build') { $row.failure_class = 'build' }
-      elseif ($row.error -match 'link|href') { $row.failure_class = 'link_integrity' }
-      elseif ($row.error -match 'json|JSON') { $row.failure_class = 'generation' }
-      Write-Result $row
-      throw
+      $row.failure_class = Get-FailureClass $row.error
     } finally {
       $row.elapsed_s = [math]::Round(((Get-Date) - $started).TotalSeconds, 1)
+      Write-Result $row
     }
 
-    Write-Result $row
+    if ($row.status -ne 'pass') { throw $row.error }
   }
 }
 
@@ -486,18 +583,30 @@ New-Item -ItemType Directory -Force -Path $OutputRoot | Out-Null
 switch ($Workload) {
   'webpage-chain' {
     if ($Mode -eq 'mock') { New-WebpageChainMock $OutputRoot } else { New-ApiWorkload $OutputRoot }
-    $validation = Invoke-WorkloadValidator $Workload $OutputRoot
-    Write-Host $validation
+    if ($Mode -eq 'mock') {
+      $validation = Invoke-WorkloadValidator $Workload $OutputRoot
+      Write-Host $validation
+    } else {
+      Complete-ApiWorkloadValidation $OutputRoot
+    }
   }
   'library-chain' {
     if ($Mode -eq 'mock') { New-LibraryChainMock $OutputRoot } else { New-ApiWorkload $OutputRoot }
-    $validation = Invoke-WorkloadValidator $Workload $OutputRoot
-    Write-Host $validation
+    if ($Mode -eq 'mock') {
+      $validation = Invoke-WorkloadValidator $Workload $OutputRoot
+      Write-Host $validation
+    } else {
+      Complete-ApiWorkloadValidation $OutputRoot
+    }
   }
   'factory' {
     if ($Mode -eq 'mock') { New-FactoryMock $OutputRoot } else { New-ApiWorkload $OutputRoot }
-    $validation = Invoke-WorkloadValidator $Workload $OutputRoot
-    Write-Host $validation
+    if ($Mode -eq 'mock') {
+      $validation = Invoke-WorkloadValidator $Workload $OutputRoot
+      Write-Host $validation
+    } else {
+      Complete-ApiWorkloadValidation $OutputRoot
+    }
   }
 }
 

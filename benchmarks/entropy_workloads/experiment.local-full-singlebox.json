@@ -1,6 +1,6 @@
 {
-  "id": "local-full-singlebox",
-  "description": "Full single-box Entropy experiment. Excludes GX10/qwen235 dual-box targets.",
+  "id": "EB-local-full-singlebox",
+  "description": "Full single-box EB run. Excludes GX10/qwen235 dual-box targets.",
   "base_url": "http://192.168.1.203:4000",
   "harness_mode": "plain",
   "include_dual_box": false,

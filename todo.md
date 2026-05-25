@@ -14,7 +14,7 @@ Build and run Entropy staged code-generation benchmark workloads to measure how 
 
 ## Current Focus
 
-Mock/local Entropy workload harness is complete. Serial real-model experiment pattern is in place. Next likely work is running the first one-target real experiment.
+Mock/local EB harness is complete. Serial real-model experiment pattern is in place. First conservative real small-model baseline has run and is saved under `runs/EB/EB-local-small-20260525-012128/`.
 
 ## Current Truth
 
@@ -26,7 +26,9 @@ Mock/local Entropy workload harness is complete. Serial real-model experiment pa
   - Factory workload: generate the actual factory/system under increasing dependency pressure.
 - The mock benchmark path now reports where runs break by target/model, context size, harness mode, and workload.
 - Real model execution pattern is implemented via `tools/run_entropy_serial_experiment.ps1`.
-- Broad real runs have not been executed yet.
+- EB run folders live under `runs/EB/`.
+- Each EB run folder keeps `run.json`, `events.jsonl`, `results.jsonl`, `critique.md`, `critique.json`, prompts, raw model responses, raw API response JSON, token usage, and generated files.
+- The small baseline shows the harness is working and the smallest models break early under plain JSON/file-output prompting.
 
 ## Active Work
 
@@ -34,9 +36,10 @@ No active KB manifest is currently running.
 
 ## Queued Improvements
 
-- Run the first real experiment: `pwsh .\tools\run_entropy_serial_experiment.ps1 -OnlySet entropy-qwen25-coder-05b-large -OnlyWorkload webpage-chain`
+- Improve or add the next harness mode after plain mode, likely `file-carry` or a stricter repair/extraction mode.
+- Run the next tier after prompt/harness adjustment, probably starting at 4B+ instead of 0.5B.
 - Add harness modes beyond `mock`: likely `plain`, `file-carry`, and `entropy`.
-- Decide whether generated artifacts should be retained per real run or compacted after validation.
+- Decide whether later large generated artifacts should be retained per real run or compacted after validation. Current EB default is retain.
 
 ## Handoff Queue
 
@@ -54,7 +57,7 @@ No active KB manifest is currently running.
 
 ## Blocked
 
-- Broad model execution should wait until the first one-target webpage-chain result is inspected.
+- Broad single-box execution should wait until the small baseline failures are inspected and the next harness mode is defined.
 
 ## Work Log
 
@@ -64,3 +67,4 @@ No active KB manifest is currently running.
 - 2026-05-24: Slice 003 done. `pwsh .\tools\run_entropy_workload.ps1 -Workload library-chain -Mode mock` built and ran a .NET chain with output `core->feature->pipeline->contract`.
 - 2026-05-24: Slice 004 done with generic factory seed. `pwsh .\tools\run_entropy_workload.ps1 -Workload factory -Mode mock` validated route `intake->assembly->quality->shipping`.
 - 2026-05-24: Slice 005 done. Default mock matrix passed: webpage 5/5, library 4/4, factory 4/4.
+- 2026-05-25: First EB small serial experiment completed at `runs/EB/EB-local-small-20260525-012128/`. All 4 small targets failed under `plain` mode; best depth was Gemma E2B reaching webpage stage 4/5 and library stage 3/4 before strict artifact-path failures.

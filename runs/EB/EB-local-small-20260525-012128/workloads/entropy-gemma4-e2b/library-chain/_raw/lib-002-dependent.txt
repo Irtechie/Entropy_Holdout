@@ -1,0 +1,13 @@
+{
+  "files": [
+    {
+      "path": "library-chain/feature/Cargo.toml",
+      "content": "[package]\nname = \"library_chain_feature\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[dependencies]\nlibrary_chain_core = { path = \"../core\" }\n"
+    },
+    {
+      "path": "library-chain/feature/src/lib.rs",
+      "content": "use library_chain_core::add;\n\n/// Calculates the sum using the function from the core library.\npub fn calculate_sum(a: i32, b: i32) -> i32 {\n    add(a, b)\n}\n"
+    }
+  ],
+  "notes": "Created the second library 'library_chain_feature' which depends on 'library_chain_core' and calls its public function 'add'."
+}

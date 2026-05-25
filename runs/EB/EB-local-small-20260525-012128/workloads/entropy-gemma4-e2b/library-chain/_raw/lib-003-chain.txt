@@ -1,0 +1,13 @@
+{
+  "files": [
+    {
+      "path": "library-chain/pipeline/Cargo.toml",
+      "content": "[package]\nname = \"library_chain_pipeline\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[dependencies]\nlibrary_chain_feature = { path = \"../feature\" }\n"
+    },
+    {
+      "path": "library-chain/pipeline/src/lib.rs",
+      "content": "use library_chain_feature::calculate_sum;\n\n/// Orchestrates the calculation by using the feature library.\npub fn run_pipeline(a: i32, b: i32) -> i32 {\n    calculate_sum(a, b)\n}\n"
+    }
+  ],
+  "notes": "Created the third library 'library_chain_pipeline' which depends on 'library_chain_feature' and calls its function, completing the three-library chain."
+}

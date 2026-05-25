@@ -1,0 +1,7 @@
+{
+  "files": [
+    { "path": "lib-001-core/core-builds", "content": "build failure class=build" },
+    { "path": "lib-001-core/core-sample-runs", "content": "runtime_behavior failure_class=runtime_behavior" }
+  ],
+  "notes": "Created the first library with one public function and a tiny sample caller."
+}

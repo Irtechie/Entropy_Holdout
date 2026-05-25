@@ -7,6 +7,8 @@ param(
   [string[]]$OnlyWorkload = @(),
   [switch]$IncludeDualBox,
   [switch]$KeepRunOutputs,
+  [switch]$PruneRunOutputs,
+  [switch]$SkipCritique,
   [switch]$StopOnFailure,
   [int]$MaxTargets = 0
 )
@@ -25,12 +27,14 @@ if (-not $Base) {
 }
 if (-not $ResultRoot) {
   $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-  $ResultRoot = Join-Path $repoRoot "runs/entropy_experiments/$($experiment.id)-$stamp"
+  $ResultRoot = Join-Path $repoRoot "runs/EB/$($experiment.id)-$stamp"
 }
 
 New-Item -ItemType Directory -Force -Path $ResultRoot | Out-Null
 $aggregatePath = Join-Path $ResultRoot 'results.jsonl'
 $eventsPath = Join-Path $ResultRoot 'events.jsonl'
+$critiqueMarkdownPath = Join-Path $ResultRoot 'critique.md'
+$critiqueJsonPath = Join-Path $ResultRoot 'critique.json'
 
 function Write-Event($obj) {
   $obj | ConvertTo-Json -Depth 24 -Compress | Add-Content -LiteralPath $eventsPath -Encoding UTF8
@@ -154,8 +158,46 @@ if ($workloads.Count -eq 0) {
 }
 
 $harnessMode = if ($experiment.harness_mode) { [string]$experiment.harness_mode } else { 'plain' }
+$gitHead = ''
+try {
+  $gitHead = (git -C $repoRoot rev-parse HEAD).Trim()
+} catch {
+  $gitHead = ''
+}
 
-Write-Host "Entropy serial experiment"
+function Format-ReplayArg($value) {
+  return '"' + ([string]$value).Replace('"','\"') + '"'
+}
+
+$replayCommand = @(
+  'pwsh'
+  (Format-ReplayArg $MyInvocation.MyCommand.Path)
+  '-ExperimentPath'
+  (Format-ReplayArg (Resolve-Path -LiteralPath $ExperimentPath).Path)
+  '-TargetsPath'
+  (Format-ReplayArg (Resolve-Path -LiteralPath $TargetsPath).Path)
+  '-Base'
+  (Format-ReplayArg $Base)
+  '-ResultRoot'
+  (Format-ReplayArg (Resolve-Path -LiteralPath $ResultRoot).Path)
+)
+if ($OnlySet) {
+  $replayCommand += @('-OnlySet', (Format-ReplayArg $OnlySet))
+}
+foreach ($workload in @($OnlyWorkload)) {
+  $replayCommand += @('-OnlyWorkload', (Format-ReplayArg $workload))
+}
+if ($IncludeDualBox) { $replayCommand += '-IncludeDualBox' }
+if ($KeepRunOutputs) { $replayCommand += '-KeepRunOutputs' }
+if ($PruneRunOutputs) { $replayCommand += '-PruneRunOutputs' }
+if ($SkipCritique) { $replayCommand += '-SkipCritique' }
+if ($StopOnFailure) { $replayCommand += '-StopOnFailure' }
+if ($MaxTargets -gt 0) {
+  $replayCommand += @('-MaxTargets', [string]$MaxTargets)
+}
+$replayCommandText = $replayCommand -join ' '
+
+Write-Host "EB serial experiment"
 Write-Host "Experiment: $($experiment.id)"
 Write-Host "Controller: $Base"
 Write-Host "Targets: $($targets.Count)"
@@ -170,6 +212,34 @@ Write-Event ([ordered]@{
   target_count = $targets.Count
   workloads = $workloads
 })
+
+[ordered]@{
+  schema_version = 1
+  benchmark = 'EB'
+  created_at = (Get-Date).ToString('o')
+  experiment_path = (Resolve-Path -LiteralPath $ExperimentPath).Path
+  targets_path = (Resolve-Path -LiteralPath $TargetsPath).Path
+  controller = $Base
+  git_head = $gitHead
+  command = $replayCommandText
+  result_root = (Resolve-Path -LiteralPath $ResultRoot).Path
+  aggregate_results = (Join-Path $ResultRoot 'results.jsonl')
+  events = (Join-Path $ResultRoot 'events.jsonl')
+  critique = (Join-Path $ResultRoot 'critique.md')
+  critique_json = (Join-Path $ResultRoot 'critique.json')
+  keep_run_outputs = (-not $PruneRunOutputs.IsPresent) -or $KeepRunOutputs.IsPresent
+  targets = @($targets | ForEach-Object {
+    [ordered]@{
+      set_id = $_.set_id
+      profile_id = $_.profile_id
+      parameter_count_b = $_.parameter_count_b
+      context_tokens = $_.context_tokens
+      runtime_family = $_.runtime_family
+      requires_gx10 = $_.requires_gx10
+    }
+  })
+  workloads = $workloads
+} | ConvertTo-Json -Depth 16 | Set-Content -LiteralPath (Join-Path $ResultRoot 'run.json') -Encoding UTF8
 
 foreach ($target in $targets) {
   Write-Host "=== target $($target.set_id) ($($target.parameter_count_b)B ctx $($target.context_tokens)) ==="
@@ -224,7 +294,7 @@ foreach ($target in $targets) {
         if ($StopOnFailure) { throw }
       }
 
-      if (-not $KeepRunOutputs -and (Test-Path -LiteralPath $workloadRoot)) {
+      if ($PruneRunOutputs -and -not $KeepRunOutputs -and (Test-Path -LiteralPath $workloadRoot)) {
         Remove-Item -LiteralPath $workloadRoot -Recurse -Force -ErrorAction SilentlyContinue
       }
     }
@@ -236,4 +306,8 @@ foreach ($target in $targets) {
 }
 
 Write-Event ([ordered]@{ ts=(Get-Date).ToString('o'); event='experiment_done'; results=$aggregatePath })
+if (-not $SkipCritique -and (Test-Path -LiteralPath $aggregatePath)) {
+  & (Join-Path $PSScriptRoot 'write_eb_run_critique.ps1') -RunRoot $ResultRoot -OutputMarkdown $critiqueMarkdownPath -OutputJson $critiqueJsonPath | Out-Host
+  Write-Event ([ordered]@{ ts=(Get-Date).ToString('o'); event='critique_written'; markdown=$critiqueMarkdownPath; json=$critiqueJsonPath })
+}
 Write-Host "Complete: $aggregatePath"

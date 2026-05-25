@@ -1,0 +1,36 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Webpage 1</title>\\n</head>\\n<body>\\n    <h1>Webpage 1</h1>\\n    <p>Main content</p>\\n    <nav>\\n        <ul>\\n            <li>Home</li>\\n            <li>About</li>\\n            <li>Contact</li>\\n        </ul>\\n    </nav>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created index.html with title, main content, and a basic navigation area.\"\n}\n```"
+      }
+    }
+  ],
+  "created": 1779686923,
+  "model": "SmolLM3-Q4_K_M.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 195,
+    "prompt_tokens": 258,
+    "total_tokens": 453,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-dBeixtcqOd7dBPxAnkXbgOXsROC2ZSt6",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 258,
+    "prompt_ms": 78.026,
+    "prompt_per_token_ms": 0.3024263565891473,
+    "prompt_per_second": 3306.590110988645,
+    "predicted_n": 195,
+    "predicted_ms": 2139.763,
+    "predicted_per_token_ms": 10.97314358974359,
+    "predicted_per_second": 91.13158793754262
+  }
+}

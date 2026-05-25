@@ -1,0 +1,36 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    { \"path\": \"lib-001-core/core-builds\", \"content\": \"build failure class=build\" },\n    { \"path\": \"lib-001-core/core-sample-runs\", \"content\": \"runtime_behavior failure_class=runtime_behavior\" }\n  ],\n  \"notes\": \"Created the first library with one public function and a tiny sample caller.\"\n}"
+      }
+    }
+  ],
+  "created": 1779686507,
+  "model": "qwen2.5-coder-0.5b-instruct-q4_k_m.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 86,
+    "prompt_tokens": 219,
+    "total_tokens": 305,
+    "prompt_tokens_details": {
+      "cached_tokens": 38
+    }
+  },
+  "id": "chatcmpl-nIb1Ljnv8npzu1VqOUKdTH82wNb5B4Uw",
+  "timings": {
+    "cache_n": 38,
+    "prompt_n": 181,
+    "prompt_ms": 12.716,
+    "prompt_per_token_ms": 0.07025414364640883,
+    "prompt_per_second": 14234.035860333437,
+    "predicted_n": 86,
+    "predicted_ms": 263.313,
+    "predicted_per_token_ms": 3.0617790697674416,
+    "predicted_per_second": 326.60749754094934
+  }
+}

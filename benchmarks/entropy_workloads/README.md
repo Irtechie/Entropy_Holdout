@@ -1,6 +1,6 @@
-# Entropy Workload Benchmark Specs
+# EB Workload Benchmark Specs
 
-These files define staged code-generation workloads for measuring how far an Entropy model/harness combination can progress before generated code breaks.
+EB means Entropy Benchmark. These files define staged code-generation workloads for measuring how far an Entropy model/harness combination can progress before generated code breaks.
 
 The benchmark is not a throughput test and is not the same as the LLMCommune activation smoke runner. Activation proves a model endpoint is alive. These workloads prove whether a model can keep extending a generated codebase under growing dependency pressure.
 
@@ -51,7 +51,26 @@ Every stage result should record:
 - validator outcomes,
 - pass/fail status,
 - first failure class,
+- prompt path, raw extracted response path, and raw API response JSON path,
 - timing/token usage when available.
+
+Every serial EB run folder should keep:
+
+- `run.json`: replay metadata, controller, target list, workloads, and git baseline,
+- `events.jsonl`: activation and workload lifecycle events,
+- `results.jsonl`: aggregate stage rows,
+- `critique.md`: standardized human-readable critique,
+- `critique.json`: machine-readable critique with the same 0-5 rubric,
+- `workloads/<target>/<workload>/`: prompts, raw responses, generated files, and per-workload rows.
+
+The critique scale is fixed across runs:
+
+- `0`: no valid stage output or strict output-contract failure before useful code evaluation,
+- `1`: minimal first-stage progress,
+- `2`: partial local continuity,
+- `3`: meaningful cross-stage progress but incomplete workload invariants,
+- `4`: all generation stages completed but final validation failed,
+- `5`: all generation stages and final validation passed.
 
 Run the local contract check:
 
@@ -59,13 +78,13 @@ Run the local contract check:
 pwsh .\tools\entropy_workload_check.ps1
 ```
 
-Run a conservative real serial experiment:
+Run a conservative real EB serial experiment:
 
 ```powershell
 pwsh .\tools\run_entropy_serial_experiment.ps1 -ExperimentPath .\benchmarks\entropy_workloads\experiment.local-small.json
 ```
 
-For the first real run, use one target and one workload:
+For a first real run, use one target and one workload:
 
 ```powershell
 pwsh .\tools\run_entropy_serial_experiment.ps1 -OnlySet entropy-qwen25-coder-05b-large -OnlyWorkload webpage-chain

@@ -1,6 +1,6 @@
 {
-  "id": "local-small-smoke",
-  "description": "Conservative first real Entropy experiment: small proven single-box targets, all workloads, one by one.",
+  "id": "EB-local-small",
+  "description": "Conservative first EB run: small proven single-box targets, all workloads, one by one.",
   "base_url": "http://192.168.1.203:4000",
   "harness_mode": "plain",
   "include_dual_box": false,
