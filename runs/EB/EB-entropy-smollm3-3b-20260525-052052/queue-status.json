@@ -1,0 +1,17 @@
+{
+  "queue_id": "EB-wave1-small-individual",
+  "target_set_id": "entropy-smollm3-3b",
+  "slice_id": "wave1-small-004",
+  "classification": "completed-data-run",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-smollm3-3b-20260525-052052",
+  "started_at": "2026-05-25T05:20:52.8447192-04:00",
+  "finished_at": "2026-05-25T05:21:42.5988988-04:00",
+  "elapsed_s": 49.8,
+  "runner_exit_code": 0,
+  "results": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-smollm3-3b-20260525-052052\\results.jsonl",
+  "critique": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-smollm3-3b-20260525-052052\\critique.md",
+  "critique_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-smollm3-3b-20260525-052052\\critique.json",
+  "report_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-smollm3-3b-20260525-052052\\report.json",
+  "wedge_risk": false,
+  "wedge_detail": null
+}
