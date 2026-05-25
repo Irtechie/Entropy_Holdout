@@ -1,0 +1,8 @@
+{"ts":"2026-05-25T13:06:06.4511811-04:00","event":"experiment_start","experiment_id":"EB-LC-wave1-plain-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
+{"ts":"2026-05-25T13:06:06.4543453-04:00","event":"target_start","set_id":"entropy-qwen35-4b","context_tokens":262144}
+{"ts":"2026-05-25T13:06:27.3736444-04:00","event":"target_ready","set_id":"entropy-qwen35-4b","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"Qwen3.5-4B-Q4_K_M.gguf"}
+{"ts":"2026-05-25T13:07:48.9462919-04:00","event":"workload_failed","set_id":"entropy-qwen35-4b","workload":"webpage-chain","error":"model did not return a JSON object"}
+{"ts":"2026-05-25T13:09:09.8024882-04:00","event":"workload_failed","set_id":"entropy-qwen35-4b","workload":"library-chain","error":"model did not return a JSON object"}
+{"ts":"2026-05-25T13:10:30.9391299-04:00","event":"workload_failed","set_id":"entropy-qwen35-4b","workload":"factory","error":"model did not return a JSON object"}
+{"ts":"2026-05-25T13:10:30.9604969-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-qwen35-4b-20260525-130606\\results.jsonl"}
+{"ts":"2026-05-25T13:10:30.9906707-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-qwen35-4b-20260525-130606\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-qwen35-4b-20260525-130606\\critique.json"}
