@@ -176,7 +176,7 @@ def main() -> int:
 
     request = json.loads(Path(args.request).read_text(encoding="utf-8"))
     response = invoke(request)
-    print(json.dumps(response, ensure_ascii=False))
+    print(json.dumps(response, ensure_ascii=True))
     return 0
 
 
