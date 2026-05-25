@@ -1,0 +1,37 @@
+{
+  "files": [
+    {
+      "path": "library-chain/contracts/go.mod",
+      "content": "module example.com/contracts\n\ngo 1.22"
+    },
+    {
+      "path": "library-chain/contracts/contracts.go",
+      "content": "package contracts\n\n// Greeter defines a contract for greeting.\ntype Greeter interface {\n    Greet(name string) string\n}\n"
+    },
+    {
+      "path": "library-chain/core/go.mod",
+      "content": "module example.com/core\n\ngo 1.22\n\nrequire example.com/contracts v0.0.0\n\nreplace example.com/contracts => ../contracts"
+    },
+    {
+      "path": "library-chain/core/greeter.go",
+      "content": "package core\n\nimport \"example.com/contracts\"\n\n// CoreGreeter implements the Greeter contract using the core Hello function.\ntype CoreGreeter struct{}\n\nfunc (g CoreGreeter) Greet(name string) string {\n    return Hello(name)\n}\n\n// Compile‑time check that CoreGreeter satisfies contracts.Greeter.\nvar _ contracts.Greeter = CoreGreeter{}\n"
+    },
+    {
+      "path": "library-chain/feature/go.mod",
+      "content": "module example.com/feature\n\ngo 1.22\n\nrequire example.com/core v0.0.0\nrequire example.com/contracts v0.0.0\n\nreplace example.com/core => ../core\nreplace example.com/contracts => ../contracts"
+    },
+    {
+      "path": "library-chain/feature/greeter.go",
+      "content": "package feature\n\nimport (\n    \"example.com/contracts\"\n    \"example.com/core\"\n)\n\n// FeatureGreeter implements the Greeter contract by delegating to the core library.\ntype FeatureGreeter struct{}\n\nfunc (g FeatureGreeter) Greet(name string) string {\n    return core.Hello(name)\n}\n\n// Ensure FeatureGreeter satisfies contracts.Greeter.\nvar _ contracts.Greeter = FeatureGreeter{}\n"
+    },
+    {
+      "path": "library-chain/pipeline/go.mod",
+      "content": "module example.com/pipeline\n\ngo 1.22\n\nrequire example.com/feature v0.0.0\nrequire example.com/contracts v0.0.0\n\nreplace example.com/feature => ../feature\nreplace example.com/contracts => ../contracts"
+    },
+    {
+      "path": "library-chain/pipeline/greeter.go",
+      "content": "package pipeline\n\nimport (\n    \"example.com/contracts\"\n    \"example.com/feature\"\n)\n\n// PipelineGreeter implements the Greeter contract by delegating to the feature library.\ntype PipelineGreeter struct{}\n\nfunc (g PipelineGreeter) Greet(name string) string {\n    return feature.Greet(name)\n}\n\n// Ensure PipelineGreeter satisfies contracts.Greeter.\nvar _ contracts.Greeter = PipelineGreeter{}\n"
+    }
+  ],
+  "notes": "Added shared contracts package and updated core, feature, and pipeline to import and implement the Greeter interface without breaking existing samples."
+}

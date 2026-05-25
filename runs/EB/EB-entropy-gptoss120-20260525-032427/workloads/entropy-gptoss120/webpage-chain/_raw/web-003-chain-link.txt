@@ -1,0 +1,13 @@
+{
+  "files": [
+    {
+      "path": "site/page-2.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 2</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Home</a>\n        <a href=\"page-3.html\">Page 3</a>\n    </nav>\n    <main>\n        <h1>Page 2</h1>\n        <p>This is the second page in the chain.</p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-3.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 3</title>\n</head>\n<body>\n    <nav>\n        <a href=\"page-2.html\">Back to Page 2</a>\n    </nav>\n    <main>\n        <h1>Page 3</h1>\n        <p>This is the third page in the chain.</p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Added page-3.html linking back to page-2.html and updated page-2.html to include link to page-3.html while preserving existing backlink to index."
+}

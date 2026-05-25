@@ -1,0 +1,13 @@
+{
+  "files": [
+    {
+      "path": "library-chain/feature/go.mod",
+      "content": "module example.com/feature\n\ngo 1.22\n\nrequire example.com/core v0.0.0\n\nreplace example.com/core => ../core"
+    },
+    {
+      "path": "library-chain/feature/feature.go",
+      "content": "package feature\n\nimport \"example.com/core\"\n\n// Greet calls the core Hello function.\nfunc Greet(name string) string {\n    return core.Hello(name)\n}\n"
+    }
+  ],
+  "notes": "Added feature library that depends on core and forwards Hello via Greet."
+}

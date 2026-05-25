@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "benchmark": "EB",
+  "created_at": "2026-05-25T03:24:27.5450133-04:00",
+  "experiment_path": "E:\\Dev\\AI\\remote\\Entropy\\benchmarks\\entropy_workloads\\experiment.local-full-singlebox.json",
+  "targets_path": "E:\\Dev\\AI\\remote\\Entropy\\llmcommune-entropy-targets.json",
+  "controller": "http://192.168.1.203:4000",
+  "git_head": "719e0c6355f0ddf3e92241963ab1ed4f6965804e",
+  "command": "pwsh \"E:\\Dev\\AI\\remote\\Entropy\\tools\\run_entropy_serial_experiment.ps1\" -ExperimentPath \"E:\\Dev\\AI\\remote\\Entropy\\benchmarks\\entropy_workloads\\experiment.local-full-singlebox.json\" -TargetsPath \"E:\\Dev\\AI\\remote\\Entropy\\llmcommune-entropy-targets.json\" -Base \"http://192.168.1.203:4000\" -ResultRoot \"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\" -OnlySet \"entropy-gptoss120\"",
+  "result_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427",
+  "aggregate_results": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\results.jsonl",
+  "events": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\events.jsonl",
+  "critique": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\critique.md",
+  "critique_json": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\critique.json",
+  "keep_run_outputs": true,
+  "targets": [
+    {
+      "set_id": "entropy-gptoss120",
+      "profile_id": "entropy_gguf_gptoss120b_large",
+      "parameter_count_b": 120,
+      "context_tokens": 65536,
+      "runtime_family": "llama.cpp",
+      "requires_gx10": false
+    }
+  ],
+  "workloads": [
+    "webpage-chain",
+    "library-chain",
+    "factory"
+  ]
+}

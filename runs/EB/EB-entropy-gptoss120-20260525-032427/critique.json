@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "benchmark": "EB",
+  "generated_at": "2026-05-25T03:32:22.3586806-04:00",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427",
+  "results_path": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\results.jsonl",
+  "rubric": {
+    "scale": "0-5",
+    "score_meaning": {
+      "0": "No valid stage output or strict output contract failure before code evaluation.",
+      "1": "Only first-stage or minimal artifact progress.",
+      "2": "Some local continuity, but breaks before deeper dependency pressure.",
+      "3": "Meaningful cross-stage progress, but breaks before completing workload invariants.",
+      "4": "All planned generation stages completed, but final validator failed.",
+      "5": "All planned generation stages and final validation passed."
+    },
+    "dimensions": [
+      "output_contract",
+      "artifact_continuity",
+      "dependency_retention",
+      "validator_readiness",
+      "entropy_pressure"
+    ]
+  },
+  "totals": {
+    "target_workload_count": 3,
+    "fully_validated_count": 0,
+    "prompt_tokens": 67812,
+    "completion_tokens": 16177,
+    "total_tokens": 83989
+  },
+  "critiques": [
+    {
+      "target_set_id": "entropy-gptoss120",
+      "model_id": "gpt-oss-120b-Q4_K_M-00001-of-00002.gguf",
+      "context_tokens": 65536,
+      "harness_mode": "plain",
+      "workload_id": "factory",
+      "planned_stage_count": 4,
+      "stages_seen": 2,
+      "max_pass_stage": 1,
+      "entropy_right_shift": {
+        "passed_stages": 1,
+        "possible_stages": 4,
+        "normalized": 0.25,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "factory-002-stations",
+      "first_failure_class": "generation",
+      "first_error": "model did not generate expected artifact path: factory-system/stations",
+      "likely_entropy_cause": "The model produced files, but not at the paths required by the stage contract.",
+      "eb_score": 1,
+      "dimension_scores": {
+        "output_contract": 1,
+        "artifact_continuity": 1,
+        "dependency_retention": 1,
+        "validator_readiness": 1,
+        "entropy_pressure": 1
+      },
+      "token_usage": {
+        "prompt_tokens": 2761,
+        "completion_tokens": 2120,
+        "total_tokens": 4881
+      },
+      "breakpoint_metric": "highest ordered stage with valid component graph, configuration, and end-to-end factory behavior",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\factory\\_raw\\factory-001-layout.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\factory\\_raw\\factory-001-layout.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\factory\\_raw\\factory-002-stations.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\factory\\_raw\\factory-002-stations.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\factory\\_raw\\factory-001-layout.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\factory\\_raw\\factory-002-stations.prompt.txt"
+      ],
+      "generated_file_count": 6,
+      "generated_files": [
+        "factory-system/src/component.ts",
+        "factory-system/src/station.ts",
+        "factory-system/src/product.ts",
+        "factory-system/src/routing.ts",
+        "factory-system/src/index.ts",
+        "factory-system/package.json"
+      ]
+    },
+    {
+      "target_set_id": "entropy-gptoss120",
+      "model_id": "gpt-oss-120b-Q4_K_M-00001-of-00002.gguf",
+      "context_tokens": 65536,
+      "harness_mode": "plain",
+      "workload_id": "library-chain",
+      "planned_stage_count": 4,
+      "stages_seen": 5,
+      "max_pass_stage": 4,
+      "entropy_right_shift": {
+        "passed_stages": 4,
+        "possible_stages": 4,
+        "normalized": 1.0,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "final-validation",
+      "first_failure_class": "missing_artifact",
+      "first_error": "library-chain validation failed: missing project: CoreLib/CoreLib.csproj",
+      "likely_entropy_cause": "The generated tree did not preserve or create a required artifact.",
+      "eb_score": 4,
+      "dimension_scores": {
+        "output_contract": 4,
+        "artifact_continuity": 3,
+        "dependency_retention": 4,
+        "validator_readiness": 3,
+        "entropy_pressure": 5
+      },
+      "token_usage": {
+        "prompt_tokens": 17645,
+        "completion_tokens": 4903,
+        "total_tokens": 22548
+      },
+      "breakpoint_metric": "highest ordered stage with valid dependency references, build output, and sample call",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\library-chain\\_raw\\lib-001-core.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\library-chain\\_raw\\lib-001-core.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\library-chain\\_raw\\lib-002-dependent.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\library-chain\\_raw\\lib-002-dependent.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\library-chain\\_raw\\lib-003-chain.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\library-chain\\_raw\\lib-003-chain.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\library-chain\\_raw\\lib-004-shared-interface.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\library-chain\\_raw\\lib-004-shared-interface.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\library-chain\\_raw\\lib-001-core.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\library-chain\\_raw\\lib-002-dependent.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\library-chain\\_raw\\lib-003-chain.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\library-chain\\_raw\\lib-004-shared-interface.prompt.txt"
+      ],
+      "generated_file_count": 13,
+      "generated_files": [
+        "library-chain/core/go.mod",
+        "library-chain/core/core.go",
+        "library-chain/core/main.go",
+        "library-chain/feature/go.mod",
+        "library-chain/feature/feature.go",
+        "library-chain/pipeline/go.mod",
+        "library-chain/pipeline/pipeline.go",
+        "library-chain/pipeline/main.go",
+        "library-chain/contracts/go.mod",
+        "library-chain/contracts/contracts.go",
+        "library-chain/core/greeter.go",
+        "library-chain/feature/greeter.go",
+        "library-chain/pipeline/greeter.go"
+      ]
+    },
+    {
+      "target_set_id": "entropy-gptoss120",
+      "model_id": "gpt-oss-120b-Q4_K_M-00001-of-00002.gguf",
+      "context_tokens": 65536,
+      "harness_mode": "plain",
+      "workload_id": "webpage-chain",
+      "planned_stage_count": 5,
+      "stages_seen": 5,
+      "max_pass_stage": 4,
+      "entropy_right_shift": {
+        "passed_stages": 4,
+        "possible_stages": 5,
+        "normalized": 0.8,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "web-005-nested-shared-table",
+      "first_failure_class": "generation",
+      "first_error": "Conversion from JSON failed with error: Unexpected end when deserializing object. Path 'files[1]', line 10, position 5.",
+      "likely_entropy_cause": "The model lost the strict JSON response contract before code could be evaluated.",
+      "eb_score": 3,
+      "dimension_scores": {
+        "output_contract": 0,
+        "artifact_continuity": 3,
+        "dependency_retention": 3,
+        "validator_readiness": 2,
+        "entropy_pressure": 4
+      },
+      "token_usage": {
+        "prompt_tokens": 47406,
+        "completion_tokens": 9154,
+        "total_tokens": 56560
+      },
+      "breakpoint_metric": "highest ordered stage with valid pages, backlinks, and shared structure",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\webpage-chain\\_raw\\web-001-home.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\webpage-chain\\_raw\\web-001-home.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\webpage-chain\\_raw\\web-002-backlink.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\webpage-chain\\_raw\\web-002-backlink.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\webpage-chain\\_raw\\web-003-chain-link.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\webpage-chain\\_raw\\web-003-chain-link.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\webpage-chain\\_raw\\web-004-shared-nav.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\webpage-chain\\_raw\\web-004-shared-nav.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\webpage-chain\\_raw\\web-005-nested-shared-table.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\webpage-chain\\_raw\\web-005-nested-shared-table.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\webpage-chain\\_raw\\web-001-home.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\webpage-chain\\_raw\\web-002-backlink.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\webpage-chain\\_raw\\web-003-chain-link.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\webpage-chain\\_raw\\web-004-shared-nav.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-gptoss120-20260525-032427\\workloads\\entropy-gptoss120\\webpage-chain\\_raw\\web-005-nested-shared-table.prompt.txt"
+      ],
+      "generated_file_count": 4,
+      "generated_files": [
+        "site/index.html",
+        "site/page-2.html",
+        "site/page-3.html",
+        "site/page-4.html"
+      ]
+    }
+  ]
+}

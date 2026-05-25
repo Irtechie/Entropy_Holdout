@@ -1,0 +1,29 @@
+{
+  "files": [
+    {
+      "path": "factory-system/src/component.ts",
+      "content": "export interface Component {\n  id: string;\n  name: string;\n  description?: string;\n}"
+    },
+    {
+      "path": "factory-system/src/station.ts",
+      "content": "export interface Station {\n  id: string;\n  name: string;\n  location?: string;\n}"
+    },
+    {
+      "path": "factory-system/src/product.ts",
+      "content": "export interface Product {\n  id: string;\n  name: string;\n  sku?: string;\n}"
+    },
+    {
+      "path": "factory-system/src/routing.ts",
+      "content": "export interface Routing {\n  id: string;\n  fromStationId: string;\n  toStationId: string;\n  productId?: string;\n}"
+    },
+    {
+      "path": "factory-system/src/index.ts",
+      "content": "export * from \"./component\";\nexport * from \"./station\";\nexport * from \"./product\";\nexport * from \"./routing\";\n"
+    },
+    {
+      "path": "factory-system/package.json",
+      "content": "{\n  \"name\": \"factory-system\",\n  \"version\": \"0.1.0\",\n  \"main\": \"src/index.ts\",\n  \"type\": \"module\"\n}"
+    }
+  ],
+  "notes": "Created factory-system project layout with core type definitions for component, station, product, and routing."
+}

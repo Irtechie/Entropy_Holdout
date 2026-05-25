@@ -1,0 +1,37 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/feature/go.mod\",\n      \"content\": \"module example.com/feature\\n\\ngo 1.22\\n\\nrequire example.com/core v0.0.0\\n\\nreplace example.com/core => ../core\"\n    },\n    {\n      \"path\": \"library-chain/feature/feature.go\",\n      \"content\": \"package feature\\n\\nimport \\\"example.com/core\\\"\\n\\n// Greet calls the core Hello function.\\nfunc Greet(name string) string {\\n    return core.Hello(name)\\n}\\n\"\n    }\n  ],\n  \"notes\": \"Added feature library that depends on core and forwards Hello via Greet.\"\n}",
+        "reasoning_content": "We need to create second library that depends on first library and calls its public function.\n\nProject structure: library-chain/feature (project). So we need to create a new module under library-chain/feature that imports example.com/core and calls core.Hello.\n\nWe need go.mod for feature module, maybe module example.com/feature.\n\nAdd a file feature.go with a function that calls core.Hello? Or a main program? The stage goal: \"Create a second library that depends on the first library and calls its public function.\" So a library (not a main) that imports core and provides a function that calls core.Hello. Could also have a sample usage? But validators: feature-references-core: failure_class=api_contract, feature-builds: failure_class=build. So they will check that feature library references core correctly (API contract). So we need to expose a function that calls core.Hello.\n\nThus create library-chain/feature/go.mod, library-chain/feature/feature.go.\n\nIn go.mod: module example.com/feature, require example.com/core v0.0.0? Since core is local, we can use replace directive. Use go.mod with replace example.com/core => ../core. Also require example.com/core v0.0.0.\n\nSo go.mod content:\n\nmodule example.com/feature\n\ngo 1.22\n\nrequire example.com/core v0.0.0\n\nreplace example.com/core => ./../core\n\nBut relative path from feature to core: \"../core\". Since go.mod is in library-chain/feature, relative path is \"../core\". So replace example.com/core => ../core.\n\nAdd feature.go:\n\npackage feature\n\nimport \"example.com/core\"\n\nfunc Greet(name string) string {\n    return core.Hello(name)\n}\n\nOptionally add a comment.\n\nThat's all.\n\nWe need to include any other files? Possibly a test? Not required.\n\nThus JSON with two files.\n\nMake sure path uses forward slashes.\n\nReturn JSON.\n\n"
+      }
+    }
+  ],
+  "created": 1779694217,
+  "model": "gpt-oss-120b-Q4_K_M-00001-of-00002.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 557,
+    "prompt_tokens": 1769,
+    "total_tokens": 2326,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-pt01DMl1BizS3DIM0WYAl3V5dBN87BD2",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 1769,
+    "prompt_ms": 1380.852,
+    "prompt_per_token_ms": 0.7805833804409271,
+    "prompt_per_second": 1281.0931222172976,
+    "predicted_n": 557,
+    "predicted_ms": 9532.351,
+    "predicted_per_token_ms": 17.113736086175944,
+    "predicted_per_second": 58.43259443551753
+  }
+}
