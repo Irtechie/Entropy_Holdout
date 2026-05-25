@@ -17,6 +17,24 @@ function Read-JsonFile($path) {
   return Get-Content -Raw -LiteralPath $path | ConvertFrom-Json -Depth 32
 }
 
+function Get-Stations($config) {
+  $items = @($config)
+  if ($items.Count -eq 1 -and $items[0].PSObject.Properties['stations']) {
+    return @($items[0].stations)
+  }
+  return $items
+}
+
+function Get-RouteSegments($value) {
+  $items = @($value)
+  if ($items.Count -gt 1) {
+    return @($items | ForEach-Object { [string]$_ } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+  }
+  $text = ($value -join "`n").Trim()
+  $text = $text -replace '(?i)^route:\s*', ''
+  return @($text -split '\s*->\s*' | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+}
+
 $spec = Read-JsonFile $SpecPath
 $factoryRoot = Join-Path $RunRoot $spec.output_dir
 if (-not (Test-Path -LiteralPath $factoryRoot -PathType Container)) {
@@ -28,11 +46,12 @@ $scriptPath = Join-Path $factoryRoot 'src/factory.ps1'
 $reportPath = Join-Path $factoryRoot 'dashboard/report.json'
 
 $config = Read-JsonFile $configPath
-if (@($config.stations).Count -ne @($spec.stations).Count) {
+$stations = Get-Stations $config
+if (@($stations).Count -ne @($spec.stations).Count) {
   Fail "station count mismatch"
 }
 
-$stationIds = @($config.stations | ForEach-Object { $_.id })
+$stationIds = @($stations | ForEach-Object { $_.id })
 foreach ($expectedId in @($spec.expected_route)) {
   if ($stationIds -notcontains $expectedId) {
     Fail "missing station id $expectedId"
@@ -48,7 +67,7 @@ if ($LASTEXITCODE -ne 0) {
   Fail "factory script failed: $($runOutput -join "`n")"
 }
 
-$actualRoute = (($runOutput -join "`n").Trim() -split '\s*->\s*')
+$actualRoute = Get-RouteSegments $runOutput
 $expectedRoute = @($spec.expected_route)
 if ($actualRoute.Count -ne $expectedRoute.Count) {
   Fail "route length mismatch: $($actualRoute -join '->')"
@@ -63,7 +82,8 @@ $report = Read-JsonFile $reportPath
 if ($report.product_id -ne $spec.sample_product.id) {
   Fail "dashboard report product id mismatch"
 }
-if (($report.route -join '->') -ne ($expectedRoute -join '->')) {
+$reportRoute = Get-RouteSegments $report.route
+if (($reportRoute -join '->') -ne ($expectedRoute -join '->')) {
   Fail "dashboard report route mismatch"
 }
 

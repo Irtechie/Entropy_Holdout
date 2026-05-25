@@ -35,10 +35,11 @@ foreach ($project in @($spec.projects)) {
     Fail "missing project: $($project.path)"
   }
   $projectXml = Get-Content -Raw -LiteralPath $projectPath
+  $normalizedProjectXml = $projectXml.Replace('/', '\')
   Assert-Contains $projectXml "<TargetFramework>$($spec.target_framework)</TargetFramework>" "project $($project.name) has wrong target framework"
   foreach ($reference in @($project.references)) {
     $expected = $reference.Replace('/', '\')
-    Assert-Contains $projectXml $expected "project $($project.name) missing reference $reference"
+    Assert-Contains $normalizedProjectXml $expected "project $($project.name) missing reference $reference"
   }
 }
 
