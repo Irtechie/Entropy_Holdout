@@ -1,0 +1,8 @@
+{"ts":"2026-05-25T13:15:46.3649253-04:00","event":"experiment_start","experiment_id":"EB-LC-wave1-plain-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
+{"ts":"2026-05-25T13:15:46.3685763-04:00","event":"target_start","set_id":"entropy-devstral-small2","context_tokens":131072}
+{"ts":"2026-05-25T13:16:15.3469984-04:00","event":"target_ready","set_id":"entropy-devstral-small2","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf"}
+{"ts":"2026-05-25T13:21:31.1112991-04:00","event":"workload_done","set_id":"entropy-devstral-small2","workload":"webpage-chain"}
+{"ts":"2026-05-25T13:22:24.6046535-04:00","event":"workload_failed","set_id":"entropy-devstral-small2","workload":"library-chain","error":"model did not generate expected artifact path: library-chain/core"}
+{"ts":"2026-05-25T13:24:08.0457785-04:00","event":"workload_failed","set_id":"entropy-devstral-small2","workload":"factory","error":"model did not generate expected artifact path: factory-system/stations"}
+{"ts":"2026-05-25T13:24:08.0474693-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-devstral-small2-20260525-131546\\results.jsonl"}
+{"ts":"2026-05-25T13:24:08.0764279-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-devstral-small2-20260525-131546\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave1-plain-entropy-devstral-small2-20260525-131546\\critique.json"}

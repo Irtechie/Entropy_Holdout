@@ -1,0 +1,11 @@
+```json
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Entropy Page 1</title>\n</head>\n<body>\n    <nav>\n        <!-- Navigation area for future links -->\n    </nav>\n    <main>\n        <h1>Welcome to Entropy Page 1</h1>\n        <p>This is the main content area.</p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created index.html with title, main content, and empty navigation area."
+}
+```

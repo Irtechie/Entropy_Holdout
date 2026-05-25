@@ -1,0 +1,31 @@
+```json
+{
+  "files": [
+    {
+      "path": "library-chain/CoreLib/CoreLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n  </PropertyGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/FeatureLib/FeatureLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"../CoreLib/CoreLib.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/PipelineLib/PipelineLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"../FeatureLib/FeatureLib.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/Contracts/Contracts.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n  </PropertyGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/SampleApp/SampleApp.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <OutputType>Exe</OutputType>\n    <TargetFramework>net10.0</TargetFramework>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"../PipelineLib/PipelineLib.csproj\" />\n    <ProjectReference Include=\"../Contracts/Contracts.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/SampleApp/Program.cs",
+      "content": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        Console.WriteLine(\"core->feature->pipeline->contract\");\n    }\n}"
+    }
+  ],
+  "notes": "Created .NET 1.0 projects with required references and sample app."
+}
+```

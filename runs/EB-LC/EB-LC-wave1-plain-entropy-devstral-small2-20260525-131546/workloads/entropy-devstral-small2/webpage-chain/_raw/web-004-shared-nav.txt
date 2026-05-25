@@ -1,0 +1,23 @@
+```json
+{
+  "files": [
+    {
+      "path": "site/page-4.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Entropy Page 4</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Entropy Page 1</a> |\n        <a href=\"page-2.html\">Entropy Page 2</a> |\n        <a href=\"page-3.html\">Entropy Page 3</a> |\n        <a href=\"page-4.html\">Entropy Page 4</a>\n    </nav>\n    <main>\n        <h1>Welcome to Entropy Page 4</h1>\n        <p>This is the main content area.</p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/index.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Entropy Page 1</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Entropy Page 1</a> |\n        <a href=\"page-2.html\">Entropy Page 2</a> |\n        <a href=\"page-3.html\">Entropy Page 3</a> |\n        <a href=\"page-4.html\">Entropy Page 4</a>\n    </nav>\n    <main>\n        <h1>Welcome to Entropy Page 1</h1>\n        <p>This is the main content area.</p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-2.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Entropy Page 2</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Entropy Page 1</a> |\n        <a href=\"page-2.html\">Entropy Page 2</a> |\n        <a href=\"page-3.html\">Entropy Page 3</a> |\n        <a href=\"page-4.html\">Entropy Page 4</a>\n    </nav>\n    <main>\n        <h1>Welcome to Entropy Page 2</h1>\n        <p>This is the main content area.</p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-3.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Entropy Page 3</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Entropy Page 1</a> |\n        <a href=\"page-2.html\">Entropy Page 2</a> |\n        <a href=\"page-3.html\">Entropy Page 3</a> |\n        <a href=\"page-4.html\">Entropy Page 4</a>\n    </nav>\n    <main>\n        <h1>Welcome to Entropy Page 3</h1>\n        <p>This is the main content area.</p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Added shared navigation to all pages and created page-4.html with backlink to page-3.html."
+}
+```

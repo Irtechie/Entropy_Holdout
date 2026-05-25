@@ -1,0 +1,35 @@
+[
+  {
+    "target_set_id": "entropy-devstral-small2",
+    "model_id": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+    "context_tokens": 131072,
+    "harness_mode": "plain",
+    "workload_id": "factory",
+    "stages_seen": 2,
+    "max_pass_stage": 1,
+    "first_fail_stage": "factory-002-stations",
+    "first_failure_class": "generation"
+  },
+  {
+    "target_set_id": "entropy-devstral-small2",
+    "model_id": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+    "context_tokens": 131072,
+    "harness_mode": "plain",
+    "workload_id": "library-chain",
+    "stages_seen": 1,
+    "max_pass_stage": 0,
+    "first_fail_stage": "lib-001-core",
+    "first_failure_class": "generation"
+  },
+  {
+    "target_set_id": "entropy-devstral-small2",
+    "model_id": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+    "context_tokens": 131072,
+    "harness_mode": "plain",
+    "workload_id": "webpage-chain",
+    "stages_seen": 5,
+    "max_pass_stage": 5,
+    "first_fail_stage": null,
+    "first_failure_class": "none"
+  }
+]

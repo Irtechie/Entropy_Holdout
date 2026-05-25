@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"site/page-4.html\",\n      \"content\": \"<!doctype html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Entropy Page 4</title>\\n</head>\\n<body>\\n    <nav>\\n        <a href=\\\"index.html\\\">Entropy Page 1</a> |\\n        <a href=\\\"page-2.html\\\">Entropy Page 2</a> |\\n        <a href=\\\"page-3.html\\\">Entropy Page 3</a> |\\n        <a href=\\\"page-4.html\\\">Entropy Page 4</a>\\n    </nav>\\n    <main>\\n        <h1>Welcome to Entropy Page 4</h1>\\n        <p>This is the main content area.</p>\\n    </main>\\n</body>\\n</html>\"\n    },\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!doctype html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Entropy Page 1</title>\\n</head>\\n<body>\\n    <nav>\\n        <a href=\\\"index.html\\\">Entropy Page 1</a> |\\n        <a href=\\\"page-2.html\\\">Entropy Page 2</a> |\\n        <a href=\\\"page-3.html\\\">Entropy Page 3</a> |\\n        <a href=\\\"page-4.html\\\">Entropy Page 4</a>\\n    </nav>\\n    <main>\\n        <h1>Welcome to Entropy Page 1</h1>\\n        <p>This is the main content area.</p>\\n    </main>\\n</body>\\n</html>\"\n    },\n    {\n      \"path\": \"site/page-2.html\",\n      \"content\": \"<!doctype html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Entropy Page 2</title>\\n</head>\\n<body>\\n    <nav>\\n        <a href=\\\"index.html\\\">Entropy Page 1</a> |\\n        <a href=\\\"page-2.html\\\">Entropy Page 2</a> |\\n        <a href=\\\"page-3.html\\\">Entropy Page 3</a> |\\n        <a href=\\\"page-4.html\\\">Entropy Page 4</a>\\n    </nav>\\n    <main>\\n        <h1>Welcome to Entropy Page 2</h1>\\n        <p>This is the main content area.</p>\\n    </main>\\n</body>\\n</html>\"\n    },\n    {\n      \"path\": \"site/page-3.html\",\n      \"content\": \"<!doctype html>\\n<html lang=\\\"en\\\">\\n<head>\\n    <meta charset=\\\"UTF-8\\\">\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n    <title>Entropy Page 3</title>\\n</head>\\n<body>\\n    <nav>\\n        <a href=\\\"index.html\\\">Entropy Page 1</a> |\\n        <a href=\\\"page-2.html\\\">Entropy Page 2</a> |\\n        <a href=\\\"page-3.html\\\">Entropy Page 3</a> |\\n        <a href=\\\"page-4.html\\\">Entropy Page 4</a>\\n    </nav>\\n    <main>\\n        <h1>Welcome to Entropy Page 3</h1>\\n        <p>This is the main content area.</p>\\n    </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Added shared navigation to all pages and created page-4.html with backlink to page-3.html.\"\n}\n```",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 934,
+      "prompt_tokens": 11079,
+      "total_tokens": 12013,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 43
+      }
+    },
+    "model_name": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-z7Hxz0AwUj3hd5TvHrELBw7zO5UO5yuI",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 11079,
+    "output_tokens": 934,
+    "total_tokens": 12013,
+    "input_token_details": {
+      "cache_read": 43
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "be7f5382161f692909f1e9c4fa230123",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-devstral-small2",
+      "webpage-chain"
+    ]
+  }
+}

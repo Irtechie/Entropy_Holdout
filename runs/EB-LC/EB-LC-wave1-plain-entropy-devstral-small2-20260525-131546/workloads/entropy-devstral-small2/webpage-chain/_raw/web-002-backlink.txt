@@ -1,0 +1,11 @@
+```json
+{
+  "files": [
+    {
+      "path": "site/page-2.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Entropy Page 2</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Back to Entropy Page 1</a>\n    </nav>\n    <main>\n        <h1>Welcome to Entropy Page 2</h1>\n        <p>This is the main content area.</p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created page-2.html with title, main content, and backlink to index.html."
+}
+```
