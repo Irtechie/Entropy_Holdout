@@ -1,0 +1,13 @@
+{
+  "files": [
+    {
+      "path": "factory-system/src/factory_system/core/types.py",
+      "content": "from dataclasses import dataclass\nfrom typing import List\n\n@dataclass\nclass Component:\n    id: str\n    name: str\n\n@dataclass\nclass Station:\n    id: str\n    name: str\n    capacity: int\n\n@dataclass\nclass Product:\n    id: str\n    name: str\n    components: List[Component]\n\n@dataclass\nclass Routing:\n    id: str\n    product_id: str\n    stations: List[Station]\n\n@dataclass\nclass Connection:\n    from_station_id: str\n    to_station_id: str\n"
+    },
+    {
+      "path": "factory-system/src/factory_system/core/__init__.py",
+      "content": "from .types import Component, Station, Product, Routing, Connection\n\n__all__ = [\"Component\", \"Station\", \"Product\", \"Routing\", \"Connection\"]\n"
+    },
+    {
+      "path": "factory-system/src/factory_system/__init__.py",
+      "content": "from .core import Component,

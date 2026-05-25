@@ -1,0 +1,37 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/contracts/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"chain_contracts\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[dependencies]\\n\"\n    },\n    {\n      \"path\": \"library-chain/contracts/src/lib.rs\",\n      \"content\": \"pub trait Operation {\\n    fn execute(&self, value: i32) -> i32;\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"chain_core\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[dependencies]\\nchain_contracts = { path = \\\"../contracts\\\" }\\n\"\n    },\n    {\n      \"path\": \"library-chain/core/src/lib.rs\",\n      \"content\": \"use chain_contracts::Operation;\\n\\npub struct DoubleOp;\\n\\nimpl Operation for DoubleOp {\\n    fn execute(&self, value: i32) -> i32 {\\n        value * 2\\n    }\\n}\\n\\npub fn double(x: i32) -> i32 {\\n    DoubleOp.execute(x)\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/feature/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"chain_feature\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[dependencies]\\nchain_core = { path = \\\"../core\\\" }\\nchain_contracts = { path = \\\"../contracts\\\" }\\n\"\n    },\n    {\n      \"path\": \"library-chain/feature/src/lib.rs\",\n      \"content\": \"use chain_contracts::Operation;\\n\\npub struct TripleOp;\\n\\nimpl Operation for TripleOp {\\n    fn execute(&self, value: i32) -> i32 {\\n        chain_core::double(value) + value\\n    }\\n}\\n\\npub fn triple(x: i32) -> i32 {\\n    TripleOp.execute(x)\\n}\\n\"\n    },\n    {\n      \"path\": \"library-chain/pipeline/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"chain_pipeline\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[dependencies]\\nchain_feature = { path = \\\"../feature\\\" }\\nchain_contracts = { path = \\\"../contracts\\\" }\\n\"\n    },\n    {\n      \"path\": \"library-chain/pipeline/src/lib.rs\",\n      \"content\": \"use chain_contracts::Operation;\\n\\npub struct QuadrupleOp;\\n\\nimpl Operation for QuadrupleOp {\\n    fn execute(&self, value: i32) -> i32 {\\n        chain_feature::triple(value) + value\\n    }\\n}\\n\\npub fn quadruple(x: i32) -> i32 {\\n    QuadrupleOp.execute(x)\\n}\\n\"\n    }\n  ],\n  \"notes\": \"Created shared contracts crate with Operation trait and updated all libraries to implement it.\"\n}",
+        "reasoning_content": "The user is asking me to generate code for stage 4 of the library-chain benchmark. Looking at the existing files, I can see:\n\n1. Stage 1 (lib-001-core): Created `library-chain/core` with `double(x)` function\n2. Stage 2 (lib-002-dependent): Created `library-chain/feature` with `triple(x)` function that calls `chain_core::double(x) + x`\n3. Stage 3 (lib-003-chain): Created `library-chain/pipeline` with `quadruple(x)` function that calls `chain_feature::triple(x) + x`\n\nNow for Stage 4 (lib-004-shared-interface), the goal is:\n- Introduce a shared interface or contract that all three libraries must use without breaking the sample.\n- Expected artifacts: `library-chain/contracts` (project)\n- Validators: `contract-used-by-all-libraries` and `full-chain-builds`\n\nI need to create a shared interface/contract project that all three libraries can depend on. This should define a trait or interface that the functions implement.\n\nIn Rust, this would typically be a trait defined in a separate crate that all other crates depend on.\n\nLet me create:\n1. `library-chain/contracts/Cargo.toml` - The contract crate\n2. `library-chain/contracts/src/lib.rs` - The trait/interface definition\n\nThen I'll need to update the existing libraries to use this contract. However, the prompt says \"Include every new or modified file needed for this stage to pass.\" So I should include the contract project AND potentially update the existing libraries to use the contract.\n\nLooking at the existing files provided in the prompt, I can see the current state of all three libraries. I need to:\n1. Create the contracts project\n2. Update core, feature, and pipeline to use the contract\n\nLet me design a simple trait that defines the operation interface. Something like:\n\n```rust\npub trait ChainOperation {\n    fn apply(&self, x: i32) -> i32;\n}\n```\n\nOr perhaps a simpler approach where each library implements a trait that defines their specific operation.\n\nActually, looking at the functions:\n- `double(x: i32) -> i32`\n- `triple(x: i32) -> i32`\n- `quadruple(x: i32) -> i32`\n\nA shared interface could be a trait like:\n\n```rust\npub trait Operation {\n    fn execute(&self, value: i32) -> i32;\n}\n```\n\nEach library would implement this trait for their respective operations. This way, all three libraries share a common contract while maintaining their individual functionality.\n\nI need to create the contracts crate and update all three libraries to depend on it and implement the trait. The contracts crate will define the trait, and each library will implement it for their specific operation.\n\nFor the Cargo.toml files, I'll add the contracts dependency to core, feature, and pipeline. Then in each lib.rs, I'll implement the Operation trait for their respective functions.\n\nThe key is ensuring the trait is properly exported from contracts and imported by each library, with each library providing its own implementation of the execute method.\n"
+      }
+    }
+  ],
+  "created": 1779718626,
+  "model": "Qwen3.5-122B-A10B-Q4_K_M-00001-of-00003.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 1422,
+    "prompt_tokens": 25810,
+    "total_tokens": 27232,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "id": "chatcmpl-SMvIt8LDpxNZV2Ci2NiunA7NQYlyL9Pj",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 25810,
+    "prompt_ms": 40301.52,
+    "prompt_per_token_ms": 1.5614691979852768,
+    "prompt_per_second": 640.4224952309492,
+    "predicted_n": 1422,
+    "predicted_ms": 70090.281,
+    "predicted_per_token_ms": 49.289930379746835,
+    "predicted_per_second": 20.288119546845586
+  }
+}

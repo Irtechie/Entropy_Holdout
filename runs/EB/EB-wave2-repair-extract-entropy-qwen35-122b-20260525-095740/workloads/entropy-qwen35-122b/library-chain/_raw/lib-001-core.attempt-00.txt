@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "path": "library-chain/core/Cargo.toml",
+      "content": "[package]\nname = \"chain_core\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[dependencies]\n"
+    },
+    {
+      "path": "library-chain/core/src/lib.rs",
+      "content": "pub fn double(x: i32) -> i32 {\n    x * 2\n}\n"
+    },
+    {
+      "path": "library-chain/core/src/main.rs",
+      "content": "use chain_core::double;\n\nfn main() {\n    let result = double(5);\n    println!(\"Result: {}\", result);\n}\n"
+    }
+  ],
+  "notes": "Initial Rust library project with public function and sample caller."
+}

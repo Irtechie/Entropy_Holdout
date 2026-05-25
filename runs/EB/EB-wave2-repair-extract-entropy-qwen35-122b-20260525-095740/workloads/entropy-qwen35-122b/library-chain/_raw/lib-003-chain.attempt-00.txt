@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "path": "library-chain/pipeline/Cargo.toml",
+      "content": "[package]\nname = \"chain_pipeline\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[dependencies]\nchain_feature = { path = \"../feature\" }\n"
+    },
+    {
+      "path": "library-chain/pipeline/src/lib.rs",
+      "content": "pub fn quadruple(x: i32) -> i32 {\n    chain_feature::triple(x) + x\n}\n"
+    },
+    {
+      "path": "library-chain/pipeline/src/main.rs",
+      "content": "use chain_pipeline::quadruple;\n\nfn main() {\n    let result = quadruple(5);\n    println!(\"Pipeline Result: {}\", result);\n}\n"
+    }
+  ],
+  "notes": "Third library depending on feature and preserving full call chain."
+}

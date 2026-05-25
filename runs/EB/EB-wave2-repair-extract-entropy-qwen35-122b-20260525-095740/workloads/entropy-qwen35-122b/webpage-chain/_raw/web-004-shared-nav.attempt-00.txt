@@ -1,0 +1,21 @@
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Home Page</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Home</a>\n        <a href=\"page-2.html\">Page 2</a>\n        <a href=\"page-3.html\">Page 3</a>\n        <a href=\"page-4.html\">Page 4</a>\n    </nav>\n    <main>\n        <h1>Welcome</h1>\n        <p>This is the main content area.</p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-2.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 2</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Home</a>\n        <a href=\"page-2.html\">Page 2</a>\n        <a href=\"page-3.html\">Page 3</a>\n        <a href=\"page-4.html\">Page 4</a>\n    </nav>\n    <main>\n        <h1>Page 2</h1>\n        <p>This is the second page.</p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-3.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 3</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Home</a>\n        <a href=\"page-2.html\">Page 2</a>\n        <a href=\"page-3.html\">Page 3</a>\n        <a href=\"page-4.html\">Page 4</a>\n    </nav>\n    <main>\n        <h1>Page 3</h1>\n        <p>This is the third page.</p>\n    </main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-4.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 4</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Home</a>\n        <a href=\"page-2.html\">Page 2</a>\n        <a href=\"page-3.html\">Page 3</a>\n        <a href=\"page-4.html\">Page 4</a>\n    </nav>\n    <main>\n        <h1>Page 4</h1>\n        <p>This is the fourth page.</p>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created page 4 and added shared navigation across all pages linking to pages 1-4."
+}
