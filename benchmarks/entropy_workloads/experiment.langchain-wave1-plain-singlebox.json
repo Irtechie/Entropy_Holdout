@@ -1,0 +1,15 @@
+{
+  "id": "EB-LC-wave1-plain-singlebox",
+  "description": "Canonical LangChain/Langfuse pass-through Wave 1 plain EB run over single-box targets.",
+  "base_url": "http://192.168.1.203:4000",
+  "harness_mode": "plain",
+  "completion_provider": "langchain",
+  "require_langfuse": true,
+  "include_dual_box": false,
+  "targets": "all-singlebox",
+  "workloads": [
+    "webpage-chain",
+    "library-chain",
+    "factory"
+  ]
+}

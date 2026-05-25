@@ -158,6 +158,8 @@ if ($workloads.Count -eq 0) {
 }
 
 $harnessMode = if ($experiment.harness_mode) { [string]$experiment.harness_mode } else { 'plain' }
+$completionProvider = if ($experiment.completion_provider) { [string]$experiment.completion_provider } else { 'direct' }
+$requireLangfuse = $experiment.require_langfuse -eq $true
 $gitHead = ''
 try {
   $gitHead = (git -C $repoRoot rev-parse HEAD).Trim()
@@ -239,6 +241,9 @@ Write-Event ([ordered]@{
     }
   })
   workloads = $workloads
+  harness_mode = $harnessMode
+  completion_provider = $completionProvider
+  require_langfuse = $requireLangfuse
 } | ConvertTo-Json -Depth 16 | Set-Content -LiteralPath (Join-Path $ResultRoot 'run.json') -Encoding UTF8
 
 foreach ($target in $targets) {
@@ -278,6 +283,8 @@ foreach ($target in $targets) {
           -TargetSetId $target.set_id `
           -ContextTokens ([int]$target.context_tokens) `
           -HarnessMode $harnessMode `
+          -CompletionProvider $completionProvider `
+          -RequireLangfuse $requireLangfuse `
           -OutputRoot $workloadRoot `
           -ResultPath $workloadResults | Out-Host
 

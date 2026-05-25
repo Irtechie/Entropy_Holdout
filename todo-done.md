@@ -59,6 +59,23 @@ skills/eb-wave-2-repair-extract/
 
 The skills encode first-principles failure-origin discipline, Wave 1 plain rules, Wave 2 repair-extract rules, and the requirement that LangChain/Langfuse remain pass-through instrumentation unless a later wave explicitly measures them as harness behavior.
 
+## 2026-05-25 - EB-LC Harness Prepared
+
+Added the canonical LangChain/Langfuse pass-through harness path:
+
+```text
+tools/langchain_completion.py
+tools/check_langchain_langfuse.ps1
+requirements-eb-langchain.txt
+docs/operations/langchain-langfuse-eb.md
+benchmarks/entropy_workloads/experiment.langchain-wave1-plain-singlebox.json
+benchmarks/entropy_workloads/experiment.langchain-wave2-repair-extract-singlebox.json
+benchmarks/entropy_workloads/wave1.langchain.targets.json
+benchmarks/entropy_workloads/wave2.langchain.targets.json
+```
+
+The harness keeps LangChain behavior-pass-through, requires Langfuse env vars for canonical runs, and writes clean reruns under `runs/EB-LC/`.
+
 ## 2026-05-25 - EB Wave 1 Plain Single-Box Baseline Complete
 
 Completed the full Wave 1 `plain` EB baseline for every single-box target in `llmcommune-entropy-targets.json`.

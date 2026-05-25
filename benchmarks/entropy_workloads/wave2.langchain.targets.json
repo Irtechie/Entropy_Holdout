@@ -1,0 +1,28 @@
+{
+  "id": "EB-LC-wave2-repair-extract-singlebox",
+  "description": "Canonical LangChain/Langfuse Wave 2 repair-extract EB queue.",
+  "harness_mode": "repair-extract",
+  "completion_provider": "langchain",
+  "run_prefix": "EB-LC-wave2-repair-extract",
+  "targets": [
+    { "set_id": "entropy-qwen25-coder-05b-large", "slice_id": "lc-wave2-001", "enabled": true },
+    { "set_id": "entropy-gemma4-e2b", "slice_id": "lc-wave2-002", "enabled": true },
+    { "set_id": "entropy-granite-code-3b", "slice_id": "lc-wave2-003", "enabled": true },
+    { "set_id": "entropy-smollm3-3b", "slice_id": "lc-wave2-004", "enabled": true },
+    { "set_id": "entropy-gemma4-e4b", "slice_id": "lc-wave2-005", "enabled": true },
+    { "set_id": "entropy-qwen35-4b", "slice_id": "lc-wave2-006", "enabled": true },
+    { "set_id": "entropy-gptoss20", "slice_id": "lc-wave2-007", "enabled": true },
+    { "set_id": "entropy-devstral-small2", "slice_id": "lc-wave2-008", "enabled": true },
+    { "set_id": "entropy-nemotron-cascade-30b", "slice_id": "lc-wave2-009", "enabled": true },
+    { "set_id": "entropy-gemma431", "slice_id": "lc-wave2-010", "enabled": true },
+    { "set_id": "entropy-qwen36", "slice_id": "lc-wave2-011", "enabled": true },
+    { "set_id": "entropy-qwen80next", "slice_id": "lc-wave2-012", "enabled": true },
+    { "set_id": "entropy-qwen80nextcoder", "slice_id": "lc-wave2-013", "enabled": true },
+    { "set_id": "entropy-qwen80nextcoder-256k", "slice_id": "lc-wave2-014", "enabled": true },
+    { "set_id": "entropy-gptoss120", "slice_id": "lc-wave2-015", "enabled": true },
+    { "set_id": "entropy-nemotron120", "slice_id": "lc-wave2-016", "enabled": true },
+    { "set_id": "entropy-nemotron3-super-120b", "slice_id": "lc-wave2-017", "enabled": true },
+    { "set_id": "entropy-qwen35-122b", "slice_id": "lc-wave2-018", "enabled": true },
+    { "set_id": "entropy-minimax-m27", "slice_id": "lc-wave2-019", "enabled": true }
+  ]
+}

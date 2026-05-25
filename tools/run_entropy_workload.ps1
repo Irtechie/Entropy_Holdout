@@ -9,7 +9,10 @@ param(
   [string]$Model = '',
   [string]$TargetSetId = 'mock',
   [int]$ContextTokens = 0,
-  [string]$HarnessMode = ''
+  [string]$HarnessMode = '',
+  [ValidateSet('direct','langchain')]
+  [string]$CompletionProvider = 'direct',
+  [bool]$RequireLangfuse = $false
 )
 
 $ErrorActionPreference = 'Stop'
@@ -55,7 +58,7 @@ function Invoke-JsonPost($url, $body, $timeoutSec) {
   }
 }
 
-function Invoke-ModelCompletion($prompt) {
+function Invoke-DirectModelCompletion($prompt) {
   if (-not $ApiBaseUrl) { throw "-ApiBaseUrl is required for api mode" }
   if (-not $Model) { throw "-Model is required for api mode" }
 
@@ -93,6 +96,65 @@ function Invoke-ModelCompletion($prompt) {
     }
   }
   throw "model response did not include choices text"
+}
+
+function Invoke-LangChainCompletion($prompt, $stage, $attemptIndex, $attemptReason) {
+  if (-not $ApiBaseUrl) { throw "-ApiBaseUrl is required for api mode" }
+  if (-not $Model) { throw "-Model is required for api mode" }
+
+  $script = Join-Path $PSScriptRoot 'langchain_completion.py'
+  $requestFile = New-TemporaryFile
+  try {
+    [ordered]@{
+      base_url = $ApiBaseUrl
+      model = $Model
+      system = 'You are a code generator. Return only the requested JSON object. No prose.'
+      prompt = $prompt
+      max_tokens = 4096
+      temperature = 0
+      timeout_s = 600
+      require_langfuse = $RequireLangfuse
+      run_id = (Split-Path -Leaf $OutputRoot)
+      session_id = (Split-Path -Leaf $OutputRoot)
+      run_name = "EB $TargetSetId $Workload $($stage.id)"
+      tags = @('EB', $HarnessMode, $CompletionProvider, $TargetSetId, $Workload)
+      metadata = [ordered]@{
+        benchmark = 'EB'
+        target_set_id = $TargetSetId
+        workload_id = $Workload
+        stage_id = [string]$stage.id
+        stage_order = [int]$stage.order
+        harness_mode = $HarnessMode
+        completion_provider = $CompletionProvider
+        attempt_index = $attemptIndex
+        attempt_reason = $attemptReason
+        context_tokens = $ContextTokens
+      }
+    } | ConvertTo-Json -Depth 32 | Set-Content -LiteralPath $requestFile.FullName -Encoding UTF8
+
+    $output = & python $script --request $requestFile.FullName 2>&1
+    $exitCode = $LASTEXITCODE
+    $text = ($output | ForEach-Object { [string]$_ }) -join [Environment]::NewLine
+    if ($exitCode -ne 0) {
+      throw "langchain adapter exited ${exitCode}: $text"
+    }
+    $resp = $text | ConvertFrom-Json -Depth 64
+    return [pscustomobject]@{
+      text = [string]$resp.text
+      raw = $resp.raw
+      usage = $resp.usage
+      langfuse_trace_id = $resp.langfuse_trace_id
+    }
+  } finally {
+    Remove-Item -LiteralPath $requestFile.FullName -Force -ErrorAction SilentlyContinue
+  }
+}
+
+function Invoke-ModelCompletion($prompt, $stage, $attemptIndex, $attemptReason) {
+  if ($CompletionProvider -eq 'langchain') {
+    return Invoke-LangChainCompletion $prompt $stage $attemptIndex $attemptReason
+  }
+  return Invoke-DirectModelCompletion $prompt
 }
 
 function ConvertFrom-JsonObjectText($text) {
@@ -169,6 +231,7 @@ function New-StagePrompt($workloadId, $stage, $existingFiles) {
 
   $artifactText = (@($stage.expected_artifacts) | ForEach-Object { "- $($_.path) ($($_.kind))" }) -join "`n"
   $validatorText = (@($stage.validators) | ForEach-Object { "- $($_.id): failure_class=$($_.failure_class)" }) -join "`n"
+  $contractText = New-ValidatorContractText $workloadId
 
   return @"
 You are running an Entropy staged code-generation benchmark.
@@ -185,6 +248,9 @@ $artifactText
 
 Validators that will run:
 $validatorText
+
+Exact validator contract:
+$contractText
 
 Existing generated files:
 $existingText
@@ -205,6 +271,53 @@ Rules:
 "@
 }
 
+function New-ValidatorContractText($workloadId) {
+  switch ($workloadId) {
+    'webpage-chain' {
+      $spec = Get-Content -Raw -LiteralPath (Join-Path $repoRoot 'benchmarks/entropy_workloads/webpage_chain.json') | ConvertFrom-Json -Depth 32
+      $pages = (@($spec.pages) | ForEach-Object {
+        $backlinkText = if ($_.backlink) { "; backlink href must be '$($_.backlink)'" } else { '' }
+        "- $($_.path): title text must include '$($_.title)'$backlinkText"
+      }) -join "`n"
+      return @"
+Generate files under site/ only.
+Every HTML page must include <!doctype html>.
+Required pages and literals:
+$pages
+From page order $($spec.shared_nav_required_from_stage), every page must link to index.html, page-2.html, page-3.html, and page-4.html.
+By stage $($spec.shared_table_required_from_stage), index.html and page-5.html must include data-entropy-shared-table="factory-links".
+"@
+    }
+    'library-chain' {
+      $spec = Get-Content -Raw -LiteralPath (Join-Path $repoRoot 'benchmarks/entropy_workloads/library_chain.json') | ConvertFrom-Json -Depth 32
+      $projects = (@($spec.projects) | ForEach-Object {
+        $refs = if (@($_.references).Count) { " references: $(@($_.references) -join ', ')" } else { '' }
+        "- $($_.name): $($_.path)$refs"
+      }) -join "`n"
+      return @"
+Generate a .NET project tree under library-chain/.
+Target framework must be $($spec.target_framework).
+Required project files:
+$projects
+SampleApp must build and dotnet run --project SampleApp/SampleApp.csproj --no-build --nologo must print exactly $($spec.sample_expected_output).
+"@
+    }
+    'factory' {
+      $spec = Get-Content -Raw -LiteralPath (Join-Path $repoRoot 'benchmarks/entropy_workloads/factory.json') | ConvertFrom-Json -Depth 32
+      $stations = (@($spec.stations) | ForEach-Object { "- id=$($_.id), name=$($_.name), next=$($_.next)" }) -join "`n"
+      return @"
+Generate a PowerShell-runnable factory under factory-system/.
+Required final files include factory-system/config/stations.json, factory-system/src/factory.ps1, and factory-system/dashboard/report.json.
+stations.json must contain exactly these stations:
+$stations
+factory.ps1 must accept -ConfigPath and -ProductId, print route intake->assembly->quality->shipping, and write dashboard/report.json.
+dashboard/report.json must contain product_id $($spec.sample_product.id) and route intake->assembly->quality->shipping.
+"@
+    }
+  }
+  return ''
+}
+
 function New-RepairPrompt($workloadId, $stage, $existingFiles, $failedResponse, $failureMessage) {
   if (@($existingFiles).Count) {
     $existingChunks = @($existingFiles | ForEach-Object {
@@ -216,6 +329,7 @@ function New-RepairPrompt($workloadId, $stage, $existingFiles, $failedResponse, 
   }
 
   $artifactText = (@($stage.expected_artifacts) | ForEach-Object { "- $($_.path) ($($_.kind))" }) -join "`n"
+  $contractText = New-ValidatorContractText $workloadId
 
   return @"
 You are repairing an Entropy staged code-generation benchmark response.
@@ -229,6 +343,9 @@ $($stage.prompt_goal)
 
 Expected artifacts:
 $artifactText
+
+Exact validator contract:
+$contractText
 
 The previous response failed with:
 $failureMessage
@@ -337,6 +454,7 @@ function Complete-ApiWorkloadValidation($runRoot) {
       context_tokens = $ContextTokens
       harness_mode = $HarnessMode
       workload_id = $Workload
+      completion_provider = $CompletionProvider
       stage_id = 'final-validation'
       stage_order = ([int]$lastStage.order + 1)
       status = 'fail'
@@ -347,6 +465,7 @@ function Complete-ApiWorkloadValidation($runRoot) {
       raw_response_json_path = $null
       prompt_path = $null
       token_usage = $null
+      langfuse_trace_id = $null
       elapsed_s = 0
       error = $message
     })
@@ -365,6 +484,7 @@ function New-ApiWorkload($runRoot) {
       context_tokens = $ContextTokens
       harness_mode = $HarnessMode
       workload_id = $Workload
+      completion_provider = $CompletionProvider
       stage_id = $stage.id
       stage_order = [int]$stage.order
       status = 'fail'
@@ -375,6 +495,7 @@ function New-ApiWorkload($runRoot) {
       raw_response_json_path = $null
       prompt_path = $null
       token_usage = $null
+      langfuse_trace_id = $null
       repair_count = 0
       repair_history = @()
       elapsed_s = $null
@@ -400,13 +521,14 @@ function New-ApiWorkload($runRoot) {
           ''
         }
 
-        $completion = Invoke-ModelCompletion $attemptPrompt
+        $completion = Invoke-ModelCompletion $attemptPrompt $stage $attemptIndex $attemptReason
         $paths = Save-CompletionArtifacts $rawDir $stage.id $label $attemptPrompt $completion
         $row.prompt_path = $paths.prompt_path
         $row.raw_response_path = $paths.raw_response_path
         $row.raw_response_json_path = $paths.raw_response_json_path
         $tokenUsage = Add-TokenUsage $tokenUsage $completion.usage
         $row.token_usage = [pscustomobject]$tokenUsage
+        $row.langfuse_trace_id = $completion.langfuse_trace_id
         $text = $completion.text
 
         try {
@@ -432,6 +554,7 @@ function New-ApiWorkload($runRoot) {
             raw_response_path = $paths.raw_response_path
             raw_response_json_path = $paths.raw_response_json_path
             token_usage = $completion.usage
+            langfuse_trace_id = $completion.langfuse_trace_id
           }
 
           if ($attemptIndex -ge $maxRepairs) {

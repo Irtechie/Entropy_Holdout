@@ -32,13 +32,17 @@ Wave 1 and Wave 2 are complete as first-pass data. The next focus is a clean rep
 
 ## Active Work
 
-Prepare the clean EB rerun harness:
+Prepare and run the clean EB-LC rerun harness:
 
-- Preserve current GitHub history and run evidence; do not delete current Wave 1/Wave 2 data as part of cleanup.
-- Version the exact EB skills used for the run under `skills/`.
-- Add LangChain as behavior-pass-through workflow structure only: same prompts, same model endpoint/options, same call count, same raw responses.
-- Add Langfuse capture for traces, timings, token metrics, prompt/response evidence, and per-run sections.
-- Rerun Wave 1 and Wave 2 into new run prefixes after the instrumented harness is committed.
+- LangChain/Langfuse pass-through harness is staged in code.
+- Canonical clean runs must use `runs/EB-LC/`.
+- Preflight command: `pwsh .\tools\check_langchain_langfuse.ps1`.
+- Current blocker: set `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, and `LANGFUSE_HOST` in the shell before launching Wave 1.
+- Wave 1 launch command after preflight passes:
+
+```powershell
+pwsh .\tools\run_eb_target_queue.ps1 -QueuePath .\benchmarks\entropy_workloads\wave1.langchain.targets.json -ExperimentPath .\benchmarks\entropy_workloads\experiment.langchain-wave1-plain-singlebox.json -ResultRootBase .\runs\EB-LC -CommitEach -PushEach -SkipCompleted
+```
 
 ## Queued Improvements
 
@@ -72,3 +76,4 @@ Prepare the clean EB rerun harness:
 - 2026-05-24: Slice 005 done. Default mock matrix passed: webpage 5/5, library 4/4, factory 4/4.
 - 2026-05-25: First EB small serial experiment completed at `runs/EB/EB-local-small-20260525-012128/`. All 4 small targets failed under `plain` mode; best depth was Gemma E2B reaching webpage stage 4/5 and library stage 3/4 before strict artifact-path failures.
 - 2026-05-25: Wave 2 repair-extract EB completed for all 19 single-box targets. Run folders use prefix `runs/EB/EB-wave2-repair-extract-*`.
+- 2026-05-25: EB-LC LangChain/Langfuse harness added. Preflight is blocked until Langfuse env vars are set.

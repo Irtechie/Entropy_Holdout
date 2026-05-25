@@ -1,0 +1,15 @@
+{
+  "id": "EB-LC-wave2-repair-extract-singlebox",
+  "description": "Canonical LangChain/Langfuse pass-through Wave 2 repair-extract EB run over single-box targets.",
+  "base_url": "http://192.168.1.203:4000",
+  "harness_mode": "repair-extract",
+  "completion_provider": "langchain",
+  "require_langfuse": true,
+  "include_dual_box": false,
+  "targets": "all-singlebox",
+  "workloads": [
+    "webpage-chain",
+    "library-chain",
+    "factory"
+  ]
+}
