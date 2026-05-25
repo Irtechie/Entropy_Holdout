@@ -1,0 +1,62 @@
+{
+  "schema_version": "2026-05-24",
+  "workload": {
+    "description": "A staged code-generation benchmark workload.",
+    "required_fields": [
+      "id",
+      "name",
+      "breakpoint_metric",
+      "stages"
+    ]
+  },
+  "stage": {
+    "description": "One ordered generation step inside a workload.",
+    "required_fields": [
+      "id",
+      "order",
+      "prompt_goal",
+      "expected_artifacts",
+      "validators"
+    ]
+  },
+  "result_record": {
+    "description": "One workload stage execution result.",
+    "required_fields": [
+      "run_id",
+      "target_set_id",
+      "model_id",
+      "context_tokens",
+      "harness_mode",
+      "workload_id",
+      "stage_id",
+      "stage_order",
+      "status",
+      "failure_class",
+      "generated_files",
+      "validator_results",
+      "elapsed_s"
+    ],
+    "status_values": [
+      "pass",
+      "fail",
+      "blocked",
+      "skipped"
+    ],
+    "failure_classes": [
+      "none",
+      "activation",
+      "generation",
+      "missing_artifact",
+      "syntax",
+      "link_integrity",
+      "shared_state",
+      "build",
+      "api_contract",
+      "dependency_graph",
+      "configuration",
+      "runtime_behavior",
+      "timeout",
+      "harness"
+    ]
+  }
+}

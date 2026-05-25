@@ -1,0 +1,51 @@
+{
+  "id": "library-chain",
+  "source": "benchmarks/entropy_workloads/workloads.json",
+  "output_dir": "library-chain",
+  "target_framework": "net10.0",
+  "sample_expected_output": "core->feature->pipeline->contract",
+  "projects": [
+    {
+      "stage_id": "lib-001-core",
+      "order": 1,
+      "name": "CoreLib",
+      "path": "CoreLib/CoreLib.csproj",
+      "references": []
+    },
+    {
+      "stage_id": "lib-002-dependent",
+      "order": 2,
+      "name": "FeatureLib",
+      "path": "FeatureLib/FeatureLib.csproj",
+      "references": [
+        "CoreLib/CoreLib.csproj"
+      ]
+    },
+    {
+      "stage_id": "lib-003-chain",
+      "order": 3,
+      "name": "PipelineLib",
+      "path": "PipelineLib/PipelineLib.csproj",
+      "references": [
+        "FeatureLib/FeatureLib.csproj"
+      ]
+    },
+    {
+      "stage_id": "lib-004-shared-interface",
+      "order": 4,
+      "name": "Contracts",
+      "path": "Contracts/Contracts.csproj",
+      "references": []
+    },
+    {
+      "stage_id": "lib-004-shared-interface",
+      "order": 4,
+      "name": "SampleApp",
+      "path": "SampleApp/SampleApp.csproj",
+      "references": [
+        "PipelineLib/PipelineLib.csproj",
+        "Contracts/Contracts.csproj"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "default-mock-matrix",
+  "description": "Local mock matrix for validating all Entropy workload families before model calls.",
+  "mode": "mock",
+  "targets": [
+    {
+      "target_set_id": "mock",
+      "model_id": "mock",
+      "context_tokens": 0,
+      "harness_mode": "mock"
+    }
+  ],
+  "workloads": [
+    "webpage-chain",
+    "library-chain",
+    "factory"
+  ]
+}

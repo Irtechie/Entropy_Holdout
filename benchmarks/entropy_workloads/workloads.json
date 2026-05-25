@@ -1,0 +1,314 @@
+{
+  "schema_version": "2026-05-24",
+  "description": "Staged code-generation workloads for Entropy break-point measurement.",
+  "harness_modes": [
+    {
+      "id": "plain",
+      "description": "Prompt only with the current task and minimal prior summary."
+    },
+    {
+      "id": "file-carry",
+      "description": "Prompt with current task plus relevant generated files from previous stages."
+    },
+    {
+      "id": "entropy",
+      "description": "Prompt through the Entropy harness mode under test."
+    }
+  ],
+  "workloads": [
+    {
+      "id": "webpage-chain",
+      "name": "Webpage Chain",
+      "breakpoint_metric": "highest ordered stage with valid pages, backlinks, and shared structure",
+      "stages": [
+        {
+          "id": "web-001-home",
+          "order": 1,
+          "prompt_goal": "Create webpage 1 as index.html with a title, main content, and an empty navigation area that can grow later.",
+          "expected_artifacts": [
+            {
+              "path": "site/index.html",
+              "kind": "html"
+            }
+          ],
+          "validators": [
+            {
+              "id": "file-exists",
+              "failure_class": "missing_artifact"
+            },
+            {
+              "id": "html-parse",
+              "failure_class": "syntax"
+            }
+          ]
+        },
+        {
+          "id": "web-002-backlink",
+          "order": 2,
+          "prompt_goal": "Create webpage 2 and link it back to page 1 without breaking page 1.",
+          "expected_artifacts": [
+            {
+              "path": "site/page-2.html",
+              "kind": "html"
+            }
+          ],
+          "validators": [
+            {
+              "id": "page-2-links-index",
+              "failure_class": "link_integrity"
+            },
+            {
+              "id": "all-html-parse",
+              "failure_class": "syntax"
+            }
+          ]
+        },
+        {
+          "id": "web-003-chain-link",
+          "order": 3,
+          "prompt_goal": "Create webpage 3 and link it back to page 2 while preserving the existing page 1 and page 2 links.",
+          "expected_artifacts": [
+            {
+              "path": "site/page-3.html",
+              "kind": "html"
+            }
+          ],
+          "validators": [
+            {
+              "id": "page-3-links-page-2",
+              "failure_class": "link_integrity"
+            },
+            {
+              "id": "previous-links-preserved",
+              "failure_class": "link_integrity"
+            }
+          ]
+        },
+        {
+          "id": "web-004-shared-nav",
+          "order": 4,
+          "prompt_goal": "Create webpage 4 and add shared navigation across all pages that includes pages 1 through 4.",
+          "expected_artifacts": [
+            {
+              "path": "site/page-4.html",
+              "kind": "html"
+            }
+          ],
+          "validators": [
+            {
+              "id": "shared-nav-all-pages",
+              "failure_class": "shared_state"
+            },
+            {
+              "id": "page-4-links-page-3",
+              "failure_class": "link_integrity"
+            }
+          ]
+        },
+        {
+          "id": "web-005-nested-shared-table",
+          "order": 5,
+          "prompt_goal": "Create webpage 5 and add a shared nested table or shared data section that all five pages use consistently.",
+          "expected_artifacts": [
+            {
+              "path": "site/page-5.html",
+              "kind": "html"
+            }
+          ],
+          "validators": [
+            {
+              "id": "shared-table-all-pages",
+              "failure_class": "shared_state"
+            },
+            {
+              "id": "all-pages-linked",
+              "failure_class": "link_integrity"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "library-chain",
+      "name": "Library / DLL Chain",
+      "breakpoint_metric": "highest ordered stage with valid dependency references, build output, and sample call",
+      "stages": [
+        {
+          "id": "lib-001-core",
+          "order": 1,
+          "prompt_goal": "Create the first library with one public function and a tiny sample caller.",
+          "expected_artifacts": [
+            {
+              "path": "library-chain/core",
+              "kind": "project"
+            }
+          ],
+          "validators": [
+            {
+              "id": "core-builds",
+              "failure_class": "build"
+            },
+            {
+              "id": "core-sample-runs",
+              "failure_class": "runtime_behavior"
+            }
+          ]
+        },
+        {
+          "id": "lib-002-dependent",
+          "order": 2,
+          "prompt_goal": "Create a second library that depends on the first library and calls its public function.",
+          "expected_artifacts": [
+            {
+              "path": "library-chain/feature",
+              "kind": "project"
+            }
+          ],
+          "validators": [
+            {
+              "id": "feature-references-core",
+              "failure_class": "api_contract"
+            },
+            {
+              "id": "feature-builds",
+              "failure_class": "build"
+            }
+          ]
+        },
+        {
+          "id": "lib-003-chain",
+          "order": 3,
+          "prompt_goal": "Create a third library that depends on the second library, preserving the full call chain.",
+          "expected_artifacts": [
+            {
+              "path": "library-chain/pipeline",
+              "kind": "project"
+            }
+          ],
+          "validators": [
+            {
+              "id": "pipeline-references-feature",
+              "failure_class": "api_contract"
+            },
+            {
+              "id": "chain-sample-runs",
+              "failure_class": "runtime_behavior"
+            }
+          ]
+        },
+        {
+          "id": "lib-004-shared-interface",
+          "order": 4,
+          "prompt_goal": "Introduce a shared interface or contract that all three libraries must use without breaking the sample.",
+          "expected_artifacts": [
+            {
+              "path": "library-chain/contracts",
+              "kind": "project"
+            }
+          ],
+          "validators": [
+            {
+              "id": "contract-used-by-all-libraries",
+              "failure_class": "api_contract"
+            },
+            {
+              "id": "full-chain-builds",
+              "failure_class": "build"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "factory",
+      "name": "Factory System",
+      "breakpoint_metric": "highest ordered stage with valid component graph, configuration, and end-to-end factory behavior",
+      "stages": [
+        {
+          "id": "factory-001-layout",
+          "order": 1,
+          "prompt_goal": "Create the factory project layout with component, station, product, and routing concepts.",
+          "expected_artifacts": [
+            {
+              "path": "factory-system",
+              "kind": "project"
+            }
+          ],
+          "validators": [
+            {
+              "id": "factory-layout-exists",
+              "failure_class": "missing_artifact"
+            },
+            {
+              "id": "factory-core-types-present",
+              "failure_class": "api_contract"
+            }
+          ]
+        },
+        {
+          "id": "factory-002-stations",
+          "order": 2,
+          "prompt_goal": "Add multiple stations and a routing flow that moves a product between them.",
+          "expected_artifacts": [
+            {
+              "path": "factory-system/stations",
+              "kind": "source"
+            }
+          ],
+          "validators": [
+            {
+              "id": "station-graph-valid",
+              "failure_class": "dependency_graph"
+            },
+            {
+              "id": "product-route-runs",
+              "failure_class": "runtime_behavior"
+            }
+          ]
+        },
+        {
+          "id": "factory-003-configuration",
+          "order": 3,
+          "prompt_goal": "Move station definitions and product routing into configuration while preserving end-to-end behavior.",
+          "expected_artifacts": [
+            {
+              "path": "factory-system/config",
+              "kind": "configuration"
+            }
+          ],
+          "validators": [
+            {
+              "id": "config-loads",
+              "failure_class": "configuration"
+            },
+            {
+              "id": "configured-route-runs",
+              "failure_class": "runtime_behavior"
+            }
+          ]
+        },
+        {
+          "id": "factory-004-dashboard",
+          "order": 4,
+          "prompt_goal": "Add a simple dashboard or report that summarizes station throughput and product state from the configured factory.",
+          "expected_artifacts": [
+            {
+              "path": "factory-system/dashboard",
+              "kind": "source"
+            }
+          ],
+          "validators": [
+            {
+              "id": "dashboard-uses-factory-state",
+              "failure_class": "api_contract"
+            },
+            {
+              "id": "factory-e2e-report-runs",
+              "failure_class": "runtime_behavior"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

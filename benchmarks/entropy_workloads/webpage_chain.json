@@ -1,0 +1,44 @@
+{
+  "id": "webpage-chain",
+  "source": "benchmarks/entropy_workloads/workloads.json",
+  "output_dir": "site",
+  "pages": [
+    {
+      "stage_id": "web-001-home",
+      "order": 1,
+      "path": "index.html",
+      "title": "Entropy Page 1",
+      "backlink": null
+    },
+    {
+      "stage_id": "web-002-backlink",
+      "order": 2,
+      "path": "page-2.html",
+      "title": "Entropy Page 2",
+      "backlink": "index.html"
+    },
+    {
+      "stage_id": "web-003-chain-link",
+      "order": 3,
+      "path": "page-3.html",
+      "title": "Entropy Page 3",
+      "backlink": "page-2.html"
+    },
+    {
+      "stage_id": "web-004-shared-nav",
+      "order": 4,
+      "path": "page-4.html",
+      "title": "Entropy Page 4",
+      "backlink": "page-3.html"
+    },
+    {
+      "stage_id": "web-005-nested-shared-table",
+      "order": 5,
+      "path": "page-5.html",
+      "title": "Entropy Page 5",
+      "backlink": "page-4.html"
+    }
+  ],
+  "shared_nav_required_from_stage": 4,
+  "shared_table_required_from_stage": 5
+}

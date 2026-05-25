@@ -1,0 +1,37 @@
+{
+  "id": "factory",
+  "source": "benchmarks/entropy_workloads/workloads.json",
+  "output_dir": "factory-system",
+  "stations": [
+    {
+      "id": "intake",
+      "name": "Intake",
+      "next": "assembly"
+    },
+    {
+      "id": "assembly",
+      "name": "Assembly",
+      "next": "quality"
+    },
+    {
+      "id": "quality",
+      "name": "Quality",
+      "next": "shipping"
+    },
+    {
+      "id": "shipping",
+      "name": "Shipping",
+      "next": null
+    }
+  ],
+  "sample_product": {
+    "id": "entropy-widget-001",
+    "name": "Entropy Widget"
+  },
+  "expected_route": [
+    "intake",
+    "assembly",
+    "quality",
+    "shipping"
+  ]
+}

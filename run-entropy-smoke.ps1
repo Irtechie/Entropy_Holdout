@@ -24,6 +24,9 @@ function Read-ResponseBody($err) {
     }
     $response = $err.Exception.Response
     if ($null -eq $response) { return $null }
+    if ($response -is [System.Net.Http.HttpResponseMessage]) {
+      return $response.Content.ReadAsStringAsync().GetAwaiter().GetResult()
+    }
     $stream = $response.GetResponseStream()
     if ($null -eq $stream) { return $null }
     $reader = New-Object System.IO.StreamReader($stream)
@@ -34,28 +37,35 @@ function Read-ResponseBody($err) {
 }
 
 function Invoke-JsonPost($url, $body, $timeoutSec) {
-  $json = $body | ConvertTo-Json -Depth 10
+  $json = $body | ConvertTo-Json -Depth 10 -Compress
+  $tmp = New-TemporaryFile
+  $bodyFile = New-TemporaryFile
   try {
-    $response = Invoke-WebRequest -TimeoutSec $timeoutSec -Method Post -ContentType 'application/json' -Body $json -Uri $url
-    $content = $response.Content
-    if ([string]::IsNullOrWhiteSpace($content)) { return $null }
-    return $content | ConvertFrom-Json
-  } catch {
-    $bodyText = Read-ResponseBody $_
-    if ($bodyText) {
-      try {
-        $parsed = $bodyText | ConvertFrom-Json
-        if ($parsed.ok -eq $true -and $parsed.status -eq 'skipped') {
-          return $parsed
-        }
-        if ($parsed.code -eq 'RATE_LIMITED') {
-          return $parsed
-        }
-      } catch {
-      }
-      throw "$($_.Exception.Message) body=$bodyText"
+    [System.IO.File]::WriteAllText($bodyFile.FullName, $json, (New-Object System.Text.UTF8Encoding($false)))
+    $statusText = & curl.exe -sS -m $timeoutSec -o $tmp.FullName -w '%{http_code}' -X POST $url -H 'Content-Type: application/json' --data-binary "@$($bodyFile.FullName)"
+    $exitCode = $LASTEXITCODE
+    $content = Get-Content -Raw -LiteralPath $tmp.FullName
+    if ($exitCode -ne 0) {
+      throw "curl exited $exitCode posting $url body=$content"
     }
-    throw
+    $statusCode = [int]$statusText
+    $parsed = $null
+    if (-not [string]::IsNullOrWhiteSpace($content)) {
+      $parsed = $content | ConvertFrom-Json
+    }
+    if ($statusCode -ge 200 -and $statusCode -lt 300) {
+      return $parsed
+    }
+    if ($parsed -and $parsed.ok -eq $true -and $parsed.status -eq 'skipped') {
+      return $parsed
+    }
+    if ($parsed -and $parsed.code -eq 'RATE_LIMITED') {
+      return $parsed
+    }
+    throw "HTTP $statusCode posting $url body=$content"
+  } finally {
+    Remove-Item -LiteralPath $tmp.FullName -Force -ErrorAction SilentlyContinue
+    Remove-Item -LiteralPath $bodyFile.FullName -Force -ErrorAction SilentlyContinue
   }
 }
 
