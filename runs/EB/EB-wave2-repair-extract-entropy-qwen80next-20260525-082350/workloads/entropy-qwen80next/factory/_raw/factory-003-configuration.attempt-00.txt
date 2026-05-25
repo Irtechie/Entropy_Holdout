@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "factory-system/config",
+      "content": "assembly-station: station-001\ninspection-station: station-002\npackaging-station: station-003\n\nrouting:\n  product-A: [station-001, station-002, station-003]\n  product-B: [station-001, station-002, station-003]"
+    }
+  ],
+  "notes": "Moved station definitions and product routing into configuration file to meet stage goal while preserving end-to-end behavior."
+}

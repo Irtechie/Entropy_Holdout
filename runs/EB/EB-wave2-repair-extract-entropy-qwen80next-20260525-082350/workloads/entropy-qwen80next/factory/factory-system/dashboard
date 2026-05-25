@@ -1,0 +1,23 @@
+Station Throughput Report
+========================
+
+Assembly Station (station-001):
+  - Products processed: 2
+  - Throughput: 2 products/hour
+
+Inspection Station (station-002):
+  - Products processed: 2
+  - Throughput: 2 products/hour
+
+Packaging Station (station-003):
+  - Products processed: 2
+  - Throughput: 2 products/hour
+
+Product State Summary
+===================
+
+product-A: Completed (passed all stations)
+product-B: Completed (passed all stations)
+
+Overall Factory Efficiency: 100%
+

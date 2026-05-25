@@ -1,0 +1,33 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/contracts/mod.rs\",\n      \"content\": \"pub trait SharedContract {\\n    fn shared_function(&self) -> String;\\n}\"\n    },\n    {\n      \"path\": \"library-chain/core/src/lib.rs\",\n      \"content\": \"use crate::shared_contract::SharedContract;\\n\\npub struct CoreImpl;\\n\\nimpl SharedContract for CoreImpl {\\n    fn shared_function(&self) -> String {\\n        \\\"Hello from core\\\".to_string()\\n    }\\n}\\n\\npub fn core_function() -> String {\\n    CoreImpl {}.shared_function()\\n}\"\n    },\n    {\n      \"path\": \"library-chain/feature/src/lib.rs\",\n      \"content\": \"use library_chain_core::SharedContract;\\n\\npub fn feature_function() -> String {\\n    let core = CoreImpl {};\\n    format!(\\\"{} and feature\\\", core.shared_function())\\n}\"\n    },\n    {\n      \"path\": \"library-chain/pipeline/src/lib.rs\",\n      \"content\": \"use library_chain_feature::feature_function;\\n\\npub fn pipeline_function() -> String {\\n    format!(\\\"{} and pipeline\\\", feature_function())\\n}\"\n    },\n    {\n      \"path\": \"library-chain/core/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"library-chain-core\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[lib]\\nname = \\\"library_chain_core\\\"\\npath = \\\"src/lib.rs\\\"\\n\\n[[bin]]\\nname = \\\"core-sample\\\"\\npath = \\\"src/main.rs\\\"\\n\\n[dependencies]\\nlibrary-chain-contracts = { path = \\\"../contracts\\\" }\"\n    },\n    {\n      \"path\": \"library-chain/feature/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"library-chain-feature\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[lib]\\nname = \\\"library_chain_feature\\\"\\npath = \\\"src/lib.rs\\\"\\n\\n[dependencies]\\nlibrary-chain-core = { path = \\\"../core\\\" }\"\n    },\n    {\n      \"path\": \"library-chain/pipeline/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"library-chain-pipeline\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[lib]\\nname = \\\"library_chain_pipeline\\\"\\npath = \\\"src/lib.rs\\\"\\n\\n[dependencies]\\nlibrary-chain-feature = { path = \\\"../feature\\\" }\"\n    },\n    {\n      \"path\": \"library-chain/contracts/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"library-chain-contracts\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[lib]\\nname = \\\"library_chain_contracts\\\"\\npath = \\\"mod.rs\\\"\"\n    }\n  ],\n  \"notes\": \"Introduced shared interface contract in library-chain/contracts; updated core to implement it; feature and pipeline remain unchanged as they depend on core's public function, preserving the chain.\"\n}"
+      }
+    }
+  ],
+  "created": 1779711993,
+  "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 674,
+    "prompt_tokens": 8780,
+    "total_tokens": 9454
+  },
+  "id": "chatcmpl-1tcYVBVGfEcQDQfa7woHwFxUhhrXG6fT",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 8780,
+    "prompt_ms": 8497.735,
+    "prompt_per_token_ms": 0.9678513667425969,
+    "prompt_per_second": 1033.216498278659,
+    "predicted_n": 674,
+    "predicted_ms": 14840.199,
+    "predicted_per_token_ms": 22.01809940652819,
+    "predicted_per_second": 45.417180726484865
+  }
+}

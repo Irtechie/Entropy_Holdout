@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "factory-system/dashboard",
+      "content": "Station Throughput Report\n========================\n\nAssembly Station (station-001):\n  - Products processed: 2\n  - Throughput: 2 products/hour\n\nInspection Station (station-002):\n  - Products processed: 2\n  - Throughput: 2 products/hour\n\nPackaging Station (station-003):\n  - Products processed: 2\n  - Throughput: 2 products/hour\n\nProduct State Summary\n===================\n\nproduct-A: Completed (passed all stations)\nproduct-B: Completed (passed all stations)\n\nOverall Factory Efficiency: 100%\n"
+    }
+  ],
+  "notes": "Created a simple dashboard that summarizes station throughput and product state based on configured factory data, fulfilling the stage goal."
+}

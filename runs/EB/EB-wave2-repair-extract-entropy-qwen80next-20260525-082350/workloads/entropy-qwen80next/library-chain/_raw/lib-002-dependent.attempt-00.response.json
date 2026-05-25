@@ -1,0 +1,33 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/feature/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"library-chain-feature\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[lib]\\nname = \\\"library_chain_feature\\\"\\npath = \\\"src/lib.rs\\\"\\n\\n[dependencies]\\nlibrary-chain-core = { path = \\\"../core\\\" }\"\n    },\n    {\n      \"path\": \"library-chain/feature/src/lib.rs\",\n      \"content\": \"use library_chain_core::core_function;\\n\\npub fn feature_function() -> String {\\n    format!(\\\"{} and feature\\\", core_function())\\n}\"\n    }\n  ],\n  \"notes\": \"Created feature library that depends on core library and calls its public function.\"\n}"
+      }
+    }
+  ],
+  "created": 1779711961,
+  "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 176,
+    "prompt_tokens": 1492,
+    "total_tokens": 1668
+  },
+  "id": "chatcmpl-dLtnpBicMjPeT1lS2tyBM0Cwh4hFukJQ",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 1492,
+    "prompt_ms": 1463.008,
+    "prompt_per_token_ms": 0.9805683646112601,
+    "prompt_per_second": 1019.8167064021524,
+    "predicted_n": 176,
+    "predicted_ms": 3637.249,
+    "predicted_per_token_ms": 20.6661875,
+    "predicted_per_second": 48.388218678457264
+  }
+}

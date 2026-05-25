@@ -1,0 +1,33 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/pipeline/Cargo.toml\",\n      \"content\": \"[package]\\nname = \\\"library-chain-pipeline\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[lib]\\nname = \\\"library_chain_pipeline\\\"\\npath = \\\"src/lib.rs\\\"\\n\\n[dependencies]\\nlibrary-chain-feature = { path = \\\"../feature\\\" }\"\n    },\n    {\n      \"path\": \"library-chain/pipeline/src/lib.rs\",\n      \"content\": \"use library_chain_feature::feature_function;\\n\\npub fn pipeline_function() -> String {\\n    format!(\\\"{} and pipeline\\\", feature_function())\\n}\"\n    }\n  ],\n  \"notes\": \"Created third library that depends on the second library, preserving the full call chain from core to feature to pipeline.\"\n}"
+      }
+    }
+  ],
+  "created": 1779711969,
+  "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 185,
+    "prompt_tokens": 3913,
+    "total_tokens": 4098
+  },
+  "id": "chatcmpl-7IAzv8MbMUf5NCt5h0AYsgJsdtAwn317",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 3913,
+    "prompt_ms": 3825.319,
+    "prompt_per_token_ms": 0.9775923843598262,
+    "prompt_per_second": 1022.9212256546447,
+    "predicted_n": 185,
+    "predicted_ms": 3884.997,
+    "predicted_per_token_ms": 20.999983783783783,
+    "predicted_per_second": 47.61908439054136
+  }
+}

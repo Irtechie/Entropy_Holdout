@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "site/page-5.html",
+      "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Page 5</title>\n</head>\n<body>\n    <nav>\n        <a href=\"index.html\">Home</a>\n        <a href=\"page-2.html\">Page 2</a>\n        <a href=\"page-3.html\">Page 3</a>\n        <a href=\"page-4.html\">Page 4</a>\n    </nav>\n    <main>\n        <h1>Welcome to Page 5</h1>\n        <p>This is the content of page 5, linked back to all previous pages.</p>\n        <section id=\"shared-data\">\n            <h2>Shared Data Table</h2>\n            <table border=\"1\">\n                <thead>\n                    <tr>\n                        <th>Item</th>\n                        <th>Value</th>\n                        <th>Status</th>\n                    </tr>\n                </thead>\n                <tbody>\n                    <tr>\n                        <td>Entry A</td>\n                        <td>100</td>\n                        <td>Active</td>\n                    </tr>\n                    <tr>\n                        <td>Entry B</td>\n                        <td>200</td>\n                        <td>Active</td>\n                    </tr>\n                    <tr>\n                        <td>Entry C</td>\n                        <td>300</td>\n                        <td>Inactive</td>\n                    </tr>\n                </tbody>\n            </table>\n        </section>\n    </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created page-5.html with shared navigation linking to all previous pages and a shared nested table section for consistent data across all five pages."
+}

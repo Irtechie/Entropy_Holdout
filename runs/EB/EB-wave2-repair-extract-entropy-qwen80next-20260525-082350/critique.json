@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "benchmark": "EB",
+  "generated_at": "2026-05-25T08:30:18.3985801-04:00",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350",
+  "results_path": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\results.jsonl",
+  "rubric": {
+    "scale": "0-5",
+    "score_meaning": {
+      "0": "No valid stage output or strict output contract failure before code evaluation.",
+      "1": "Only first-stage or minimal artifact progress.",
+      "2": "Some local continuity, but breaks before deeper dependency pressure.",
+      "3": "Meaningful cross-stage progress, but breaks before completing workload invariants.",
+      "4": "All planned generation stages completed, but final validator failed.",
+      "5": "All planned generation stages and final validation passed."
+    },
+    "dimensions": [
+      "output_contract",
+      "artifact_continuity",
+      "dependency_retention",
+      "validator_readiness",
+      "entropy_pressure"
+    ]
+  },
+  "totals": {
+    "target_workload_count": 3,
+    "fully_validated_count": 0,
+    "prompt_tokens": 203044,
+    "completion_tokens": 5339,
+    "total_tokens": 208383
+  },
+  "critiques": [
+    {
+      "target_set_id": "entropy-qwen80next",
+      "model_id": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+      "context_tokens": 131072,
+      "harness_mode": "repair-extract",
+      "workload_id": "factory",
+      "planned_stage_count": 4,
+      "stages_seen": 5,
+      "max_pass_stage": 4,
+      "entropy_right_shift": {
+        "passed_stages": 4,
+        "possible_stages": 4,
+        "normalized": 1.0,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "final-validation",
+      "first_failure_class": "missing_artifact",
+      "first_error": "factory validation failed: missing json file: E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\factory\\factory-system\\config\\stations.json",
+      "likely_entropy_cause": "The generated tree did not preserve or create a required artifact.",
+      "eb_score": 4,
+      "dimension_scores": {
+        "output_contract": 4,
+        "artifact_continuity": 3,
+        "dependency_retention": 4,
+        "validator_readiness": 3,
+        "entropy_pressure": 5
+      },
+      "token_usage": {
+        "prompt_tokens": 157306,
+        "completion_tokens": 2797,
+        "total_tokens": 160103
+      },
+      "breakpoint_metric": "highest ordered stage with valid component graph, configuration, and end-to-end factory behavior",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\factory\\_raw\\factory-001-layout.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\factory\\_raw\\factory-001-layout.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\factory\\_raw\\factory-002-stations.attempt-01-repair.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\factory\\_raw\\factory-002-stations.attempt-01-repair.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\factory\\_raw\\factory-003-configuration.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\factory\\_raw\\factory-003-configuration.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\factory\\_raw\\factory-004-dashboard.attempt-01-repair.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\factory\\_raw\\factory-004-dashboard.attempt-01-repair.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\factory\\_raw\\factory-001-layout.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\factory\\_raw\\factory-002-stations.attempt-01-repair.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\factory\\_raw\\factory-003-configuration.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\factory\\_raw\\factory-004-dashboard.attempt-01-repair.prompt.txt"
+      ],
+      "generated_file_count": 8,
+      "generated_files": [
+        "factory-system/src/main/java/com/entropy/factory/model/Component.java",
+        "factory-system/src/main/java/com/entropy/factory/model/Station.java",
+        "factory-system/src/main/java/com/entropy/factory/model/Product.java",
+        "factory-system/src/main/java/com/entropy/factory/model/Routing.java",
+        "factory-system/src/main/java/com/entropy/factory/FactorySystem.java",
+        "factory-system/stations",
+        "factory-system/config",
+        "factory-system/dashboard"
+      ]
+    },
+    {
+      "target_set_id": "entropy-qwen80next",
+      "model_id": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+      "context_tokens": 131072,
+      "harness_mode": "repair-extract",
+      "workload_id": "library-chain",
+      "planned_stage_count": 4,
+      "stages_seen": 5,
+      "max_pass_stage": 4,
+      "entropy_right_shift": {
+        "passed_stages": 4,
+        "possible_stages": 4,
+        "normalized": 1.0,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "final-validation",
+      "first_failure_class": "missing_artifact",
+      "first_error": "library-chain validation failed: missing project: CoreLib/CoreLib.csproj",
+      "likely_entropy_cause": "The generated tree did not preserve or create a required artifact.",
+      "eb_score": 4,
+      "dimension_scores": {
+        "output_contract": 4,
+        "artifact_continuity": 3,
+        "dependency_retention": 4,
+        "validator_readiness": 3,
+        "entropy_pressure": 5
+      },
+      "token_usage": {
+        "prompt_tokens": 14404,
+        "completion_tokens": 1256,
+        "total_tokens": 15660
+      },
+      "breakpoint_metric": "highest ordered stage with valid dependency references, build output, and sample call",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\library-chain\\_raw\\lib-001-core.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\library-chain\\_raw\\lib-001-core.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\library-chain\\_raw\\lib-002-dependent.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\library-chain\\_raw\\lib-002-dependent.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\library-chain\\_raw\\lib-003-chain.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\library-chain\\_raw\\lib-003-chain.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\library-chain\\_raw\\lib-004-shared-interface.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\library-chain\\_raw\\lib-004-shared-interface.attempt-00.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\library-chain\\_raw\\lib-001-core.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\library-chain\\_raw\\lib-002-dependent.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\library-chain\\_raw\\lib-003-chain.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\library-chain\\_raw\\lib-004-shared-interface.attempt-00.prompt.txt"
+      ],
+      "generated_file_count": 9,
+      "generated_files": [
+        "library-chain/core/src/lib.rs",
+        "library-chain/core/src/main.rs",
+        "library-chain/core/Cargo.toml",
+        "library-chain/feature/Cargo.toml",
+        "library-chain/feature/src/lib.rs",
+        "library-chain/pipeline/Cargo.toml",
+        "library-chain/pipeline/src/lib.rs",
+        "library-chain/contracts/mod.rs",
+        "library-chain/contracts/Cargo.toml"
+      ]
+    },
+    {
+      "target_set_id": "entropy-qwen80next",
+      "model_id": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+      "context_tokens": 131072,
+      "harness_mode": "repair-extract",
+      "workload_id": "webpage-chain",
+      "planned_stage_count": 5,
+      "stages_seen": 6,
+      "max_pass_stage": 5,
+      "entropy_right_shift": {
+        "passed_stages": 5,
+        "possible_stages": 5,
+        "normalized": 1.0,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "final-validation",
+      "first_failure_class": "missing_artifact",
+      "first_error": "webpage-chain validation failed: page index.html is missing title text",
+      "likely_entropy_cause": "The generated tree did not preserve or create a required artifact.",
+      "eb_score": 4,
+      "dimension_scores": {
+        "output_contract": 4,
+        "artifact_continuity": 3,
+        "dependency_retention": 4,
+        "validator_readiness": 3,
+        "entropy_pressure": 5
+      },
+      "token_usage": {
+        "prompt_tokens": 31334,
+        "completion_tokens": 1286,
+        "total_tokens": 32620
+      },
+      "breakpoint_metric": "highest ordered stage with valid pages, backlinks, and shared structure",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\webpage-chain\\_raw\\web-001-home.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\webpage-chain\\_raw\\web-001-home.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\webpage-chain\\_raw\\web-002-backlink.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\webpage-chain\\_raw\\web-002-backlink.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\webpage-chain\\_raw\\web-003-chain-link.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\webpage-chain\\_raw\\web-003-chain-link.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\webpage-chain\\_raw\\web-004-shared-nav.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\webpage-chain\\_raw\\web-004-shared-nav.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\webpage-chain\\_raw\\web-005-nested-shared-table.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\webpage-chain\\_raw\\web-005-nested-shared-table.attempt-00.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\webpage-chain\\_raw\\web-001-home.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\webpage-chain\\_raw\\web-002-backlink.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\webpage-chain\\_raw\\web-003-chain-link.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\webpage-chain\\_raw\\web-004-shared-nav.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-wave2-repair-extract-entropy-qwen80next-20260525-082350\\workloads\\entropy-qwen80next\\webpage-chain\\_raw\\web-005-nested-shared-table.attempt-00.prompt.txt"
+      ],
+      "generated_file_count": 5,
+      "generated_files": [
+        "site/index.html",
+        "site/page-2.html",
+        "site/page-3.html",
+        "site/page-4.html",
+        "site/page-5.html"
+      ]
+    }
+  ]
+}

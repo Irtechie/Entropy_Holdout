@@ -1,0 +1,1310 @@
+You are running an Entropy staged code-generation benchmark.
+
+Workload: factory
+Stage: factory-003-configuration
+Order: 3
+
+Stage goal:
+Move station definitions and product routing into configuration while preserving end-to-end behavior.
+
+Expected artifacts:
+- factory-system/config (configuration)
+
+Validators that will run:
+- config-loads: failure_class=configuration
+- configured-route-runs: failure_class=runtime_behavior
+
+Existing generated files:
+FILE: factory-system/stations
+---BEGIN FILE---
+assembly-station: station-001
+inspection-station: station-002
+packaging-station: station-003
+
+routing:
+  product-A: [station-001, station-002, station-003]
+  product-B: [station-001, station-002, station-003]
+
+---END FILE---
+
+FILE: factory-system/src/main/java/com/entropy/factory/FactorySystem.java
+---BEGIN FILE---
+package com.entropy.factory;
+
+import com.entropy.factory.model.Component;
+import com.entropy.factory.model.Station;
+import com.entropy.factory.model.Product;
+import com.entropy.factory.model.Routing;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
+public class FactorySystem {
+    // Entry point for the factory system
+    // This class will orchestrate the core concepts
+    
+    private Map<String, Station> stations;
+    private Map<String, Routing> routings;
+    
+    public FactorySystem() {
+        this.stations = new HashMap<>();
+        this.routings = new HashMap<>();
+        initializeStations();
+        initializeRoutings();
+    }
+    
+    private void initializeStations() {
+        Station assemblyStation = new Station("station-001", "Assembly Station", List.of("motor", "wheels", "frame"));
+        Station inspectionStation = new Station("station-002", "Inspection Station", List.of("motor", "wheels", "frame", "battery"));
+        Station packagingStation = new Station("station-003", "Packaging Station", List.of("finished_product"));
+        
+        stations.put(assemblyStation.getId(), assemblyStation);
+        stations.put(inspectionStation.getId(), inspectionStation);
+        stations.put(packagingStation.getId(), packagingStation);
+    }
+    
+    private void initializeRoutings() {
+        Routing productA = new Routing("product-A", List.of("station-001", "station-002", "station-003"));
+        Routing productB = new Routing("product-B", List.of("station-001", "station-002", "station-003"));
+        
+        routings.put(productA.getProductId(), productA);
+        routings.put(productB.getProductId(), productB);
+    }
+    
+    public Station getStation(String stationId) {
+        return stations.get(stationId);
+    }
+    
+    public Routing getRouting(String productId) {
+        return routings.get(productId);
+    }
+    
+    public List<String> getStationSequence(String productId) {
+        Routing routing = routings.get(productId);
+        return routing != null ? routing.getStationSequence() : null;
+    }
+}
+
+---END FILE---
+
+FILE: factory-system/src/main/java/com/entropy/factory/model/Component.java
+---BEGIN FILE---
+package com.entropy.factory.model;
+
+public class Component {
+    private String id;
+    private String name;
+    
+    public Component(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    
+    // Getters and setters
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+}
+
+---END FILE---
+
+FILE: factory-system/src/main/java/com/entropy/factory/model/Product.java
+---BEGIN FILE---
+package com.entropy.factory.model;
+
+import java.util.List;
+
+public class Product {
+    private String id;
+    private String name;
+    private List<String> requiredComponents;
+    
+    public Product(String id, String name, List<String> requiredComponents) {
+        this.id = id;
+        this.name = name;
+        this.requiredComponents = requiredComponents;
+    }
+    
+    // Getters and setters
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public List<String> getRequiredComponents() { return requiredComponents; }
+    public void setRequiredComponents(List<String> requiredComponents) { this.requiredComponents = requiredComponents; }
+}
+
+---END FILE---
+
+FILE: factory-system/src/main/java/com/entropy/factory/model/Routing.java
+---BEGIN FILE---
+package com.entropy.factory.model;
+
+import java.util.List;
+
+public class Routing {
+    private String productId;
+    private List<String> stationSequence;
+    
+    public Routing(String productId, List<String> stationSequence) {
+        this.productId = productId;
+        this.stationSequence = stationSequence;
+    }
+    
+    // Getters and setters
+    public String getProductId() { return productId; }
+    public void setProductId(String productId) { this.productId = productId; }
+    public List<String> getStationSequence() { return stationSequence; }
+    public void setStationSequence(List<String> stationSequence) { this.stationSequence = stationSequence; }
+}
+
+---END FILE---
+
+FILE: factory-system/src/main/java/com/entropy/factory/model/Station.java
+---BEGIN FILE---
+package com.entropy.factory.model;
+
+import java.util.List;
+
+public class Station {
+    private String id;
+    private String name;
+    private List<String> supportedComponents;
+    
+    public Station(String id, String name, List<String> supportedComponents) {
+        this.id = id;
+        this.name = name;
+        this.supportedComponents = supportedComponents;
+    }
+    
+    // Getters and setters
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public List<String> getSupportedComponents() { return supportedComponents; }
+    public void setSupportedComponents(List<String> supportedComponents) { this.supportedComponents = supportedComponents; }
+}
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: factory
+Stage: factory-001-layout
+Order: 1
+
+Stage goal:
+Create the factory project layout with component, station, product, and routing concepts.
+
+Expected artifacts:
+- factory-system (project)
+
+Validators that will run:
+- factory-layout-exists: failure_class=missing_artifact
+- factory-core-types-present: failure_class=api_contract
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/model/Component.java\",\n      \"content\": \"package com.entropy.factory.model;\\n\\npublic class Component {\\n    private String id;\\n    private String name;\\n    \\n    public Component(String id, String name) {\\n        this.id = id;\\n        this.name = name;\\n    }\\n    \\n    // Getters and setters\\n    public String getId() { return id; }\\n    public void setId(String id) { this.id = id; }\\n    public String getName() { return name; }\\n    public void setName(String name) { this.name = name; }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/model/Station.java\",\n      \"content\": \"package com.entropy.factory.model;\\n\\nimport java.util.List;\\n\\npublic class Station {\\n    private String id;\\n    private String name;\\n    private List<String> supportedComponents;\\n    \\n    public Station(String id, String name, List<String> supportedComponents) {\\n        this.id = id;\\n        this.name = name;\\n        this.supportedComponents = supportedComponents;\\n    }\\n    \\n    // Getters and setters\\n    public String getId() { return id; }\\n    public void setId(String id) { this.id = id; }\\n    public String getName() { return name; }\\n    public void setName(String name) { this.name = name; }\\n    public List<String> getSupportedComponents() { return supportedComponents; }\\n    public void setSupportedComponents(List<String> supportedComponents) { this.supportedComponents = supportedComponents; }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/model/Product.java\",\n      \"content\": \"package com.entropy.factory.model;\\n\\nimport java.util.List;\\n\\npublic class Product {\\n    private String id;\\n    private String name;\\n    private List<String> requiredComponents;\\n    \\n    public Product(String id, String name, List<String> requiredComponents) {\\n        this.id = id;\\n        this.name = name;\\n        this.requiredComponents = requiredComponents;\\n    }\\n    \\n    // Getters and setters\\n    public String getId() { return id; }\\n    public void setId(String id) { this.id = id; }\\n    public String getName() { return name; }\\n    public void setName(String name) { this.name = name; }\\n    public List<String> getRequiredComponents() { return requiredComponents; }\\n    public void setRequiredComponents(List<String> requiredComponents) { this.requiredComponents = requiredComponents; }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/model/Routing.java\",\n      \"content\": \"package com.entropy.factory.model;\\n\\nimport java.util.List;\\n\\npublic class Routing {\\n    private String productId;\\n    private List<String> stationSequence;\\n    \\n    public Routing(String productId, List<String> stationSequence) {\\n        this.productId = productId;\\n        this.stationSequence = stationSequence;\\n    }\\n    \\n    // Getters and setters\\n    public String getProductId() { return productId; }\\n    public void setProductId(String productId) { this.productId = productId; }\\n    public List<String> getStationSequence() { return stationSequence; }\\n    public void setStationSequence(List<String> stationSequence) { this.stationSequence = stationSequence; }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/FactorySystem.java\",\n      \"content\": \"package com.entropy.factory;\\n\\nimport com.entropy.factory.model.Component;\\nimport com.entropy.factory.model.Station;\\nimport com.entropy.factory.model.Product;\\nimport com.entropy.factory.model.Routing;\\n\\npublic class FactorySystem {\\n    // Entry point for the factory system\\n    // This class will orchestrate the core concepts\\n}\\n\"\n    }\n  ],\n  \"notes\": \"Created core model classes for Component, Station, Product, and Routing in the factory-system project layout.\"\n}"
+      }
+    }
+  ],
+  "created": 1779712012,
+  "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 904,
+    "prompt_tokens": 222,
+    "total_tokens": 1126
+  },
+  "id": "chatcmpl-9N2rjQj8GhwNNSMGlvRXc3uL35XzQIO4",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 222,
+    "prompt_ms": 299.575,
+    "prompt_per_token_ms": 1.3494369369369368,
+    "prompt_per_second": 741.0498205791539,
+    "predicted_n": 904,
+    "predicted_ms": 18749.926,
+    "predicted_per_token_ms": 20.741068584070796,
+    "predicted_per_second": 48.21352361603987
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/model/Component.java",
+      "content": "package com.entropy.factory.model;\n\npublic class Component {\n    private String id;\n    private String name;\n    \n    public Component(String id, String name) {\n        this.id = id;\n        this.name = name;\n    }\n    \n    // Getters and setters\n    public String getId() { return id; }\n    public void setId(String id) { this.id = id; }\n    public String getName() { return name; }\n    public void setName(String name) { this.name = name; }\n}"
+    },
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/model/Station.java",
+      "content": "package com.entropy.factory.model;\n\nimport java.util.List;\n\npublic class Station {\n    private String id;\n    private String name;\n    private List<String> supportedComponents;\n    \n    public Station(String id, String name, List<String> supportedComponents) {\n        this.id = id;\n        this.name = name;\n        this.supportedComponents = supportedComponents;\n    }\n    \n    // Getters and setters\n    public String getId() { return id; }\n    public void setId(String id) { this.id = id; }\n    public String getName() { return name; }\n    public void setName(String name) { this.name = name; }\n    public List<String> getSupportedComponents() { return supportedComponents; }\n    public void setSupportedComponents(List<String> supportedComponents) { this.supportedComponents = supportedComponents; }\n}"
+    },
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/model/Product.java",
+      "content": "package com.entropy.factory.model;\n\nimport java.util.List;\n\npublic class Product {\n    private String id;\n    private String name;\n    private List<String> requiredComponents;\n    \n    public Product(String id, String name, List<String> requiredComponents) {\n        this.id = id;\n        this.name = name;\n        this.requiredComponents = requiredComponents;\n    }\n    \n    // Getters and setters\n    public String getId() { return id; }\n    public void setId(String id) { this.id = id; }\n    public String getName() { return name; }\n    public void setName(String name) { this.name = name; }\n    public List<String> getRequiredComponents() { return requiredComponents; }\n    public void setRequiredComponents(List<String> requiredComponents) { this.requiredComponents = requiredComponents; }\n}"
+    },
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/model/Routing.java",
+      "content": "package com.entropy.factory.model;\n\nimport java.util.List;\n\npublic class Routing {\n    private String productId;\n    private List<String> stationSequence;\n    \n    public Routing(String productId, List<String> stationSequence) {\n        this.productId = productId;\n        this.stationSequence = stationSequence;\n    }\n    \n    // Getters and setters\n    public String getProductId() { return productId; }\n    public void setProductId(String productId) { this.productId = productId; }\n    public List<String> getStationSequence() { return stationSequence; }\n    public void setStationSequence(List<String> stationSequence) { this.stationSequence = stationSequence; }\n}"
+    },
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/FactorySystem.java",
+      "content": "package com.entropy.factory;\n\nimport com.entropy.factory.model.Component;\nimport com.entropy.factory.model.Station;\nimport com.entropy.factory.model.Product;\nimport com.entropy.factory.model.Routing;\n\npublic class FactorySystem {\n    // Entry point for the factory system\n    // This class will orchestrate the core concepts\n}\n"
+    }
+  ],
+  "notes": "Created core model classes for Component, Station, Product, and Routing in the factory-system project layout."
+}
+
+---END FILE---
+
+FILE: _raw/factory-002-stations.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: factory
+Stage: factory-002-stations
+Order: 2
+
+Stage goal:
+Add multiple stations and a routing flow that moves a product between them.
+
+Expected artifacts:
+- factory-system/stations (source)
+
+Validators that will run:
+- station-graph-valid: failure_class=dependency_graph
+- product-route-runs: failure_class=runtime_behavior
+
+Existing generated files:
+FILE: factory-system/src/main/java/com/entropy/factory/FactorySystem.java
+---BEGIN FILE---
+package com.entropy.factory;
+
+import com.entropy.factory.model.Component;
+import com.entropy.factory.model.Station;
+import com.entropy.factory.model.Product;
+import com.entropy.factory.model.Routing;
+
+public class FactorySystem {
+    // Entry point for the factory system
+    // This class will orchestrate the core concepts
+}
+
+
+---END FILE---
+
+FILE: factory-system/src/main/java/com/entropy/factory/model/Component.java
+---BEGIN FILE---
+package com.entropy.factory.model;
+
+public class Component {
+    private String id;
+    private String name;
+    
+    public Component(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    
+    // Getters and setters
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+}
+
+---END FILE---
+
+FILE: factory-system/src/main/java/com/entropy/factory/model/Product.java
+---BEGIN FILE---
+package com.entropy.factory.model;
+
+import java.util.List;
+
+public class Product {
+    private String id;
+    private String name;
+    private List<String> requiredComponents;
+    
+    public Product(String id, String name, List<String> requiredComponents) {
+        this.id = id;
+        this.name = name;
+        this.requiredComponents = requiredComponents;
+    }
+    
+    // Getters and setters
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public List<String> getRequiredComponents() { return requiredComponents; }
+    public void setRequiredComponents(List<String> requiredComponents) { this.requiredComponents = requiredComponents; }
+}
+
+---END FILE---
+
+FILE: factory-system/src/main/java/com/entropy/factory/model/Routing.java
+---BEGIN FILE---
+package com.entropy.factory.model;
+
+import java.util.List;
+
+public class Routing {
+    private String productId;
+    private List<String> stationSequence;
+    
+    public Routing(String productId, List<String> stationSequence) {
+        this.productId = productId;
+        this.stationSequence = stationSequence;
+    }
+    
+    // Getters and setters
+    public String getProductId() { return productId; }
+    public void setProductId(String productId) { this.productId = productId; }
+    public List<String> getStationSequence() { return stationSequence; }
+    public void setStationSequence(List<String> stationSequence) { this.stationSequence = stationSequence; }
+}
+
+---END FILE---
+
+FILE: factory-system/src/main/java/com/entropy/factory/model/Station.java
+---BEGIN FILE---
+package com.entropy.factory.model;
+
+import java.util.List;
+
+public class Station {
+    private String id;
+    private String name;
+    private List<String> supportedComponents;
+    
+    public Station(String id, String name, List<String> supportedComponents) {
+        this.id = id;
+        this.name = name;
+        this.supportedComponents = supportedComponents;
+    }
+    
+    // Getters and setters
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public List<String> getSupportedComponents() { return supportedComponents; }
+    public void setSupportedComponents(List<String> supportedComponents) { this.supportedComponents = supportedComponents; }
+}
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: factory
+Stage: factory-001-layout
+Order: 1
+
+Stage goal:
+Create the factory project layout with component, station, product, and routing concepts.
+
+Expected artifacts:
+- factory-system (project)
+
+Validators that will run:
+- factory-layout-exists: failure_class=missing_artifact
+- factory-core-types-present: failure_class=api_contract
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/model/Component.java\",\n      \"content\": \"package com.entropy.factory.model;\\n\\npublic class Component {\\n    private String id;\\n    private String name;\\n    \\n    public Component(String id, String name) {\\n        this.id = id;\\n        this.name = name;\\n    }\\n    \\n    // Getters and setters\\n    public String getId() { return id; }\\n    public void setId(String id) { this.id = id; }\\n    public String getName() { return name; }\\n    public void setName(String name) { this.name = name; }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/model/Station.java\",\n      \"content\": \"package com.entropy.factory.model;\\n\\nimport java.util.List;\\n\\npublic class Station {\\n    private String id;\\n    private String name;\\n    private List<String> supportedComponents;\\n    \\n    public Station(String id, String name, List<String> supportedComponents) {\\n        this.id = id;\\n        this.name = name;\\n        this.supportedComponents = supportedComponents;\\n    }\\n    \\n    // Getters and setters\\n    public String getId() { return id; }\\n    public void setId(String id) { this.id = id; }\\n    public String getName() { return name; }\\n    public void setName(String name) { this.name = name; }\\n    public List<String> getSupportedComponents() { return supportedComponents; }\\n    public void setSupportedComponents(List<String> supportedComponents) { this.supportedComponents = supportedComponents; }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/model/Product.java\",\n      \"content\": \"package com.entropy.factory.model;\\n\\nimport java.util.List;\\n\\npublic class Product {\\n    private String id;\\n    private String name;\\n    private List<String> requiredComponents;\\n    \\n    public Product(String id, String name, List<String> requiredComponents) {\\n        this.id = id;\\n        this.name = name;\\n        this.requiredComponents = requiredComponents;\\n    }\\n    \\n    // Getters and setters\\n    public String getId() { return id; }\\n    public void setId(String id) { this.id = id; }\\n    public String getName() { return name; }\\n    public void setName(String name) { this.name = name; }\\n    public List<String> getRequiredComponents() { return requiredComponents; }\\n    public void setRequiredComponents(List<String> requiredComponents) { this.requiredComponents = requiredComponents; }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/model/Routing.java\",\n      \"content\": \"package com.entropy.factory.model;\\n\\nimport java.util.List;\\n\\npublic class Routing {\\n    private String productId;\\n    private List<String> stationSequence;\\n    \\n    public Routing(String productId, List<String> stationSequence) {\\n        this.productId = productId;\\n        this.stationSequence = stationSequence;\\n    }\\n    \\n    // Getters and setters\\n    public String getProductId() { return productId; }\\n    public void setProductId(String productId) { this.productId = productId; }\\n    public List<String> getStationSequence() { return stationSequence; }\\n    public void setStationSequence(List<String> stationSequence) { this.stationSequence = stationSequence; }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/FactorySystem.java\",\n      \"content\": \"package com.entropy.factory;\\n\\nimport com.entropy.factory.model.Component;\\nimport com.entropy.factory.model.Station;\\nimport com.entropy.factory.model.Product;\\nimport com.entropy.factory.model.Routing;\\n\\npublic class FactorySystem {\\n    // Entry point for the factory system\\n    // This class will orchestrate the core concepts\\n}\\n\"\n    }\n  ],\n  \"notes\": \"Created core model classes for Component, Station, Product, and Routing in the factory-system project layout.\"\n}"
+      }
+    }
+  ],
+  "created": 1779712012,
+  "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 904,
+    "prompt_tokens": 222,
+    "total_tokens": 1126
+  },
+  "id": "chatcmpl-9N2rjQj8GhwNNSMGlvRXc3uL35XzQIO4",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 222,
+    "prompt_ms": 299.575,
+    "prompt_per_token_ms": 1.3494369369369368,
+    "prompt_per_second": 741.0498205791539,
+    "predicted_n": 904,
+    "predicted_ms": 18749.926,
+    "predicted_per_token_ms": 20.741068584070796,
+    "predicted_per_second": 48.21352361603987
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/model/Component.java",
+      "content": "package com.entropy.factory.model;\n\npublic class Component {\n    private String id;\n    private String name;\n    \n    public Component(String id, String name) {\n        this.id = id;\n        this.name = name;\n    }\n    \n    // Getters and setters\n    public String getId() { return id; }\n    public void setId(String id) { this.id = id; }\n    public String getName() { return name; }\n    public void setName(String name) { this.name = name; }\n}"
+    },
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/model/Station.java",
+      "content": "package com.entropy.factory.model;\n\nimport java.util.List;\n\npublic class Station {\n    private String id;\n    private String name;\n    private List<String> supportedComponents;\n    \n    public Station(String id, String name, List<String> supportedComponents) {\n        this.id = id;\n        this.name = name;\n        this.supportedComponents = supportedComponents;\n    }\n    \n    // Getters and setters\n    public String getId() { return id; }\n    public void setId(String id) { this.id = id; }\n    public String getName() { return name; }\n    public void setName(String name) { this.name = name; }\n    public List<String> getSupportedComponents() { return supportedComponents; }\n    public void setSupportedComponents(List<String> supportedComponents) { this.supportedComponents = supportedComponents; }\n}"
+    },
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/model/Product.java",
+      "content": "package com.entropy.factory.model;\n\nimport java.util.List;\n\npublic class Product {\n    private String id;\n    private String name;\n    private List<String> requiredComponents;\n    \n    public Product(String id, String name, List<String> requiredComponents) {\n        this.id = id;\n        this.name = name;\n        this.requiredComponents = requiredComponents;\n    }\n    \n    // Getters and setters\n    public String getId() { return id; }\n    public void setId(String id) { this.id = id; }\n    public String getName() { return name; }\n    public void setName(String name) { this.name = name; }\n    public List<String> getRequiredComponents() { return requiredComponents; }\n    public void setRequiredComponents(List<String> requiredComponents) { this.requiredComponents = requiredComponents; }\n}"
+    },
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/model/Routing.java",
+      "content": "package com.entropy.factory.model;\n\nimport java.util.List;\n\npublic class Routing {\n    private String productId;\n    private List<String> stationSequence;\n    \n    public Routing(String productId, List<String> stationSequence) {\n        this.productId = productId;\n        this.stationSequence = stationSequence;\n    }\n    \n    // Getters and setters\n    public String getProductId() { return productId; }\n    public void setProductId(String productId) { this.productId = productId; }\n    public List<String> getStationSequence() { return stationSequence; }\n    public void setStationSequence(List<String> stationSequence) { this.stationSequence = stationSequence; }\n}"
+    },
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/FactorySystem.java",
+      "content": "package com.entropy.factory;\n\nimport com.entropy.factory.model.Component;\nimport com.entropy.factory.model.Station;\nimport com.entropy.factory.model.Product;\nimport com.entropy.factory.model.Routing;\n\npublic class FactorySystem {\n    // Entry point for the factory system\n    // This class will orchestrate the core concepts\n}\n"
+    }
+  ],
+  "notes": "Created core model classes for Component, Station, Product, and Routing in the factory-system project layout."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/factory-002-stations.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/FactorySystem.java\",\n      \"content\": \"package com.entropy.factory;\\n\\nimport com.entropy.factory.model.Component;\\nimport com.entropy.factory.model.Station;\\nimport com.entropy.factory.model.Product;\\nimport com.entropy.factory.model.Routing;\\nimport java.util.List;\\nimport java.util.Map;\\nimport java.util.HashMap;\\n\\npublic class FactorySystem {\\n    // Entry point for the factory system\\n    // This class will orchestrate the core concepts\\n    \\n    private Map<String, Station> stations;\\n    private Map<String, Routing> routings;\\n    \\n    public FactorySystem() {\\n        this.stations = new HashMap<>();\\n        this.routings = new HashMap<>();\\n        initializeStations();\\n        initializeRoutings();\\n    }\\n    \\n    private void initializeStations() {\\n        Station assemblyStation = new Station(\\\"station-001\\\", \\\"Assembly Station\\\", List.of(\\\"motor\\\", \\\"wheels\\\", \\\"frame\\\"));\\n        Station inspectionStation = new Station(\\\"station-002\\\", \\\"Inspection Station\\\", List.of(\\\"motor\\\", \\\"wheels\\\", \\\"frame\\\", \\\"battery\\\"));\\n        Station packagingStation = new Station(\\\"station-003\\\", \\\"Packaging Station\\\", List.of(\\\"finished_product\\\"));\\n        \\n        stations.put(assemblyStation.getId(), assemblyStation);\\n        stations.put(inspectionStation.getId(), inspectionStation);\\n        stations.put(packagingStation.getId(), packagingStation);\\n    }\\n    \\n    private void initializeRoutings() {\\n        Routing productA = new Routing(\\\"product-A\\\", List.of(\\\"station-001\\\", \\\"station-002\\\", \\\"station-003\\\"));\\n        Routing productB = new Routing(\\\"product-B\\\", List.of(\\\"station-001\\\", \\\"station-002\\\", \\\"station-003\\\"));\\n        \\n        routings.put(productA.getProductId(), productA);\\n        routings.put(productB.getProductId(), productB);\\n    }\\n    \\n    public Station getStation(String stationId) {\\n        return stations.get(stationId);\\n    }\\n    \\n    public Routing getRouting(String productId) {\\n        return routings.get(productId);\\n    }\\n    \\n    public List<String> getStationSequence(String productId) {\\n        Routing routing = routings.get(productId);\\n        return routing != null ? routing.getStationSequence() : null;\\n    }\\n}\"\n    }\n  ],\n  \"notes\": \"Added multiple stations and routing flow to FactorySystem to enable product movement between stations.\"\n}"
+      }
+    }
+  ],
+  "created": 1779712029,
+  "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 591,
+    "prompt_tokens": 3536,
+    "total_tokens": 4127
+  },
+  "id": "chatcmpl-LhqJwj8JQCLkKCqPSPIocVVHuxb92HD9",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 3536,
+    "prompt_ms": 3406.286,
+    "prompt_per_token_ms": 0.9633161764705882,
+    "prompt_per_second": 1038.0807718435856,
+    "predicted_n": 591,
+    "predicted_ms": 12503.638,
+    "predicted_per_token_ms": 21.15674788494078,
+    "predicted_per_second": 47.26624363245321
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-002-stations.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/FactorySystem.java",
+      "content": "package com.entropy.factory;\n\nimport com.entropy.factory.model.Component;\nimport com.entropy.factory.model.Station;\nimport com.entropy.factory.model.Product;\nimport com.entropy.factory.model.Routing;\nimport java.util.List;\nimport java.util.Map;\nimport java.util.HashMap;\n\npublic class FactorySystem {\n    // Entry point for the factory system\n    // This class will orchestrate the core concepts\n    \n    private Map<String, Station> stations;\n    private Map<String, Routing> routings;\n    \n    public FactorySystem() {\n        this.stations = new HashMap<>();\n        this.routings = new HashMap<>();\n        initializeStations();\n        initializeRoutings();\n    }\n    \n    private void initializeStations() {\n        Station assemblyStation = new Station(\"station-001\", \"Assembly Station\", List.of(\"motor\", \"wheels\", \"frame\"));\n        Station inspectionStation = new Station(\"station-002\", \"Inspection Station\", List.of(\"motor\", \"wheels\", \"frame\", \"battery\"));\n        Station packagingStation = new Station(\"station-003\", \"Packaging Station\", List.of(\"finished_product\"));\n        \n        stations.put(assemblyStation.getId(), assemblyStation);\n        stations.put(inspectionStation.getId(), inspectionStation);\n        stations.put(packagingStation.getId(), packagingStation);\n    }\n    \n    private void initializeRoutings() {\n        Routing productA = new Routing(\"product-A\", List.of(\"station-001\", \"station-002\", \"station-003\"));\n        Routing productB = new Routing(\"product-B\", List.of(\"station-001\", \"station-002\", \"station-003\"));\n        \n        routings.put(productA.getProductId(), productA);\n        routings.put(productB.getProductId(), productB);\n    }\n    \n    public Station getStation(String stationId) {\n        return stations.get(stationId);\n    }\n    \n    public Routing getRouting(String productId) {\n        return routings.get(productId);\n    }\n    \n    public List<String> getStationSequence(String productId) {\n        Routing routing = routings.get(productId);\n        return routing != null ? routing.getStationSequence() : null;\n    }\n}"
+    }
+  ],
+  "notes": "Added multiple stations and routing flow to FactorySystem to enable product movement between stations."
+}
+
+---END FILE---
+
+FILE: _raw/factory-002-stations.attempt-01-repair.prompt.txt
+---BEGIN FILE---
+You are repairing an Entropy staged code-generation benchmark response.
+
+Workload: factory
+Stage: factory-002-stations
+Order: 2
+
+Stage goal:
+Add multiple stations and a routing flow that moves a product between them.
+
+Expected artifacts:
+- factory-system/stations (source)
+
+The previous response failed with:
+model did not generate expected artifact path: factory-system/stations
+
+Previous response text:
+---BEGIN FAILED RESPONSE---
+{
+  "files": [
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/FactorySystem.java",
+      "content": "package com.entropy.factory;\n\nimport com.entropy.factory.model.Component;\nimport com.entropy.factory.model.Station;\nimport com.entropy.factory.model.Product;\nimport com.entropy.factory.model.Routing;\nimport java.util.List;\nimport java.util.Map;\nimport java.util.HashMap;\n\npublic class FactorySystem {\n    // Entry point for the factory system\n    // This class will orchestrate the core concepts\n    \n    private Map<String, Station> stations;\n    private Map<String, Routing> routings;\n    \n    public FactorySystem() {\n        this.stations = new HashMap<>();\n        this.routings = new HashMap<>();\n        initializeStations();\n        initializeRoutings();\n    }\n    \n    private void initializeStations() {\n        Station assemblyStation = new Station(\"station-001\", \"Assembly Station\", List.of(\"motor\", \"wheels\", \"frame\"));\n        Station inspectionStation = new Station(\"station-002\", \"Inspection Station\", List.of(\"motor\", \"wheels\", \"frame\", \"battery\"));\n        Station packagingStation = new Station(\"station-003\", \"Packaging Station\", List.of(\"finished_product\"));\n        \n        stations.put(assemblyStation.getId(), assemblyStation);\n        stations.put(inspectionStation.getId(), inspectionStation);\n        stations.put(packagingStation.getId(), packagingStation);\n    }\n    \n    private void initializeRoutings() {\n        Routing productA = new Routing(\"product-A\", List.of(\"station-001\", \"station-002\", \"station-003\"));\n        Routing productB = new Routing(\"product-B\", List.of(\"station-001\", \"station-002\", \"station-003\"));\n        \n        routings.put(productA.getProductId(), productA);\n        routings.put(productB.getProductId(), productB);\n    }\n    \n    public Station getStation(String stationId) {\n        return stations.get(stationId);\n    }\n    \n    public Routing getRouting(String productId) {\n        return routings.get(productId);\n    }\n    \n    public List<String> getStationSequence(String productId) {\n        Routing routing = routings.get(productId);\n        return routing != null ? routing.getStationSequence() : null;\n    }\n}"
+    }
+  ],
+  "notes": "Added multiple stations and routing flow to FactorySystem to enable product movement between stations."
+}
+---END FAILED RESPONSE---
+
+Current generated files:
+FILE: factory-system/src/main/java/com/entropy/factory/FactorySystem.java
+---BEGIN FILE---
+package com.entropy.factory;
+
+import com.entropy.factory.model.Component;
+import com.entropy.factory.model.Station;
+import com.entropy.factory.model.Product;
+import com.entropy.factory.model.Routing;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
+public class FactorySystem {
+    // Entry point for the factory system
+    // This class will orchestrate the core concepts
+    
+    private Map<String, Station> stations;
+    private Map<String, Routing> routings;
+    
+    public FactorySystem() {
+        this.stations = new HashMap<>();
+        this.routings = new HashMap<>();
+        initializeStations();
+        initializeRoutings();
+    }
+    
+    private void initializeStations() {
+        Station assemblyStation = new Station("station-001", "Assembly Station", List.of("motor", "wheels", "frame"));
+        Station inspectionStation = new Station("station-002", "Inspection Station", List.of("motor", "wheels", "frame", "battery"));
+        Station packagingStation = new Station("station-003", "Packaging Station", List.of("finished_product"));
+        
+        stations.put(assemblyStation.getId(), assemblyStation);
+        stations.put(inspectionStation.getId(), inspectionStation);
+        stations.put(packagingStation.getId(), packagingStation);
+    }
+    
+    private void initializeRoutings() {
+        Routing productA = new Routing("product-A", List.of("station-001", "station-002", "station-003"));
+        Routing productB = new Routing("product-B", List.of("station-001", "station-002", "station-003"));
+        
+        routings.put(productA.getProductId(), productA);
+        routings.put(productB.getProductId(), productB);
+    }
+    
+    public Station getStation(String stationId) {
+        return stations.get(stationId);
+    }
+    
+    public Routing getRouting(String productId) {
+        return routings.get(productId);
+    }
+    
+    public List<String> getStationSequence(String productId) {
+        Routing routing = routings.get(productId);
+        return routing != null ? routing.getStationSequence() : null;
+    }
+}
+
+---END FILE---
+
+FILE: factory-system/src/main/java/com/entropy/factory/model/Component.java
+---BEGIN FILE---
+package com.entropy.factory.model;
+
+public class Component {
+    private String id;
+    private String name;
+    
+    public Component(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    
+    // Getters and setters
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+}
+
+---END FILE---
+
+FILE: factory-system/src/main/java/com/entropy/factory/model/Product.java
+---BEGIN FILE---
+package com.entropy.factory.model;
+
+import java.util.List;
+
+public class Product {
+    private String id;
+    private String name;
+    private List<String> requiredComponents;
+    
+    public Product(String id, String name, List<String> requiredComponents) {
+        this.id = id;
+        this.name = name;
+        this.requiredComponents = requiredComponents;
+    }
+    
+    // Getters and setters
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public List<String> getRequiredComponents() { return requiredComponents; }
+    public void setRequiredComponents(List<String> requiredComponents) { this.requiredComponents = requiredComponents; }
+}
+
+---END FILE---
+
+FILE: factory-system/src/main/java/com/entropy/factory/model/Routing.java
+---BEGIN FILE---
+package com.entropy.factory.model;
+
+import java.util.List;
+
+public class Routing {
+    private String productId;
+    private List<String> stationSequence;
+    
+    public Routing(String productId, List<String> stationSequence) {
+        this.productId = productId;
+        this.stationSequence = stationSequence;
+    }
+    
+    // Getters and setters
+    public String getProductId() { return productId; }
+    public void setProductId(String productId) { this.productId = productId; }
+    public List<String> getStationSequence() { return stationSequence; }
+    public void setStationSequence(List<String> stationSequence) { this.stationSequence = stationSequence; }
+}
+
+---END FILE---
+
+FILE: factory-system/src/main/java/com/entropy/factory/model/Station.java
+---BEGIN FILE---
+package com.entropy.factory.model;
+
+import java.util.List;
+
+public class Station {
+    private String id;
+    private String name;
+    private List<String> supportedComponents;
+    
+    public Station(String id, String name, List<String> supportedComponents) {
+        this.id = id;
+        this.name = name;
+        this.supportedComponents = supportedComponents;
+    }
+    
+    // Getters and setters
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public List<String> getSupportedComponents() { return supportedComponents; }
+    public void setSupportedComponents(List<String> supportedComponents) { this.supportedComponents = supportedComponents; }
+}
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: factory
+Stage: factory-001-layout
+Order: 1
+
+Stage goal:
+Create the factory project layout with component, station, product, and routing concepts.
+
+Expected artifacts:
+- factory-system (project)
+
+Validators that will run:
+- factory-layout-exists: failure_class=missing_artifact
+- factory-core-types-present: failure_class=api_contract
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/model/Component.java\",\n      \"content\": \"package com.entropy.factory.model;\\n\\npublic class Component {\\n    private String id;\\n    private String name;\\n    \\n    public Component(String id, String name) {\\n        this.id = id;\\n        this.name = name;\\n    }\\n    \\n    // Getters and setters\\n    public String getId() { return id; }\\n    public void setId(String id) { this.id = id; }\\n    public String getName() { return name; }\\n    public void setName(String name) { this.name = name; }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/model/Station.java\",\n      \"content\": \"package com.entropy.factory.model;\\n\\nimport java.util.List;\\n\\npublic class Station {\\n    private String id;\\n    private String name;\\n    private List<String> supportedComponents;\\n    \\n    public Station(String id, String name, List<String> supportedComponents) {\\n        this.id = id;\\n        this.name = name;\\n        this.supportedComponents = supportedComponents;\\n    }\\n    \\n    // Getters and setters\\n    public String getId() { return id; }\\n    public void setId(String id) { this.id = id; }\\n    public String getName() { return name; }\\n    public void setName(String name) { this.name = name; }\\n    public List<String> getSupportedComponents() { return supportedComponents; }\\n    public void setSupportedComponents(List<String> supportedComponents) { this.supportedComponents = supportedComponents; }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/model/Product.java\",\n      \"content\": \"package com.entropy.factory.model;\\n\\nimport java.util.List;\\n\\npublic class Product {\\n    private String id;\\n    private String name;\\n    private List<String> requiredComponents;\\n    \\n    public Product(String id, String name, List<String> requiredComponents) {\\n        this.id = id;\\n        this.name = name;\\n        this.requiredComponents = requiredComponents;\\n    }\\n    \\n    // Getters and setters\\n    public String getId() { return id; }\\n    public void setId(String id) { this.id = id; }\\n    public String getName() { return name; }\\n    public void setName(String name) { this.name = name; }\\n    public List<String> getRequiredComponents() { return requiredComponents; }\\n    public void setRequiredComponents(List<String> requiredComponents) { this.requiredComponents = requiredComponents; }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/model/Routing.java\",\n      \"content\": \"package com.entropy.factory.model;\\n\\nimport java.util.List;\\n\\npublic class Routing {\\n    private String productId;\\n    private List<String> stationSequence;\\n    \\n    public Routing(String productId, List<String> stationSequence) {\\n        this.productId = productId;\\n        this.stationSequence = stationSequence;\\n    }\\n    \\n    // Getters and setters\\n    public String getProductId() { return productId; }\\n    public void setProductId(String productId) { this.productId = productId; }\\n    public List<String> getStationSequence() { return stationSequence; }\\n    public void setStationSequence(List<String> stationSequence) { this.stationSequence = stationSequence; }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/FactorySystem.java\",\n      \"content\": \"package com.entropy.factory;\\n\\nimport com.entropy.factory.model.Component;\\nimport com.entropy.factory.model.Station;\\nimport com.entropy.factory.model.Product;\\nimport com.entropy.factory.model.Routing;\\n\\npublic class FactorySystem {\\n    // Entry point for the factory system\\n    // This class will orchestrate the core concepts\\n}\\n\"\n    }\n  ],\n  \"notes\": \"Created core model classes for Component, Station, Product, and Routing in the factory-system project layout.\"\n}"
+      }
+    }
+  ],
+  "created": 1779712012,
+  "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 904,
+    "prompt_tokens": 222,
+    "total_tokens": 1126
+  },
+  "id": "chatcmpl-9N2rjQj8GhwNNSMGlvRXc3uL35XzQIO4",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 222,
+    "prompt_ms": 299.575,
+    "prompt_per_token_ms": 1.3494369369369368,
+    "prompt_per_second": 741.0498205791539,
+    "predicted_n": 904,
+    "predicted_ms": 18749.926,
+    "predicted_per_token_ms": 20.741068584070796,
+    "predicted_per_second": 48.21352361603987
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/model/Component.java",
+      "content": "package com.entropy.factory.model;\n\npublic class Component {\n    private String id;\n    private String name;\n    \n    public Component(String id, String name) {\n        this.id = id;\n        this.name = name;\n    }\n    \n    // Getters and setters\n    public String getId() { return id; }\n    public void setId(String id) { this.id = id; }\n    public String getName() { return name; }\n    public void setName(String name) { this.name = name; }\n}"
+    },
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/model/Station.java",
+      "content": "package com.entropy.factory.model;\n\nimport java.util.List;\n\npublic class Station {\n    private String id;\n    private String name;\n    private List<String> supportedComponents;\n    \n    public Station(String id, String name, List<String> supportedComponents) {\n        this.id = id;\n        this.name = name;\n        this.supportedComponents = supportedComponents;\n    }\n    \n    // Getters and setters\n    public String getId() { return id; }\n    public void setId(String id) { this.id = id; }\n    public String getName() { return name; }\n    public void setName(String name) { this.name = name; }\n    public List<String> getSupportedComponents() { return supportedComponents; }\n    public void setSupportedComponents(List<String> supportedComponents) { this.supportedComponents = supportedComponents; }\n}"
+    },
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/model/Product.java",
+      "content": "package com.entropy.factory.model;\n\nimport java.util.List;\n\npublic class Product {\n    private String id;\n    private String name;\n    private List<String> requiredComponents;\n    \n    public Product(String id, String name, List<String> requiredComponents) {\n        this.id = id;\n        this.name = name;\n        this.requiredComponents = requiredComponents;\n    }\n    \n    // Getters and setters\n    public String getId() { return id; }\n    public void setId(String id) { this.id = id; }\n    public String getName() { return name; }\n    public void setName(String name) { this.name = name; }\n    public List<String> getRequiredComponents() { return requiredComponents; }\n    public void setRequiredComponents(List<String> requiredComponents) { this.requiredComponents = requiredComponents; }\n}"
+    },
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/model/Routing.java",
+      "content": "package com.entropy.factory.model;\n\nimport java.util.List;\n\npublic class Routing {\n    private String productId;\n    private List<String> stationSequence;\n    \n    public Routing(String productId, List<String> stationSequence) {\n        this.productId = productId;\n        this.stationSequence = stationSequence;\n    }\n    \n    // Getters and setters\n    public String getProductId() { return productId; }\n    public void setProductId(String productId) { this.productId = productId; }\n    public List<String> getStationSequence() { return stationSequence; }\n    public void setStationSequence(List<String> stationSequence) { this.stationSequence = stationSequence; }\n}"
+    },
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/FactorySystem.java",
+      "content": "package com.entropy.factory;\n\nimport com.entropy.factory.model.Component;\nimport com.entropy.factory.model.Station;\nimport com.entropy.factory.model.Product;\nimport com.entropy.factory.model.Routing;\n\npublic class FactorySystem {\n    // Entry point for the factory system\n    // This class will orchestrate the core concepts\n}\n"
+    }
+  ],
+  "notes": "Created core model classes for Component, Station, Product, and Routing in the factory-system project layout."
+}
+
+---END FILE---
+
+FILE: _raw/factory-002-stations.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: factory
+Stage: factory-002-stations
+Order: 2
+
+Stage goal:
+Add multiple stations and a routing flow that moves a product between them.
+
+Expected artifacts:
+- factory-system/stations (source)
+
+Validators that will run:
+- station-graph-valid: failure_class=dependency_graph
+- product-route-runs: failure_class=runtime_behavior
+
+Existing generated files:
+FILE: factory-system/src/main/java/com/entropy/factory/FactorySystem.java
+---BEGIN FILE---
+package com.entropy.factory;
+
+import com.entropy.factory.model.Component;
+import com.entropy.factory.model.Station;
+import com.entropy.factory.model.Product;
+import com.entropy.factory.model.Routing;
+
+public class FactorySystem {
+    // Entry point for the factory system
+    // This class will orchestrate the core concepts
+}
+
+
+---END FILE---
+
+FILE: factory-system/src/main/java/com/entropy/factory/model/Component.java
+---BEGIN FILE---
+package com.entropy.factory.model;
+
+public class Component {
+    private String id;
+    private String name;
+    
+    public Component(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    
+    // Getters and setters
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+}
+
+---END FILE---
+
+FILE: factory-system/src/main/java/com/entropy/factory/model/Product.java
+---BEGIN FILE---
+package com.entropy.factory.model;
+
+import java.util.List;
+
+public class Product {
+    private String id;
+    private String name;
+    private List<String> requiredComponents;
+    
+    public Product(String id, String name, List<String> requiredComponents) {
+        this.id = id;
+        this.name = name;
+        this.requiredComponents = requiredComponents;
+    }
+    
+    // Getters and setters
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public List<String> getRequiredComponents() { return requiredComponents; }
+    public void setRequiredComponents(List<String> requiredComponents) { this.requiredComponents = requiredComponents; }
+}
+
+---END FILE---
+
+FILE: factory-system/src/main/java/com/entropy/factory/model/Routing.java
+---BEGIN FILE---
+package com.entropy.factory.model;
+
+import java.util.List;
+
+public class Routing {
+    private String productId;
+    private List<String> stationSequence;
+    
+    public Routing(String productId, List<String> stationSequence) {
+        this.productId = productId;
+        this.stationSequence = stationSequence;
+    }
+    
+    // Getters and setters
+    public String getProductId() { return productId; }
+    public void setProductId(String productId) { this.productId = productId; }
+    public List<String> getStationSequence() { return stationSequence; }
+    public void setStationSequence(List<String> stationSequence) { this.stationSequence = stationSequence; }
+}
+
+---END FILE---
+
+FILE: factory-system/src/main/java/com/entropy/factory/model/Station.java
+---BEGIN FILE---
+package com.entropy.factory.model;
+
+import java.util.List;
+
+public class Station {
+    private String id;
+    private String name;
+    private List<String> supportedComponents;
+    
+    public Station(String id, String name, List<String> supportedComponents) {
+        this.id = id;
+        this.name = name;
+        this.supportedComponents = supportedComponents;
+    }
+    
+    // Getters and setters
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public List<String> getSupportedComponents() { return supportedComponents; }
+    public void setSupportedComponents(List<String> supportedComponents) { this.supportedComponents = supportedComponents; }
+}
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: factory
+Stage: factory-001-layout
+Order: 1
+
+Stage goal:
+Create the factory project layout with component, station, product, and routing concepts.
+
+Expected artifacts:
+- factory-system (project)
+
+Validators that will run:
+- factory-layout-exists: failure_class=missing_artifact
+- factory-core-types-present: failure_class=api_contract
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/model/Component.java\",\n      \"content\": \"package com.entropy.factory.model;\\n\\npublic class Component {\\n    private String id;\\n    private String name;\\n    \\n    public Component(String id, String name) {\\n        this.id = id;\\n        this.name = name;\\n    }\\n    \\n    // Getters and setters\\n    public String getId() { return id; }\\n    public void setId(String id) { this.id = id; }\\n    public String getName() { return name; }\\n    public void setName(String name) { this.name = name; }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/model/Station.java\",\n      \"content\": \"package com.entropy.factory.model;\\n\\nimport java.util.List;\\n\\npublic class Station {\\n    private String id;\\n    private String name;\\n    private List<String> supportedComponents;\\n    \\n    public Station(String id, String name, List<String> supportedComponents) {\\n        this.id = id;\\n        this.name = name;\\n        this.supportedComponents = supportedComponents;\\n    }\\n    \\n    // Getters and setters\\n    public String getId() { return id; }\\n    public void setId(String id) { this.id = id; }\\n    public String getName() { return name; }\\n    public void setName(String name) { this.name = name; }\\n    public List<String> getSupportedComponents() { return supportedComponents; }\\n    public void setSupportedComponents(List<String> supportedComponents) { this.supportedComponents = supportedComponents; }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/model/Product.java\",\n      \"content\": \"package com.entropy.factory.model;\\n\\nimport java.util.List;\\n\\npublic class Product {\\n    private String id;\\n    private String name;\\n    private List<String> requiredComponents;\\n    \\n    public Product(String id, String name, List<String> requiredComponents) {\\n        this.id = id;\\n        this.name = name;\\n        this.requiredComponents = requiredComponents;\\n    }\\n    \\n    // Getters and setters\\n    public String getId() { return id; }\\n    public void setId(String id) { this.id = id; }\\n    public String getName() { return name; }\\n    public void setName(String name) { this.name = name; }\\n    public List<String> getRequiredComponents() { return requiredComponents; }\\n    public void setRequiredComponents(List<String> requiredComponents) { this.requiredComponents = requiredComponents; }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/model/Routing.java\",\n      \"content\": \"package com.entropy.factory.model;\\n\\nimport java.util.List;\\n\\npublic class Routing {\\n    private String productId;\\n    private List<String> stationSequence;\\n    \\n    public Routing(String productId, List<String> stationSequence) {\\n        this.productId = productId;\\n        this.stationSequence = stationSequence;\\n    }\\n    \\n    // Getters and setters\\n    public String getProductId() { return productId; }\\n    public void setProductId(String productId) { this.productId = productId; }\\n    public List<String> getStationSequence() { return stationSequence; }\\n    public void setStationSequence(List<String> stationSequence) { this.stationSequence = stationSequence; }\\n}\"\n    },\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/FactorySystem.java\",\n      \"content\": \"package com.entropy.factory;\\n\\nimport com.entropy.factory.model.Component;\\nimport com.entropy.factory.model.Station;\\nimport com.entropy.factory.model.Product;\\nimport com.entropy.factory.model.Routing;\\n\\npublic class FactorySystem {\\n    // Entry point for the factory system\\n    // This class will orchestrate the core concepts\\n}\\n\"\n    }\n  ],\n  \"notes\": \"Created core model classes for Component, Station, Product, and Routing in the factory-system project layout.\"\n}"
+      }
+    }
+  ],
+  "created": 1779712012,
+  "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 904,
+    "prompt_tokens": 222,
+    "total_tokens": 1126
+  },
+  "id": "chatcmpl-9N2rjQj8GhwNNSMGlvRXc3uL35XzQIO4",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 222,
+    "prompt_ms": 299.575,
+    "prompt_per_token_ms": 1.3494369369369368,
+    "prompt_per_second": 741.0498205791539,
+    "predicted_n": 904,
+    "predicted_ms": 18749.926,
+    "predicted_per_token_ms": 20.741068584070796,
+    "predicted_per_second": 48.21352361603987
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/model/Component.java",
+      "content": "package com.entropy.factory.model;\n\npublic class Component {\n    private String id;\n    private String name;\n    \n    public Component(String id, String name) {\n        this.id = id;\n        this.name = name;\n    }\n    \n    // Getters and setters\n    public String getId() { return id; }\n    public void setId(String id) { this.id = id; }\n    public String getName() { return name; }\n    public void setName(String name) { this.name = name; }\n}"
+    },
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/model/Station.java",
+      "content": "package com.entropy.factory.model;\n\nimport java.util.List;\n\npublic class Station {\n    private String id;\n    private String name;\n    private List<String> supportedComponents;\n    \n    public Station(String id, String name, List<String> supportedComponents) {\n        this.id = id;\n        this.name = name;\n        this.supportedComponents = supportedComponents;\n    }\n    \n    // Getters and setters\n    public String getId() { return id; }\n    public void setId(String id) { this.id = id; }\n    public String getName() { return name; }\n    public void setName(String name) { this.name = name; }\n    public List<String> getSupportedComponents() { return supportedComponents; }\n    public void setSupportedComponents(List<String> supportedComponents) { this.supportedComponents = supportedComponents; }\n}"
+    },
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/model/Product.java",
+      "content": "package com.entropy.factory.model;\n\nimport java.util.List;\n\npublic class Product {\n    private String id;\n    private String name;\n    private List<String> requiredComponents;\n    \n    public Product(String id, String name, List<String> requiredComponents) {\n        this.id = id;\n        this.name = name;\n        this.requiredComponents = requiredComponents;\n    }\n    \n    // Getters and setters\n    public String getId() { return id; }\n    public void setId(String id) { this.id = id; }\n    public String getName() { return name; }\n    public void setName(String name) { this.name = name; }\n    public List<String> getRequiredComponents() { return requiredComponents; }\n    public void setRequiredComponents(List<String> requiredComponents) { this.requiredComponents = requiredComponents; }\n}"
+    },
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/model/Routing.java",
+      "content": "package com.entropy.factory.model;\n\nimport java.util.List;\n\npublic class Routing {\n    private String productId;\n    private List<String> stationSequence;\n    \n    public Routing(String productId, List<String> stationSequence) {\n        this.productId = productId;\n        this.stationSequence = stationSequence;\n    }\n    \n    // Getters and setters\n    public String getProductId() { return productId; }\n    public void setProductId(String productId) { this.productId = productId; }\n    public List<String> getStationSequence() { return stationSequence; }\n    public void setStationSequence(List<String> stationSequence) { this.stationSequence = stationSequence; }\n}"
+    },
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/FactorySystem.java",
+      "content": "package com.entropy.factory;\n\nimport com.entropy.factory.model.Component;\nimport com.entropy.factory.model.Station;\nimport com.entropy.factory.model.Product;\nimport com.entropy.factory.model.Routing;\n\npublic class FactorySystem {\n    // Entry point for the factory system\n    // This class will orchestrate the core concepts\n}\n"
+    }
+  ],
+  "notes": "Created core model classes for Component, Station, Product, and Routing in the factory-system project layout."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/factory-002-stations.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/FactorySystem.java\",\n      \"content\": \"package com.entropy.factory;\\n\\nimport com.entropy.factory.model.Component;\\nimport com.entropy.factory.model.Station;\\nimport com.entropy.factory.model.Product;\\nimport com.entropy.factory.model.Routing;\\nimport java.util.List;\\nimport java.util.Map;\\nimport java.util.HashMap;\\n\\npublic class FactorySystem {\\n    // Entry point for the factory system\\n    // This class will orchestrate the core concepts\\n    \\n    private Map<String, Station> stations;\\n    private Map<String, Routing> routings;\\n    \\n    public FactorySystem() {\\n        this.stations = new HashMap<>();\\n        this.routings = new HashMap<>();\\n        initializeStations();\\n        initializeRoutings();\\n    }\\n    \\n    private void initializeStations() {\\n        Station assemblyStation = new Station(\\\"station-001\\\", \\\"Assembly Station\\\", List.of(\\\"motor\\\", \\\"wheels\\\", \\\"frame\\\"));\\n        Station inspectionStation = new Station(\\\"station-002\\\", \\\"Inspection Station\\\", List.of(\\\"motor\\\", \\\"wheels\\\", \\\"frame\\\", \\\"battery\\\"));\\n        Station packagingStation = new Station(\\\"station-003\\\", \\\"Packaging Station\\\", List.of(\\\"finished_product\\\"));\\n        \\n        stations.put(assemblyStation.getId(), assemblyStation);\\n        stations.put(inspectionStation.getId(), inspectionStation);\\n        stations.put(packagingStation.getId(), packagingStation);\\n    }\\n    \\n    private void initializeRoutings() {\\n        Routing productA = new Routing(\\\"product-A\\\", List.of(\\\"station-001\\\", \\\"station-002\\\", \\\"station-003\\\"));\\n        Routing productB = new Routing(\\\"product-B\\\", List.of(\\\"station-001\\\", \\\"station-002\\\", \\\"station-003\\\"));\\n        \\n        routings.put(productA.getProductId(), productA);\\n        routings.put(productB.getProductId(), productB);\\n    }\\n    \\n    public Station getStation(String stationId) {\\n        return stations.get(stationId);\\n    }\\n    \\n    public Routing getRouting(String productId) {\\n        return routings.get(productId);\\n    }\\n    \\n    public List<String> getStationSequence(String productId) {\\n        Routing routing = routings.get(productId);\\n        return routing != null ? routing.getStationSequence() : null;\\n    }\\n}\"\n    }\n  ],\n  \"notes\": \"Added multiple stations and routing flow to FactorySystem to enable product movement between stations.\"\n}"
+      }
+    }
+  ],
+  "created": 1779712029,
+  "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 591,
+    "prompt_tokens": 3536,
+    "total_tokens": 4127
+  },
+  "id": "chatcmpl-LhqJwj8JQCLkKCqPSPIocVVHuxb92HD9",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 3536,
+    "prompt_ms": 3406.286,
+    "prompt_per_token_ms": 0.9633161764705882,
+    "prompt_per_second": 1038.0807718435856,
+    "predicted_n": 591,
+    "predicted_ms": 12503.638,
+    "predicted_per_token_ms": 21.15674788494078,
+    "predicted_per_second": 47.26624363245321
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-002-stations.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "factory-system/src/main/java/com/entropy/factory/FactorySystem.java",
+      "content": "package com.entropy.factory;\n\nimport com.entropy.factory.model.Component;\nimport com.entropy.factory.model.Station;\nimport com.entropy.factory.model.Product;\nimport com.entropy.factory.model.Routing;\nimport java.util.List;\nimport java.util.Map;\nimport java.util.HashMap;\n\npublic class FactorySystem {\n    // Entry point for the factory system\n    // This class will orchestrate the core concepts\n    \n    private Map<String, Station> stations;\n    private Map<String, Routing> routings;\n    \n    public FactorySystem() {\n        this.stations = new HashMap<>();\n        this.routings = new HashMap<>();\n        initializeStations();\n        initializeRoutings();\n    }\n    \n    private void initializeStations() {\n        Station assemblyStation = new Station(\"station-001\", \"Assembly Station\", List.of(\"motor\", \"wheels\", \"frame\"));\n        Station inspectionStation = new Station(\"station-002\", \"Inspection Station\", List.of(\"motor\", \"wheels\", \"frame\", \"battery\"));\n        Station packagingStation = new Station(\"station-003\", \"Packaging Station\", List.of(\"finished_product\"));\n        \n        stations.put(assemblyStation.getId(), assemblyStation);\n        stations.put(inspectionStation.getId(), inspectionStation);\n        stations.put(packagingStation.getId(), packagingStation);\n    }\n    \n    private void initializeRoutings() {\n        Routing productA = new Routing(\"product-A\", List.of(\"station-001\", \"station-002\", \"station-003\"));\n        Routing productB = new Routing(\"product-B\", List.of(\"station-001\", \"station-002\", \"station-003\"));\n        \n        routings.put(productA.getProductId(), productA);\n        routings.put(productB.getProductId(), productB);\n    }\n    \n    public Station getStation(String stationId) {\n        return stations.get(stationId);\n    }\n    \n    public Routing getRouting(String productId) {\n        return routings.get(productId);\n    }\n    \n    public List<String> getStationSequence(String productId) {\n        Routing routing = routings.get(productId);\n        return routing != null ? routing.getStationSequence() : null;\n    }\n}"
+    }
+  ],
+  "notes": "Added multiple stations and routing flow to FactorySystem to enable product movement between stations."
+}
+
+---END FILE---
+
+Return ONLY a corrected JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+- Do not copy placeholder path or content values from the schema.
+
+---END FILE---
+
+FILE: _raw/factory-002-stations.attempt-01-repair.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"factory-system/stations\",\n      \"content\": \"assembly-station: station-001\\ninspection-station: station-002\\npackaging-station: station-003\\n\\nrouting:\\n  product-A: [station-001, station-002, station-003]\\n  product-B: [station-001, station-002, station-003]\"\n    }\n  ],\n  \"notes\": \"Created stations configuration file to define stations and routing flow as required by the stage goal.\"\n}"
+      }
+    }
+  ],
+  "created": 1779712042,
+  "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 133,
+    "prompt_tokens": 9769,
+    "total_tokens": 9902
+  },
+  "id": "chatcmpl-Lt20vwMNpOPAAFHo43UjLz6k8IQgavl1",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 9769,
+    "prompt_ms": 9432.258,
+    "prompt_per_token_ms": 0.9655295321936739,
+    "prompt_per_second": 1035.701101475384,
+    "predicted_n": 133,
+    "predicted_ms": 2946.966,
+    "predicted_per_token_ms": 22.15763909774436,
+    "predicted_per_second": 45.13116201544232
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-002-stations.attempt-01-repair.txt
+---BEGIN FILE---
+{
+  "files": [
+    {
+      "path": "factory-system/stations",
+      "content": "assembly-station: station-001\ninspection-station: station-002\npackaging-station: station-003\n\nrouting:\n  product-A: [station-001, station-002, station-003]\n  product-B: [station-001, station-002, station-003]"
+    }
+  ],
+  "notes": "Created stations configuration file to define stations and routing flow as required by the stage goal."
+}
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.

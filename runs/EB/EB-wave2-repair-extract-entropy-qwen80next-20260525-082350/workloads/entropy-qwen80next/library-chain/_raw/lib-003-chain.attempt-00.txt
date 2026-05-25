@@ -1,0 +1,13 @@
+{
+  "files": [
+    {
+      "path": "library-chain/pipeline/Cargo.toml",
+      "content": "[package]\nname = \"library-chain-pipeline\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\nname = \"library_chain_pipeline\"\npath = \"src/lib.rs\"\n\n[dependencies]\nlibrary-chain-feature = { path = \"../feature\" }"
+    },
+    {
+      "path": "library-chain/pipeline/src/lib.rs",
+      "content": "use library_chain_feature::feature_function;\n\npub fn pipeline_function() -> String {\n    format!(\"{} and pipeline\", feature_function())\n}"
+    }
+  ],
+  "notes": "Created third library that depends on the second library, preserving the full call chain from core to feature to pipeline."
+}

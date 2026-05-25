@@ -1,0 +1,33 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    {\n      \"path\": \"factory-system/src/main/java/com/entropy/factory/FactorySystem.java\",\n      \"content\": \"package com.entropy.factory;\\n\\nimport com.entropy.factory.model.Component;\\nimport com.entropy.factory.model.Station;\\nimport com.entropy.factory.model.Product;\\nimport com.entropy.factory.model.Routing;\\nimport java.util.List;\\nimport java.util.Map;\\nimport java.util.HashMap;\\n\\npublic class FactorySystem {\\n    // Entry point for the factory system\\n    // This class will orchestrate the core concepts\\n    \\n    private Map<String, Station> stations;\\n    private Map<String, Routing> routings;\\n    \\n    public FactorySystem() {\\n        this.stations = new HashMap<>();\\n        this.routings = new HashMap<>();\\n        initializeStations();\\n        initializeRoutings();\\n    }\\n    \\n    private void initializeStations() {\\n        Station assemblyStation = new Station(\\\"station-001\\\", \\\"Assembly Station\\\", List.of(\\\"motor\\\", \\\"wheels\\\", \\\"frame\\\"));\\n        Station inspectionStation = new Station(\\\"station-002\\\", \\\"Inspection Station\\\", List.of(\\\"motor\\\", \\\"wheels\\\", \\\"frame\\\", \\\"battery\\\"));\\n        Station packagingStation = new Station(\\\"station-003\\\", \\\"Packaging Station\\\", List.of(\\\"finished_product\\\"));\\n        \\n        stations.put(assemblyStation.getId(), assemblyStation);\\n        stations.put(inspectionStation.getId(), inspectionStation);\\n        stations.put(packagingStation.getId(), packagingStation);\\n    }\\n    \\n    private void initializeRoutings() {\\n        Routing productA = new Routing(\\\"product-A\\\", List.of(\\\"station-001\\\", \\\"station-002\\\", \\\"station-003\\\"));\\n        Routing productB = new Routing(\\\"product-B\\\", List.of(\\\"station-001\\\", \\\"station-002\\\", \\\"station-003\\\"));\\n        \\n        routings.put(productA.getProductId(), productA);\\n        routings.put(productB.getProductId(), productB);\\n    }\\n    \\n    public Station getStation(String stationId) {\\n        return stations.get(stationId);\\n    }\\n    \\n    public Routing getRouting(String productId) {\\n        return routings.get(productId);\\n    }\\n    \\n    public List<String> getStationSequence(String productId) {\\n        Routing routing = routings.get(productId);\\n        return routing != null ? routing.getStationSequence() : null;\\n    }\\n}\"\n    }\n  ],\n  \"notes\": \"Added multiple stations and routing flow to FactorySystem to enable product movement between stations.\"\n}"
+      }
+    }
+  ],
+  "created": 1779712029,
+  "model": "Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf",
+  "system_fingerprint": "b1-983559d",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 591,
+    "prompt_tokens": 3536,
+    "total_tokens": 4127
+  },
+  "id": "chatcmpl-LhqJwj8JQCLkKCqPSPIocVVHuxb92HD9",
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 3536,
+    "prompt_ms": 3406.286,
+    "prompt_per_token_ms": 0.9633161764705882,
+    "prompt_per_second": 1038.0807718435856,
+    "predicted_n": 591,
+    "predicted_ms": 12503.638,
+    "predicted_per_token_ms": 21.15674788494078,
+    "predicted_per_second": 47.26624363245321
+  }
+}
