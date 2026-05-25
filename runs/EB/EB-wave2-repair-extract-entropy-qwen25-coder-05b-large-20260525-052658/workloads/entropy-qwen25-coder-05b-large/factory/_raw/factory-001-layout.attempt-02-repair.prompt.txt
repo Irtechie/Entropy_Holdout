@@ -1,0 +1,321 @@
+You are repairing an Entropy staged code-generation benchmark response.
+
+Workload: factory
+Stage: factory-001-layout
+Order: 1
+
+Stage goal:
+Create the factory project layout with component, station, product, and routing concepts.
+
+Expected artifacts:
+- factory-system (project)
+
+The previous response failed with:
+model copied placeholder content instead of generating real file content
+
+Previous response text:
+---BEGIN FAILED RESPONSE---
+{
+  "files": [
+    { "path": "relative/path/to/run/root/factory-system", "content": "complete file content" }
+  ],
+  "notes": "factory-system project layout created"
+}
+---END FAILED RESPONSE---
+
+Current generated files:
+FILE: _raw/factory-001-layout.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: factory
+Stage: factory-001-layout
+Order: 1
+
+Stage goal:
+Create the factory project layout with component, station, product, and routing concepts.
+
+Expected artifacts:
+- factory-system (project)
+
+Validators that will run:
+- factory-layout-exists: failure_class=missing_artifact
+- factory-core-types-present: failure_class=api_contract
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    { \"path\": \"relative/path/to/run/root/factory-system\", \"content\": \"complete file content\" }\n  ],\n  \"notes\": \"factory-system project layout created\"\n}"
+      }
+    }
+  ],
+  "created": 1779701242,
+  "model": "qwen2.5-coder-0.5b-instruct-q4_k_m.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 45,
+    "prompt_tokens": 222,
+    "total_tokens": 267,
+    "prompt_tokens_details": {
+      "cached_tokens": 26
+    }
+  },
+  "id": "chatcmpl-BFnxzgNOv7GOY7ITX0pkax47S930iWdE",
+  "timings": {
+    "cache_n": 26,
+    "prompt_n": 196,
+    "prompt_ms": 13.66,
+    "prompt_per_token_ms": 0.06969387755102041,
+    "prompt_per_second": 14348.462664714496,
+    "predicted_n": 45,
+    "predicted_ms": 138.416,
+    "predicted_per_token_ms": 3.075911111111111,
+    "predicted_per_second": 325.10692405502255
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    { "path": "relative/path/to/run/root/factory-system", "content": "complete file content" }
+  ],
+  "notes": "factory-system project layout created"
+}
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-01-repair.prompt.txt
+---BEGIN FILE---
+You are repairing an Entropy staged code-generation benchmark response.
+
+Workload: factory
+Stage: factory-001-layout
+Order: 1
+
+Stage goal:
+Create the factory project layout with component, station, product, and routing concepts.
+
+Expected artifacts:
+- factory-system (project)
+
+The previous response failed with:
+model copied placeholder content instead of generating real file content
+
+Previous response text:
+---BEGIN FAILED RESPONSE---
+{
+  "files": [
+    { "path": "relative/path/to/run/root/factory-system", "content": "complete file content" }
+  ],
+  "notes": "factory-system project layout created"
+}
+---END FAILED RESPONSE---
+
+Current generated files:
+FILE: _raw/factory-001-layout.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: factory
+Stage: factory-001-layout
+Order: 1
+
+Stage goal:
+Create the factory project layout with component, station, product, and routing concepts.
+
+Expected artifacts:
+- factory-system (project)
+
+Validators that will run:
+- factory-layout-exists: failure_class=missing_artifact
+- factory-core-types-present: failure_class=api_contract
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    { \"path\": \"relative/path/to/run/root/factory-system\", \"content\": \"complete file content\" }\n  ],\n  \"notes\": \"factory-system project layout created\"\n}"
+      }
+    }
+  ],
+  "created": 1779701242,
+  "model": "qwen2.5-coder-0.5b-instruct-q4_k_m.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 45,
+    "prompt_tokens": 222,
+    "total_tokens": 267,
+    "prompt_tokens_details": {
+      "cached_tokens": 26
+    }
+  },
+  "id": "chatcmpl-BFnxzgNOv7GOY7ITX0pkax47S930iWdE",
+  "timings": {
+    "cache_n": 26,
+    "prompt_n": 196,
+    "prompt_ms": 13.66,
+    "prompt_per_token_ms": 0.06969387755102041,
+    "prompt_per_second": 14348.462664714496,
+    "predicted_n": 45,
+    "predicted_ms": 138.416,
+    "predicted_per_token_ms": 3.075911111111111,
+    "predicted_per_second": 325.10692405502255
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-00.txt
+---BEGIN FILE---
+{
+  "files": [
+    { "path": "relative/path/to/run/root/factory-system", "content": "complete file content" }
+  ],
+  "notes": "factory-system project layout created"
+}
+
+---END FILE---
+
+Return ONLY a corrected JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+- Do not copy placeholder path or content values from the schema.
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-01-repair.response.json
+---BEGIN FILE---
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"files\": [\n    { \"path\": \"relative/path/to/run/root/factory-system\", \"content\": \"complete file content\" }\n  ],\n  \"notes\": \"factory-system project layout created\"\n}"
+      }
+    }
+  ],
+  "created": 1779701242,
+  "model": "qwen2.5-coder-0.5b-instruct-q4_k_m.gguf",
+  "system_fingerprint": "b1-25eec6f",
+  "object": "chat.completion",
+  "usage": {
+    "completion_tokens": 45,
+    "prompt_tokens": 1015,
+    "total_tokens": 1060,
+    "prompt_tokens_details": {
+      "cached_tokens": 26
+    }
+  },
+  "id": "chatcmpl-ebNHpE1ODGLfnRBnq9gcdIi8Rjgbacxv",
+  "timings": {
+    "cache_n": 26,
+    "prompt_n": 989,
+    "prompt_ms": 40.263,
+    "prompt_per_token_ms": 0.0407108190091001,
+    "prompt_per_second": 24563.49502024191,
+    "predicted_n": 45,
+    "predicted_ms": 140.382,
+    "predicted_per_token_ms": 3.1196,
+    "predicted_per_second": 320.55391716886777
+  }
+}
+
+---END FILE---
+
+FILE: _raw/factory-001-layout.attempt-01-repair.txt
+---BEGIN FILE---
+{
+  "files": [
+    { "path": "relative/path/to/run/root/factory-system", "content": "complete file content" }
+  ],
+  "notes": "factory-system project layout created"
+}
+
+---END FILE---
+
+Return ONLY a corrected JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+- Do not copy placeholder path or content values from the schema.

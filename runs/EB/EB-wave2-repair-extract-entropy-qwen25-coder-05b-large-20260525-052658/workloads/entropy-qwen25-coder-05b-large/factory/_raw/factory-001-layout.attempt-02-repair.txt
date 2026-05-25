@@ -1,0 +1,6 @@
+{
+  "files": [
+    { "path": "relative/path/to/run/root/factory-system", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}

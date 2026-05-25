@@ -1,0 +1,6 @@
+{
+  "files": [
+    { "path": "lib-chain/core", "content": "complete file content" }
+  ],
+  "notes": "This is the first library with one public function and a tiny sample caller."
+}
