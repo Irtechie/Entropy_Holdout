@@ -1,0 +1,8 @@
+{"ts":"2026-05-25T05:13:23.5698616-04:00","event":"experiment_start","experiment_id":"EB-local-full-singlebox","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
+{"ts":"2026-05-25T05:13:23.6493415-04:00","event":"target_start","set_id":"entropy-qwen25-coder-05b-large","context_tokens":262144}
+{"ts":"2026-05-25T05:13:47.8384006-04:00","event":"target_ready","set_id":"entropy-qwen25-coder-05b-large","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"qwen2.5-coder-0.5b-instruct-q4_k_m.gguf"}
+{"ts":"2026-05-25T05:13:50.3637023-04:00","event":"workload_failed","set_id":"entropy-qwen25-coder-05b-large","workload":"webpage-chain","error":"model copied placeholder content instead of generating real file content"}
+{"ts":"2026-05-25T05:13:51.9330183-04:00","event":"workload_failed","set_id":"entropy-qwen25-coder-05b-large","workload":"library-chain","error":"model did not generate expected artifact path: library-chain/core"}
+{"ts":"2026-05-25T05:13:52.9428569-04:00","event":"workload_failed","set_id":"entropy-qwen25-coder-05b-large","workload":"factory","error":"model copied placeholder content instead of generating real file content"}
+{"ts":"2026-05-25T05:13:52.9445098-04:00","event":"experiment_done","results":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-qwen25-coder-05b-large-20260525-051323\\results.jsonl"}
+{"ts":"2026-05-25T05:13:53.3458963-04:00","event":"critique_written","markdown":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-qwen25-coder-05b-large-20260525-051323\\critique.md","json":"E:\\Dev\\AI\\remote\\Entropy\\runs\\EB\\EB-entropy-qwen25-coder-05b-large-20260525-051323\\critique.json"}
