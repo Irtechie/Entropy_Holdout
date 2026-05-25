@@ -1,0 +1,38 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"library-chain/CoreLib/CoreLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/CoreLib/Core.cs\",\n      \"content\": \"namespace CoreLib;\\n\\npublic static class Core\\n{\\n    public static string Process() => \\\"core\\\";\\n}\"\n    },\n    {\n      \"path\": \"library-chain/FeatureLib/FeatureLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\CoreLib\\\\CoreLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/FeatureLib/Feature.cs\",\n      \"content\": \"namespace FeatureLib;\\n\\npublic static class Feature\\n{\\n    public static string Process() => \\\"feature\\\";\\n}\"\n    },\n    {\n      \"path\": \"library-chain/PipelineLib/PipelineLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\FeatureLib\\\\FeatureLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/PipelineLib/Pipeline.cs\",\n      \"content\": \"namespace PipelineLib;\\n\\npublic static class Pipeline\\n{\\n    public static string Process() => \\\"pipeline\\\";\\n}\"\n    },\n    {\n      \"path\": \"library-chain/Contracts/Contracts.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/Contracts/Contract.cs\",\n      \"content\": \"namespace Contracts;\\n\\npublic static class Contract\\n{\\n    public static string Process() => \\\"contract\\\";\\n}\"\n    },\n    {\n      \"path\": \"library-chain/SampleApp/SampleApp.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <OutputType>Exe</OutputType>\\n    <TargetFramework>net10.0</TargetFramework>\\n    <ImplicitUsings>enable</ImplicitUsings>\\n    <Nullable>enable</Nullable>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"..\\\\PipelineLib\\\\PipelineLib.csproj\\\" />\\n    <ProjectReference Include=\\\"..\\\\Contracts\\\\Contracts.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/SampleApp/Program.cs\",\n      \"content\": \"using CoreLib;\\nusing FeatureLib;\\nusing PipelineLib;\\nusing Contracts;\\n\\nConsole.WriteLine($\\\"{Core.Process()}->{Feature.Process()}->{Pipeline.Process()}->{Contract.Process()}\\\");\"\n    }\n  ],\n  \"notes\": \"Created a 5-library chain with CoreLib as the base, referencing up through FeatureLib and PipelineLib, plus a Contracts library. SampleApp references PipelineLib and Contracts, and prints the required chain output.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 859,
+      "prompt_tokens": 370,
+      "total_tokens": 1229,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    },
+    "model_name": "Qwen3-Coder-Next-Q4_K_M.gguf",
+    "system_fingerprint": "b1-983559d",
+    "id": "chatcmpl-DR3EHMyObPXScAU9DjT1gv4yAYZM3Kzv",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 370,
+    "output_tokens": 859,
+    "total_tokens": 1229,
+    "input_token_details": {},
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "2b31c4e8d8ff1c3a6d4de46891941ba4",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-qwen80nextcoder",
+      "library-chain"
+    ]
+  }
+}
