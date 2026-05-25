@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"library-chain/Contracts/Contracts.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n</Project>\"\n    },\n    {\n      \"path\": \"library-chain/SampleApp/SampleApp.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"../PipelineLib/PipelineLib.csproj\\\" />\\n    <ProjectReference Include=\\\"../Contracts/Contracts.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    }\n  ],\n  \"notes\": \"Created Contracts and SampleApp projects\"\n}\n```",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 203,
+      "prompt_tokens": 8921,
+      "total_tokens": 9124,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 43
+      }
+    },
+    "model_name": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-tROmR48dJl3on4EPf2cW5L2cv43YdXuM",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 8921,
+    "output_tokens": 203,
+    "total_tokens": 9124,
+    "input_token_details": {
+      "cache_read": 43
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "ac76f161d295bad3bdfeec4ec3ea84e3",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "model-repair",
+      "langchain",
+      "entropy-devstral-small2",
+      "library-chain"
+    ]
+  }
+}

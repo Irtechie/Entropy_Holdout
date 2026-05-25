@@ -1,0 +1,8 @@
+{"ts":"2026-05-25T16:49:45.7617421-04:00","event":"experiment_start","experiment_id":"EB-LC-wave0-model-repair-canary","controller":"http://192.168.1.203:4000","target_count":1,"workloads":["webpage-chain","library-chain","factory"]}
+{"ts":"2026-05-25T16:49:45.7651053-04:00","event":"target_start","set_id":"entropy-devstral-small2","context_tokens":131072}
+{"ts":"2026-05-25T16:50:14.7449614-04:00","event":"target_ready","set_id":"entropy-devstral-small2","activation_status":"ready","lane_base_url":"http://192.168.1.203:8000","served_model_id":"Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf"}
+{"ts":"2026-05-25T16:55:39.1098096-04:00","event":"workload_done","set_id":"entropy-devstral-small2","workload":"webpage-chain"}
+{"ts":"2026-05-25T16:57:20.5341011-04:00","event":"workload_failed","set_id":"entropy-devstral-small2","workload":"library-chain","error":"library-chain validation failed: project FeatureLib missing reference CoreLib/CoreLib.csproj"}
+{"ts":"2026-05-25T17:00:29.5345629-04:00","event":"workload_failed","set_id":"entropy-devstral-small2","workload":"factory","error":"factory validation failed: missing station id intake"}
+{"ts":"2026-05-25T17:00:29.5369780-04:00","event":"experiment_done","results":".\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\results.jsonl"}
+{"ts":"2026-05-25T17:00:29.5667315-04:00","event":"critique_written","markdown":".\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\critique.md","json":".\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\critique.json"}

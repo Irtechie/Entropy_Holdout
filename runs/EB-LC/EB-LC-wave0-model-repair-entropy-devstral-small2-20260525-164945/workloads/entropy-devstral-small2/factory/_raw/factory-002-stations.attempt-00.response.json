@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"factory-system/src/factory.ps1\",\n      \"content\": \"param (\\n    [Parameter(Mandatory=$true)]\\n    [string]$ConfigPath,\\n    [Parameter(Mandatory=$true)]\\n    [string]$ProductId\\n)\\n\\n# Load stations configuration\\n$stations = Get-Content -Path $ConfigPath | ConvertFrom-Json\\n\\n# Build the route\\n$route = @()\\n$currentStation = $stations | Where-Object { $_.id -eq 'intake' }\\nwhile ($currentStation -ne $null) {\\n    $route += $currentStation.id\\n    $currentStation = $stations | Where-Object { $_.id -eq $currentStation.next }\\n}\\n\\n# Print the route\\nWrite-Output (\\\"Route: \\\" + ($route -join '->'))\\n\\n# Create dashboard directory if it doesn't exist\\nif (-not (Test-Path -Path \\\"dashboard\\\")) {\\n    New-Item -ItemType Directory -Path \\\"dashboard\\\" | Out-Null\\n}\\n\\n# Write report.json\\n$report = @{\\n    \\\"product_id\\\" = $ProductId\\n    \\\"route\\\" = ($route -join '->')\\n} | ConvertTo-Json\\n\\nSet-Content -Path \\\"dashboard/report.json\\\" -Value $report\"\n    }\n  ],\n  \"notes\": \"Updated factory.ps1 to ensure proper routing and report generation.\"\n}\n```",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 333,
+      "prompt_tokens": 2958,
+      "total_tokens": 3291,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 42
+      }
+    },
+    "model_name": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-fsCs3EwoIAgz5O3pquGC5v049bsmtzMV",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 2958,
+    "output_tokens": 333,
+    "total_tokens": 3291,
+    "input_token_details": {
+      "cache_read": 42
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "94df4b9128ff76e92b9dc20e60a3e451",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "model-repair",
+      "langchain",
+      "entropy-devstral-small2",
+      "factory"
+    ]
+  }
+}

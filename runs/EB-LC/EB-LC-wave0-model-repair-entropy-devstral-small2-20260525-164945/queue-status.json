@@ -1,0 +1,17 @@
+{
+  "queue_id": "EB-LC-wave0-model-repair-canary",
+  "target_set_id": "entropy-devstral-small2",
+  "slice_id": "wave0-canary-002",
+  "classification": "completed-data-run",
+  "run_root": ".\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945",
+  "started_at": "2026-05-25T16:49:45.4596833-04:00",
+  "finished_at": "2026-05-25T17:00:29.5815147-04:00",
+  "elapsed_s": 644.1,
+  "runner_exit_code": 0,
+  "results": ".\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\results.jsonl",
+  "critique": ".\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\critique.md",
+  "critique_json": ".\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\critique.json",
+  "report_json": ".\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\report.json",
+  "wedge_risk": false,
+  "wedge_detail": null
+}

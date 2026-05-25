@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"library-chain/FeatureLib/FeatureLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n  <ItemGroup>\\n    <ProjectReference Include=\\\"../CoreLib/CoreLib.csproj\\\" />\\n  </ItemGroup>\\n</Project>\"\n    }\n  ],\n  \"notes\": \"Created FeatureLib project file referencing CoreLib\"\n}\n```",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 123,
+      "prompt_tokens": 1548,
+      "total_tokens": 1671,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 43
+      }
+    },
+    "model_name": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-tgt50iQIVELpFrQY3J6FqEjxXzHlhOFT",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 1548,
+    "output_tokens": 123,
+    "total_tokens": 1671,
+    "input_token_details": {
+      "cache_read": 43
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "33a3d68535a02051f98037d0f9672b8e",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "model-repair",
+      "langchain",
+      "entropy-devstral-small2",
+      "library-chain"
+    ]
+  }
+}

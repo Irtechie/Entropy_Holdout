@@ -1,0 +1,19 @@
+```json
+{
+  "files": [
+    {
+      "path": "factory-system/config/stations.json",
+      "content": "[\n  {\n    \"id\": \"intake\",\n    \"name\": \"Intake\",\n    \"next\": \"assembly\"\n  },\n  {\n    \"id\": \"assembly\",\n    \"name\": \"Assembly\",\n    \"next\": \"quality\"\n  },\n  {\n    \"id\": \"quality\",\n    \"name\": \"Quality\",\n    \"next\": \"shipping\"\n  },\n  {\n    \"id\": \"shipping\",\n    \"name\": \"Shipping\",\n    \"next\": \"\"\n  }\n]"
+    },
+    {
+      "path": "factory-system/src/factory.ps1",
+      "content": "param (\n    [Parameter(Mandatory=$true)]\n    [string]$ConfigPath,\n    [Parameter(Mandatory=$true)]\n    [string]$ProductId\n)\n\n# Load stations configuration\n$stations = Get-Content -Path $ConfigPath | ConvertFrom-Json\n\n# Build the route\n$route = @()\n$currentStation = $stations | Where-Object { $_.id -eq 'intake' }\nwhile ($currentStation -ne $null) {\n    $route += $currentStation.id\n    $currentStation = $stations | Where-Object { $_.id -eq $currentStation.next }\n}\n\n# Print the route\nWrite-Output (\"Route: \" + ($route -join '->'))\n\n# Create dashboard directory if it doesn't exist\nif (-not (Test-Path -Path \"dashboard\")) {\n    New-Item -ItemType Directory -Path \"dashboard\" | Out-Null\n}\n\n# Write report.json\n$report = @{\n    \"product_id\" = $ProductId\n    \"route\" = ($route -join '->')\n} | ConvertTo-Json\n\nSet-Content -Path \"dashboard/report.json\" -Value $report"
+    },
+    {
+      "path": "factory-system/dashboard/report.json",
+      "content": "{\n  \"product_id\": \"entropy-widget-001\",\n  \"route\": \"intake->assembly->quality->shipping\"\n}"
+    }
+  ],
+  "notes": "Configuration files updated to ensure proper station definitions and product routing."
+}
+```

@@ -1,0 +1,166 @@
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-002-dependent
+Order: 2
+
+Stage goal:
+Create a second library that depends on the first library and calls its public function.
+
+Expected artifacts:
+- library-chain/FeatureLib/FeatureLib.csproj (project)
+
+Validators that will run:
+- feature-references-core: failure_class=api_contract
+- feature-builds: failure_class=build
+
+Exact validator contract:
+Generate a .NET project tree under library-chain/.
+Target framework must be net10.0.
+Required project files:
+- CoreLib: CoreLib/CoreLib.csproj
+- FeatureLib: FeatureLib/FeatureLib.csproj references: CoreLib/CoreLib.csproj
+- PipelineLib: PipelineLib/PipelineLib.csproj references: FeatureLib/FeatureLib.csproj
+- Contracts: Contracts/Contracts.csproj
+- SampleApp: SampleApp/SampleApp.csproj references: PipelineLib/PipelineLib.csproj, Contracts/Contracts.csproj
+SampleApp must build and dotnet run --project SampleApp/SampleApp.csproj --no-build --nologo must print exactly core->feature->pipeline->contract.
+
+Existing generated files:
+FILE: library-chain/CoreLib/CoreLib.csproj
+---BEGIN FILE---
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.prompt.txt
+---BEGIN FILE---
+You are running an Entropy staged code-generation benchmark.
+
+Workload: library-chain
+Stage: lib-001-core
+Order: 1
+
+Stage goal:
+Create the first library with one public function and a tiny sample caller.
+
+Expected artifacts:
+- library-chain/CoreLib/CoreLib.csproj (project)
+
+Validators that will run:
+- core-builds: failure_class=build
+- core-sample-runs: failure_class=runtime_behavior
+
+Exact validator contract:
+Generate a .NET project tree under library-chain/.
+Target framework must be net10.0.
+Required project files:
+- CoreLib: CoreLib/CoreLib.csproj
+- FeatureLib: FeatureLib/FeatureLib.csproj references: CoreLib/CoreLib.csproj
+- PipelineLib: PipelineLib/PipelineLib.csproj references: FeatureLib/FeatureLib.csproj
+- Contracts: Contracts/Contracts.csproj
+- SampleApp: SampleApp/SampleApp.csproj references: PipelineLib/PipelineLib.csproj, Contracts/Contracts.csproj
+SampleApp must build and dotnet run --project SampleApp/SampleApp.csproj --no-build --nologo must print exactly core->feature->pipeline->contract.
+
+Existing generated files:
+FILE: 
+---BEGIN FILE---
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.response.json
+---BEGIN FILE---
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "```json\n{\n  \"files\": [\n    {\n      \"path\": \"library-chain/CoreLib/CoreLib.csproj\",\n      \"content\": \"<Project Sdk=\\\"Microsoft.NET.Sdk\\\">\\n  <PropertyGroup>\\n    <TargetFramework>net10.0</TargetFramework>\\n  </PropertyGroup>\\n</Project>\"\n    }\n  ],\n  \"notes\": \"Created CoreLib project file for net10.0\"\n}\n```",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 95,
+      "prompt_tokens": 376,
+      "total_tokens": 471,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 34
+      }
+    },
+    "model_name": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-hnPTgqiXCZYMyI1S2pKKIkc3MBEpW1D4",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 376,
+    "output_tokens": 95,
+    "total_tokens": 471,
+    "input_token_details": {
+      "cache_read": 34
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "8051a7ce5729b67d0b5d26118efb45f0",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "model-repair",
+      "langchain",
+      "entropy-devstral-small2",
+      "library-chain"
+    ]
+  }
+}
+
+---END FILE---
+
+FILE: _raw/lib-001-core.attempt-00.txt
+---BEGIN FILE---
+```json
+{
+  "files": [
+    {
+      "path": "library-chain/CoreLib/CoreLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n  </PropertyGroup>\n</Project>"
+    }
+  ],
+  "notes": "Created CoreLib project file for net10.0"
+}
+```
+
+---END FILE---
+
+Return ONLY a JSON object in this exact shape:
+{
+  "files": [
+    { "path": "relative/path/from/run/root", "content": "complete file content" }
+  ],
+  "notes": "short note"
+}
+
+Rules:
+- Include every new or modified file needed for this stage to pass.
+- Use only relative paths.
+- Do not include markdown fences outside the JSON.
+- Do not explain the answer outside the JSON.

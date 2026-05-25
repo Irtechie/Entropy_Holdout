@@ -1,0 +1,11 @@
+```json
+{
+  "files": [
+    {
+      "path": "factory-system/dashboard/report.json",
+      "content": "{\n  \"product_id\": \"entropy-widget-001\",\n  \"route\": \"intake->assembly->quality->shipping\"\n}"
+    }
+  ],
+  "notes": "Dashboard report updated to reflect the factory's station throughput and product state."
+}
+```

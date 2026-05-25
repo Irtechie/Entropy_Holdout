@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "benchmark": "EB",
+  "generated_at": "2026-05-25T17:00:29.5580485-04:00",
+  "run_root": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945",
+  "results_path": "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\results.jsonl",
+  "rubric": {
+    "scale": "0-5",
+    "score_meaning": {
+      "0": "No valid stage output or strict output contract failure before code evaluation.",
+      "1": "Only first-stage or minimal artifact progress.",
+      "2": "Some local continuity, but breaks before deeper dependency pressure.",
+      "3": "Meaningful cross-stage progress, but breaks before completing workload invariants.",
+      "4": "All planned generation stages completed, but final validator failed.",
+      "5": "All planned generation stages and final validation passed."
+    },
+    "dimensions": [
+      "output_contract",
+      "artifact_continuity",
+      "dependency_retention",
+      "validator_readiness",
+      "entropy_pressure"
+    ]
+  },
+  "totals": {
+    "target_workload_count": 3,
+    "fully_validated_count": 1,
+    "prompt_tokens": 85324,
+    "completion_tokens": 4644,
+    "total_tokens": 89968
+  },
+  "critiques": [
+    {
+      "target_set_id": "entropy-devstral-small2",
+      "model_id": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+      "context_tokens": 131072,
+      "harness_mode": "model-repair",
+      "workload_id": "factory",
+      "planned_stage_count": 4,
+      "stages_seen": 5,
+      "max_pass_stage": 4,
+      "entropy_right_shift": {
+        "passed_stages": 4,
+        "possible_stages": 4,
+        "normalized": 1.0,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "final-validation",
+      "first_failure_class": "missing_artifact",
+      "first_error": "factory validation failed: missing station id intake",
+      "likely_entropy_cause": "The generated tree did not preserve or create a required artifact.",
+      "eb_score": 4,
+      "dimension_scores": {
+        "output_contract": 4,
+        "artifact_continuity": 3,
+        "dependency_retention": 4,
+        "validator_readiness": 3,
+        "entropy_pressure": 5
+      },
+      "token_usage": {
+        "prompt_tokens": 26617,
+        "completion_tokens": 1505,
+        "total_tokens": 28122
+      },
+      "breakpoint_metric": "highest ordered stage with valid component graph, configuration, and end-to-end factory behavior",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\factory\\_raw\\factory-001-layout.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\factory\\_raw\\factory-001-layout.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\factory\\_raw\\factory-002-stations.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\factory\\_raw\\factory-002-stations.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\factory\\_raw\\factory-003-configuration.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\factory\\_raw\\factory-003-configuration.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\factory\\_raw\\factory-004-dashboard.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\factory\\_raw\\factory-004-dashboard.attempt-00.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\factory\\_raw\\factory-001-layout.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\factory\\_raw\\factory-002-stations.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\factory\\_raw\\factory-003-configuration.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\factory\\_raw\\factory-004-dashboard.attempt-00.prompt.txt"
+      ],
+      "generated_file_count": 3,
+      "generated_files": [
+        "factory-system/config/stations.json",
+        "factory-system/src/factory.ps1",
+        "factory-system/dashboard/report.json"
+      ]
+    },
+    {
+      "target_set_id": "entropy-devstral-small2",
+      "model_id": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+      "context_tokens": 131072,
+      "harness_mode": "model-repair",
+      "workload_id": "library-chain",
+      "planned_stage_count": 4,
+      "stages_seen": 5,
+      "max_pass_stage": 4,
+      "entropy_right_shift": {
+        "passed_stages": 4,
+        "possible_stages": 4,
+        "normalized": 1.0,
+        "final_validation_passed": false
+      },
+      "first_fail_stage": "final-validation",
+      "first_failure_class": "missing_artifact",
+      "first_error": "library-chain validation failed: project FeatureLib missing reference CoreLib/CoreLib.csproj",
+      "likely_entropy_cause": "The generated tree did not preserve or create a required artifact.",
+      "eb_score": 4,
+      "dimension_scores": {
+        "output_contract": 4,
+        "artifact_continuity": 3,
+        "dependency_retention": 4,
+        "validator_readiness": 3,
+        "entropy_pressure": 5
+      },
+      "token_usage": {
+        "prompt_tokens": 14849,
+        "completion_tokens": 545,
+        "total_tokens": 15394
+      },
+      "breakpoint_metric": "highest ordered stage with valid dependency references, build output, and sample call",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\library-chain\\_raw\\lib-001-core.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\library-chain\\_raw\\lib-001-core.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\library-chain\\_raw\\lib-002-dependent.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\library-chain\\_raw\\lib-002-dependent.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\library-chain\\_raw\\lib-003-chain.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\library-chain\\_raw\\lib-003-chain.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\library-chain\\_raw\\lib-004-shared-interface.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\library-chain\\_raw\\lib-004-shared-interface.attempt-00.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\library-chain\\_raw\\lib-001-core.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\library-chain\\_raw\\lib-002-dependent.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\library-chain\\_raw\\lib-003-chain.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\library-chain\\_raw\\lib-004-shared-interface.attempt-00.prompt.txt"
+      ],
+      "generated_file_count": 5,
+      "generated_files": [
+        "library-chain/CoreLib/CoreLib.csproj",
+        "library-chain/FeatureLib/FeatureLib.csproj",
+        "library-chain/PipelineLib/PipelineLib.csproj",
+        "library-chain/Contracts/Contracts.csproj",
+        "library-chain/SampleApp/SampleApp.csproj"
+      ]
+    },
+    {
+      "target_set_id": "entropy-devstral-small2",
+      "model_id": "Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+      "context_tokens": 131072,
+      "harness_mode": "model-repair",
+      "workload_id": "webpage-chain",
+      "planned_stage_count": 5,
+      "stages_seen": 5,
+      "max_pass_stage": 5,
+      "entropy_right_shift": {
+        "passed_stages": 5,
+        "possible_stages": 5,
+        "normalized": 1.0,
+        "final_validation_passed": true
+      },
+      "first_fail_stage": null,
+      "first_failure_class": "none",
+      "first_error": "",
+      "likely_entropy_cause": "No failure was recorded for this target/workload.",
+      "eb_score": 5,
+      "dimension_scores": {
+        "output_contract": 5,
+        "artifact_continuity": 5,
+        "dependency_retention": 5,
+        "validator_readiness": 5,
+        "entropy_pressure": 5
+      },
+      "token_usage": {
+        "prompt_tokens": 43858,
+        "completion_tokens": 2594,
+        "total_tokens": 46452
+      },
+      "breakpoint_metric": "highest ordered stage with valid pages, backlinks, and shared structure",
+      "raw_response_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\webpage-chain\\_raw\\web-001-home.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\webpage-chain\\_raw\\web-001-home.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\webpage-chain\\_raw\\web-002-backlink.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\webpage-chain\\_raw\\web-002-backlink.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\webpage-chain\\_raw\\web-003-chain-link.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\webpage-chain\\_raw\\web-003-chain-link.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\webpage-chain\\_raw\\web-004-shared-nav.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\webpage-chain\\_raw\\web-004-shared-nav.attempt-00.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\webpage-chain\\_raw\\web-005-nested-shared-table.attempt-00.response.json",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\webpage-chain\\_raw\\web-005-nested-shared-table.attempt-00.txt"
+      ],
+      "prompt_paths": [
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\webpage-chain\\_raw\\web-001-home.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\webpage-chain\\_raw\\web-002-backlink.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\webpage-chain\\_raw\\web-003-chain-link.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\webpage-chain\\_raw\\web-004-shared-nav.attempt-00.prompt.txt",
+        "E:\\Dev\\AI\\remote\\Entropy\\runs\\EB-LC\\EB-LC-wave0-model-repair-entropy-devstral-small2-20260525-164945\\workloads\\entropy-devstral-small2\\webpage-chain\\_raw\\web-005-nested-shared-table.attempt-00.prompt.txt"
+      ],
+      "generated_file_count": 5,
+      "generated_files": [
+        "site/index.html",
+        "site/page-2.html",
+        "site/page-3.html",
+        "site/page-4.html",
+        "site/page-5.html"
+      ]
+    }
+  ]
+}
