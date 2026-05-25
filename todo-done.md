@@ -29,6 +29,24 @@ Notes:
 - Repair-extract keeps every initial and repair prompt/response under `_raw/`, records `repair_count`, `repair_history`, and aggregates token usage in each result row.
 - No generated files were manually edited; repairs were model calls inside the named Wave 2 harness mode.
 
+## 2026-05-25 - EB Failure-Origin Audit Added
+
+Added `tools/write_eb_failure_origin_audit.ps1` and generated first-pass failure-origin audits:
+
+```text
+docs/reports/EB-wave1-plain-failure-origin-audit.md
+docs/reports/EB-wave1-plain-failure-origin-audit.json
+docs/reports/EB-wave2-repair-extract-failure-origin-audit.md
+docs/reports/EB-wave2-repair-extract-failure-origin-audit.json
+```
+
+First-pass origin counts:
+
+- Wave 1 plain: `model_or_entropy=36`, `prompt_spec_or_validator=13`, `infra_or_serving=7`, `context_budget=1`.
+- Wave 2 repair-extract: `model_or_entropy=14`, `prompt_spec_or_validator=21`, `infra_or_serving=10`, `context_budget=12`.
+
+The audits make completed data runs distinct from clean benchmark datapoints.
+
 ## 2026-05-25 - EB Wave 1 Plain Single-Box Baseline Complete
 
 Completed the full Wave 1 `plain` EB baseline for every single-box target in `llmcommune-entropy-targets.json`.
