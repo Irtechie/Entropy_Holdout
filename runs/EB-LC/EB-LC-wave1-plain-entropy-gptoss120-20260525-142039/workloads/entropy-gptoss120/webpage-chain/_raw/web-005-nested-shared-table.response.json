@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!doctype html>\\n<html lang=\\\"en\\\">\\n<head>\\n  <meta charset=\\\"UTF-8\\\">\\n  <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n  <title>Entropy Page 1</title>\\n</head>\\n<body data-entropy-shared-table=\\\"factory-links\\\">\\n  <header>\\n    <h1>Welcome to Entropy Page 1</h1>\\n  </header>\\n  <main>\\n    <p>This is the main content area for the first page of the Entropy benchmark.</p>\\n    <table data-entropy-shared-table=\\\"factory-links\\\">\\n      <tr><th>Factory</th><th>Link</th></tr>\\n      <tr><td>Page 1</td><td><a href=\\\"index.html\\\">Link</a></td></tr>\\n      <tr><td>Page 2</td><td><a href=\\\"page-2.html\\\">Link</a></td></tr>\\n      <tr><td>Page 3</td><td><a href=\\\"page-3.html\\\">Link</a></td></tr>\\n      <tr><td>Page 4</td><td><a href=\\\"page-4.html\\\">Link</a></td></tr>\\n    </table>\\n  </main>\\n  <nav>\\n    <a href=\\\"index.html\\\">Page 1</a> |\\n    <a href=\\\"page-2.html\\\">Page 2</a> |\\n    <a href=\\\"page-3.html\\\">Page 3</a> |\\n    <a href=\\\"page-4.html\\\">Page 4</a>\\n  </nav>\\n</body>\\n</html>\"\n    },\n    {\n      \"path\": \"site/page-2.html\",\n      \"content\": \"<!doctype html>\\n<html lang=\\\"en\\\">\\n<head>\\n  <meta charset=\\\"UTF-8\\\">\\n  <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n  <title>Entropy Page 2</title>\\n</head>\\n<body>\\n  <header>\\n    <h1>Entropy Page 2</h1>\\n  </header>\\n  <main>\\n    <p>This is page 2 of the Entropy benchmark.</p>\\n    <a href=\\\"index.html\\\">Back to Page 1</a>\\n    <table data-entropy-shared-table=\\\"factory-links\\\">\\n      <tr><th>Factory</th><th>Link</th></tr>\\n      <tr><td>Page 1</td><td><a href=\\\"index.html\\\">Link</a></td></tr>\\n      <tr><td>Page 2</td><td><a href=\\\"page-2.html\\\">Link</a></td></tr>\\n      <tr><td>Page 3</td><td><a href=\\\"page-3.html\\\">Link</a></td></tr>\\n      <tr><td>Page 4</td><td><a href=\\\"page-4.html\\\">Link</a></td></tr>\\n    </table>\\n  </main>\\n</body>\\n</html>\"\n    },\n    {\n      \"path\": \"site/page-3.html\",\n      \"content\": \"<!doctype html>\\n<html lang=\\\"en\\\">\\n<head>\\n  <meta charset=\\\"UTF-8\\\">\\n  <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n  <title>Entropy Page 3</title>\\n</head>\\n<body>\\n  <header>\\n    <h1>Entropy Page 3</h1>\\n  </header>\\n  <main>\\n    <p>This is page 3 of the Entropy benchmark.</p>\\n    <a href=\\\"page-2.html\\\">Back to Page 2</a>\\n    <table data-entropy-shared-table=\\\"factory-links\\\">\\n      <tr><th>Factory</th><th>Link</th></tr>\\n      <tr><td>Page 1</td><td><a href=\\\"index.html\\\">Link</a></td></tr>\\n      <tr><td>Page 2</td><td><a href=\\\"page-2.html\\\">Link</a></td></tr>\\n      <tr><td>Page 3</td><td><a href=\\\"page-3.html\\\">Link</a></td></tr>\\n      <tr><td>Page 4</td><td><a href=\\\"page-4.html\\\">Link</a></td></tr>\\n    </table>\\n  </main>\\n</body>\\n</html>\"\n    },\n    {\n      \"path\": \"site/page-4.html\",\n      \"content\": \"<!doctype html>\\n<html lang=\\\"en\\\">\\n<head>\\n  <meta charset=\\\"UTF-8\\\">\\n  <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n  <title>Entropy Page 4</title>\\n</head>\\n<body>\\n  <header>\\n    <h1>Entropy Page 4</h1>\\n  </header>\\n  <main>\\n    <p>This is page 4 of the Entropy benchmark.</p>\\n    <a href=\\\"page-3.html\\\">",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 4096,
+      "prompt_tokens": 22927,
+      "total_tokens": 27023,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "gpt-oss-120b-Q4_K_M-00001-of-00002.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-agDNJRtp0wAbtBZQdnIloRw5oKy3z2GO",
+    "service_tier": null,
+    "finish_reason": "length",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 22927,
+    "output_tokens": 4096,
+    "total_tokens": 27023,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "08852d677f6874b3361f7971bed1edf8",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-gptoss120",
+      "webpage-chain"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "path": "factory-system/config/stations.json",
+      "content": "{\n  \"stations\": [\n    { \"id\": \"intake\", \"name\": \"Intake\", \"next\": \"assembly\" },\n    { \"id\": \"assembly\", \"name\": \"Assembly\", \"next\": \"quality\" },\n    { \"id\": \"quality\", \"name\": \"Quality\", \"next\": \"shipping\" },\n    { \"id\": \"shipping\", \"name\": \"Shipping\", \"next\": \"\" }\n  ]\n}"
+    },
+    {
+      "path": "factory-system/src/factory.ps1",
+      "content": "param(\n    [Parameter(Mandatory=$true)]\n    [string]$ConfigPath,\n    [Parameter(Mandatory=$true)]\n    [string]$ProductId\n)\n\n# Define route\n$route = @(\"intake\",\"assembly\",\"quality\",\"shipping\")\nWrite-Host \"Route: $($route -join '->')\"\n\n# Prepare report\n$report = @{\n    product_id = $ProductId\n    route = $route -join '->'\n}\n$reportJson = $report | ConvertTo-Json -Depth 3\n\n# Write report to dashboard/report.json relative to script location\n$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path\n$reportPath = Join-Path $scriptDir \"..\\\\dashboard\\\\report.json\"\nSet-Content -Path $reportPath -Value $reportJson -Encoding UTF8\n\nWrite-Host \"Report written to $reportPath\""
+    },
+    {
+      "path": "factory-system/dashboard/report.json",
+      "content": "{\n  \"product_id\": \"entropy-widget-001\",\n  \"route\": \"intake->assembly->quality->shipping\"\n}"
+    }
+  ],
+  "notes": "factory layout created"
+}

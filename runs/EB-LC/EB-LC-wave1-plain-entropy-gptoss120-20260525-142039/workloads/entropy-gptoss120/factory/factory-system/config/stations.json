@@ -1,0 +1,8 @@
+{
+  "stations": [
+    { "id": "intake", "name": "Intake", "next": "assembly" },
+    { "id": "assembly", "name": "Assembly", "next": "quality" },
+    { "id": "quality", "name": "Quality", "next": "shipping" },
+    { "id": "shipping", "name": "Shipping", "next": "" }
+  ]
+}

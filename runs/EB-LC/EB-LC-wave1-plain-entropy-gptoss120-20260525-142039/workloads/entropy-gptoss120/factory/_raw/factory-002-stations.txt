@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "factory-system/src/factory.ps1",
+      "content": "param(\n    [Parameter(Mandatory=$true)]\n    [string]$ConfigPath,\n    [Parameter(Mandatory=$true)]\n    [string]$ProductId\n)\n\n# Load stations configuration\n$config = Get-Content -Path $ConfigPath -Raw | ConvertFrom-Json\n\n# Build route following 'next' links starting at intake\n$route = @()\n$current = \"intake\"\nwhile ($current) {\n    $route += $current\n    $station = $config.stations | Where-Object { $_.id -eq $current }\n    if (-not $station) { break }\n    $next = $station.next\n    if ([string]::IsNullOrEmpty($next)) { break }\n    $current = $next\n}\n\nWrite-Host \"Route: $($route -join '->')\"\n\n# Prepare report\n$report = @{\n    product_id = $ProductId\n    route = $route -join '->'\n}\n$reportJson = $report | ConvertTo-Json -Depth 3\n\n# Write report to dashboard/report.json relative to script location\n$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path\n$reportPath = Join-Path $scriptDir \"..\\\\dashboard\\\\report.json\"\nSet-Content -Path $reportPath -Value $reportJson -Encoding UTF8\n\nWrite-Host \"Report written to $reportPath\""
+    }
+  ],
+  "notes": "Updated factory.ps1 to read stations.json and compute dynamic route."
+}

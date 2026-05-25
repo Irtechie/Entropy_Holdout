@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/page-3.html\",\n      \"content\": \"<!doctype html>\\n<html lang=\\\"en\\\">\\n<head>\\n  <meta charset=\\\"UTF-8\\\">\\n  <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\n  <title>Entropy Page 3</title>\\n</head>\\n<body>\\n  <header>\\n    <h1>Entropy Page 3</h1>\\n  </header>\\n  <main>\\n    <p>This is page 3 of the Entropy benchmark.</p>\\n    <a href=\\\"page-2.html\\\">Back to Page 2</a>\\n  </main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Added page-3.html linking back to page-2.html.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 546,
+      "prompt_tokens": 4569,
+      "total_tokens": 5115,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "gpt-oss-120b-Q4_K_M-00001-of-00002.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-ZM2DZEMrrLz4VaVntzIAo7fdHXFDRq99",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 4569,
+    "output_tokens": 546,
+    "total_tokens": 5115,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "32e822927fb2dafa43fb70e995cfd2b7",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-gptoss120",
+      "webpage-chain"
+    ]
+  }
+}

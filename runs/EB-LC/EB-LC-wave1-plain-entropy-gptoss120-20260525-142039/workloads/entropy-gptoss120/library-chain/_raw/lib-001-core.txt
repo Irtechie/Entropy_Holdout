@@ -1,0 +1,45 @@
+{
+  "files": [
+    {
+      "path": "library-chain/CoreLib/CoreLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <OutputType>Library</OutputType>\n  </PropertyGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/CoreLib/Core.cs",
+      "content": "namespace CoreLib\n{\n    public static class Core\n    {\n        public static string GetMessage() => \"core\";\n    }\n}"
+    },
+    {
+      "path": "library-chain/FeatureLib/FeatureLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <OutputType>Library</OutputType>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"..\\CoreLib\\CoreLib.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/FeatureLib/Feature.cs",
+      "content": "namespace FeatureLib\n{\n    public static class Feature\n    {\n        public static string GetMessage() => \"feature\";\n    }\n}"
+    },
+    {
+      "path": "library-chain/PipelineLib/PipelineLib.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <OutputType>Library</OutputType>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"..\\FeatureLib\\FeatureLib.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/PipelineLib/Pipeline.cs",
+      "content": "namespace PipelineLib\n{\n    public static class Pipeline\n    {\n        public static string GetMessage() => \"pipeline\";\n    }\n}"
+    },
+    {
+      "path": "library-chain/Contracts/Contracts.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <OutputType>Library</OutputType>\n  </PropertyGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/Contracts/Contract.cs",
+      "content": "namespace Contracts\n{\n    public static class Contract\n    {\n        public static string GetMessage() => \"contract\";\n    }\n}"
+    },
+    {
+      "path": "library-chain/SampleApp/SampleApp.csproj",
+      "content": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>net10.0</TargetFramework>\n    <OutputType>Exe</OutputType>\n  </PropertyGroup>\n  <ItemGroup>\n    <ProjectReference Include=\"..\\PipelineLib\\PipelineLib.csproj\" />\n    <ProjectReference Include=\"..\\Contracts\\Contracts.csproj\" />\n  </ItemGroup>\n</Project>"
+    },
+    {
+      "path": "library-chain/SampleApp/Program.cs",
+      "content": "using System;\nusing CoreLib;\nusing FeatureLib;\nusing PipelineLib;\nusing Contracts;\n\nnamespace SampleApp\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            var result = $\"{Core.GetMessage()}->{Feature.GetMessage()}->{Pipeline.GetMessage()}->{Contract.GetMessage()}\";\n            Console.WriteLine(result);\n        }\n    }\n}"
+    }
+  ],
+  "notes": "Core, Feature, Pipeline, and Contract each expose a GetMessage returning their name; SampleApp composes them and prints core->feature->pipeline->contract."
+}

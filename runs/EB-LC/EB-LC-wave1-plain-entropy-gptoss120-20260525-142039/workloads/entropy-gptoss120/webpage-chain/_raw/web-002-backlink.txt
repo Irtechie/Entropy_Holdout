@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "site/page-2.html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Entropy Page 2</title>\n</head>\n<body>\n  <header>\n    <h1>Entropy Page 2</h1>\n  </header>\n  <main>\n    <p>This is page 2 of the Entropy benchmark.</p>\n    <a href=\"index.html\">Back to Page 1</a>\n  </main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Added page-2.html linking back to index.html."
+}
