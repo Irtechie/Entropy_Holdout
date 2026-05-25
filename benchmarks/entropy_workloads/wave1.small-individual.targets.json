@@ -1,0 +1,27 @@
+{
+  "id": "EB-wave1-small-individual",
+  "description": "Individual top-level Wave 1 plain EB folders for the small targets that were first covered by the grouped EB-local-small run.",
+  "harness_mode": "plain",
+  "targets": [
+    {
+      "set_id": "entropy-qwen25-coder-05b-large",
+      "slice_id": "wave1-small-001",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-gemma4-e2b",
+      "slice_id": "wave1-small-002",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-granite-code-3b",
+      "slice_id": "wave1-small-003",
+      "enabled": true
+    },
+    {
+      "set_id": "entropy-smollm3-3b",
+      "slice_id": "wave1-small-004",
+      "enabled": true
+    }
+  ]
+}

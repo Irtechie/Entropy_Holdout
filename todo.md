@@ -14,7 +14,7 @@ Build and run Entropy staged code-generation benchmark workloads to measure how 
 
 ## Current Focus
 
-Mock/local EB harness is complete. Serial real-model experiment pattern is in place. First conservative real small-model baseline has run and is saved under `runs/EB/EB-local-small-20260525-012128/`.
+Wave 1 plain EB baseline is complete for all single-box targets. Results are saved under `runs/EB/`.
 
 ## Current Truth
 
@@ -28,46 +28,17 @@ Mock/local EB harness is complete. Serial real-model experiment pattern is in pl
 - Real model execution pattern is implemented via `tools/run_entropy_serial_experiment.ps1`.
 - EB run folders live under `runs/EB/`.
 - Each EB run folder keeps `run.json`, `events.jsonl`, `results.jsonl`, `critique.md`, `critique.json`, prompts, raw model responses, raw API response JSON, token usage, and generated files.
-- The small baseline shows the harness is working and the smallest models break early under plain JSON/file-output prompting.
+- The Wave 1 plain baseline shows the harness is working and most model failures are benchmark-output failures, not LLMCommune wedges.
 
 ## Active Work
 
-### EB Remaining Single-Box Runs (kb-2026-05-25-eb-remaining-singlebox-runs)
-
-Source: `todo.md`
-Manifest: `docs/plans/2026-05-25-000-kb-eb-remaining-singlebox-runs-manifest.md`
-
-Wave 1 baseline rule: run `plain` EB per target, one folder per target, commit/push after each. Repair LLMCommune/model-serving issues when safe; do not repair generated model output inside Wave 1.
-
-Overnight runner:
-
-```powershell
-pwsh .\tools\run_eb_target_queue.ps1 -QueuePath .\benchmarks\entropy_workloads\wave1.remaining.targets.json -CommitEach -PushEach -SkipCompleted
-```
-
-| # | Slice | Blocked By | Verification | Status |
-|---|-------|------------|--------------|--------|
-| 1 | entropy-gemma4-e4b | - | functional-cli | ✅ done |
-| 2 | entropy-qwen35-4b | - | functional-cli | ✅ done |
-| 3 | entropy-gptoss20 | - | functional-cli | ⬜ pending |
-| 4 | entropy-devstral-small2 | - | functional-cli | ⬜ pending |
-| 5 | entropy-nemotron-cascade-30b | - | functional-cli | ⬜ pending |
-| 6 | entropy-gemma431 | - | functional-cli | ⬜ pending |
-| 7 | entropy-qwen36 | - | functional-cli | ⬜ pending |
-| 8 | entropy-qwen80next | - | functional-cli | ⬜ pending |
-| 9 | entropy-qwen80nextcoder | - | functional-cli | ⬜ pending |
-| 10 | entropy-qwen80nextcoder-256k | - | functional-cli | ⬜ pending |
-| 11 | entropy-gptoss120 | - | functional-cli | ⬜ pending |
-| 12 | entropy-nemotron120 | - | functional-cli | ⬜ pending |
-| 13 | entropy-nemotron3-super-120b | - | functional-cli | ⬜ pending |
-| 14 | entropy-qwen35-122b | - | functional-cli | ⬜ pending |
-| 15 | entropy-minimax-m27 | - | functional-cli | ⬜ pending |
+No active KB manifest is currently running.
 
 ## Queued Improvements
 
-- Improve or add the next harness mode after plain mode, likely `file-carry` or a stricter repair/extraction mode.
-- Run the next tier after prompt/harness adjustment, probably starting at 4B+ instead of 0.5B.
-- Add harness modes beyond `mock`: likely `plain`, `file-carry`, and `entropy`.
+- Plan Wave 2: add a separate repair/extract harness mode that can recover malformed JSON/output without overwriting Wave 1 `plain` results.
+- Compare Wave 2 against Wave 1 by target/workload using right-shift deltas.
+- Add harness modes beyond `mock`/`plain`: likely `repair-extract`, `file-carry`, and `entropy`.
 - Decide whether later large generated artifacts should be retained per real run or compacted after validation. Current EB default is retain.
 
 ## Handoff Queue
@@ -83,10 +54,6 @@ pwsh .\tools\run_eb_target_queue.ps1 -QueuePath .\benchmarks\entropy_workloads\w
 ## Parked / Cold Storage
 
 - Qwen235 128K activation remains experimental until it can pass readiness and a real completion.
-
-## Blocked
-
-- Broad single-box execution should wait until the small baseline failures are inspected and the next harness mode is defined.
 
 ## Work Log
 

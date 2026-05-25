@@ -1,5 +1,34 @@
 # Todo Done
 
+## 2026-05-25 - EB Wave 1 Plain Single-Box Baseline Complete
+
+Completed the full Wave 1 `plain` EB baseline for every single-box target in `llmcommune-entropy-targets.json`.
+
+Primary queue manifest:
+
+```text
+docs/plans/2026-05-25-000-kb-eb-remaining-singlebox-runs-manifest.md
+```
+
+Overnight queue runner:
+
+```powershell
+pwsh .\tools\run_eb_target_queue.ps1 -QueuePath .\benchmarks\entropy_workloads\wave1.remaining.targets.json -CommitEach -PushEach -SkipCompleted
+```
+
+All run folders live under:
+
+```text
+runs/EB/
+```
+
+Notes:
+
+- Each target has its own EB folder with `run.json`, `events.jsonl`, `results.jsonl`, `critique.md`, `critique.json`, `report.json`, raw prompts/responses, token usage, and generated files.
+- LLMCommune/model-serving recovery was allowed; generated model output was not repaired inside Wave 1.
+- The final MiniMax commit initially hit a GitHub server-side 500 on normal push, then pushed successfully with `git push --no-thin origin main`.
+- Next work is Wave 2: a separate repair/extract harness mode compared against these Wave 1 plain results.
+
 ## 2026-05-24 - Entropy Workload Harness Mock Baseline
 
 Implemented the first local/mock Entropy staged code-generation benchmark harness.

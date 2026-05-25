@@ -21,7 +21,7 @@ expected_files:
   - path: todo.md
     op: edit
     scope: "Sync live board status for this slice."
-status: pending
+status: done
 owner: agent
 blocked_reason: ""
 resume_when: ""

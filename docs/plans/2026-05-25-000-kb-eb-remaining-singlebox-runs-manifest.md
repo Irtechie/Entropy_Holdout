@@ -3,7 +3,7 @@ type: kb-manifest
 kb_id: kb-2026-05-25-eb-remaining-singlebox-runs
 brainstorm_path: todo.md
 created: 2026-05-25
-status: active
+status: completed
 slices:
   - id: slice-001
     title: "Run EB target entropy-gemma4-e4b"
@@ -45,7 +45,7 @@ slices:
     test_level: functional-cli
     functional_risk: narrow
     hitl: false
-    status: pending
+    status: done
     owner: agent
     blocked_reason: ""
     resume_when: ""
@@ -61,7 +61,7 @@ slices:
     test_level: functional-cli
     functional_risk: narrow
     hitl: false
-    status: pending
+    status: done
     owner: agent
     blocked_reason: ""
     resume_when: ""
@@ -77,7 +77,7 @@ slices:
     test_level: functional-cli
     functional_risk: narrow
     hitl: false
-    status: pending
+    status: done
     owner: agent
     blocked_reason: ""
     resume_when: ""
@@ -93,7 +93,7 @@ slices:
     test_level: functional-cli
     functional_risk: narrow
     hitl: false
-    status: pending
+    status: done
     owner: agent
     blocked_reason: ""
     resume_when: ""
@@ -109,7 +109,7 @@ slices:
     test_level: functional-cli
     functional_risk: narrow
     hitl: false
-    status: pending
+    status: done
     owner: agent
     blocked_reason: ""
     resume_when: ""
@@ -125,7 +125,7 @@ slices:
     test_level: functional-cli
     functional_risk: narrow
     hitl: false
-    status: pending
+    status: done
     owner: agent
     blocked_reason: ""
     resume_when: ""
@@ -141,7 +141,7 @@ slices:
     test_level: functional-cli
     functional_risk: narrow
     hitl: false
-    status: pending
+    status: done
     owner: agent
     blocked_reason: ""
     resume_when: ""
@@ -157,7 +157,7 @@ slices:
     test_level: functional-cli
     functional_risk: narrow
     hitl: false
-    status: pending
+    status: done
     owner: agent
     blocked_reason: ""
     resume_when: ""
@@ -173,7 +173,7 @@ slices:
     test_level: functional-cli
     functional_risk: narrow
     hitl: false
-    status: pending
+    status: done
     owner: agent
     blocked_reason: ""
     resume_when: ""
@@ -189,7 +189,7 @@ slices:
     test_level: functional-cli
     functional_risk: narrow
     hitl: false
-    status: pending
+    status: done
     owner: agent
     blocked_reason: ""
     resume_when: ""
@@ -205,7 +205,7 @@ slices:
     test_level: functional-cli
     functional_risk: narrow
     hitl: false
-    status: pending
+    status: done
     owner: agent
     blocked_reason: ""
     resume_when: ""
@@ -221,7 +221,7 @@ slices:
     test_level: functional-cli
     functional_risk: narrow
     hitl: false
-    status: pending
+    status: done
     owner: agent
     blocked_reason: ""
     resume_when: ""
@@ -237,7 +237,7 @@ slices:
     test_level: functional-cli
     functional_risk: narrow
     hitl: false
-    status: pending
+    status: done
     owner: agent
     blocked_reason: ""
     resume_when: ""
@@ -318,16 +318,20 @@ Wave 2 should add a separate named harness mode, such as `repair-extract`, that 
 |---|-------|------------|--------------|------|--------|
 | 1 | Run EB target entropy-gemma4-e4b | - | functional-cli | no | done |
 | 2 | Run EB target entropy-qwen35-4b | - | functional-cli | no | done |
-| 3 | Run EB target entropy-gptoss20 | - | functional-cli | no | pending |
-| 4 | Run EB target entropy-devstral-small2 | - | functional-cli | no | pending |
-| 5 | Run EB target entropy-nemotron-cascade-30b | - | functional-cli | no | pending |
-| 6 | Run EB target entropy-gemma431 | - | functional-cli | no | pending |
-| 7 | Run EB target entropy-qwen36 | - | functional-cli | no | pending |
-| 8 | Run EB target entropy-qwen80next | - | functional-cli | no | pending |
-| 9 | Run EB target entropy-qwen80nextcoder | - | functional-cli | no | pending |
-| 10 | Run EB target entropy-qwen80nextcoder-256k | - | functional-cli | no | pending |
-| 11 | Run EB target entropy-gptoss120 | - | functional-cli | no | pending |
-| 12 | Run EB target entropy-nemotron120 | - | functional-cli | no | pending |
-| 13 | Run EB target entropy-nemotron3-super-120b | - | functional-cli | no | pending |
-| 14 | Run EB target entropy-qwen35-122b | - | functional-cli | no | pending |
-| 15 | Run EB target entropy-minimax-m27 | - | functional-cli | no | pending |
+| 3 | Run EB target entropy-gptoss20 | - | functional-cli | no | done |
+| 4 | Run EB target entropy-devstral-small2 | - | functional-cli | no | done |
+| 5 | Run EB target entropy-nemotron-cascade-30b | - | functional-cli | no | done |
+| 6 | Run EB target entropy-gemma431 | - | functional-cli | no | done |
+| 7 | Run EB target entropy-qwen36 | - | functional-cli | no | done |
+| 8 | Run EB target entropy-qwen80next | - | functional-cli | no | done |
+| 9 | Run EB target entropy-qwen80nextcoder | - | functional-cli | no | done |
+| 10 | Run EB target entropy-qwen80nextcoder-256k | - | functional-cli | no | done |
+| 11 | Run EB target entropy-gptoss120 | - | functional-cli | no | done |
+| 12 | Run EB target entropy-nemotron120 | - | functional-cli | no | done |
+| 13 | Run EB target entropy-nemotron3-super-120b | - | functional-cli | no | done |
+| 14 | Run EB target entropy-qwen35-122b | - | functional-cli | no | done |
+| 15 | Run EB target entropy-minimax-m27 | - | functional-cli | no | done |
+
+## Completion Summary
+
+Completed all 15 planned remaining Wave 1 target slices. The queue runner committed and pushed one EB run folder per target. The final MiniMax push initially hit a GitHub server-side 500, then succeeded with `git push --no-thin origin main`.
