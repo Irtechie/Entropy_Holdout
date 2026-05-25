@@ -170,9 +170,10 @@ function Get-ExperimentInt($name, $defaultValue) {
   return [int]$defaultValue
 }
 
-$maxCompletionTokens = Get-ExperimentInt 'max_completion_tokens' 4096
-$minCompletionTokens = Get-ExperimentInt 'min_completion_tokens' 128
-$minCompletionChars = Get-ExperimentInt 'min_completion_chars' 512
+$maxCompletionTokens = Get-ExperimentInt 'max_completion_tokens' 32768
+$minCompletionTokens = Get-ExperimentInt 'min_completion_tokens' 1024
+$minCompletionChars = Get-ExperimentInt 'min_completion_chars' 4096
+$contextReserveTokens = Get-ExperimentInt 'context_reserve_tokens' 1024
 $minContextTokens = Get-ExperimentInt 'min_context_tokens' 0
 
 if ($maxCompletionTokens -lt $minCompletionTokens) {
@@ -273,6 +274,7 @@ Write-Event ([ordered]@{
     max_completion_tokens = $maxCompletionTokens
     min_completion_tokens = $minCompletionTokens
     min_completion_chars = $minCompletionChars
+    context_reserve_tokens = $contextReserveTokens
     min_context_tokens = $minContextTokens
   }
 } | ConvertTo-Json -Depth 16 | Set-Content -LiteralPath (Join-Path $ResultRoot 'run.json') -Encoding UTF8
@@ -319,6 +321,7 @@ foreach ($target in $targets) {
           -MaxCompletionTokens $maxCompletionTokens `
           -MinCompletionTokens $minCompletionTokens `
           -MinCompletionChars $minCompletionChars `
+          -ContextReserveTokens $contextReserveTokens `
           -OutputRoot $workloadRoot `
           -ResultPath $workloadResults | Out-Host
 

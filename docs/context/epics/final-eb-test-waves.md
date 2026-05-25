@@ -23,7 +23,7 @@ Current judgment: a new full EB-LC Wave 2 is blocked. The existing `repair-extra
 - Every wave has a written hypothesis, included targets, included workloads, harness mode, stop conditions, and expected evidence paths before execution.
 - Every completed wave gets an outcome judgment before the next wave is designed.
 - Any `harness`, `prompt_spec_or_validator`, missing Langfuse export, or ambiguous failure-origin row blocks expansion until resolved or explicitly quarantined.
-- Any failed row with length-capped or tiny completion output is serving/token-budget contamination unless the artifacts prove the stage already passed from valid existing files.
+- Any failed row with length-capped or tiny completion output is serving/token-budget contamination unless the artifacts prove the stage already passed from valid existing files. `4096` is only a low sanity floor, not a fair final-wave output cap.
 - Claims distinguish model behavior, harness behavior, prompt/spec failure, context-budget failure, and infrastructure failure.
 - The final report is good enough to publish or share even if some rows fail, because failures are categorized instead of silently repaired away.
 
@@ -100,7 +100,7 @@ Pass requirements:
 - `workloads.json` expected artifacts match workload specs and validators.
 - Factory null-method failure has a reproducer or fix.
 - Harness modes in experiment configs are listed and mechanically accurate.
-- Canonical experiment configs declare `max_completion_tokens`, `min_completion_tokens`, `min_completion_chars`, and `min_context_tokens`; the selected targets satisfy the context floor.
+- Canonical experiment configs declare `max_completion_tokens`, `min_completion_tokens`, `min_completion_chars`, `context_reserve_tokens`, and `min_context_tokens`; the selected targets satisfy the context floor and the output cap is backed by model-card/backend evidence or a live output-budget probe.
 - Langfuse preflight passes.
 - Failure-origin audit can classify known contaminated rows.
 

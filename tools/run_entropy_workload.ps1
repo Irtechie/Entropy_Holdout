@@ -13,9 +13,10 @@ param(
   [ValidateSet('direct','langchain')]
   [string]$CompletionProvider = 'direct',
   [bool]$RequireLangfuse = $false,
-  [int]$MaxCompletionTokens = 4096,
-  [int]$MinCompletionTokens = 128,
-  [int]$MinCompletionChars = 512
+  [int]$MaxCompletionTokens = 32768,
+  [int]$MinCompletionTokens = 1024,
+  [int]$MinCompletionChars = 4096,
+  [int]$ContextReserveTokens = 1024
 )
 
 $ErrorActionPreference = 'Stop'
@@ -65,11 +66,26 @@ function Invoke-JsonPost($url, $body, $timeoutSec) {
   }
 }
 
+function Get-ApproxPromptTokens($text) {
+  if ([string]::IsNullOrEmpty([string]$text)) { return 0 }
+  return [int][math]::Ceiling(([string]$text).Length / 4.0)
+}
+
+function Get-EffectiveMaxCompletionTokens($prompt) {
+  if ($ContextTokens -le 0) { return $MaxCompletionTokens }
+  $available = [int]($ContextTokens - (Get-ApproxPromptTokens $prompt) - $ContextReserveTokens)
+  if ($available -lt $MinCompletionTokens) {
+    throw "context_budget: approximate prompt tokens leave only $available completion tokens under context_tokens=$ContextTokens reserve=$ContextReserveTokens"
+  }
+  return [int][math]::Min($MaxCompletionTokens, $available)
+}
+
 function Invoke-DirectModelCompletion($prompt) {
   if (-not $ApiBaseUrl) { throw "-ApiBaseUrl is required for api mode" }
   if (-not $Model) { throw "-Model is required for api mode" }
 
   $resp = $null
+  $effectiveMaxTokens = Get-EffectiveMaxCompletionTokens $prompt
   try {
     $resp = Invoke-JsonPost "$ApiBaseUrl/v1/chat/completions" @{
       model = $Model
@@ -77,14 +93,14 @@ function Invoke-DirectModelCompletion($prompt) {
         @{ role = 'system'; content = 'You are a code generator. Return only the requested JSON object. No prose.' },
         @{ role = 'user'; content = $prompt }
       )
-      max_tokens = $MaxCompletionTokens
+      max_tokens = $effectiveMaxTokens
       temperature = 0
     } 600
   } catch {
     $resp = Invoke-JsonPost "$ApiBaseUrl/v1/completions" @{
       model = $Model
       prompt = $prompt
-      max_tokens = $MaxCompletionTokens
+      max_tokens = $effectiveMaxTokens
       temperature = 0
     } 600
   }
@@ -100,6 +116,7 @@ function Invoke-DirectModelCompletion($prompt) {
       text = $text
       raw = $resp
       usage = $resp.usage
+      requested_max_tokens = $effectiveMaxTokens
     }
   }
   throw "model response did not include choices text"
@@ -112,12 +129,13 @@ function Invoke-LangChainCompletion($prompt, $stage, $attemptIndex, $attemptReas
   $script = Join-Path $PSScriptRoot 'langchain_completion.py'
   $requestFile = New-TemporaryFile
   try {
+    $effectiveMaxTokens = Get-EffectiveMaxCompletionTokens $prompt
     [ordered]@{
       base_url = $ApiBaseUrl
       model = $Model
       system = 'You are a code generator. Return only the requested JSON object. No prose.'
       prompt = $prompt
-      max_tokens = $MaxCompletionTokens
+      max_tokens = $effectiveMaxTokens
       temperature = 0
       timeout_s = 600
       require_langfuse = $RequireLangfuse
@@ -137,8 +155,10 @@ function Invoke-LangChainCompletion($prompt, $stage, $attemptIndex, $attemptReas
         attempt_reason = $attemptReason
         context_tokens = $ContextTokens
         max_completion_tokens = $MaxCompletionTokens
+        requested_max_tokens = $effectiveMaxTokens
         min_completion_tokens = $MinCompletionTokens
         min_completion_chars = $MinCompletionChars
+        context_reserve_tokens = $ContextReserveTokens
       }
     } | ConvertTo-Json -Depth 32 | Set-Content -LiteralPath $requestFile.FullName -Encoding UTF8
 
@@ -154,6 +174,7 @@ function Invoke-LangChainCompletion($prompt, $stage, $attemptIndex, $attemptReas
       raw = $resp.raw
       usage = $resp.usage
       langfuse_trace_id = $resp.langfuse_trace_id
+      requested_max_tokens = $effectiveMaxTokens
     }
   } finally {
     Remove-Item -LiteralPath $requestFile.FullName -Force -ErrorAction SilentlyContinue
@@ -467,7 +488,8 @@ function Get-CompletionBudgetFailure($completion, [bool]$IncludeTinyResponse = $
     return "observability_token_usage_missing: canonical EB run did not receive completion token usage from the serving path"
   }
   if ($finishReason -match 'length|max_tokens|token') {
-    return "serving_token_budget: completion stopped by finish_reason=$finishReason with requested max_completion_tokens=$MaxCompletionTokens"
+    $requested = if ($completion.requested_max_tokens) { $completion.requested_max_tokens } else { $MaxCompletionTokens }
+    return "serving_token_budget: completion stopped by finish_reason=$finishReason with requested max_completion_tokens=$requested"
   }
   if ($IncludeTinyResponse -and $null -ne $completionTokens -and $completionTokens -le $MinCompletionTokens -and $text.Length -lt $MinCompletionChars) {
     return "serving_token_budget: completion_tokens=$completionTokens and response_chars=$($text.Length) are below canonical minimums min_completion_tokens=$MinCompletionTokens min_completion_chars=$MinCompletionChars"
@@ -546,6 +568,7 @@ function Complete-ApiWorkloadValidation($runRoot) {
       raw_response_json_path = $null
       prompt_path = $null
       token_usage = $null
+      requested_max_tokens = $null
       langfuse_trace_id = $null
       elapsed_s = 0
       error = $message
@@ -610,6 +633,7 @@ function New-ApiWorkload($runRoot) {
         $row.raw_response_json_path = $paths.raw_response_json_path
         $tokenUsage = Add-TokenUsage $tokenUsage $completion.usage
         $row.token_usage = [pscustomobject]$tokenUsage
+        $row.requested_max_tokens = $completion.requested_max_tokens
         $row.langfuse_trace_id = $completion.langfuse_trace_id
         $text = $completion.text
 

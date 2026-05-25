@@ -35,8 +35,9 @@ Infrastructure recovery is allowed. Generated-output repair is only allowed when
    - Do not count context overflow as model failure.
    - Canonical waves must declare `min_context_tokens`; default final-wave floor is 32768 unless a target is explicitly marked as a low-context diagnostic/control.
 4. Check serving token budget:
-   - Canonical waves must declare `max_completion_tokens`, `min_completion_tokens`, and `min_completion_chars`.
-   - `max_completion_tokens` must be large enough for the workload contract, normally 4096 for the current EB staged code workloads.
+   - Canonical waves must declare `max_completion_tokens`, `min_completion_tokens`, `min_completion_chars`, and `context_reserve_tokens`.
+   - `max_completion_tokens` must come from model-card/backend evidence or a live LLMCommune output-budget probe. Treat 4096 as a low sanity floor, not as a fair cap for final code-generation waves.
+   - The runner should use the smaller of the declared output cap and the prompt-adjusted remaining served context, so later-stage prompts are not contaminated by artificial prompt+max-token overflow.
    - A failed response with tiny completion usage, length finish reason, missing canonical token usage, or a configured cap below the declared minimum is infrastructure/serving contamination, not a model failure.
 5. Define commit boundaries:
    - one run folder per target unless the user explicitly asks for grouped runs
