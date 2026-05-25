@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!doctype html>\n<html>\n<head>\n<title>Entropy Page 1</title>\n</head>\n<body>\n<nav></nav>\n<main>Main content</main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created index.html with required title, empty navigation, and main content."
+}

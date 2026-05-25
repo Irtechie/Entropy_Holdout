@@ -1,0 +1,21 @@
+{
+  "files": [
+    {
+      "path": "site/index.html",
+      "content": "<!doctype html>\n<html>\n<head>\n<title>Entropy Page 1</title>\n</head>\n<body>\n<nav><a href=\"index.html\">Page 1</a> <a href=\"page-2.html\">Page 2</a> <a href=\"page-3.html\">Page 3</a> <a href=\"page-4.html\">Page 4</a></nav>\n<main>Main content</main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-2.html",
+      "content": "<!doctype html>\n<html>\n<head>\n<title>Entropy Page 2</title>\n</head>\n<body>\n<nav><a href=\"index.html\">Page 1</a> <a href=\"page-2.html\">Page 2</a> <a href=\"page-3.html\">Page 3</a> <a href=\"page-4.html\">Page 4</a></nav>\n<main>Page 2 content</main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-3.html",
+      "content": "<!doctype html>\n<html>\n<head>\n<title>Entropy Page 3</title>\n</head>\n<body>\n<nav><a href=\"index.html\">Page 1</a> <a href=\"page-2.html\">Page 2</a> <a href=\"page-3.html\">Page 3</a> <a href=\"page-4.html\">Page 4</a></nav>\n<main>Page 3 content</main>\n</body>\n</html>"
+    },
+    {
+      "path": "site/page-4.html",
+      "content": "<!doctype html>\n<html>\n<head>\n<title>Entropy Page 4</title>\n</head>\n<body>\n<nav><a href=\"index.html\">Page 1</a> <a href=\"page-2.html\">Page 2</a> <a href=\"page-3.html\">Page 3</a> <a href=\"page-4.html\">Page 4</a></nav>\n<main>Page 4 content</main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created page-4.html and updated navigation in all pages to include links to pages 1-4."
+}

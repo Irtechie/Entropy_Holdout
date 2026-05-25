@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "path": "factory-system/config/stations.json",
+      "content": "[\n  {\n    \"id\": \"intake\",\n    \"name\": \"Intake\",\n    \"next\": \"assembly\"\n  },\n  {\n    \"id\": \"assembly\",\n    \"name\": \"Assembly\",\n    \"next\": \"quality\"\n  },\n  {\n    \"id\": \"quality\",\n    \"name\": \"Quality\",\n    \"next\": \"shipping\"\n  },\n  {\n    \"id\": \"shipping\",\n    \"name\": \"Shipping\",\n    \"next\": \"\"\n  }\n]"
+    },
+    {
+      "path": "factory-system/src/factory.ps1",
+      "content": "param(\n    [Parameter(Mandatory=$true)][string]$ConfigPath,\n    [Parameter(Mandatory=$true)][string]$ProductId\n)\n\n# Ensure dashboard folder exists\n$configDir = Split-Path $ConfigPath\n$rootDir = Split-Path $configDir\n$dashboardDir = Join-Path $rootDir 'dashboard'\nif (-not (Test-Path $dashboardDir)) {\n    New-Item -ItemType Directory -Path $dashboardDir | Out-Null\n}\n\n# Load stations\ntry {\n    $stations = Get-Content $ConfigPath -Raw | ConvertFrom-Json\n} catch {\n    Write-Error \"Failed to load stations config: $_\"\n    exit 1\n}\n\n# Build route starting from intake\n$route = @()\n$current = $stations | Where-Object { $_.id -eq 'intake' } | Select-Object -First 1\nif (-not $current) {\n    Write-Error \"Intake station not found.\"\n    exit 1\n}\nwhile ($current) {\n    $route += $current.name\n    $next = $current.next\n    if ([string]::IsNullOrEmpty($next)) { break }\n    $current = $stations | Where-Object { $_.id -eq $next } | Select-Object -First 1\n    if (-not $current) {\n        Write-Error \"Next station '$next' not found.\"\n        exit 1\n    }\n}\n$routeString = $route -join '->'\nWrite-Host $routeString\n\n# Write report\n$report = @{\n    product_id = $ProductId\n    route = $routeString\n}\n$reportPath = Join-Path $dashboardDir 'report.json'\n$report | ConvertTo-Json -Depth 3 | Set-Content $reportPath\n"
+    },
+    {
+      "path": "factory-system/dashboard/report.json",
+      "content": "{\n  \"product_id\": \"entropy-widget-001\",\n  \"route\": \"intake->assembly->quality->shipping\"\n}\n"
+    }
+  ],
+  "notes": "Generated factory layout with required files."
+}

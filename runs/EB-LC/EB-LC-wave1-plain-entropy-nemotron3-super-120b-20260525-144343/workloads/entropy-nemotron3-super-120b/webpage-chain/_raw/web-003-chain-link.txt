@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "path": "site/page-3.html",
+      "content": "<!doctype html>\n<html>\n<head>\n<title>Entropy Page 3</title>\n</head>\n<body>\n<nav><a href=\"page-2.html\">Back to Page 2</a></nav>\n<main>Page 3 content</main>\n</body>\n</html>"
+    }
+  ],
+  "notes": "Created page-3.html with required title and backlink to page-2.html."
+}

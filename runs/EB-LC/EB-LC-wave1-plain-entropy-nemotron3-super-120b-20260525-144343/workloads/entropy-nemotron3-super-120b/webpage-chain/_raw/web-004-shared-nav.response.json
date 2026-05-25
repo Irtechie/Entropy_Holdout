@@ -1,0 +1,43 @@
+{
+  "provider": "langchain",
+  "kind": "chat",
+  "content": "{\n  \"files\": [\n    {\n      \"path\": \"site/index.html\",\n      \"content\": \"<!doctype html>\\n<html>\\n<head>\\n<title>Entropy Page 1</title>\\n</head>\\n<body>\\n<nav><a href=\\\"index.html\\\">Page 1</a> <a href=\\\"page-2.html\\\">Page 2</a> <a href=\\\"page-3.html\\\">Page 3</a> <a href=\\\"page-4.html\\\">Page 4</a></nav>\\n<main>Main content</main>\\n</body>\\n</html>\"\n    },\n    {\n      \"path\": \"site/page-2.html\",\n      \"content\": \"<!doctype html>\\n<html>\\n<head>\\n<title>Entropy Page 2</title>\\n</head>\\n<body>\\n<nav><a href=\\\"index.html\\\">Page 1</a> <a href=\\\"page-2.html\\\">Page 2</a> <a href=\\\"page-3.html\\\">Page 3</a> <a href=\\\"page-4.html\\\">Page 4</a></nav>\\n<main>Page 2 content</main>\\n</body>\\n</html>\"\n    },\n    {\n      \"path\": \"site/page-3.html\",\n      \"content\": \"<!doctype html>\\n<html>\\n<head>\\n<title>Entropy Page 3</title>\\n</head>\\n<body>\\n<nav><a href=\\\"index.html\\\">Page 1</a> <a href=\\\"page-2.html\\\">Page 2</a> <a href=\\\"page-3.html\\\">Page 3</a> <a href=\\\"page-4.html\\\">Page 4</a></nav>\\n<main>Page 3 content</main>\\n</body>\\n</html>\"\n    },\n    {\n      \"path\": \"site/page-4.html\",\n      \"content\": \"<!doctype html>\\n<html>\\n<head>\\n<title>Entropy Page 4</title>\\n</head>\\n<body>\\n<nav><a href=\\\"index.html\\\">Page 1</a> <a href=\\\"page-2.html\\\">Page 2</a> <a href=\\\"page-3.html\\\">Page 3</a> <a href=\\\"page-4.html\\\">Page 4</a></nav>\\n<main>Page 4 content</main>\\n</body>\\n</html>\"\n    }\n  ],\n  \"notes\": \"Created page-4.html and updated navigation in all pages to include links to pages 1-4.\"\n}",
+  "response_metadata": {
+    "token_usage": {
+      "completion_tokens": 3318,
+      "prompt_tokens": 9394,
+      "total_tokens": 12712,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0
+      }
+    },
+    "model_name": "NVIDIA-Nemotron-3-Super-120B-A12B-UD-Q4_K_M-00001-of-00003.gguf",
+    "system_fingerprint": "b1-25eec6f",
+    "id": "chatcmpl-0mi0DgErodkeBF2ipLO4V7zSjqUzTltb",
+    "service_tier": null,
+    "finish_reason": "stop",
+    "logprobs": null
+  },
+  "usage_metadata": {
+    "input_tokens": 9394,
+    "output_tokens": 3318,
+    "total_tokens": 12712,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {}
+  },
+  "langfuse": {
+    "trace_id": "fd87544e0449e0dd6b52196441e77868",
+    "host": "http://192.168.1.203:3100",
+    "tags": [
+      "EB",
+      "plain",
+      "langchain",
+      "entropy-nemotron3-super-120b",
+      "webpage-chain"
+    ]
+  }
+}
