@@ -12,10 +12,10 @@ Cards are written and reviewed one harness at a time. Do not bulk-author all car
 ## Cards
 
 - `gstack.md`
+- `superpowers.md`
 
 Pending, not yet carded:
 
-- Superpowers
 - Matt Pocock skills
 - ATV skills catalog
 - Working Skill Repo / Pt. 2 skills
