@@ -15,10 +15,9 @@ Cards are written and reviewed one harness at a time. Do not bulk-author all car
 - `gstack.md`
 - `matt-pocock-skills.md`
 - `superpowers.md`
+- `working-skill-repo-kb.md`
 
-Pending, not yet carded:
-
-- Working Skill Repo / Pt. 2 skills
+All current candidate harnesses now have draft cards. Keep them in draft until external tire-kicking confirms the native invocation steps and wrong-use rejection rules.
 
 ## Shared Evidence Wrapper
 
