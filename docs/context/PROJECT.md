@@ -89,6 +89,7 @@ This repo currently has no application source tree. It contains:
 | Workload benchmark plan | `docs/context/architecture/entropy-workloads.md` | Building the staged generation harness | mixed |
 | EB-LC LangChain/Langfuse harness | `docs/operations/langchain-langfuse-eb.md` | Running/exporting canonical EB-LC evidence | verified |
 | Final EB test waves | `docs/context/epics/final-eb-test-waves.md` | Freezing the final benchmark protocol and wave gates | active |
+| Harness bakeoff charity app | `docs/context/epics/harness-bakeoff-charity-app.md` | Comparing native agent workflow harnesses on useful app tasks | draft |
 | Benchmark wave design research | `docs/context/research/benchmark-wave-design.md` | Explaining why gates/quarantine beat repeated full reruns | active |
 | Existing target state | `llmcommune-entropy-smoke-summary.md` | Choosing model/context targets | verified |
 
@@ -99,6 +100,7 @@ This repo currently has no application source tree. It contains:
 - Completed handoff archive: `docs/handoffs/done/2026-05-24-entropy-workload-harness.md`
 - Current canonical data: completed EB-LC Wave 1 run folders under `runs/EB-LC/`, with Langfuse exports under each run's `langfuse/` folder.
 - Active epic: `docs/context/epics/final-eb-test-waves.md`
+- Harness bakeoff plan: `docs/context/epics/harness-bakeoff-charity-app.md`
 - Active manifest: `docs/plans/2026-05-25-000-kb-final-eb-test-waves-manifest.md`
 - Wave 0 model-repair canary judgment: `docs/reports/2026-05-25-eb-lc-wave0-model-repair-canary-judgment.md`
 - Close-failure audit: `docs/reports/2026-05-25-eb-lc-close-failure-audit.md`
@@ -109,7 +111,7 @@ This repo currently has no application source tree. It contains:
 ## Known Sharp Edges
 
 - Do not confuse activation smoke tests with the staged code-generation benchmark.
-- Qwen235 64K eager is the known-good qwen235 Entropy handoff.
+- Qwen235 is not currently eligible for final EB waves. Ray/vLLM 64K eager passed a short chat smoke on 2026-05-26 but failed a 4096-token output-budget probe with CUBLAS/EngineDead and dropped the lane; TRT 2507 NVFP4 failed API readiness under rc5 and rc13. See `docs/context/research/qwen235-trt-gguf-dual-box.md`.
 - Qwen235 128K is not smoke-proven.
 - The factory workload seed/spec may be missing from this checkout.
 - `run_entropy_serial_experiment.ps1` can activate Entropy targets and run workloads in `api` mode one by one.

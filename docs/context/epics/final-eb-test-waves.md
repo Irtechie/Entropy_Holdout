@@ -41,6 +41,7 @@ Current judgment: a new full EB-LC Wave 2 is blocked. The existing `repair-extra
 - Require trace export and failure-origin audit for every model run folder.
 - Prefer quarantine over rerun after a wave starts. Rerun only for missing artifacts/traces, infrastructure interruption, or a defect that invalidates the whole configured harness mode before enough evidence exists to judge it.
 - Score breakpoint position, not just final success. A model that reaches stage 4 and then breaks is a meaningful result if the harness can explain the break.
+- Prefer longitudinal target pilots before broad target expansion: run one capable model through the planned wave ladder, judge each wave, then swap models. This tests whether harness changes improve outcomes for the same model instead of confounding model differences with harness differences.
 
 ## Protocol Freeze
 
@@ -67,6 +68,7 @@ Disallowed changes after freeze:
 - `docs/reports/2026-05-25-eb-lc-wave1-outcome-judgment.md`
 - `docs/context/architecture/entropy-workloads.md`
 - `docs/operations/langchain-langfuse-eb.md`
+- `docs/context/epics/harness-bakeoff-charity-app.md`
 
 ## Workstreams
 
@@ -77,6 +79,7 @@ Disallowed changes after freeze:
 | Golden preflight gate | n/a | pending | pending | Add deterministic local fixtures proving each workload stage, validator, artifact assertion, critique, and audit path. |
 | Wave 0 canary | n/a | pending | blocked | Run only after golden gate; three medium-or-better targets that should pass at least one workload. |
 | Wave 1 pilot | n/a | pending | blocked | Expand only after Wave 0 judgment; representative targets, not all targets. |
+| Harness bakeoff | n/a | `docs/context/epics/harness-bakeoff-charity-app.md` | draft | Compare Plain EB, EB repair, GStack, Superpowers, Matt Pocock skills, ATV-startup/upstream ATV, and your Pt. 2 skills on the same task families. |
 | Final full wave | n/a | pending | blocked | All agreed targets only after pilot passes stop conditions. |
 | Reporting and claim audit | n/a | pending | blocked | Produce final tables with quarantines, allowed claims, unsupported claims, and source run folders. |
 
@@ -178,6 +181,20 @@ Empty until Gate A passes. Do not queue full EB-LC Wave 2 or any all-target fina
 
 When the queue opens, it should contain only the next wave, not the whole remaining program.
 
+## Harness Bakeoff Direction
+
+The next protocol branch is a native harness comparison, not a custom "DF versus non-DF" label. Each candidate harness must be used according to its own intended workflow and validated with an invocation card before it is scoreable.
+
+Candidate sources:
+
+- GStack: `https://github.com/garrytan/gstack.git`
+- Superpowers: `https://github.com/obra/superpowers.git`
+- Matt Pocock skills: `https://github.com/mattpocock/skills.git`
+- ATV-startup/upstream ATV candidate: `https://github.com/All-The-Vibes/skills-catalog.git`
+- Your Pt. 2 skills candidate: `https://github.com/Irtechie/working-skill-repo.git`
+
+Task families should include existing website/library baselines plus the Community Aid Hub complex charity app described in `docs/context/epics/harness-bakeoff-charity-app.md`.
+
 ## Human Checkpoints
 
 - Approve the harness-mode name and mechanics before Wave 0.
@@ -195,6 +212,7 @@ Default decision rule: when a checkpoint finds a flaw after freeze, choose quara
 - `benchmarks/entropy_workloads/workloads.json` does not list `repair-extract`, although Wave 2 experiment files use it.
 - Current `repair-extract` behavior is model-assisted repair, not deterministic extraction.
 - The exact original factory seed/spec is still missing from this checkout.
+- Qwen235 is parked for final EB waves. The current Ray/vLLM eager path passed only a short smoke and then failed a 4096-token output-budget probe with CUBLAS/EngineDead; installed 2507 NVFP4 failed TRT readiness under rc5 and rc13. Dual-box GGUF Q3 needs llama.cpp RPC build/wiring before it can be considered.
 
 ## Completion Criteria
 
