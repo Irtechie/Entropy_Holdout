@@ -43,7 +43,7 @@ Classification: `invalid_incomplete`
 Reason:
 
 - The run reached Claude Code and generated artifacts.
-- Claude Code stopped on the budget guard before completing the required evidence/review/QA loop.
+- Claude Code stopped on an artificial budget guard before completing the required evidence/review/QA loop.
 - No `HARNESS_EVIDENCE.md` was produced in wave 1.
 
 Independent validator state after wave 1:
@@ -54,7 +54,7 @@ Independent validator state after wave 1:
 | `library-chain` | fail | Projects were placed at workspace root instead of under `library-chain/` |
 | `factory` | pass | Route `intake->assembly->quality->shipping` |
 
-Wave 1 is useful diagnostic evidence but should not be scored as a completed GStack report-only run.
+Wave 1 is useful diagnostic evidence but should not be scored as a completed GStack report-only run. The artificial budget guard itself is resource contamination for GStack; future GStack rows must not use token, completion, or model-budget caps as part of the scoreable lane.
 
 ### Wave 2 Native Repair
 
@@ -136,7 +136,7 @@ Recommended next step:
    - existing EB final-artifact workloads, as done here, or
    - the Community Aid Hub complex app from the harness bakeoff plan.
 5. Rerun only Codex-host cells:
-   - GStack wave 1 and wave 2 as Codex skills.
+   - GStack wave 1 and wave 2 as Codex skills, with no artificial token/completion/model-budget caps.
    - ATV wave 1 as Codex-imported skills or explicitly degraded generic skills.
    - ATV full mode only if `bd` and subagents are available in the Codex host.
    - ATV wave 2 only if wave 1 has a failure to repair, or as an explicit no-op repair verification lane.

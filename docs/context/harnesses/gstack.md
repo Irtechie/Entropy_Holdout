@@ -88,6 +88,20 @@ Use this path for the Community Aid Hub complex app unless a reviewer explicitly
 10. Run `/ship` only as release-readiness evidence. Do not allow merge, deploy, or production mutation in benchmark runs unless a separate release experiment explicitly asks for it.
 11. Capture all plans, review output, QA output, test logs, commits, and manual intervention notes.
 
+## Resource Policy
+
+Do not put artificial token, completion, model-budget, or prompt-size caps inside the scoreable GStack lane.
+
+GStack is a process harness. Its native value is in doing the full plan/review/QA/repair loop. A run stopped by `max_tokens`, `max_completion_tokens`, `max_budget_usd`, a short completion cap, or a deliberately shrunken prompt is not evidence that GStack failed. It is resource-contaminated.
+
+Allowed controls:
+
+- Record token usage, wall-clock time, tool calls, and total cost/proxy cost as evidence.
+- Use a wall-clock runaway stop only as an operator safety abort, then classify the row as `operator_abort` or `resource_contaminated`, not as a model/harness failure.
+- Use a smaller task only as a separately declared workload, not as a hidden way to make GStack fit a cap.
+
+For GStack scoreable rows, the harness must be allowed enough context and completion room to finish `/office-hours`, `/autoplan`, implementation, `/review`, QA, and evidence capture.
+
 ## Optional `/spec` Variant
 
 Use this only if the experiment is explicitly testing GStack's issue/spec workflow.
@@ -127,6 +141,7 @@ Mark the run `invalid_native_use` and do not score it if any of these happen:
 - UI/browser claims are made without `/qa`, `/qa-only`, or another rendered-browser evidence path approved before the run.
 - `/qa` native fixes are mixed into a report-only lane.
 - `/spec --execute` is used but not declared as the `/spec` variant.
+- Artificial token, completion, model-budget, or prompt-size caps stop the native workflow before review/QA/evidence completion.
 - Human/manual fixes are applied and scored as model or harness output.
 - The benchmark wrapper rewrites the intended GStack sequence to match Entropy Bench's internal runner.
 - `/ship` is allowed to merge, deploy, or mutate a real production target during a benchmark run.
