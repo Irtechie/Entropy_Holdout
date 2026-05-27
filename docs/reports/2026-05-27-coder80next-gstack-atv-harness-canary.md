@@ -4,6 +4,10 @@ Date: 2026-05-27
 
 ## Scope
 
+Status: `null_host_contaminated`
+
+This run is quarantined and must not be used as a scoreable harness result. It used Coder80Next as the model, but Claude Code as the agent host. The intended comparison is Codex/local skills harnessing, so the host changed the thing being measured.
+
 This was a native-harness canary using Coder80Next through the Claude Code Anthropic-compatible endpoint:
 
 - Endpoint: `http://192.168.1.203:8000`
@@ -12,7 +16,13 @@ This was a native-harness canary using Coder80Next through the Claude Code Anthr
 - Workloads: `webpage-chain`, `library-chain`, `factory`
 - External validators: `tools/validators/webpage_chain.ps1`, `tools/validators/library_chain.ps1`, `tools/validators/factory.ps1`
 
-These runs are canaries, not final paper rows. The task shape used the existing EB final-artifact validators, while the native harnesses were driven through Claude Code skills.
+These runs are setup diagnostics only, not final paper rows. The task shape used the existing EB final-artifact validators, while the native harnesses were driven through Claude Code skills. Preserve them only as evidence that:
+
+- Coder80Next can be driven through an Anthropic-compatible endpoint.
+- GStack and ATV skill files can influence a Claude Code run.
+- The EB validators can still catch and verify repair behavior.
+
+Do not use these rows to claim anything about Codex, Codex skills, or local skill harness quality.
 
 ## GStack
 
@@ -48,7 +58,7 @@ Wave 1 is useful diagnostic evidence but should not be scored as a completed GSt
 
 ### Wave 2 Native Repair
 
-Classification: `scoreable_gstack_repair_canary`
+Classification: `null_host_contaminated_gstack_repair_diagnostic`
 
 Commit in run workspace:
 
@@ -64,9 +74,10 @@ Independent validator state after wave 2:
 
 Judgment:
 
-- GStack plus Coder80Next successfully repaired the concrete validator failure.
+- GStack plus Coder80Next under Claude Code successfully repaired the concrete validator failure.
 - The repair was minimal: move C# projects under `library-chain/`.
 - The run committed generated build outputs (`bin/` and `obj/`) inside the isolated workspace; this does not affect the main repo but should be excluded from future benchmark commits.
+- Because the agent host was Claude Code, this is not scoreable for the intended Codex/skills experiment.
 
 ## ATV
 
@@ -84,7 +95,7 @@ Harness setup:
 
 ### Wave 1 Report-Only
 
-Classification: `scoreable_degraded_atv_canary`
+Classification: `null_host_contaminated_degraded_atv_diagnostic`
 
 Not full ATV because:
 
@@ -108,6 +119,7 @@ Judgment:
 - ATV degraded mode produced a clean implementation across all three validators on wave 1.
 - The model self-reported "Scoreable full ATV"; that is incorrect. The valid classification is degraded ATV because native `bd` and subagent execution were absent.
 - Unlike the GStack run, this workspace did not commit generated `bin/` / `obj/` outputs in the filtered stat view.
+- Because the agent host was Claude Code, this is not scoreable for the intended Codex/skills experiment.
 
 ## Next Gate
 
@@ -115,11 +127,16 @@ Do not start broad model or harness expansion yet.
 
 Recommended next step:
 
-1. Install or make available `bd` for a full ATV run.
-2. Decide whether native-harness canaries should use:
+1. Re-run GStack and ATV through Codex, not Claude Code.
+2. Use Codex-native skills when available:
+   - GStack should use its Codex skill format, not `~/.claude/skills`.
+   - ATV currently ships Claude skill files in the checked repo; if no Codex-native skill packaging exists, treat them as imported generic skills and record that as a degraded host-port.
+3. Install or make available `bd` for a full ATV run.
+4. Decide whether native-harness canaries should use:
    - existing EB final-artifact workloads, as done here, or
    - the Community Aid Hub complex app from the harness bakeoff plan.
-3. Rerun only the missing cells:
-   - GStack wave 1 with a higher guard or smaller prompt, to get a completed report-only row.
-   - ATV full mode with `bd` and subagents if the host can provide them.
+5. Rerun only Codex-host cells:
+   - GStack wave 1 and wave 2 as Codex skills.
+   - ATV wave 1 as Codex-imported skills or explicitly degraded generic skills.
+   - ATV full mode only if `bd` and subagents are available in the Codex host.
    - ATV wave 2 only if wave 1 has a failure to repair, or as an explicit no-op repair verification lane.
